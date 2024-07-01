@@ -1,0 +1,37 @@
+.widhtLimitContainer {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.widhtLimitContainerLarge {
+  margin-right: auto;
+  margin-left: auto;
+  left: 0;
+  right: 0;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 8px;
+  background: #f9f8fc;
+}
+
+.carListContainer {
+  padding-top: 36px;
+  padding-bottom: 58px;
+}
+
+.carListContainer span {
+  color: var(--Neutral-Text-Dark, #505673);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 590;
+  line-height: 32px;
+}
+
+@media (min-width: 1080px) {
+  .widhtLimitContainer {
+    max-width: 1120px !important;
+  }
+
+  .widhtLimitContainerLarge {
+  }
+}

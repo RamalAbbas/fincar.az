@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+.widhtLimitContainer {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.widhtLimitContainerLarge {
+  /* padding-right: 15px; */
+  /* padding-left: 15px; */
+  margin-right: auto;
+  margin-left: auto;
+  left: 0;
+  right: 0;
+}
+
+.sliderContainer {
+  /* margin-top: 72px; */
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.sliderCard {
+  max-height: 536px;
+  height: 40vw;
+  min-height: 326px;
+}
+
+.slider div {
+  outline: none !important;
+}
+
+.sliderDots button {
+  transition: 0.3s;
+  transition-timing-function: linear;
+}
+.sliderDots {
+  transition: 0.3s;
+  transition-timing-function: linear;
+  background-color: #696864 !important;
+  display: inline-block !important;
+  border-radius: 30px !important;
+  height: 22px !important;
+  padding: 0 16px !important;
+}
+
+.slider :global(button::before) {
+  background-color: white;
+  color: #fff;
+  opacity: 1 !important;
+  width: 9px !important;
+  height: 9px !important;
+  border: none;
+  padding: 0px;
+  border-radius: 5px;
+  /* cursor: default !important; */
+}
+
+.slider :global(button) {
+  background-color: #4a4946 !important;
+  opacity: 1 !important;
+  width: 9px !important;
+  height: 9px !important;
+  padding: 0px !important;
+  border-radius: 5px;
+  /* pointer-events: none; */
+  /* cursor: default !important; */
+}
+
+.slider :global(.slick-active button) {
+  width: 28px !important;
+  height: 9px !important;
+  cursor: default !important;
+  background-color: black !important;
+}
+
+.slider :global(.slick-dots li) {
+  display: inline-flex;
+  width: auto;
+  top: -6px;
+}
+
+.slider :global(.slick-dots li button:before) {
+  display: none !important;
+  content: none !important;
+}
+
+.slider :global(.slick-active) {
+  /* cursor: default !important; */
+}
+
+.slider :global(li) {
+  cursor: default !important;
+}
+
+@media (min-width: 1080px) {
+}
+
+@media screen and (max-width: 1080px) {
+}
+
+@media screen and (max-width: 468px) {
+}

@@ -1,0 +1,84 @@
+.titleContainer {
+  margin-right: auto;
+  margin-left: auto;
+  left: 0;
+  right: 0;
+  padding-left: 15px;
+  padding-right: 15px;
+  max-width: 1128px !important;
+  padding: 36px 24px;
+  border-radius: 10px;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+}
+
+.contentLeft h1 {
+  color: var(--Neutral-Text-Dark, #505673);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 590;
+  line-height: 32px;
+}
+
+.contentLeft p {
+  color: var(--Neutral-Text-Soft, #8990b9);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  max-width: 456px;
+  margin-top: 8px;
+}
+
+.eyeCheck {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  align-items: center;
+}
+
+.eyeCheck span {
+  color: var(--Neutral-Medium, #878ca8);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.contentRight {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.columnDiv {
+  display: flex;
+  gap: 8px;
+}
+
+.columnWithGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px 16px;
+}
+
+.columnWithGrid p {
+  color: var(--Neutral-Text-Dark, #505673);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 24px;
+}
+.columnContent {
+}
+
+.columnContent p {
+  color: var(--Neutral-Text-Soft, #8990b9);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}

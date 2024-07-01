@@ -1,0 +1,42 @@
+.container {
+  margin-top: 25px;
+}
+.container h1 {
+  color: var(--Neutral-Text-Dark, #505673);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 590;
+  line-height: 24px;
+  padding-bottom: 8px;
+}
+
+.container > div > p {
+  color: var(--Neutral-Text-Dark, #505673);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  padding-top: 2px;
+}
+
+.container > div {
+  transition: 0.3s;
+  transition-timing-function: linear;
+}
+
+.container > p {
+  color: #2151d9;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 24px;
+  cursor: pointer;
+  margin: 12px 0;
+  transition: 0.3s;
+  transition-timing-function: linear;
+  display: inline-block;
+}
+
+.container > p:hover {
+  opacity: 0.8;
+}

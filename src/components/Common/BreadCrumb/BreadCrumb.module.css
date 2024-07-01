@@ -1,0 +1,65 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  max-width: 1128px;
+  width: 100%;
+  padding-top: 24px;
+  padding-bottom: 16px;
+  overflow-x: scroll;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.box {
+  display: flex;
+  align-items: center;
+}
+
+.box span {
+  text-wrap: nowrap;
+}
+
+.item {
+  color: #8990b9;
+  margin-right: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.activeItem {
+  color: #505773;
+  margin-left: 4px;
+  cursor: default;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+@media screen and (max-width: 1079px) {
+    .box div {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media screen and (max-width: 1160px) {
+  .container{
+    max-width: 1000px;
+  }
+}

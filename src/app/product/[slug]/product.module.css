@@ -1,0 +1,31 @@
+.widhtLimitContainer {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex;
+  gap: 24px;
+}
+
+.productContainer {
+  padding-bottom: 160px;
+}
+
+.widhtLimitContainerLarge {
+  margin-right: auto;
+  margin-left: auto;
+  left: 0;
+  right: 0;
+}
+
+@media (min-width: 1080px) {
+  .widhtLimitContainer {
+    max-width: 1128px;
+  }
+}
+
+@media (max-width: 1080px) {
+}
+
+@media (max-width: 468px) {
+}

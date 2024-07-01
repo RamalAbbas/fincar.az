@@ -1,0 +1,26 @@
+.wrapper {
+  padding: 0 15px;
+  margin-top: 32px;
+}
+
+.wrapper div {
+  transition: 0.3s;
+  transition-timing-function: linear;
+}
+
+.wrapper span {
+  color: #727276;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.wrapper p {
+  color: #2151d9;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin-top: 10px;
+}

@@ -1,0 +1,14 @@
+.titleContainer {
+  margin-right: auto;
+  margin-left: auto;
+  left: 0;
+  right: 0;
+  padding-left: 15px;
+  padding-right: 15px;
+  max-width: 1128px !important;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px 24px;
+  margin-top: 24px;
+  padding-bottom: 60px;
+}

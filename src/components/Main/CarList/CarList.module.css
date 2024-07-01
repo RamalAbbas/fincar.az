@@ -1,0 +1,43 @@
+.widhtLimitContainer {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.widhtLimitContainerLarge {
+  margin-right: auto;
+  margin-left: auto;
+  left: 0;
+  right: 0;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.carListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding-top: 80px;
+  padding-bottom: 172px;
+}
+
+.carList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 80px 24px;
+}
+
+@media (min-width: 1080px) {
+  .widhtLimitContainer {
+    max-width: 1120px !important;
+  }
+
+  .widhtLimitContainerLarge {
+    max-width: 1440px !important;
+  }
+}
+
+@media (max-width: 1080px) {
+  .widhtLimitContainer {
+    display: none;
+  }
+}

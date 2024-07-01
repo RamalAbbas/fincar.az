@@ -1,0 +1,122 @@
+.box {
+  max-width: 360px;
+  width: 100%;
+  padding: 24px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.headTitle {
+  color: #505673;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 590;
+  line-height: 28px;
+  margin-bottom: 16px;
+}
+
+.filter_content input {
+  max-width: 152px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid #8990b9;
+  outline: none;
+  color: #8990b9;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+
+  &&::placeholder {
+    color: #8990b9;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+  }
+}
+
+.filter_content label {
+  color: #505673;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin-top: 16px;
+}
+
+.filter_content select {
+  max-width: 152px;
+  width: 100%;
+  padding: 14px 0px 14px 16px;
+  border-radius: 10px;
+  border: 1px solid #8990b9;
+  color: #8990b9;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.special_select {
+  max-width: 100% !important;
+  width: 100%;
+}
+
+.searchButton {
+  width: 100%;
+  padding: 12px 24px;
+  border-radius: 10px;
+  background: var(--Primary-05, #183178);
+  color: var(--Neutral-Lightest, #f5f6fa);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 24px;
+}
+
+.select_wrapper {
+  max-width: 152px;
+  width: 100%;
+  position: relative;
+  display: inline-block;
+}
+
+.special_select_wrapper{
+  max-width: 100%;
+  width: 100%;
+  position: relative;
+  display: inline-block;
+}
+
+.special_select_wrapper::after{
+  content: ""; 
+  position: absolute;
+  top: 50%;
+  right: 6px; 
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: 24px; 
+  height: 24px; 
+  background: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 10L12 14L16 10" stroke="%238990B9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat center center;
+  background-size: contain; 
+}
+
+.box select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.select_wrapper::after {
+  content: ""; 
+  position: absolute;
+  top: 50%;
+  right: 6px; 
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: 24px; 
+  height: 24px; 
+  background: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 10L12 14L16 10" stroke="%238990B9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat center center;
+  background-size: contain; 
+}
