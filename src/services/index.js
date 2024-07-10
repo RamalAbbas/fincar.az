@@ -27,4 +27,3 @@ export const getCarDetail = async (slug) => {
         console.log({ error })
     }
 };
-
