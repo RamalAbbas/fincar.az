@@ -17,7 +17,7 @@ const Header = () => {
 
   return (
     <>
-      {pathname !== '/main' && (
+      {pathname !== '/main' && pathname !== '/signin' && pathname !== '/signin/request' && (
         <>
           <div className="h-[56px] lg:hidden">
             <div className={styles.widhtLimitContainerLarge}>

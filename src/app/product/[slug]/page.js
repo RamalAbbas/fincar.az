@@ -24,7 +24,6 @@ const ProductPage = ({ params }) => {
   useEffect(() => {
     getProductInfo()
   }, [])
-  console.log(data)
   return (
     <>
       <BreadCrumb items={['Homepage', 'Product page']} />
