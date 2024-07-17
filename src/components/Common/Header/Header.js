@@ -9,12 +9,15 @@ import Link from 'next/link'
 import languageIcon from '../../../assets/icons/languageIcon.svg'
 import { usePathname } from 'next/navigation'
 import leftBlue from '../../../assets/icons/arrow/leftBlue.svg'
+import saved from '../../../assets/icons/saved/saved.svg'
+import notification from '../../../assets/icons/notification/notification.svg'
 import searchInput from '../../../assets/icons/mobileHeader/searchInput.svg'
+import { useRouter } from 'next/navigation'
 
-const Header = () => {
+const Header = ({isSaved,isNotification}) => {
+  const { push } = useRouter()
   const pathname = usePathname()
   
-
   return (
     <>
       {pathname !== '/main' && pathname !== '/signin' && pathname !== '/signin/request' && (
@@ -24,10 +27,10 @@ const Header = () => {
               <div
                 className={`${styles.headerContainer} ${styles.widhtLimitContainer}`}
               >
-                <a>Fincar.az</a>
+                <a onClick={() => push("/main")}>Fincar.az</a>
                 <div className={styles.rightNav}>
                   <a>Bütün Elanlar</a>
-                  <a>Salonlar</a>
+                  <a onClick={() => push("/dealerships")}>Salonlar</a>
                   <div className={styles.language}>
                     EN
                     <Image
@@ -37,7 +40,26 @@ const Header = () => {
                       alt="languageIcon"
                     />
                   </div>
-                  <button>Daxil ol</button>
+
+                    {
+                        isSaved ? 
+                          (
+                            <div>
+                                <Image src={saved} alt="" /> 
+                            </div>
+                          ) : <></>
+                      }
+
+                    {
+                      isNotification ? 
+                      (
+                        <div>
+                          <Image src={notification} alt="" /> 
+                        </div>
+                      ) : <></>
+                    }
+
+                  <button onClick={() => push("/signin")}>Daxil ol</button>
                 </div>
               </div>
             </div>

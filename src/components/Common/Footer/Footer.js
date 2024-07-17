@@ -7,8 +7,10 @@ import instagram from '../../../assets/icons//contact/instagram.svg'
 import linkedIn from '../../../assets/icons//contact/linkedIn.svg'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 const Footer = () => {
+  const { push } = useRouter()
   const pathname = usePathname()
 
   return (
@@ -20,7 +22,7 @@ const Footer = () => {
               className={`${styles.footerContainer} ${styles.widhtLimitContainer}`}
             >
               <div className={styles.footerFirst}>
-                <a>
+                <a onClick={() => push("/main")}>
                   <h1>Fincar.az</h1>
                 </a>
               </div>
@@ -41,7 +43,7 @@ const Footer = () => {
                     <p>Bütün avtomobillər</p>
                   </a>
                   <a>
-                    <p>Salonlar</p>
+                    <p onClick={() => push("/dealerships")}>Salonlar</p>
                   </a>
                   <a>
                     <p>Bizimlə əlaqə</p>

@@ -11,8 +11,10 @@ import downArrow from '../../../assets/icons/arrow/down.svg'
 import leftBlue from '../../../assets/icons/arrow/leftBlue.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { handleMenuFilter } from '@/redux/features/mobileMenuFilterSlice'
+import { useRouter } from 'next/navigation'
 
 const Title = () => {
+  const { push } = useRouter();
   const [selectedBrand, setSelectedBrand] = useState('')
   const [selectedModel, setSelectedModel] = useState('')
 
@@ -79,17 +81,17 @@ const Title = () => {
         <Image src={headerBg} width={1440} height={580} alt="header-bg" />
         <div className={`${styles.content} ${styles.widhtLimit}`}>
           <nav className={`${styles.navbar} `}>
-            <div className={styles.leftLogo}>
+            <div onClick={() => push("/main")} className={styles.leftLogo}>
               <a>Fincar.az</a>
             </div>
             <div className={styles.rightNav}>
               <a>Bütün Elanlar</a>
-              <a>Salonlar</a>
+              <a onClick={() => push("/dealerships")}>Salonlar</a>
               <div className={styles.languageDivar}>
                 AZ
                 <Image src={azFlag} width={20} height={15} alt="header-bg" />
               </div>
-              <button>Daxil ol</button>
+              <button onClick={() => push("/signin")}>Daxil ol</button>
             </div>
           </nav>
           <h1 className={styles.desc}>Xəyalınızın maşınına bizlə sahib olun</h1>
@@ -129,7 +131,7 @@ const Title = () => {
               <input placeholder="Axtarış" type="text" maxLength={20} />
               <button className={styles.searchButton}>Axtar </button>
             </div>
-            <button className={styles.detailSearch}>Ətraflı axtarış</button>
+            <button onClick={() => push("/search")} className={styles.detailSearch}>Ətraflı axtarış</button>
           </div>
         </div>
       </div>

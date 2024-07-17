@@ -27,3 +27,30 @@ export const getCarDetail = async (slug) => {
         console.log({ error })
     }
 };
+
+export const filterCar = async (data) => {
+    try {
+        const response = await instanceAxios.get(`car/filter`,data);
+        return response;
+    } catch (error) {
+        console.log({ error })
+    }
+};
+
+export const register = async (data) => {
+    try {
+        const response = await instanceAxios.post(`client/register`,data);
+        return response;
+    } catch (error) {
+        console.log({ error })
+    }
+};
+
+export const login = async (data) => {
+    try {
+        const response = await instanceAxios.post(`client/login`,data);
+        return response;
+    } catch (error) {
+        console.log({ error })
+    }
+};

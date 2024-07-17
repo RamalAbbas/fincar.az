@@ -1,5 +1,6 @@
-import Image from 'next/image'
-import React from 'react'
+"use client";
+
+import React, { useEffect, useState } from 'react'
 import styles from './CarList.module.css'
 import CarCard from '@/components/Common/CarCard/CarCard'
 import car1 from '../../../assets/images/carCardExample/bmwe46.jpg'
@@ -9,8 +10,36 @@ import car4 from '../../../assets/images/carCardExample/car2.png'
 import car5 from '../../../assets/images/carCardExample/car3.png'
 import car6 from '../../../assets/images/carCardExample/car4.png'
 import SearchByPrice from '@/components/Common/SearchByPrice/SearchByPrice'
+import { useRouter } from 'next/navigation'
+import { getCars } from '@/services'
 
 const CarList = () => {
+  const { push } = useRouter();
+  const [isLoading,setIsLoading] = useState(false)
+  const [cars,setCars] = useState([])
+
+  //! Fetching Data 
+  const getCarsData = async () => {
+      try{
+        setIsLoading(true)
+        const response = await getCars()
+        setCars(response);
+      }
+      catch (err) {
+        console.error(err);
+      }
+      finally {
+        setIsLoading(false)
+      }
+  }
+
+  useEffect(() => {
+    getCarsData()
+  },[])
+
+  const callBackSlug = (slug) => {
+    push(`/product/${slug}`);
+  }
   return (
     <>
       <div className={styles.widhtLimitContainerLarge}>
@@ -18,27 +47,21 @@ const CarList = () => {
           className={`${styles.carListContainer} ${styles.widhtLimitContainer}`}
         >
           <div className={styles.carList}>
-            <CarCard src={car1} />
-            <CarCard src={car3} />
-            <CarCard src={car2} />
-            <CarCard src={car5} />
-            <CarCard src={car6} />
-            <CarCard src={car1} />
-            <CarCard src={car3} />
-            <CarCard src={car2} />
+              {
+                cars?.slice(0,8)?.map((info,index) => 
+                  <CarCard key={index} callBackSlug={callBackSlug} data={info} />
+                )
+              }
           </div>
           <>
-            <SearchByPrice />
+            <SearchByPrice data={cars} />
           </>
           <div className={styles.carList}>
-            <CarCard src={car1} />
-            <CarCard src={car3} />
-            <CarCard src={car2} />
-            <CarCard src={car5} />
-            <CarCard src={car6} />
-            <CarCard src={car1} />
-            <CarCard src={car3} />
-            <CarCard src={car2} />
+              {
+                cars?.slice(8,16)?.map((info,index) => 
+                  <CarCard key={index} callBackSlug={callBackSlug} data={info} />
+                )
+              }
           </div>
         </div>
       </div>
