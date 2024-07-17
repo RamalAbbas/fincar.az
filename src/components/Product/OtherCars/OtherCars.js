@@ -1,9 +1,9 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import styles from './OtherCars.module.css'
-import CarCard from '@/components/Common/CarCard/CarCard'
+import CarCard from '../../../components/Common/CarCard/CarCard'
 import { useRouter } from 'next/navigation'
-import { getCars } from '@/services'
+import { getCars } from '../../../services'
 
 const OtherCars = () => {
   const { push } = useRouter();

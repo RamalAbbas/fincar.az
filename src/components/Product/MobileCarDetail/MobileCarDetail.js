@@ -1,9 +1,9 @@
 'use client'
 import React, { useEffect, useRef } from 'react'
 import styles from './MobileCarDetail.module.css'
-import PaymentModal from '@/components/Common/PaymentModal/PaymentModal'
+import PaymentModal from '../../../components/Common/PaymentModal/PaymentModal'
 import { useSelector, useDispatch } from 'react-redux'
-import { handlePaymentModal } from '@/redux/features/paymentModalSlice'
+import { handlePaymentModal } from '../../../redux/features/paymentModalSlice'
 
 const MobileCarDetail = () => {
   const insideRef = useRef(null)

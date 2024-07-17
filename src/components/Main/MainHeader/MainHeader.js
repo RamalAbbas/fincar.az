@@ -10,7 +10,7 @@ import filter from '../../../assets/icons/mobileHeader/filter.svg'
 import downArrow from '../../../assets/icons/arrow/down.svg'
 import leftBlue from '../../../assets/icons/arrow/leftBlue.svg'
 import { useDispatch, useSelector } from 'react-redux'
-import { handleMenuFilter } from '@/redux/features/mobileMenuFilterSlice'
+import { handleMenuFilter } from '../../../redux/features/mobileMenuFilterSlice'
 import { useRouter } from 'next/navigation'
 
 const Title = () => {

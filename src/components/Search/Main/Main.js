@@ -1,4 +1,4 @@
-import CarList from '@/components/Search/CarList/CarList'
+import CarList from '../../../components/Search/CarList/CarList'
 import FilterBox from '../FilterBox/FilterBox'
 import styles from './Main.module.css'
 

@@ -1,4 +1,4 @@
-import baseUrl from "@/constants/baseUrl/baseUrl";
+import baseUrl from "../constants/baseUrl/baseUrl";
 import axios from "axios";
 
 const instanceAxios = axios.create({

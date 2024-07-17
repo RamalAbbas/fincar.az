@@ -2,16 +2,16 @@
 
 import React, { useEffect, useState } from 'react'
 import styles from './CarList.module.css'
-import CarCard from '@/components/Common/CarCard/CarCard'
+import CarCard from '../../Common/CarCard/CarCard'
 import car1 from '../../../assets/images/carCardExample/bmwe46.jpg'
 import car2 from '../../../assets/images/carCardExample/bmwm3nfs.jpg'
 import car3 from '../../../assets/images/carCardExample/car1.png'
 import car4 from '../../../assets/images/carCardExample/car2.png'
 import car5 from '../../../assets/images/carCardExample/car3.png'
 import car6 from '../../../assets/images/carCardExample/car4.png'
-import SearchByPrice from '@/components/Common/SearchByPrice/SearchByPrice'
+import SearchByPrice from '../../Common/SearchByPrice/SearchByPrice'
 import { useRouter } from 'next/navigation'
-import { getCars } from '@/services'
+import { getCars } from '../../../services'
 
 const CarList = () => {
   const { push } = useRouter();

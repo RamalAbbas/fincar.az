@@ -1,9 +1,9 @@
-import BreadCrumb from '@/components/Common/BreadCrumb/BreadCrumb'
-import MobileCarList from '@/components/Common/MobileCarList/MobileCarList'
-import MobileCarProfile from '@/components/Common/MobileCarProfile/MobileCarProfile'
-import MobileDealershipContact from '@/components/Dealership/MobileDealershipContact/MobileDealershipContact'
-import ProductList from '@/components/Dealership/ProductList/ProductList'
-import Profile from '@/components/Dealership/Profile/Profile'
+import BreadCrumb from '../../components/Common/BreadCrumb/BreadCrumb'
+import MobileCarList from '../../components/Common/MobileCarList/MobileCarList'
+import MobileCarProfile from '../../components/Common/MobileCarProfile/MobileCarProfile'
+import MobileDealershipContact from '../../components/Dealership/MobileDealershipContact/MobileDealershipContact'
+import ProductList from '../../components/Dealership/ProductList/ProductList'
+import Profile from '../../components/Dealership/Profile/Profile'
 import React from 'react'
 
 const page = () => {

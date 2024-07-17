@@ -2,9 +2,9 @@
 import Image from 'next/image'
 import React, { useEffect, useRef } from 'react'
 import styles from './ProductDetail.module.css'
-import PaymentModal from '@/components/Common/PaymentModal/PaymentModal'
+import PaymentModal from '../../../components/Common/PaymentModal/PaymentModal'
 import { useSelector, useDispatch } from 'react-redux'
-import { handlePaymentModal } from '@/redux/features/paymentModalSlice'
+import { handlePaymentModal } from '../../../redux/features/paymentModalSlice'
 
 const ProductDetail = ({detail}) => {
   const insideRef = useRef(null)

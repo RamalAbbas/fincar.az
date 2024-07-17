@@ -5,9 +5,9 @@ import styles from './SearchByPrice.module.css'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import CarCard from '@/components/Common/CarCard/CarCard'
+import CarCard from '../../Common/CarCard/CarCard'
 import { useRouter } from 'next/navigation'
-import { filterCar } from '@/services'
+import { filterCar } from '../../../services'
 
 const SearchByPrice = ({ data }) => {
     const { push } = useRouter();
