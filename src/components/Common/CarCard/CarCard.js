@@ -4,12 +4,12 @@ import Image from 'next/image'
 import car from '../../../assets/images/carCardExample/bmwm3nfs.jpg'
 import favorite from '../../../assets/icons/favorite.svg'
 
-const CarCard = ({ src }) => {
+const CarCard = ({ data , callBackSlug }) => {
   return (
-    <div className={styles.card}>
+    <div onClick={() => callBackSlug(data.slug)} className={styles.card}>
       <div className={styles.img}>
-        <Image
-          src={src}
+        <img
+          src={data?.cover}
           loading="lazy"
           width={264}
           height={238}
@@ -29,9 +29,19 @@ const CarCard = ({ src }) => {
         </div>
       </div>
       <div className={styles.bottomContent}>
-        <h1>FORD Mustang</h1>
-        <h2>2023, 3.4L, 0 km</h2>
-        <h3>Bakı, bugün 16:51</h3>
+        <h1>
+            {
+              data?.make.name
+            }
+            {
+              data?.model.name
+            }
+        </h1>
+        <h2>
+            {
+              data?.slug
+            }
+        </h2>
       </div>
     </div>
   )
