@@ -54,3 +54,12 @@ export const login = async (data) => {
         console.log({ error })
     }
 };
+
+export const getDealerList = async () => {
+    try {
+        const response = await instanceAxios.get(`dealer/list`);
+        return response.data;
+    } catch (error) {
+        console.log({ error })
+    }
+};
