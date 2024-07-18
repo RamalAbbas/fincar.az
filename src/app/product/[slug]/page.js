@@ -16,6 +16,7 @@ import { getCarDetail } from '../../../services'
 
 const ProductPage = ({ params }) => {
   const [data, setData] = useState([])
+  
   const getProductInfo = async () => {
     const response = await getCarDetail(params.slug)
     setData(response)

@@ -13,6 +13,8 @@ import car3 from '../../../assets/images/carCardExample/car1.png'
 import car4 from '../../../assets/images/carCardExample/car2.png'
 import car5 from '../../../assets/images/carCardExample/car3.png'
 import car6 from '../../../assets/images/carCardExample/car4.png'
+import { getPopularCars } from '../../../services'
+import { useRouter } from 'next/navigation'
 
 const SampleNextArrow = ({ className, style, onClick, disabled }) => {
   return (
@@ -59,6 +61,9 @@ const Popular = () => {
   const sliderRef = useRef(null)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [slideCount, setSlideCount] = useState(0)
+  const { push } = useRouter();
+  const [isLoading,setIsLoading] = useState(false)
+  const [popularCars,setPopularCars] = useState([])
 
   useEffect(() => {
     if (sliderRef.current) {
@@ -88,6 +93,30 @@ const Popular = () => {
     afterChange: (current) => setCurrentSlide(current),
   }
 
+  //! Fetching Data 
+  const getPopularsCarsData = async () => {
+      try{
+        setIsLoading(true)
+        const response = await getPopularCars()
+        console.log(response);
+        setPopularCars(response);
+      }
+      catch (err) {
+        console.error(err);
+      }
+      finally {
+        setIsLoading(false)
+      }
+  }
+
+  useEffect(() => {
+    getPopularsCarsData()
+  },[])
+
+  const callBackSlug = (slug) => {
+    push(`/product/${slug}`);
+  }
+
   return (
     <>
       <div className={styles.widhtLimitContainerLarge}>
@@ -109,24 +138,13 @@ const Popular = () => {
           </div>
           <div className={`${styles.slider} slider-container`}>
             <Slider ref={sliderRef} {...settings}>
-              <div className="px-[12px]">
-                <CarCard src={car1} />
-              </div>
-              <div className="px-[12px]">
-                <CarCard src={car3} />
-              </div>
-              <div className="px-[12px]">
-                <CarCard src={car4} />
-              </div>
-              <div className="px-[12px]">
-                <CarCard src={car2} />
-              </div>
-              <div className="px-[12px]">
-                <CarCard src={car5} />
-              </div>
-              <div className="px-[12px]">
-                <CarCard src={car6} />
-              </div>
+              {
+                popularCars?.map((info,index) => (
+                    <div className="px-[12px]">
+                      <CarCard key={index} callBackSlug={callBackSlug} data={info} />
+                    </div>
+                ))
+              }
             </Slider>
           </div>
         </div>

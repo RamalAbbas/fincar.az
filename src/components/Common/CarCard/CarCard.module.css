@@ -85,7 +85,7 @@
 
 .price {
   display: flex;
-  width: 80px;
+  width: fit-content;
   padding: 6px 8px;
   justify-content: center;
   align-items: center;
