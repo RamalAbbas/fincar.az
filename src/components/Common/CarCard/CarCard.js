@@ -16,7 +16,7 @@ const CarCard = ({ data , callBackSlug }) => {
           alt="car"
           className="h-full object-cover rounded-t-[10px]"
         />
-        <div className={styles.price}>753 ₼ / ay</div>
+        <div className={styles.price}>{data?.payment?.initial_payment_azn.toFixed()} ₼ / ilkin</div>
         <div className={styles.fav}>
           <Image
             src={favorite}

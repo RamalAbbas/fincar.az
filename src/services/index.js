@@ -19,6 +19,15 @@ export const getCars = async () => {
     }
 };
 
+export const getPopularCars = async () => {
+    try {
+        const response = await instanceAxios.get(`car/popular-list`);
+        return response.data;
+    } catch (error) {
+        console.log({ error })
+    }
+};
+
 export const getCarDetail = async (slug) => {
     try {
         const response = await instanceAxios.get(`car/detail/${slug}`);
