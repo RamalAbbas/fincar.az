@@ -6,14 +6,17 @@ import eye from '../../../assets/icons/eye.svg'
 import phone from '../../../assets/icons//contact/phone.svg'
 import location from '../../../assets/icons//contact/location.svg'
 import time from '../../../assets/icons//contact/time.svg'
+import { getDealerDetail} from '../../../services'
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+const Profile = ({dealerdetail}) => {
 
-const Profile = () => {
   return (
     <div className="px-[15px]">
       <div className={styles.titleContainer}>
         <div>
-          <Image
-            src={hyundaiLogo}
+          <img
+            src={dealerdetail.cover}
             height={144}
             width={144}
             alt="logo"
@@ -21,11 +24,9 @@ const Profile = () => {
           />
         </div>
         <div className={styles.contentLeft}>
-          <h1>Autolux Azerbaijan - Jaguar</h1>
+          <h1>{dealerdetail.name}</h1>
           <p>
-            "Avtolüks Azərbaycan" MMC - Jaguar avtomobillərinin Azərbaycanda
-            rəsmi düstribüteri. 20% ilkin ödəniş, 10% illik bank faizi, 5 illik
-            kredit, 5 il və ya 150.000 km zəmanət.
+      {dealerdetail.about}
           </p>
           <div className={styles.eyeCheck}>
             <Image src={eye} height={24} width={24} alt="logo" />

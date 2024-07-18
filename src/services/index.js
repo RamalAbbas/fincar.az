@@ -72,3 +72,11 @@ export const getDealerList = async () => {
         console.log({ error })
     }
 };
+export const getDealerDetail = async (slug) => {
+    try {
+        const response = await instanceAxios.get(`dealer/detail/${slug}`);
+        return response.data;
+    } catch (error) {
+        console.log({ error })
+    }
+};
