@@ -5,7 +5,7 @@ import styles from './Signin.module.css'
 import { useRouter } from 'next/navigation';
 import Image from 'next/image'
 import { useState } from 'react';
-import { login } from '@/services';
+import { login } from '../../services';
 
 const Signin = () => {
     const { push } = useRouter();

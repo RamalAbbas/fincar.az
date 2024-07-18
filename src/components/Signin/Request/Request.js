@@ -4,7 +4,7 @@ import line from '../../../assets/images/signin/line/line.png';
 import logo from '../../../assets/images/logo/logo.png';
 import { useRouter } from 'next/navigation';
 import styles from './Request.module.css';
-import { register } from '@/services';
+import { register } from '../../../services';
 import { useState } from 'react';
 import Image from 'next/image';
 import { isInvalid } from '../../../utils/regex/index';

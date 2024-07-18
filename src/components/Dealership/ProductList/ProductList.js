@@ -14,42 +14,25 @@ import car3 from '../../../assets/images/carCardExample/car1.png'
 import car4 from '../../../assets/images/carCardExample/car2.png'
 import car5 from '../../../assets/images/carCardExample/car3.png'
 import car6 from '../../../assets/images/carCardExample/car4.png'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react';
 
-const ProductList = () => {
+const ProductList = ({dealerdetail}) => {
+  const { push } = useRouter();
+  console.log(dealerdetail)
+  const callBackSlug = (slug) => {
+    push(`/product/${slug}`);
+  }
   return (
     <div className="px-[15px]">
+      {
+            dealerdetail?.cars?.map((info,index) => (
       <div className={styles.titleContainer}>
-        <CarCard src={car1} />
-        <CarCard src={car2} />
-        <CarCard src={car3} />
-        <CarCard src={car4} />
-        <CarCard src={car5} />
-        <CarCard src={car6} />
-        <CarCard src={car1} />
-        <CarCard src={car2} />
-        <CarCard src={car3} />
-        <CarCard src={car4} />
-        <CarCard src={car5} />
-        <CarCard src={car6} />
-        <CarCard src={car1} />
-        <CarCard src={car2} />
-        <CarCard src={car3} />
-        <CarCard src={car4} />
-        <CarCard src={car5} />
-        <CarCard src={car6} />
-        <CarCard src={car1} />
-        <CarCard src={car2} />
-        <CarCard src={car3} />
-        <CarCard src={car4} />
-        <CarCard src={car5} />
-        <CarCard src={car6} />
-        <CarCard src={car1} />
-        <CarCard src={car2} />
-        <CarCard src={car3} />
-        <CarCard src={car4} />
-        <CarCard src={car5} />
-        <CarCard src={car6} />
+      <CarCard key={index} callBackSlug={callBackSlug} data={info} />
       </div>
+            ))
+          }
+
     </div>
   )
 }
