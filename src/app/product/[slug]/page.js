@@ -19,6 +19,7 @@ const ProductPage = ({ params }) => {
   
   const getProductInfo = async () => {
     const response = await getCarDetail(params.slug)
+    console.log(response);
     setData(response)
   }
 

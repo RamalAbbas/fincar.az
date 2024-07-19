@@ -15,7 +15,6 @@ const OtherCars = () => {
       try{
         setIsLoading(true)
         const response = await getCars()
-        console.log(response);
         setCars(response);
       }
       catch (err) {

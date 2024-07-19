@@ -1,22 +1,24 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './Header.module.css'
 import Search from '../../../assets/icons/search/search.svg'
 import Image from 'next/image'
-const Header = () => {
-  const [value,setValue] = useState("")
 
+const Header = ({ callBackData }) => {
+  const [value, setValue] = useState("")
   const searchFunction = (e) => {
     e.preventDefault()
-    console.log(value);
+    if (value.trim() === "") {
+      alert("Error: Search input cannot be empty!")
+    } else {
+      callBackData(value) 
+    }
   }
-
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <p className={styles.headTitle}>Salonlar</p>
-
         <form className="flex w-full justify-end" action="">
           <div className="relative w-full flex justify-end">
             <input
@@ -25,7 +27,7 @@ const Header = () => {
               placeholder="Search"
               type="text"
             />
-            <Image className={styles.searchIcon} src={Search} />
+            <Image className={styles.searchIcon} src={Search} alt="Search Icon" />
           </div>
           <button onClick={searchFunction} className={styles.searchButton}>Search</button>
         </form>
