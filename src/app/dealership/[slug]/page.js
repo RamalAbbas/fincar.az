@@ -20,7 +20,6 @@ const page = ({ params }) => {
       const response = await getDealerDetail(params.slug)
       setDealerDetail(response);
       setIsLoading(false)
-
     }
     catch (err) {
       console.error(err);

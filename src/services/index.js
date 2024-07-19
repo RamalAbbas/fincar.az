@@ -37,7 +37,7 @@ export const getCarDetail = async (slug) => {
     }
 };
 
-export const filterCar = async (data) => {
+export const FilterCar = async (data) => {
     try {
         const response = await instanceAxios.get(`car/filter`,data);
         return response;

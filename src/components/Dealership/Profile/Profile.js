@@ -43,9 +43,9 @@ const Profile = ({dealerdetail}) => {
               className=" self-start h-[24px]"
             />
             <div className={styles.columnWithGrid}>
-              <p>+994 51 656 76 76</p>
-              <p>+994 51 656 76 76</p>
-              <p>+994 51 656 76 76</p>
+              <p>{dealerdetail.phone1}</p>
+              <p>{dealerdetail.phone2}</p>
+              <p>{dealerdetail.phone3}</p>
             </div>
           </div>
           <div className={styles.columnDiv}>
@@ -58,7 +58,7 @@ const Profile = ({dealerdetail}) => {
             />
             <div>
               <p className=" text-[#8990B9]">
-                Həftə içi: 09:00–18:30; Şənbə: 10:00–17:00; Bazar: 11:00–16:00
+              Həftə içi: 09:00–18:30; Şənbə: 10:00–17:00; Bazar: 11:00–16:00
               </p>
             </div>
           </div>
