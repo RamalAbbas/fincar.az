@@ -19,21 +19,17 @@ const page = ({ params }) => {
       setIsLoading(true)
       const response = await getDealerDetail(params.slug)
       setDealerDetail(response);
-      console.log(response)
+      setIsLoading(false)
     }
     catch (err) {
       console.error(err);
     }
-    finally {
-      setIsLoading(false)
-    }
   }
+
   useEffect(() => {
     getCarsData()
   }, [])
-  // const callBackSlug = (slug) => {
-  //   push(`/dealer/detail/${slug}`);
-  // }
+
   return (
     <div>
       <BreadCrumb
@@ -41,7 +37,7 @@ const page = ({ params }) => {
           'Home page ',
           'Product page',
           'Car dealerships',
-          'Autolux Azerbaijan - Jaguar',
+          `${dealerDetail.name}`,
         ]}
       />
       <div className="lg:hidden">

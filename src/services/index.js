@@ -72,6 +72,17 @@ export const getDealerList = async () => {
         console.log({ error })
     }
 };
+
+export const getDealerSearch = async (keyword) => {
+    try {
+        const response = await instanceAxios.get(`dealer/search/${keyword}`);
+        return response.data;
+    } catch (error) {
+        console.log({ error })
+    }
+};
+
+
 export const getDealerDetail = async (slug) => {
     try {
         const response = await instanceAxios.get(`dealer/detail/${slug}`);
