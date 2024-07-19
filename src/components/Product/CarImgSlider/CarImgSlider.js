@@ -10,7 +10,6 @@ import ProductDetail2 from '../../../assets/images/carDetailExample/productCard2
 import ProductDetail3 from '../../../assets/images/carDetailExample/productCard3.png'
 
 const CarImgSlider = ({ images }) => {
-  console.log(images);
   const settings = {
     customPaging: function (i) {
       return (

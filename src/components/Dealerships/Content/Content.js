@@ -7,39 +7,21 @@ import location from '../../../assets/icons/location/location.svg'
 import { getDealerList } from '../../../services'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-const Content = () => {
+const Content = ({dealerList,isLoading}) => {
     const { push } = useRouter();
-    const [isLoading,setIsLoading] = useState(false)
-    const [dealerList,setDealerList] = useState([])
-
-    //! Fetching Data 
-    const getCarsData = async () => {
-        try{
-          setIsLoading(true)
-          const response = await getDealerList()
-          console.log(response);
-          setDealerList(response);
-        }
-        catch (err) {
-          console.error(err);
-        }
-        finally {
-          setIsLoading(false)
-        }
-    }
-
-    useEffect(() => {
-      getCarsData()
-    },[])
 
     const callBackSlug = (slug) => {
       push(`/dealership/${slug}`);
     }
-
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
+          {
+            isLoading && (
+            <span class={styles.loader}></span>
+            )
+          }
+
           {
             dealerList?.map((item) => (
               <div onClick={() => callBackSlug(item.slug)} className={styles.item}>
@@ -75,6 +57,11 @@ const Content = () => {
               </div>
             ))
           }
+
+          {
+            dealerList.length == 0 ?  <p className={styles.errorText}>Axtarışa uyğun nəticə tapılmadı.</p> : <></>
+          }
+         
       </div>
     </div>
   )
