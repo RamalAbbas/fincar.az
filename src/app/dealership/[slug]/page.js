@@ -19,6 +19,7 @@ const page = ({ params }) => {
       setIsLoading(true)
       const response = await getDealerDetail(params.slug)
       setDealerDetail(response);
+      console.log(response)
     }
     catch (err) {
       console.error(err);

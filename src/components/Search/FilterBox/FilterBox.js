@@ -1,6 +1,28 @@
+'use client'
 import styles from './FilterBox.module.css'
-
-const FilterBox = () => {
+import { useEffect, useState } from 'react';
+import {FilterCar} from '../../../services'
+const FilterBox =({params}) => {
+  const [isLoading,setIsLoading] = useState(false)
+  const [filterCar,setCarFilter] = useState([])
+  // ! Fetching Data 
+  const getCarsData = async () => {
+    try{
+      setIsLoading(true)
+      const response = await FilterCar(params.data)
+      setCarFilter(response);
+      console.log(response);
+    }
+    catch (err) {
+      console.error(err);
+    }
+    finally {
+      setIsLoading(false)
+    }
+}
+useEffect(() => {
+  getCarsData()
+},[])
   return (
     <div className={styles.box}>
       <p className={styles.headTitle}>Filtrlər</p>
@@ -9,7 +31,7 @@ const FilterBox = () => {
         <label htmlFor="">Qiymət</label>
 
         <div className="flex gap-2 mt-2">
-          <input placeholder="Minimum" type="text" />
+          <input placeholder="Minimum" type="text"/> 
 
           <input placeholder="Maksimum" type="text" />
         </div>

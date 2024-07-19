@@ -9,10 +9,11 @@
   padding: 36px 24px;
   border-radius: 10px;
   background: #f5f5f5;
-  display: flex;
+  display: grid;
   justify-content: space-between;
   gap: 24px;
   align-items: center;
+  grid-template-columns: auto auto auto;
 }
 
 .contentLeft h1 {
@@ -25,7 +26,7 @@
 
 .contentLeft p {
   color: var(--Neutral-Text-Soft, #8990b9);
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;

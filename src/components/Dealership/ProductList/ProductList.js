@@ -24,11 +24,11 @@ const ProductList = ({dealerdetail}) => {
     push(`/product/${slug}`);
   }
   return (
-    <div className="px-[15px]">
+    <div className={styles.px}>
       {
             dealerdetail?.cars?.map((info,index) => (
       <div className={styles.titleContainer}>
-      <CarCard key={index} callBackSlug={callBackSlug} data={info} />
+      <CarCard key={index} callBackSlug={callBackSlug} data={info}/>
       </div>
             ))
           }
