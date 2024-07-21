@@ -11,12 +11,12 @@ const FilterBox =({carfeature,products}) => {
 
       <div className={styles.filter_content}>
         <label htmlFor="">Qiymət</label>
-        {products?.map(product => (
+       
         <div className="flex gap-2 mt-2">
-          <input placeholder="Minimum" type="text" key={product.id}/> 
+          <input placeholder="Minimum" type="text"/> 
           <input placeholder="Maksimum" type="text" />
         </div>
-        ))}
+      
         <div className="flex gap-2 mt-4">
           <div className={styles.select_wrapper}>
             <select name="" id="banType">
