@@ -1,55 +1,41 @@
-'use client'
 import styles from './FilterBox.module.css'
-import { useEffect, useState } from 'react';
-import {FilterCar} from '../../../services'
-const FilterBox =({params}) => {
-  const [isLoading,setIsLoading] = useState(false)
-  const [filterCar,setCarFilter] = useState([])
-  // ! Fetching Data 
-  const getCarsData = async () => {
-    try{
-      setIsLoading(true)
-      const response = await FilterCar(params.data)
-      setCarFilter(response);
-      console.log(response);
-    }
-    catch (err) {
-      console.error(err);
-    }
-    finally {
-      setIsLoading(false)
-    }
-}
-useEffect(() => {
-  getCarsData()
-},[])
+import { useRouter } from 'next/navigation'
+const FilterBox =({carfeature,products}) => { 
+  const { push } = useRouter();
+  const callBackSlug = (data) => {
+    push(`/search/${data}`);
+  }
   return (
     <div className={styles.box}>
       <p className={styles.headTitle}>Filtrlər</p>
 
       <div className={styles.filter_content}>
         <label htmlFor="">Qiymət</label>
-
+        {products?.map(product => (
         <div className="flex gap-2 mt-2">
-          <input placeholder="Minimum" type="text"/> 
-
+          <input placeholder="Minimum" type="text" key={product.id}/> 
           <input placeholder="Maksimum" type="text" />
         </div>
-
+        ))}
         <div className="flex gap-2 mt-4">
           <div className={styles.select_wrapper}>
             <select name="" id="banType">
-              <option value="" disabled selected>Ban növü</option>
-              <option value="Avtobus">Avtobus</option>
-              <option value="Fayton">Fayton</option>
+              <option value="" disabled selected >Ban növü</option>
+              {
+             carfeature?.bans?.map((item) => (
+              <option value="Avtobus" key={item?.id}>{item.name}</option>
+             ))}
             </select>
           </div>
-
+         
           <div className={styles.select_wrapper}>
+            
             <select name="" id="Sürətqutusu">
-              <option value="Sürət qutusu" disabled selected>Sürət qutusu</option>
-              <option value="Avtobus">Avtobus</option>
-              <option value="Fayton">Fayton</option>
+            <option value="Sürət qutusu" disabled selected>Sürət qutusu</option>
+              {
+             carfeature?.gears?.map((item) => (
+              <option value="Avtobus" key={item?.id}>{item.name}</option>
+            ))}
             </select>
           </div>
         </div>
@@ -57,17 +43,21 @@ useEffect(() => {
         <div className="flex gap-2 my-4">
             <div className={styles.select_wrapper}>
               <select id="Marka">
-                <option value="Marka" disabled selected>Marka</option>
-                <option value="Avtobus">Avtobus</option>
-                <option value="Fayton">Fayton</option>
+              <option value="Marka" disabled selected>Marka</option>
+              {
+             carfeature?.makes?.map((item) => (
+                <option value="Avtobus" key={item?.id}>{item.name}</option>
+             ))}
               </select>
             </div>
 
             <div className={styles.select_wrapper}>
               <select id="Model">
                 <option value="Model" disabled selected>Model</option>
-                <option value="Avtobus">Avtobus</option>
-                <option value="Fayton">Fayton</option>
+                {
+             carfeature?.models?.map((item) => (
+                <option value="Avtobus" key={item?.id}>{item.name}</option>
+             ))}
               </select>
             </div>
         </div>
@@ -78,8 +68,8 @@ useEffect(() => {
           <div className={styles.select_wrapper}>
             <select id="2010">
               <option value="2010" disabled selected>2010</option>
+              <option value="Avtobus">2010</option>
               <option value="Avtobus">Avtobus</option>
-              <option value="Fayton">Fayton</option>
             </select>
           </div>
 
@@ -145,8 +135,10 @@ useEffect(() => {
             <div className={styles.select_wrapper}>
                 <select id="Rəng">
                 <option value="Rəng" disabled selected>Rəng</option>
-                <option value="Avtobus">Avtobus</option>
-                <option value="Fayton">Fayton</option>
+                {
+             carfeature?.colors?.map((item) => (
+                <option value="Avtobus" key={item?.id}>{item.name}</option>
+             ))}
               </select>
             </div>
         </div>
