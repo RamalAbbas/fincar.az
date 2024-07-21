@@ -37,6 +37,9 @@ const Main = ({ params }) => {
 
   useEffect(() => {
     getCarFeatureData();
+  }, []);
+
+  useEffect(() => {
     getCarsData();
   }, []);
 
