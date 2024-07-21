@@ -37,10 +37,10 @@ export const getCarDetail = async (slug) => {
     }
 };
 
-export const FilterCar = async (data) => {
+export const getCarFilter = async () => {
     try {
-        const response = await instanceAxios.get(`car/filter`,data);
-        return response;
+        const response = await instanceAxios.get(`car/filter`);
+        return response.data;
     } catch (error) {
         console.log({ error })
     }
@@ -86,6 +86,14 @@ export const getDealerSearch = async (keyword) => {
 export const getDealerDetail = async (slug) => {
     try {
         const response = await instanceAxios.get(`dealer/detail/${slug}`);
+        return response.data;
+    } catch (error) {
+        console.log({ error })
+    }
+};
+export const getCarFeature = async () => {
+    try {
+        const response = await instanceAxios.get(`/car-feature-list`);
         return response.data;
     } catch (error) {
         console.log({ error })
