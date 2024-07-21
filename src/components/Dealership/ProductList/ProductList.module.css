@@ -13,7 +13,9 @@
   padding-bottom: 60px;
 }
 .px{
-display: grid;
-grid-template-columns: auto auto auto auto;
-margin: 85px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    max-width: 1128px;
+    margin-right: auto;
+    margin-left: auto;
 }
