@@ -7,7 +7,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import CarCard from '../../Common/CarCard/CarCard'
 import { useRouter } from 'next/navigation'
-import { filterCar } from '../../../services'
+import { filterCar, getCarFilter } from '../../../services'
 
 const SearchByPrice = ({ data }) => {
     const { push } = useRouter();
@@ -36,7 +36,7 @@ const SearchByPrice = ({ data }) => {
     };
 
     const result = async () => {
-        const response = await filterCar(priceData)
+        const response = await getCarFilter(priceData)
         console.log(response);
     }
     return (
