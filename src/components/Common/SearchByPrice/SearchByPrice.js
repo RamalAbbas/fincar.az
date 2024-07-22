@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import styles from "./SearchByPrice.module.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -45,11 +45,13 @@ const SearchByPrice = () => {
 
     router.push(`/main?${queryString}`);
     const response = await getCarFilter(queryString);
-    console.log("Filtered Cars:", response); // Debugging
+    console.log("Filtered Cars:", response);
 
     setCars(response);
   };
+
   console.log(cars);
+
   //! Fetching Data
   const getCarsData = async () => {
     try {
@@ -82,48 +84,52 @@ const SearchByPrice = () => {
   }, [searchParams]);
 
   return (
-    <>
-      <div className={`${styles.sliderContainer}`}>
-        <div className={styles.title}>
-          <h1>Məbləğə görə axtarış </h1>
+    <div className={`${styles.sliderContainer}`}>
+      <div className={styles.title}>
+        <h1>Məbləğə görə axtarış</h1>
+      </div>
+      <div className={styles.content}>
+        <div className={styles.leftContent}>
+          <div className="flex flex-col gap-[8px]">
+            <input
+              name="min_price_azn"
+              value={priceData.min_price_azn}
+              onChange={handleInputChange}
+              placeholder="Minimal məbləğ"
+              type="number"
+            />
+            <input
+              name="max_price_azn"
+              value={priceData.max_price_azn}
+              onChange={handleInputChange}
+              placeholder="Maksimal məbləğ"
+              type="number"
+            />
+          </div>
+          <button type="button" onClick={result}>
+            Nəticə
+          </button>
         </div>
-        <div className={styles.content}>
-          <div className={styles.leftContent}>
-            <div className="flex flex-col gap-[8px]">
-              <input
-                name="min_price_azn"
-                value={priceData.min_price_azn}
-                onChange={handleInputChange}
-                placeholder="Minimal məbləğ"
-                type="number"
-              />
-              <input
-                name="max_price_azn"
-                value={priceData.max_price_azn}
-                onChange={handleInputChange}
-                placeholder="Maksimal məbləğ"
-                type="number"
-              />
-            </div>
-            <button type="button" onClick={result}>
-              Nəticə
-            </button>
-          </div>
-          <div
-            className={`${styles.slider} slider-container max-w-[774px] w-full`}
-          >
-            <Slider {...settings}>
-              {cars?.map((info, index) => (
-                <div key={index} className="px-[12px]">
-                  <CarCard callBackSlug={callBackSlug} data={info} />
-                </div>
-              ))}
-            </Slider>
-          </div>
+        <div
+          className={`${styles.slider} slider-container max-w-[774px] w-full`}
+        >
+          <Slider {...settings}>
+            {cars?.map((info, index) => (
+              <div key={index} className="px-[12px]">
+                <CarCard callBackSlug={callBackSlug} data={info} />
+              </div>
+            ))}
+          </Slider>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default SearchByPrice;
+const SearchByPriceWrapper = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <SearchByPrice />
+  </Suspense>
+);
+
+export default SearchByPriceWrapper;
