@@ -2,6 +2,9 @@
   margin-right: auto;
   margin-left: auto;
 }
+.slick-track {
+  transform: translate3d(0, 0, 0) !important;
+}
 
 .widhtLimitContainerLarge {
   margin-right: auto;
@@ -189,6 +192,6 @@
   background-color: #2145a6;
 }
 
-.slick-slider .slick-initialized{
+.slick-slider .slick-initialized {
   width: 100% !important;
 }

@@ -1,45 +1,47 @@
-'use client'
-import Image from 'next/image'
-import React, { useEffect, useRef } from 'react'
-import styles from './ProductDetail.module.css'
-import PaymentModal from '../../../components/Common/PaymentModal/PaymentModal'
-import { useSelector, useDispatch } from 'react-redux'
-import { handlePaymentModal } from '../../../redux/features/paymentModalSlice'
+"use client";
+import Image from "next/image";
+import React, { useEffect, useRef } from "react";
+import styles from "./ProductDetail.module.css";
+import PaymentModal from "../../../components/Common/PaymentModal/PaymentModal";
+import { useSelector, useDispatch } from "react-redux";
+import { handlePaymentModal } from "../../../redux/features/paymentModalSlice";
 
-const ProductDetail = ({detail}) => {
-  const insideRef = useRef(null)
+const ProductDetail = ({ detail }) => {
+  const insideRef = useRef(null);
   const isActivePaymentModal = useSelector(
     (state) => state.paymentModal.isActivePaymentModal
-  )
+  );
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleClickPaymentModal = () => {
-    dispatch(handlePaymentModal())
-  }
+    dispatch(handlePaymentModal());
+  };
 
   useEffect(() => {
     if (isActivePaymentModal) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = ''
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isActivePaymentModal])
+      document.body.style.overflow = "";
+    };
+  }, [isActivePaymentModal]);
 
   const handleClickOutside = (e) => {
     if (insideRef.current && !insideRef.current.contains(e.target)) {
-      handleClickPaymentModal()
+      handleClickPaymentModal();
     }
-  }
+  };
 
   return (
     <div className={`${styles.productDetailContainer}`}>
       <div className={styles.title}>
-        <span>{detail?.make?.name} {detail?.model?.name}</span>
-        <p>{detail?.price} {detail?.currency}</p>
+        <span>
+          {detail?.make?.name} {detail?.model?.name}
+        </span>
+        <p>{detail?.price_azn} AZN</p>
         <div className={styles.details}>
           <div>
             <p>Şəhər</p>
@@ -91,7 +93,9 @@ const ProductDetail = ({detail}) => {
           </div>
           <div>
             <p>Mühərrik</p>
-            <span>{detail?.engine_volume} / {detail?.engine_power} .a.g / Elektro</span>
+            <span>
+              {detail?.engine_volume} / {detail?.engine_power} .a.g / Elektro
+            </span>
           </div>
           <div>
             <p>Elanın nömrəsi</p>
@@ -99,14 +103,16 @@ const ProductDetail = ({detail}) => {
           </div>
           <div>
             <p>Yürüş</p>
-            <span>{detail?.distance} {detail?.distance_unit}</span>
+            <span>
+              {detail?.distance} {detail?.distance_unit}
+            </span>
           </div>
         </div>
         <button onClick={() => handleClickPaymentModal()}>Hesabla</button>
         <div
           onClick={handleClickOutside}
           className={`${styles.paymentModal} ${
-            !isActivePaymentModal && '!hidden !opacity-0'
+            !isActivePaymentModal && "!hidden !opacity-0"
           }`}
         >
           <div ref={insideRef}>
@@ -115,7 +121,7 @@ const ProductDetail = ({detail}) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductDetail
+export default ProductDetail;
