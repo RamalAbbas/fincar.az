@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { handlePaymentModal } from '../../../redux/features/paymentModalSlice'
 import styles from './PaymentModal.module.css'
 import Image from 'next/image'
-import xmark from '../../../assets/icons/xmark.svg'
+import xmark from '../../../assets/icons/xMark.svg'
 
 const PaymentModal = () => {
   const isActivePaymentModal = useSelector(
