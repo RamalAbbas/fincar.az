@@ -14,6 +14,7 @@ const Main = ({ params }) => {
     try {
       const response = await getCarFeature();
       setCarFeature(response);
+      console.log(response)
     } catch (err) {
       console.error(err);
     }
@@ -37,6 +38,9 @@ const Main = ({ params }) => {
 
   useEffect(() => {
     getCarFeatureData();
+  }, []);
+
+  useEffect(() => {
     getCarsData();
   }, []);
 

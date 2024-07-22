@@ -21,6 +21,12 @@ const CarList = ({ cars, isLoading }) => {
         {cars?.map((info, index) => (
           <Card key={index} callBackSlug={callBackSlug} data={info} />
         ))}
+
+        {cars?.length == 0 ? (
+          <p className={styles.errorMessage}>Axtarisa uygun netice yoxdur</p>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

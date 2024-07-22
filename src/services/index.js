@@ -2,100 +2,99 @@ import baseUrl from "../constants/baseUrl/baseUrl";
 import axios from "axios";
 
 const instanceAxios = axios.create({
-    baseURL: baseUrl,
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-    },
+  baseURL: baseUrl,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
 });
 
-//! Cars 
+//! Cars
 export const getCars = async () => {
-    try {
-        const response = await instanceAxios.get(`car/all-list`);
-        return response.data;
-    } catch (error) {
-        console.log({ error })
-    }
+  try {
+    const response = await instanceAxios.get(`car/all-list`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
 };
 
 export const getPopularCars = async () => {
-    try {
-        const response = await instanceAxios.get(`car/popular-list`);
-        return response.data;
-    } catch (error) {
-        console.log({ error })
-    }
+  try {
+    const response = await instanceAxios.get(`car/popular-list`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
 };
 
 export const getCarDetail = async (slug) => {
-    try {
-        const response = await instanceAxios.get(`car/detail/${slug}`);
-        return response.data;
-    } catch (error) {
-        console.log({ error })
-    }
+  try {
+    const response = await instanceAxios.get(`car/detail/${slug}`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
 };
 
 export const getCarFilter = async (data) => {
-    try {
-        const response = await instanceAxios.get(`car/filter`,data);
-        return response.data;
-    } catch (error) {
-        console.log({ error })
-    }
+  try {
+    const response = await instanceAxios.get(`car/filter/?${data}`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
 };
 
 export const register = async (data) => {
-    try {
-        const response = await instanceAxios.post(`client/register`,data);
-        return response;
-    } catch (error) {
-        console.log({ error })
-    }
+  try {
+    const response = await instanceAxios.post(`client/register`, data);
+    return response;
+  } catch (error) {
+    console.log({ error });
+  }
 };
 
 export const login = async (data) => {
-    try {
-        const response = await instanceAxios.post(`client/login`,data);
-        return response;
-    } catch (error) {
-        console.log({ error })
-    }
+  try {
+    const response = await instanceAxios.post(`client/login`, data);
+    return response;
+  } catch (error) {
+    console.log({ error });
+  }
 };
 
 export const getDealerList = async () => {
-    try {
-        const response = await instanceAxios.get(`dealer/list`);
-        return response.data;
-    } catch (error) {
-        console.log({ error })
-    }
+  try {
+    const response = await instanceAxios.get(`dealer/list`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
 };
 
 export const getDealerSearch = async (keyword) => {
-    try {
-        const response = await instanceAxios.get(`dealer/search/${keyword}`);
-        return response.data;
-    } catch (error) {
-        console.log({ error })
-    }
+  try {
+    const response = await instanceAxios.get(`dealer/search/${keyword}`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
 };
-
 
 export const getDealerDetail = async (slug) => {
-    try {
-        const response = await instanceAxios.get(`dealer/detail/${slug}`);
-        return response.data;
-    } catch (error) {
-        console.log({ error })
-    }
+  try {
+    const response = await instanceAxios.get(`dealer/detail/${slug}`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
 };
 export const getCarFeature = async () => {
-    try {
-        const response = await instanceAxios.get(`/car-feature-list`);
-        return response.data;
-    } catch (error) {
-        console.log({ error })
-    }
+  try {
+    const response = await instanceAxios.get(`/car-feature-list`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
 };
