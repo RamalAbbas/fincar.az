@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import styles from "./FilterBox.module.css";
 import { useRouter } from "next/navigation";
 import { getCarFilter } from "../../../services";
-
+import { data } from "autoprefixer";
 const FilterBox = ({ carfeature, filterData }) => {
   const { push } = useRouter();
   const [carFeature, setCarFeature] = useState([]);
+
   const [filters, setFilters] = useState({
     body: "",
     color: "",
@@ -25,9 +26,22 @@ const FilterBox = ({ carfeature, filterData }) => {
   });
   const [yearOptions, setYearOptions] = useState([]);
 
+  // const handleChange = (e) => {
+  //   setFilters(
+  //     { ...filters, [e.target.name]: e.target.value });
+  //      if(e.target.name == "make"){
+  //       let data =carfeature.models.filter(item => item.make === carfeature.makes.name)
+  //       console.log(data)
+  //      }
+  // };
+
   const handleChange = (e) => {
-    setFilters(
-      { ...filters, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFilters({ ...filters, [name]: value });
+  
+    if (name === "make") {
+      let data = carfeature.models.filter(item => item.make === carfeature.makes.map(item=>item.name));
+    }
   };
   const handleSearch = async () => {
     const queryString = Object.keys(filters)
@@ -110,7 +124,7 @@ const FilterBox = ({ carfeature, filterData }) => {
         </div>
         <div className="flex gap-2 my-4">
           <div className={styles.select_wrapper}>
-            <select name="make" onChange={handleChange}  value={filters.make}> 
+            <select name="make" onChange={handleChange}  value={filters.make} > 
               <option value="" disabled>
                 Marka
               </option>
@@ -126,11 +140,11 @@ const FilterBox = ({ carfeature, filterData }) => {
               <option value="" disabled>
                 Model
               </option>
-              {carfeature?.models?.map((item) => (
+              {/* {carFeature?.models?.map((item) => (
                 <option value={item.id} key={item?.id}>
                   {item?.name}
                 </option>
-              ))}
+              ))} */}
             </select>
           </div>
         </div>
