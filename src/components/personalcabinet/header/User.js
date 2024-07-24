@@ -5,9 +5,29 @@ import Image from 'next/image'
 import upload from '../../../assets/images/upload/Group.svg'
 import personalcabinet from '../../../assets/images/personalcabinet/profil.jpeg'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react';
 import Link from 'next/link'
 const User = () => {
+  const [file, setFile] = useState(null);
+  const [message, setMessage] = useState('');
   const router=useRouter()
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const res = await fetch('/api/upload', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const result = await res.json();
+    setMessage(result.error || 'File uploaded successfully!');
+  };
   return (
     <>
       {/* My Profile */}
@@ -20,14 +40,14 @@ const User = () => {
         <p className={styles.text}>Personal information</p>
         {/* Image */}
         <div className={styles.layout}>
-          <Image src={personalcabinet} className={styles.img} />
+          <Image src={personalcabinet} className={styles.img} onChange={handleFileChange} />
         </div>
         {/* Upload and Replace*/}
         <div className={styles.uploadbtn}>
-          <button className={styles.button}>
-            <Image src={upload} className={styles.upload} />
-            <p className={styles.paragraph}>Replace</p>
-          </button>
+          <button className={styles.button} onSubmit={handleSubmit}> 
+           <Image src={upload} className={styles.upload}/>
+            <p className={styles.paragraph}>Replace</p> 
+           </button> 
         </div>
         {/* side line */}
         <div className={styles.border}>
@@ -38,8 +58,8 @@ const User = () => {
           <input type='text' placeholder='Vusal Əliyev' className={styles.wraper} />
           {/* Pin Code */}
           <div className={styles.inp2}>
-            <label className={styles.username}>PIN code</label>
-            <input type='text' placeholder='2RH3YDR' className={styles.wraper} />
+            <label className={styles.username}>FIN code</label>
+            <input type='text' placeholder='2RH3YDR' className={styles.wraper} disabled/>
           </div>
         </div>
         {/* Email */}

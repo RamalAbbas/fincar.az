@@ -20,7 +20,7 @@ const CarList = ({ cars, isLoading }) => {
           <Card key={index} callBackSlug={callBackSlug} data={info} />
         ))}
 
-        {cars.length === 0 && !isLoading ? (
+        {cars?.length === 0 && !isLoading ? (
           <p className={styles.errorMessage}>Axtarisa uygun netice yoxdur</p>
         ) : null}
       </div>

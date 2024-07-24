@@ -1,13 +1,12 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import styles from "./FilterBox.module.css";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { getCarFilter } from "../../../services";
-
-const FilterBox = ({ carFeature, filterData }) => {
+import { data } from "autoprefixer";
+const FilterBox = ({ carfeature, filterData }) => {
   const { push } = useRouter();
-  const searchParams = useSearchParams();
+  const [carFeature, setCarFeature] = useState([]);
+
   const [filters, setFilters] = useState({
     body: "",
     color: "",
@@ -27,10 +26,33 @@ const FilterBox = ({ carFeature, filterData }) => {
   });
   const [yearOptions, setYearOptions] = useState([]);
 
-  useEffect(() => {
-    const currentFilters = Object.fromEntries([...searchParams.entries()]);
-    setFilters((prevFilters) => ({ ...prevFilters, ...currentFilters }));
-  }, [searchParams]);
+  // const handleChange = (e) => {
+  //   setFilters(
+  //     { ...filters, [e.target.name]: e.target.value });
+  //      if(e.target.name == "make"){
+  //       let data =carfeature.models.filter(item => item.make === carfeature.makes.name)
+  //       console.log(data)
+  //      }
+  // };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFilters({ ...filters, [name]: value });
+  
+    if (name === "make") {
+      let data = carfeature.models.filter(item => item.make === carfeature.makes.map(item=>item.name));
+    }
+  };
+  const handleSearch = async () => {
+    const queryString = Object.keys(filters)
+      .filter((key) => filters[key] !== "")
+      .map((key) => ${key}=${filters[key]})
+      .join("&");
+
+    push(/search?${queryString});
+    const response = await getCarFilter(queryString);
+    filterData(response);
+  };
 
   useEffect(() => {
     if (filters.min_year) {
@@ -43,25 +65,11 @@ const FilterBox = ({ carFeature, filterData }) => {
     }
   }, [filters.min_year]);
 
-  const handleChange = (e) => {
-    setFilters({ ...filters, [e.target.name]: e.target.value });
-  };
-
-  const handleSearch = async () => {
-    const queryString = Object.keys(filters)
-      .filter((key) => filters[key] !== "")
-      .map((key) => `${key}=${filters[key]}`)
-      .join("&");
-
-    push(`/search?${queryString}`);
-    const response = await getCarFilter(queryString);
-    filterData(response);
-  };
-
   return (
     <div className={styles.box}>
       <p className={styles.headTitle}>Filtrlər</p>
       <div className={styles.filter_content}>
+ 
         <label>Qiymət</label>
         <div className="flex gap-2 mt-2">
           <input
@@ -79,13 +87,18 @@ const FilterBox = ({ carFeature, filterData }) => {
             onChange={handleChange}
           />
         </div>
+{/* <<<<<<< HEAD */}
+
+{/*  */}
+{/* // ======= */}
+{/* >>>>>>> 965eb1173a86d263e27f78d6e9ae8886dbb54f83 */}
         <div className="flex gap-2 mt-4">
           <div className={styles.select_wrapper}>
             <select name="body" onChange={handleChange} value={filters.body}>
               <option value="" disabled>
                 Ban növü
               </option>
-              {carFeature?.bans?.map((item) => (
+              {carfeature?.bans?.map((item) => (
                 <option value={item.id} key={item.id}>
                   {item.name}
                 </option>
@@ -101,7 +114,7 @@ const FilterBox = ({ carFeature, filterData }) => {
               <option value="" disabled>
                 Sürət qutusu
               </option>
-              {carFeature?.gears?.map((item) => (
+              {carfeature?.gears?.map((item) => (
                 <option value={item.id} key={item.id}>
                   {item.name}
                 </option>
@@ -111,27 +124,27 @@ const FilterBox = ({ carFeature, filterData }) => {
         </div>
         <div className="flex gap-2 my-4">
           <div className={styles.select_wrapper}>
-            <select name="make" onChange={handleChange} value={filters.make}>
+            <select name="make" onChange={handleChange}  value={filters.make} > 
               <option value="" disabled>
                 Marka
               </option>
-              {carFeature?.makes?.map((item) => (
-                <option value={item.id} key={item.id}>
-                  {item.name}
+              {carfeature?.makes?.map((item) => (
+                <option value={item.id} key={item?.id}>
+                  {item?.name}
                 </option>
               ))}
             </select>
           </div>
           <div className={styles.select_wrapper}>
-            <select name="model" onChange={handleChange} value={filters.model}>
+            <select name="model" onChange={handleChange} value={filters.model}  >
               <option value="" disabled>
                 Model
               </option>
-              {carFeature?.models?.map((item) => (
-                <option value={item.id} key={item.id}>
-                  {item.name}
+              {/* {carFeature?.models?.map((item) => (
+                <option value={item.id} key={item?.id}>
+                  {item?.name}
                 </option>
-              ))}
+              ))} */}
             </select>
           </div>
         </div>
@@ -220,7 +233,7 @@ const FilterBox = ({ carFeature, filterData }) => {
             <option value="" disabled>
               Hansı bazar üçün yığılıb
             </option>
-            {carFeature?.markets?.map((item) => (
+            {carfeature?.markets?.map((item) => (
               <option value={item.id} key={item.id}>
                 {item.name}
               </option>
@@ -233,7 +246,7 @@ const FilterBox = ({ carFeature, filterData }) => {
               <option value="" disabled>
                 Yanacaq növü
               </option>
-              {carFeature?.fuels?.map((item) => (
+              {carfeature?.fuels?.map((item) => (
                 <option key={item.id} value={item.id}>
                   {item.name}
                 </option>
@@ -245,7 +258,7 @@ const FilterBox = ({ carFeature, filterData }) => {
               <option value="" disabled>
                 Rəng
               </option>
-              {carFeature?.colors?.map((item) => (
+              {carfeature?.colors?.map((item) => (
                 <option value={item.id} key={item.id}>
                   {item.name}
                 </option>
