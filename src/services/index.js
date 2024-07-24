@@ -6,6 +6,8 @@ const instanceAxios = axios.create({
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNDYwNzEyLCJpYXQiOjE3MjE4MjA3MTIsImp0aSI6ImM3YzhlY2YxODIwMTQwYWJiNjcwOWRkYmI2OGY1ZGZlIiwidXNlcl9pZCI6OX0.7uDeHCEZNw0UnpOCVuLwygk123gyU9zgRhPQ6Vw0Jv0",
   },
 });
 
@@ -90,9 +92,28 @@ export const getDealerDetail = async (slug) => {
     console.log({ error });
   }
 };
+
 export const getCarFeature = async () => {
   try {
     const response = await instanceAxios.get(`/car-feature-list`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
+export const carSave = async (data) => {
+  try {
+    const response = await instanceAxios.post(`car-save`, data);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
+export const carSaveList = async () => {
+  try {
+    const response = await instanceAxios.get(`car-save/list`);
     return response.data;
   } catch (error) {
     console.log({ error });

@@ -1,77 +1,77 @@
-'use client'
-import React, { useState, useRef, useEffect } from 'react'
-import styles from './MainHeader.module.css'
-import Image from 'next/image'
-import headerBg from '../../../assets/images/headerBg.png'
-import azFlag from '../../../assets/icons/azFlag.svg'
-import mobileMenu from '../../../assets/icons/mobileHeader/menu.svg'
-import searchInput from '../../../assets/icons/mobileHeader/searchInput.svg'
-import filter from '../../../assets/icons/mobileHeader/filter.svg'
-import downArrow from '../../../assets/icons/arrow/down.svg'
-import leftBlue from '../../../assets/icons/arrow/leftBlue.svg'
-import { useDispatch, useSelector } from 'react-redux'
-import { handleMenuFilter } from '../../../redux/features/mobileMenuFilterSlice'
-import { useRouter } from 'next/navigation'
+"use client";
+import React, { useState, useRef, useEffect } from "react";
+import styles from "./MainHeader.module.css";
+import Image from "next/image";
+import headerBg from "../../../assets/images/headerBg.png";
+import azFlag from "../../../assets/icons/azFlag.svg";
+import mobileMenu from "../../../assets/icons/mobileHeader/menu.svg";
+import searchInput from "../../../assets/icons/mobileHeader/searchInput.svg";
+import filter from "../../../assets/icons/mobileHeader/filter.svg";
+import downArrow from "../../../assets/icons/arrow/down.svg";
+import leftBlue from "../../../assets/icons/arrow/leftBlue.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { handleMenuFilter } from "../../../redux/features/mobileMenuFilterSlice";
+import { useRouter } from "next/navigation";
 
 const Title = () => {
   const { push } = useRouter();
-  const [selectedBrand, setSelectedBrand] = useState('')
-  const [selectedModel, setSelectedModel] = useState('')
+  const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedModel, setSelectedModel] = useState("");
 
-  const [selectedBrandFilter, setSelectedBrandFilter] = useState('')
-  const [selectedModelFilter, setSelectedModelFilter] = useState('')
-  const [selectedTypeOfBanFilter, setSelectedTypeOfBanFilter] = useState('')
+  const [selectedBrandFilter, setSelectedBrandFilter] = useState("");
+  const [selectedModelFilter, setSelectedModelFilter] = useState("");
+  const [selectedTypeOfBanFilter, setSelectedTypeOfBanFilter] = useState("");
   const [selectedTransmissionFilter, setSelectedTransmissionFilter] =
-    useState('')
-  const [selectedYearFilter, setSelectedYearFilter] = useState('')
-  const [selectedEngineMinFilter, setSelectedEngineMinFilter] = useState('')
-  const [selectedEngineMaxFilter, setSelectedEngineMaxFilter] = useState('')
-  const [selectedForMarketFilter, setSelectedForMarketFilter] = useState('')
-  const [selectedFuelTypeFilter, setSelectedFuelTypeFilter] = useState('')
-  const [selectedColorFilter, setSelectedColorFilter] = useState('')
+    useState("");
+  const [selectedYearFilter, setSelectedYearFilter] = useState("");
+  const [selectedEngineMinFilter, setSelectedEngineMinFilter] = useState("");
+  const [selectedEngineMaxFilter, setSelectedEngineMaxFilter] = useState("");
+  const [selectedForMarketFilter, setSelectedForMarketFilter] = useState("");
+  const [selectedFuelTypeFilter, setSelectedFuelTypeFilter] = useState("");
+  const [selectedColorFilter, setSelectedColorFilter] = useState("");
 
-  const [isMobileMenuActive, setIsMobileMenuActive] = useState(false)
+  const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
 
   const isMobileFilterActive = useSelector(
     (state) => state.mobileMenuFilter.isMobileFilterActive
-  )
+  );
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleClickMenuFilter = () => {
-    dispatch(handleMenuFilter())
-  }
+    dispatch(handleMenuFilter());
+  };
 
-  const insideMobileMenu = useRef(null)
+  const insideMobileMenu = useRef(null);
 
   const handleToggleMobileMenu = () => {
-    console.log('click')
-    setIsMobileMenuActive((prevState) => !prevState)
-  }
+    console.log("click");
+    setIsMobileMenuActive((prevState) => !prevState);
+  };
 
   const handleClickOutside = (e) => {
     if (
       insideMobileMenu.current &&
       !insideMobileMenu.current.contains(e.target)
     ) {
-      setIsMobileMenuActive(false)
+      setIsMobileMenuActive(false);
     }
-  }
+  };
 
   useEffect(() => {
     if (isMobileMenuActive) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = ''
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isMobileMenuActive])
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuActive]);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'auto' })
-  }, [isMobileFilterActive])
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [isMobileFilterActive]);
 
   return (
     <section>
@@ -85,7 +85,7 @@ const Title = () => {
               <a>Fincar.az</a>
             </div>
             <div className={styles.rightNav}>
-              <a>Bütün Elanlar</a>
+              <a onClick={() => push("/search")}>Bütün Elanlar</a>
               <a onClick={() => push("/dealerships")}>Salonlar</a>
               <div className={styles.languageDivar}>
                 AZ
@@ -131,7 +131,12 @@ const Title = () => {
               <input placeholder="Axtarış" type="text" maxLength={20} />
               <button className={styles.searchButton}>Axtar </button>
             </div>
-            <button onClick={() => push("/search")} className={styles.detailSearch}>Ətraflı axtarış</button>
+            <button
+              onClick={() => push("/search")}
+              className={styles.detailSearch}
+            >
+              Ətraflı axtarış
+            </button>
           </div>
         </div>
       </div>
@@ -170,14 +175,14 @@ const Title = () => {
         </div>
         <div
           onClick={handleClickOutside}
-          className={`${!isMobileMenuActive && 'hidden !opacity-0'} ${
+          className={`${!isMobileMenuActive && "hidden !opacity-0"} ${
             styles.mobileMenuOutSide
           }`}
         >
           <div
             ref={insideMobileMenu}
             className={`${styles.mobileMenu} ${
-              !isMobileMenuActive && '!left-[-100vw]'
+              !isMobileMenuActive && "!left-[-100vw]"
             }`}
           >
             <a>
@@ -224,12 +229,12 @@ const Title = () => {
         </div>
         <div
           className={`${styles.mobileFliter} ${
-            !isMobileFilterActive && 'hidden !opacity-1 !top-[100vh]'
+            !isMobileFilterActive && "hidden !opacity-1 !top-[100vh]"
           }`}
         >
           <div
             className={`${styles.fixedHeader}  ${
-              !isMobileFilterActive && 'hidden !opacity-1 !top-[-100px]'
+              !isMobileFilterActive && "hidden !opacity-1 !top-[-100px]"
             }`}
           >
             <div className={styles.mobileFilterHeader}>
@@ -463,7 +468,7 @@ const Title = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Title
+export default Title;

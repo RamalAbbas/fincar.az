@@ -46,10 +46,10 @@ const FilterBox = ({ carfeature, filterData }) => {
   const handleSearch = async () => {
     const queryString = Object.keys(filters)
       .filter((key) => filters[key] !== "")
-      .map((key) => `${key}=${filters[key]}`)
+      .map((key) => ${key}=${filters[key]})
       .join("&");
 
-    push(`/search?${queryString}`);
+    push(/search?${queryString});
     const response = await getCarFilter(queryString);
     filterData(response);
   };

@@ -2,14 +2,16 @@
 import CarList from "../../../components/Search/CarList/CarList";
 import FilterBox from "../FilterBox/FilterBox";
 import styles from "./Main.module.css";
-import { getCarFeature, getCars } from "../../../services";
+import { getCarFeature, getCars, getCarFilter } from "../../../services";
 import { useEffect, useState } from "react";
-const Main = ({ params }) => {
+import { useSearchParams } from "next/navigation";
+
+const Main = () => {
   const [carFeature, setCarFeature] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [cars, setCars] = useState([]);
+  const searchParams = useSearchParams();
 
-  //! Fetching Data
   const getCarFeatureData = async () => {
     try {
       const response = await getCarFeature();
@@ -32,22 +34,32 @@ const Main = ({ params }) => {
     }
   };
 
-  const filterData = (data) => {
-    setCars(data);
+  const getFilteredCars = async () => {
+    const queryString = new URLSearchParams(searchParams).toString();
+    if (queryString) {
+      setIsLoading(true);
+      try {
+        const response = await getCarFilter(queryString);
+        setCars(response);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      getCarsData();
+    }
   };
 
   useEffect(() => {
     getCarFeatureData();
-  }, []);
-
-  useEffect(() => {
-    getCarsData();
-  }, []);
+    getFilteredCars();
+  }, [searchParams]);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <FilterBox filterData={filterData} carfeature={carFeature} />
+        <FilterBox filterData={setCars} carFeature={carFeature} />
         <CarList isLoading={isLoading} cars={cars} />
       </div>
     </div>
