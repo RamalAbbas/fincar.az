@@ -2,9 +2,6 @@
   margin-right: auto;
   margin-left: auto;
 }
-.slick-track {
-  transform: translate3d(0, 0, 0) !important;
-}
 
 .widhtLimitContainerLarge {
   margin-right: auto;
@@ -194,4 +191,10 @@
 
 .slick-slider .slick-initialized {
   width: 100% !important;
+}
+
+.errorText {
+  color: red;
+  font-size: 20px;
+  white-space: nowrap;
 }

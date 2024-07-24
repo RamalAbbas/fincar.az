@@ -17,6 +17,7 @@ const ProductDetail = ({ detail }) => {
   const handleClickPaymentModal = () => {
     dispatch(handlePaymentModal());
   };
+  console.log(detail);
 
   useEffect(() => {
     if (isActivePaymentModal) {
