@@ -1,10 +1,13 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import styles from "./FilterBox.module.css";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { getCarFilter } from "../../../services";
 
-const FilterBox = ({ carfeature, filterData }) => {
+const FilterBox = ({ carFeature, filterData }) => {
   const { push } = useRouter();
+  const searchParams = useSearchParams();
   const [filters, setFilters] = useState({
     body: "",
     color: "",
@@ -24,6 +27,22 @@ const FilterBox = ({ carfeature, filterData }) => {
   });
   const [yearOptions, setYearOptions] = useState([]);
 
+  useEffect(() => {
+    const currentFilters = Object.fromEntries([...searchParams.entries()]);
+    setFilters((prevFilters) => ({ ...prevFilters, ...currentFilters }));
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (filters.min_year) {
+      const currentYear = new Date().getFullYear();
+      const years = [];
+      for (let year = parseInt(filters.min_year); year <= currentYear; year++) {
+        years.push(year);
+      }
+      setYearOptions(years);
+    }
+  }, [filters.min_year]);
+
   const handleChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
   };
@@ -38,17 +57,6 @@ const FilterBox = ({ carfeature, filterData }) => {
     const response = await getCarFilter(queryString);
     filterData(response);
   };
-
-  useEffect(() => {
-    if (filters.min_year) {
-      const currentYear = new Date().getFullYear();
-      const years = [];
-      for (let year = parseInt(filters.min_year); year <= currentYear; year++) {
-        years.push(year);
-      }
-      setYearOptions(years);
-    }
-  }, [filters.min_year]);
 
   return (
     <div className={styles.box}>
@@ -77,7 +85,7 @@ const FilterBox = ({ carfeature, filterData }) => {
               <option value="" disabled>
                 Ban növü
               </option>
-              {carfeature?.bans?.map((item) => (
+              {carFeature?.bans?.map((item) => (
                 <option value={item.id} key={item.id}>
                   {item.name}
                 </option>
@@ -93,7 +101,7 @@ const FilterBox = ({ carfeature, filterData }) => {
               <option value="" disabled>
                 Sürət qutusu
               </option>
-              {carfeature?.gears?.map((item) => (
+              {carFeature?.gears?.map((item) => (
                 <option value={item.id} key={item.id}>
                   {item.name}
                 </option>
@@ -107,7 +115,7 @@ const FilterBox = ({ carfeature, filterData }) => {
               <option value="" disabled>
                 Marka
               </option>
-              {carfeature?.makes?.map((item) => (
+              {carFeature?.makes?.map((item) => (
                 <option value={item.id} key={item.id}>
                   {item.name}
                 </option>
@@ -119,7 +127,7 @@ const FilterBox = ({ carfeature, filterData }) => {
               <option value="" disabled>
                 Model
               </option>
-              {carfeature?.models?.map((item) => (
+              {carFeature?.models?.map((item) => (
                 <option value={item.id} key={item.id}>
                   {item.name}
                 </option>
@@ -212,7 +220,7 @@ const FilterBox = ({ carfeature, filterData }) => {
             <option value="" disabled>
               Hansı bazar üçün yığılıb
             </option>
-            {carfeature?.markets?.map((item) => (
+            {carFeature?.markets?.map((item) => (
               <option value={item.id} key={item.id}>
                 {item.name}
               </option>
@@ -225,7 +233,7 @@ const FilterBox = ({ carfeature, filterData }) => {
               <option value="" disabled>
                 Yanacaq növü
               </option>
-              {carfeature?.fuels?.map((item) => (
+              {carFeature?.fuels?.map((item) => (
                 <option key={item.id} value={item.id}>
                   {item.name}
                 </option>
@@ -237,7 +245,7 @@ const FilterBox = ({ carfeature, filterData }) => {
               <option value="" disabled>
                 Rəng
               </option>
-              {carfeature?.colors?.map((item) => (
+              {carFeature?.colors?.map((item) => (
                 <option value={item.id} key={item.id}>
                   {item.name}
                 </option>

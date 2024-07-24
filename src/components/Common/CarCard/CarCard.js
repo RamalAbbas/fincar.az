@@ -1,12 +1,22 @@
-import React from 'react'
-import styles from './CarCard.module.css'
-import Image from 'next/image'
-import car from '../../../assets/images/carCardExample/bmwm3nfs.jpg'
-import favorite from '../../../assets/icons/favorite.svg'
+import React from "react";
+import styles from "./CarCard.module.css";
+import Image from "next/image";
+import car from "../../../assets/images/carCardExample/bmwm3nfs.jpg";
+import favorite from "../../../assets/icons/favorite.svg";
+import { carSave } from "../../../services";
+import { useRouter } from "next/navigation";
 
-const CarCard = ({ data , callBackSlug }) => {
+const CarCard = ({ data, callBackSlug }) => {
+  const { push } = useRouter();
+  const saveCarFunction = async () => {
+    const response = await carSave({ car: data.id });
+    if (!!response) {
+      push("/saved");
+    }
+  };
+
   return (
-    <div onClick={() => callBackSlug(data.slug)} className={styles.card}>
+    <div className={styles.card}>
       <div className={styles.img}>
         <img
           src={data?.cover}
@@ -16,8 +26,10 @@ const CarCard = ({ data , callBackSlug }) => {
           alt="car"
           className="h-full object-cover rounded-t-[10px]"
         />
-        <div className={styles.price}>{data?.payment?.initial_payment_azn.toFixed()} ₼ / ilkin</div>
-        <div className={styles.fav}>
+        <div className={styles.price}>
+          {data?.payment?.initial_payment_azn.toFixed()} ₼ / ilkin
+        </div>
+        <div onClick={saveCarFunction} className={styles.fav}>
           <Image
             src={favorite}
             loading="lazy"
@@ -28,23 +40,18 @@ const CarCard = ({ data , callBackSlug }) => {
           />
         </div>
       </div>
-      <div className={styles.bottomContent}>
+      <div
+        onClick={() => callBackSlug(data.slug)}
+        className={styles.bottomContent}
+      >
         <h1>
-            {
-              data?.make.name
-            }
-            {
-              data?.model.name
-            }
+          {data?.make.name}
+          {data?.model.name}
         </h1>
-        <h2>
-            {
-              data?.slug
-            }
-        </h2>
+        <h2>{data?.slug}</h2>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CarCard
+export default CarCard;

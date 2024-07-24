@@ -45,12 +45,9 @@ const SearchByPrice = () => {
 
     router.push(`/main?${queryString}`);
     const response = await getCarFilter(queryString);
-    console.log("Filtered Cars:", response);
 
     setCars(response);
   };
-
-  console.log(cars);
 
   //! Fetching Data
   const getCarsData = async () => {
@@ -114,11 +111,15 @@ const SearchByPrice = () => {
           className={`${styles.slider} slider-container max-w-[774px] w-full`}
         >
           <Slider {...settings}>
-            {cars?.map((info, index) => (
-              <div key={index} className="px-[12px]">
-                <CarCard callBackSlug={callBackSlug} data={info} />
-              </div>
-            ))}
+            {cars?.length > 0 ? (
+              cars?.map((info, index) => (
+                <div key={index} className="px-[12px]">
+                  <CarCard callBackSlug={callBackSlug} data={info} />
+                </div>
+              ))
+            ) : (
+              <p className={styles.errorText}>Axtarışa uyğun məlumat yoxdur</p>
+            )}
           </Slider>
         </div>
       </div>
