@@ -1,3 +1,4 @@
+
 import baseUrl from "../constants/baseUrl/baseUrl";
 import axios from "axios";
 
@@ -128,3 +129,22 @@ export const carLoanCalculation = async (data) => {
     console.log({ error });
   }
 };
+
+export const deleteSavedCar = async (data) => {
+  try {
+    const response = await instanceAxios.delete(`car-save/delete/${data}`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
+export const carFeatureListModel = async (id) => {
+  try {
+    const response = await instanceAxios.get(`car-feature-list/model/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+

@@ -4,7 +4,7 @@ import Image from "next/image";
 import car from "../../../assets/images/carCardExample/bmwm3nfs.jpg";
 import favorite from "../../../assets/icons/favorite.svg";
 import favouriteblack from "../../../assets/icons/favouriteblack.svg";
-import { carSave } from "../../../services";
+import { carSave, deleteSavedCar } from "../../../services";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,6 +18,17 @@ const CarCard = ({ data, callBackSlug }) => {
 
       setTimeout(() => {
         push("/saved");
+      }, 2000);
+    }
+  };
+
+  const deleteCarFunction = async () => {
+    const response = await deleteSavedCar(data.id);
+    if (response.length == 0) {
+      toast.success("Silindi.");
+
+      setTimeout(() => {
+        push("/main");
       }, 2000);
     }
   };
@@ -38,7 +49,7 @@ const CarCard = ({ data, callBackSlug }) => {
             {data?.payment?.initial_payment_azn.toFixed()} ₼ / ilkin
           </div>
           {data?.is_saved ? (
-            <div className={styles.fav_disabled}>
+            <div onClick={deleteCarFunction} className={styles.fav_disabled}>
               <Image
                 src={favouriteblack}
                 loading="lazy"

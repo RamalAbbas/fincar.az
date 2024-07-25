@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./FilterBox.module.css";
 import { useRouter } from "next/navigation";
-import { getCarFilter } from "../../../services";
+import { carFeatureListModel, getCarFilter } from "../../../services";
 import { data } from "autoprefixer";
 // import { data, data } from "autoprefixer";
 const FilterBox = ({ carfeature, filterData }) => {
@@ -24,24 +24,15 @@ const FilterBox = ({ carfeature, filterData }) => {
     model: "",
   });
   const [yearOptions, setYearOptions] = useState([]);
+  const [models, setModels] = useState([]);
 
-  // const handleChange = (e) => {
-  //   setFilters(
-  //     { ...filters, [e.target.name]: e.target.value });
-  //      if(e.target.name == "make"){
-  //       let data =carFeature.models.filter(item => item.make === carFeature.makes.name)
-  //       console.log(data)
-  //      }
-  // };
-
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value } = e.target;
     setFilters({ ...filters, [name]: value });
 
     if (name === "make") {
-      let data = carfeature.models.filter((item) => item.make !== carfeature.makes.map((item) => item.name)
-      );
-       console.log(data)
+      const data = await carFeatureListModel(e.target.value);
+      setModels(data);
     }
   };
   const handleSearch = async () => {
@@ -140,11 +131,11 @@ const FilterBox = ({ carfeature, filterData }) => {
               <option value="" disabled>
                 Model
               </option>
-               {carfeature?.models?.map((item) => (
+              {models?.map((item) => (
                 <option value={item.id} key={item?.id}>
                   {item?.name}
                 </option>
-              ))} 
+              ))}
             </select>
           </div>
         </div>
