@@ -3,7 +3,8 @@ import styles from "./FilterBox.module.css";
 import { useRouter } from "next/navigation";
 import { getCarFilter } from "../../../services";
 import { data } from "autoprefixer";
-const FilterBox = ({ carFeature, filterData }) => {
+// import { data, data } from "autoprefixer";
+const FilterBox = ({ carfeature, filterData }) => {
   const { push } = useRouter();
   const [filters, setFilters] = useState({
     body: "",
@@ -38,9 +39,9 @@ const FilterBox = ({ carFeature, filterData }) => {
     setFilters({ ...filters, [name]: value });
 
     if (name === "make") {
-      let data = carFeature.models.filter(
-        (item) => item.make === carFeature.makes.map((item) => item.name)
+      let data = carfeature.models.filter((item) => item.make !== carfeature.makes.map((item) => item.name)
       );
+       console.log(data)
     }
   };
   const handleSearch = async () => {
@@ -97,7 +98,7 @@ const FilterBox = ({ carFeature, filterData }) => {
               <option value="" disabled>
                 Ban növü
               </option>
-              {carFeature?.bans?.map((item) => (
+              {carfeature?.bans?.map((item) => (
                 <option value={item.id} key={item.id}>
                   {item.name}
                 </option>
@@ -113,7 +114,7 @@ const FilterBox = ({ carFeature, filterData }) => {
               <option value="" disabled>
                 Sürət qutusu
               </option>
-              {carFeature?.gears?.map((item) => (
+              {carfeature?.gears?.map((item) => (
                 <option value={item.id} key={item.id}>
                   {item.name}
                 </option>
@@ -127,7 +128,7 @@ const FilterBox = ({ carFeature, filterData }) => {
               <option value="" disabled>
                 Marka
               </option>
-              {carFeature?.makes?.map((item) => (
+              {carfeature?.makes?.map((item) => (
                 <option value={item.id} key={item?.id}>
                   {item?.name}
                 </option>
@@ -139,11 +140,11 @@ const FilterBox = ({ carFeature, filterData }) => {
               <option value="" disabled>
                 Model
               </option>
-              {/* {carFeature?.models?.map((item) => (
+               {carfeature?.models?.map((item) => (
                 <option value={item.id} key={item?.id}>
                   {item?.name}
                 </option>
-              ))} */}
+              ))} 
             </select>
           </div>
         </div>
@@ -232,7 +233,7 @@ const FilterBox = ({ carFeature, filterData }) => {
             <option value="" disabled>
               Hansı bazar üçün yığılıb
             </option>
-            {carFeature?.markets?.map((item) => (
+            {carfeature?.markets?.map((item) => (
               <option value={item.id} key={item.id}>
                 {item.name}
               </option>
@@ -245,7 +246,7 @@ const FilterBox = ({ carFeature, filterData }) => {
               <option value="" disabled>
                 Yanacaq növü
               </option>
-              {carFeature?.fuels?.map((item) => (
+              {carfeature?.fuels?.map((item) => (
                 <option key={item.id} value={item.id}>
                   {item.name}
                 </option>
@@ -257,7 +258,7 @@ const FilterBox = ({ carFeature, filterData }) => {
               <option value="" disabled>
                 Rəng
               </option>
-              {carFeature?.colors?.map((item) => (
+              {carfeature?.colors?.map((item) => (
                 <option value={item.id} key={item.id}>
                   {item.name}
                 </option>
