@@ -15,6 +15,10 @@ const Saved = () => {
   useEffect(() => {
     renderSavedCars();
   }, []);
+  
+  const callBackSlug = (slug) => {
+router.push(`/product/${slug}`);
+  };
   return (
  <>
       <div className={styles.testclass}>
@@ -37,7 +41,7 @@ const Saved = () => {
              width={264}
              height={238}
              alt="car"
-             className="h-full object-cover rounded-t-[10px]"
+             className="h-full object-cover rounded-t-[10px] w-[100%]"
            />
            <div className={styles.price}>
              {item?.payment?.initial_payment_azn.toFixed()} ₼ / ilkin
