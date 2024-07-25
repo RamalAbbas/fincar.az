@@ -52,7 +52,7 @@ const Header = ({ isSaved, isNotification }) => {
                       />
                     </div>
 
-                    {localStorage.getItem("access_token") !== null ? (
+                    {localStorage.getItem("data") !== null ? (
                       <div
                         className="cursor-pointer"
                         onClick={() => push("/saved")}
