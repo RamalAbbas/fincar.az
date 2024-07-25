@@ -32,6 +32,12 @@ const Title = () => {
 
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
 
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setData(JSON.parse(localStorage.getItem("data")));
+  }, []);
+
   const isMobileFilterActive = useSelector(
     (state) => state.mobileMenuFilter.isMobileFilterActive
   );
@@ -73,6 +79,12 @@ const Title = () => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [isMobileFilterActive]);
 
+  const handleSend = () => {
+    if (!data?.username) {
+      push("/signin");
+    }
+  };
+
   return (
     <section>
       <div
@@ -91,7 +103,9 @@ const Title = () => {
                 AZ
                 <Image src={azFlag} width={20} height={15} alt="header-bg" />
               </div>
-              <button onClick={() => push("/signin")}>Daxil ol</button>
+              <button onClick={handleSend}>
+                {data?.username ? data?.username : "Daxil ol"}
+              </button>
             </div>
           </nav>
           <h1 className={styles.desc}>Xəyalınızın maşınına bizlə sahib olun</h1>

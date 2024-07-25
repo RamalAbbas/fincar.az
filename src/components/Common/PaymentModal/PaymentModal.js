@@ -1,24 +1,40 @@
-'use client'
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { handlePaymentModal } from '../../../redux/features/paymentModalSlice'
-import styles from './PaymentModal.module.css'
-import Image from 'next/image'
-import xmark from '../../../assets/icons/xMark.svg'
+"use client";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { handlePaymentModal } from "../../../redux/features/paymentModalSlice";
+import styles from "./PaymentModal.module.css";
+import Image from "next/image";
+import xmark from "../../../assets/icons/xMark.svg";
+import { carLoanCalculation } from "../../../services";
 
-const PaymentModal = () => {
+const PaymentModal = ({ data }) => {
+  const [payments, setPayments] = useState([]);
   const isActivePaymentModal = useSelector(
     (state) => state.paymentModal.isActivePaymentModal
-  )
+  );
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  const [selectedOption, setSelectedOption] = useState("");
 
   const handleClickPaymentModal = () => {
-    dispatch(handlePaymentModal())
-  }
+    dispatch(handlePaymentModal());
+  };
+
+  const handleSelectChange = async (e) => {
+    setSelectedOption(e.target.value);
+    let info = {
+      car_slug: data?.slug,
+      loan_term: e.target.value,
+    };
+    const response = await carLoanCalculation(info);
+    console.log(response);
+    setPayments(response);
+  };
+  console.log(data);
   return (
     <div
-      className={`${!isActivePaymentModal && '!translate-y-[-40px]'} ${
+      className={`${!isActivePaymentModal && "!translate-y-[-40px]"} ${
         styles.modal
       }`}
     >
@@ -28,7 +44,11 @@ const PaymentModal = () => {
       >
         <Image src={xmark} width={24} height={24} alt="xmark" />
       </div>
-      <h1>FORD Mustang, 1.4 L, 2023 il, 14 630 km</h1>
+      <h1>
+        {data?.make?.name}
+        <span> </span>
+        {data?.model?.name}
+      </h1>
       <p>
         İlkin tələb olunan ödəniş komissiya, sığorta və s. xərclər üçün nəzərdə
         tutulur
@@ -36,25 +56,39 @@ const PaymentModal = () => {
       <div className={styles.inputContainer}>
         <div className="w-full">
           <label>İlkin ödəniş</label>
-          <input type="text" placeholder="$ 12.000" />
+          <input disabled type="text" placeholder="$ 12.000" />
         </div>
         <div className="w-full">
           <label>Kreditin müddəti</label>
-          <select className={styles.dropdown} name="cars" id="cars">
-            <option value="volvo">12 ay</option>
-            <option value="saab">6 ay</option>
-            <option value="opel">3 ay</option>
-            <option value="audi">1 ay</option>
+          <select
+            className={styles.dropdown}
+            name="cars"
+            id="cars"
+            value={selectedOption}
+            onChange={handleSelectChange}
+          >
+            <option selected value="Seçin">
+              Seçin
+            </option>
+            <option value="12">12 ay</option>
+            <option value="6">6 ay</option>
+            <option value="3">3 ay</option>
+            <option value="1">1 ay</option>
           </select>
         </div>
       </div>
       <div className="bg-[#DADEF2] w-full h-[1px] mt-[24px]"></div>
       <div className={styles.calculatedPrice}>
         <div className={styles.firstPrice}>
-          <p>Aylıq məbləğ</p> <span>2.240 $</span>
+          <p>Aylıq məbləğ</p>{" "}
+          <span>
+            {payments.monthly_payment_azn ? payments?.monthly_payment_azn : 0}
+            AZN
+          </span>
         </div>
         <div className={styles.secondPrice}>
-          <p>Ümumi məbləğ</p> <span>120.240 $</span>
+          <p>Ümumi məbləğ</p>{" "}
+          <span>{payments?.total ? payments?.total : 0}AZN</span>
         </div>
       </div>
       <div className="bg-[#DADEF2] w-full h-[1px] mt-[16px]"></div>
@@ -68,7 +102,7 @@ const PaymentModal = () => {
       </div>
       <button>Müraciət et</button>
     </div>
-  )
-}
+  );
+};
 
-export default PaymentModal
+export default PaymentModal;

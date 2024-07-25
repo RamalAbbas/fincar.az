@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Header.module.css";
 import Image from "next/image";
 import facebook from "../../../assets/icons//contact/facebook.svg";
@@ -17,6 +17,16 @@ import { useRouter } from "next/navigation";
 const Header = ({ isSaved, isNotification }) => {
   const { push } = useRouter();
   const pathname = usePathname();
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData(JSON.parse(localStorage.getItem("data")));
+  }, []);
+
+  const handleSend = () => {
+    if (!data?.username) {
+      push("/signin");
+    }
+  };
   return (
     <>
       {pathname !== "/main" &&
@@ -61,7 +71,9 @@ const Header = ({ isSaved, isNotification }) => {
                       <></>
                     )}
 
-                    <button onClick={() => push("/signin")}>Daxil ol</button>
+                    <button onClick={handleSend}>
+                      {data?.username ? data?.username : "Daxil ol"}
+                    </button>
                   </div>
                 </div>
               </div>
