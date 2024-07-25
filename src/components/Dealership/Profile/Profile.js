@@ -1,16 +1,16 @@
-import React from 'react'
-import styles from './Profile.module.css'
-import Image from 'next/image'
-import hyundaiLogo from '../../../assets/images/hyundaiLogo.png'
-import eye from '../../../assets/icons/eye.svg'
-import phone from '../../../assets/icons//contact/phone.svg'
-import location from '../../../assets/icons//contact/location.svg'
-import time from '../../../assets/icons//contact/time.svg'
-import { getDealerDetail} from '../../../services'
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-const Profile = ({dealerdetail}) => {
-
+import React from "react";
+import styles from "./Profile.module.css";
+import Image from "next/image";
+import hyundaiLogo from "../../../assets/images/hyundaiLogo.png";
+import eye from "../../../assets/icons/eye.svg";
+import phone from "../../../assets/icons//contact/phone.svg";
+import location from "../../../assets/icons//contact/location.svg";
+import time from "../../../assets/icons//contact/time.svg";
+import { getDealerDetail } from "../../../services";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+const Profile = ({ dealerdetail }) => {
+  console.log(dealerdetail);
   return (
     <div className="px-[15px]">
       <div className={styles.titleContainer}>
@@ -25,12 +25,10 @@ const Profile = ({dealerdetail}) => {
         </div>
         <div className={styles.contentLeft}>
           <h1>{dealerdetail.name}</h1>
-          <p>
-      {dealerdetail.about}
-          </p>
+          <p>{dealerdetail.about}</p>
           <div className={styles.eyeCheck}>
             <Image src={eye} height={24} width={24} alt="logo" />
-            <span>147 866</span>
+            <span>{dealerdetail?.views}</span>
           </div>
         </div>
         <div className={styles.contentRight}>
@@ -57,9 +55,7 @@ const Profile = ({dealerdetail}) => {
               className=" self-start h-[24px]"
             />
             <div>
-              <p className=" text-[#8990B9]">
-              Həftə içi: 09:00–18:30; Şənbə: 10:00–17:00; Bazar: 11:00–16:00
-              </p>
+              <p className=" text-[#8990B9]">{dealerdetail?.opening_time}</p>
             </div>
           </div>
           <div className={styles.columnDiv}>
@@ -79,7 +75,7 @@ const Profile = ({dealerdetail}) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

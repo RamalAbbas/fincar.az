@@ -1,45 +1,45 @@
-'use client'
-import CarImgSlider from '../../../components/Product/CarImgSlider/CarImgSlider'
-import styles from './product.module.css'
-import React, { useState, useEffect } from 'react'
-import ProductDetail from '../../../components/Product/ProductDetail/ProductDetail'
-import Stocks from '../../../components/Product/Stocks/Stocks'
-import Profile from '../../../components/Product/Profile/Profile'
-import OtherCars from '../../../components/Product/OtherCars/OtherCars'
-import BreadCrumb from '../../../components/Common/BreadCrumb/BreadCrumb'
-import MobileCarImgSlider from '../../../components/Product/MobileCarImgSlider/MobileCarImgSlider'
-import MobileCarDetail from '../../../components/Product/MobileCarDetail/MobileCarDetail'
-import MobileCarDescription from '../../../components/Product/MobileCarDescription/MobileCarDescription'
-import MobileCarProfile from '../../../components/Common/MobileCarProfile/MobileCarProfile'
-import MobileCarList from '../../../components/Common/MobileCarList/MobileCarList'
-import { getCarDetail } from '../../../services'
+"use client";
+import CarImgSlider from "../../../components/Product/CarImgSlider/CarImgSlider";
+import styles from "./product.module.css";
+import React, { useState, useEffect } from "react";
+import ProductDetail from "../../../components/Product/ProductDetail/ProductDetail";
+import Stocks from "../../../components/Product/Stocks/Stocks";
+import Profile from "../../../components/Product/Profile/Profile";
+import OtherCars from "../../../components/Product/OtherCars/OtherCars";
+import BreadCrumb from "../../../components/Common/BreadCrumb/BreadCrumb";
+import MobileCarImgSlider from "../../../components/Product/MobileCarImgSlider/MobileCarImgSlider";
+import MobileCarDetail from "../../../components/Product/MobileCarDetail/MobileCarDetail";
+import MobileCarDescription from "../../../components/Product/MobileCarDescription/MobileCarDescription";
+import MobileCarProfile from "../../../components/Common/MobileCarProfile/MobileCarProfile";
+import MobileCarList from "../../../components/Common/MobileCarList/MobileCarList";
+import { getCarDetail } from "../../../services";
 
 const ProductPage = ({ params }) => {
-  const [data, setData] = useState([])
-  
+  const [data, setData] = useState([]);
+
   const getProductInfo = async () => {
-    const response = await getCarDetail(params.slug)
+    const response = await getCarDetail(params.slug);
     console.log(response);
-    setData(response)
-  }
+    setData(response);
+  };
 
   useEffect(() => {
-    getProductInfo()
-  }, [])
+    getProductInfo();
+  }, []);
   return (
     <>
-      <BreadCrumb items={['Homepage', 'Product page']} />
+      <BreadCrumb items={["Homepage", "Product page"]} />
       <div className={styles.widhtLimitContainerLarge}>
         <div
           className={`${styles.productContainer} ${styles.widhtLimitContainer}`}
         >
           <div>
-            <CarImgSlider images={data.images} />
-            <Stocks optionals={data.optionals}/>
+            <CarImgSlider images={data?.images} />
+            <Stocks optionals={data?.optionals} />
           </div>
           <div>
             <ProductDetail detail={data} />
-            <Profile />
+            <Profile detail={data} />
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@ const ProductPage = ({ params }) => {
       </div>
       {/* mobile design end*/}
     </>
-  )
-}
+  );
+};
 
-export default ProductPage
+export default ProductPage;

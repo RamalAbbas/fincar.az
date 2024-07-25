@@ -26,8 +26,9 @@ const Signin = () => {
       console.log("Please fill in all fields.");
     } else {
       const res = await login(data);
+      console.log(res);
       if (res?.status == 200) {
-        localStorage.setItem("access_token", res?.data.access_token);
+        localStorage.setItem("data", JSON.stringify(res?.data));
         push("/main");
       }
     }

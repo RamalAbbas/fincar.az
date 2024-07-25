@@ -17,7 +17,6 @@ const ProductDetail = ({ detail }) => {
   const handleClickPaymentModal = () => {
     dispatch(handlePaymentModal());
   };
-  console.log(detail);
 
   useEffect(() => {
     if (isActivePaymentModal) {
@@ -50,7 +49,7 @@ const ProductDetail = ({ detail }) => {
           </div>
           <div>
             <p>Sürətlər qutusu </p>
-            <span>{detail.gearbox}</span>
+            <span>{detail?.gearbox}</span>
           </div>
           <div>
             <p>Marka</p>
@@ -70,7 +69,7 @@ const ProductDetail = ({ detail }) => {
           </div>
           <div>
             <p>Buraxılış ili</p>
-            <span>{detail.year}</span>
+            <span>{detail?.year}</span>
           </div>
           <div>
             <p>Yeni</p>
@@ -90,7 +89,7 @@ const ProductDetail = ({ detail }) => {
           </div>
           <div>
             <p>Yığıldığı bazar</p>
-            <span>{detail.market}</span>
+            <span>{detail?.market}</span>
           </div>
           <div>
             <p>Mühərrik</p>
@@ -117,7 +116,7 @@ const ProductDetail = ({ detail }) => {
           }`}
         >
           <div ref={insideRef}>
-            <PaymentModal />
+            <PaymentModal data={detail} />
           </div>
         </div>
       </div>

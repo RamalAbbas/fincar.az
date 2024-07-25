@@ -119,3 +119,12 @@ export const carSaveList = async () => {
     console.log({ error });
   }
 };
+
+export const carLoanCalculation = async (data) => {
+  try {
+    const response = await instanceAxios.post(`car/loan-calculation`, data);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
