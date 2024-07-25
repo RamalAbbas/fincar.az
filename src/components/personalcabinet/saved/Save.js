@@ -1,13 +1,14 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Save.module.css";
 import { useRouter } from "next/navigation";
 import { carSaveList } from "../../../services";
 const Saved = () => {
   const router = useRouter();
-
+  const [carSave,setCarSave]= useState([])
   const renderSavedCars = async () => {
     const response = await carSaveList();
+    setCarSave(response);
     console.log(response);
   };
 
@@ -15,7 +16,7 @@ const Saved = () => {
     renderSavedCars();
   }, []);
   return (
-    <>
+ <>
       <div className={styles.testclass}>
         <button
           className={styles.navbar}
@@ -27,113 +28,37 @@ const Saved = () => {
       </div>
       <div className={styles.grid}>
         <div className={styles.container}>
-          <div className={styles.box}>
-            <div className={styles.elm}>
-              <p className={styles.element}>753 ₼ / ilkin</p>
-            </div>
-            <div className={styles.item}>
-              <div className={styles.text}>
-                <p className={styles.paragraph}>FORD Mustang</p>
-              </div>
-              <div className={styles.text}>
-                <p className={styles.paragraphh}>2023, 3.4L, 0 km</p>
-              </div>
-            </div>
-          </div>
-          <div className={styles.box}>
-            <div className={styles.elm}>
-              <p className={styles.element}>753 ₼ / ilkin</p>
-            </div>
-            <div className={styles.item}>
-              <div className={styles.text}>
-                <p className={styles.paragraph}>FORD Mustang</p>
-              </div>
-              <div className={styles.text}>
-                <p className={styles.paragraphh}>2023, 3.4L, 0 km</p>
-              </div>
-            </div>
-          </div>
-          <div className={styles.box}>
-            <div className={styles.elm}>
-              <p className={styles.element}>753 ₼ / ilkin</p>
-            </div>
-            <div className={styles.item}>
-              <div className={styles.text}>
-                <p className={styles.paragraph}>FORD Mustang</p>
-              </div>
-              <div className={styles.text}>
-                <p className={styles.paragraphh}>2023, 3.4L, 0 km</p>
-              </div>
-            </div>
-          </div>
-          <div className={styles.box}>
-            <div className={styles.elm}>
-              <p className={styles.element}>753 ₼ / ilkin</p>
-            </div>
-            <div className={styles.item}>
-              <div className={styles.text}>
-                <p className={styles.paragraph}>FORD Mustang</p>
-              </div>
-              <div className={styles.text}>
-                <p className={styles.paragraphh}>2023, 3.4L, 0 km</p>
-              </div>
-            </div>
-          </div>
-          <div className={styles.box}>
-            <div className={styles.elm}>
-              <p className={styles.element}>753 ₼ / ilkin</p>
-            </div>
-            <div className={styles.item}>
-              <div className={styles.text}>
-                <p className={styles.paragraph}>FORD Mustang</p>
-              </div>
-              <div className={styles.text}>
-                <p className={styles.paragraphh}>2023, 3.4L, 0 km</p>
-              </div>
-            </div>
-          </div>
-          <div className={styles.box}>
-            <div className={styles.elm}>
-              <p className={styles.element}>753 ₼ / ilkin</p>
-            </div>
-            <div className={styles.item}>
-              <div className={styles.text}>
-                <p className={styles.paragraph}>FORD Mustang</p>
-              </div>
-              <div className={styles.text}>
-                <p className={styles.paragraphh}>2023, 3.4L, 0 km</p>
-              </div>
-            </div>
-          </div>
-          <div className={styles.box}>
-            <div className={styles.elm}>
-              <p className={styles.element}>753 ₼ / ilkin</p>
-            </div>
-            <div className={styles.item}>
-              <div className={styles.text}>
-                <p className={styles.paragraph}>FORD Mustang</p>
-              </div>
-              <div className={styles.text}>
-                <p className={styles.paragraphh}>2023, 3.4L, 0 km</p>
-              </div>
-            </div>
-          </div>
-          <div className={styles.box}>
-            <div className={styles.elm}>
-              <p className={styles.element}>753 ₼ / ilkin</p>
-            </div>
-            <div className={styles.item}>
-              <div className={styles.text}>
-                <p className={styles.paragraph}>FORD Mustang</p>
-              </div>
-              <div className={styles.text}>
-                <p className={styles.paragraphh}>2023, 3.4L, 0 km</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+        {carSave?.map((item) => (
+         <div className={styles.card}>
+         <div className={styles.img}>
+           <img
+             src={item?.cover}
+             loading="lazy"
+             width={264}
+             height={238}
+             alt="car"
+             className="h-full object-cover rounded-t-[10px]"
+           />
+           <div className={styles.price}>
+             {item?.payment?.initial_payment_azn.toFixed()} ₼ / ilkin
+           </div>
+           
+         </div>
+         <div
+           onClick={() => callBackSlug(item.slug)}
+           className={styles.bottomContent}
+         >
+           <h1>
+             {item?.make.name}
+             {item?.model.name}
+           </h1>
+           <h2>{item?.slug}</h2>
+         </div>
+       </div>
+           ))}
+   </div>
+   </div>
+   </>
   );
 };
 

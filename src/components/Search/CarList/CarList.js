@@ -16,7 +16,7 @@ const CarList = ({ cars, isLoading }) => {
       <div className={styles.cardBody}>
         {isLoading ? <span className={styles.loader}></span> : null}
 
-        {cars.map((info, index) => (
+        {cars?.map((info, index) => (
           <Card key={index} callBackSlug={callBackSlug} data={info} />
         ))}
 
