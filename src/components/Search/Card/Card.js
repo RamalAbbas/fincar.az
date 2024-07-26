@@ -17,7 +17,7 @@ const Card = ({ data, callBackSlug }) => {
 
       setTimeout(() => {
         push("/saved");
-      }, 2000);
+      }, 1000);
     }
   };
 
