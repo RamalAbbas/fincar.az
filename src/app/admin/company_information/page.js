@@ -4,6 +4,7 @@ const page = () => {
   return (
     <div style={{padding: "32px 156px 92px 28px"}}>
       <Sidebar />
+      
     </div>
   );
 };
