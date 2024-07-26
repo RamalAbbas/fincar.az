@@ -1,14 +1,17 @@
-import Image from 'next/image'
-import React from 'react'
+import Image from "next/image";
+import React from "react";
 
-import rightArrow from '../../../assets/icons/arrow/right.svg'
-import styles from './BreadCrumb.module.css'
+import rightArrow from "../../../assets/icons/arrow/right.svg";
+import styles from "./BreadCrumb.module.css";
 
-const BreadCrumb = ({ items }) => {
+const BreadCrumb = ({ items, isPaddding = false }) => {
   return (
     <div className="px-[15px]">
       <div className={styles.wrapper}>
-        <div className={styles.container}>
+        <div
+          style={{ paddingTop: isPaddding ? "0px" : "24px" }}
+          className={styles.container}
+        >
           {items.map((item, index) => (
             <div className={styles.box}>
               <span
@@ -20,7 +23,7 @@ const BreadCrumb = ({ items }) => {
                 {item}
               </span>
               {index < items.length - 1 && (
-                <div className='w-[30px] h-[30px]'>
+                <div className="w-[30px] h-[30px]">
                   <Image src={rightArrow} width={30} height={30} alt="arrow" />
                 </div>
               )}
@@ -29,7 +32,7 @@ const BreadCrumb = ({ items }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default BreadCrumb
+export default BreadCrumb;
