@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation";
 const Header = ({ isSaved, isNotification }) => {
   const { push } = useRouter();
   const pathname = usePathname();
+  const [isNotificationHover, setIsNotificationHover] = useState(false);
   const [data, setData] = useState([]);
   useEffect(() => {
     setData(JSON.parse(localStorage.getItem("data")));
@@ -63,9 +64,63 @@ const Header = ({ isSaved, isNotification }) => {
                       <></>
                     )}
 
-                    {isNotification ? (
-                      <div>
-                        <Image src={notification} alt="" />
+                    {localStorage.getItem("data") !== null ? (
+                      <div className={styles.notificationBody}>
+                        <Image
+                          onMouseLeave={() => setIsNotificationHover(false)}
+                          onMouseEnter={() => setIsNotificationHover(true)}
+                          src={notification}
+                          alt=""
+                        />
+
+                        {isNotificationHover ? (
+                          <div className={styles.notification_box}>
+                            <div className={styles.top}>Your notification</div>
+                            <div className={styles.border}></div>
+                            <div className={styles.items}>
+                              <div className={styles.item}>
+                                <div className={styles.item_top}>
+                                  <p className={styles.item_left}>
+                                    Payment Received !
+                                  </p>
+                                  <p className={styles.item_right}>Jun 19</p>
+                                </div>
+                                <p className={styles.bottom}>
+                                  We’re encountering issues with connecting to
+                                  our system’s database at the moment.
+                                </p>
+                              </div>
+
+                              <div className={styles.item}>
+                                <div className={styles.item_top}>
+                                  <p className={styles.item_left}>
+                                    Payment Received !
+                                  </p>
+                                  <p className={styles.item_right}>Jun 19</p>
+                                </div>
+                                <p className={styles.bottom}>
+                                  We’re encountering issues with connecting to
+                                  our system’s database at the moment.
+                                </p>
+                              </div>
+
+                              <div className={styles.item}>
+                                <div className={styles.item_top}>
+                                  <p className={styles.item_left}>
+                                    Payment Received !
+                                  </p>
+                                  <p className={styles.item_right}>Jun 19</p>
+                                </div>
+                                <p className={styles.bottom}>
+                                  We’re encountering issues with connecting to
+                                  our system’s database at the moment.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <></>
+                        )}
                       </div>
                     ) : (
                       <></>
