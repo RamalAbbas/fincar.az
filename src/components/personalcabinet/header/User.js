@@ -79,6 +79,7 @@ const User = () => {
         </div>
         </div>
       </div>
+      {/* Responsive */}
     <div className={styles.responsive}>
       <div className={styles.box}>
      <a className={styles.text}>My Profile</a>
