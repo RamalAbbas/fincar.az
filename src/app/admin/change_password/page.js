@@ -1,9 +1,12 @@
 import React from "react";
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar";
+import ChangePassword from "../../../components/Admin/ChangePassword/ChangePassword";
 const page = () => {
   return (
-    <div style={{padding: "32px 156px 92px 28px"}}>
+    <div style={{ padding: "32px 156px 92px 28px", display: "flex" }}>
       <Sidebar />
+
+      <ChangePassword />
     </div>
   );
 };
