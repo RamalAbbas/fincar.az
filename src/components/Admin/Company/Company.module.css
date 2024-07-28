@@ -1,0 +1,228 @@
+.container {
+  width: 1132px;
+  height: 604px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--White, #FFF);
+  position: relative;
+  bottom: 645px;
+  left: 287px;
+}
+
+.paragraph {
+  width: 190px;
+  height: 28px;
+  position: relative;
+  top: 25px;
+  left: 40px;
+}
+
+.text {
+  color: var(--Neutral-Text-Dark, #505673);
+  font-family: "SF Pro";
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.img {
+  width: 116px;
+  height: 116px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid #C6CADC;
+  position: relative;
+  top: 47px;
+  left: 65px;
+  /* background: url(https://nashuacc.edu/wp-content/uploads/2022/06/Brand-Mark_0703_1.Primary_Brand_Mark_Primary_Vertical.png) lightgray 50% / cover no-repeat; */
+
+}
+
+.uploadbtn {
+  display: inline-flex;
+  height: 50px;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  margin-top: 56px;
+}
+
+.button {
+  display: inline-flex;
+  height: 36px;
+  padding: 6px 36px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  border-radius: 10px;
+}
+
+.upload {
+  display: flex;
+  width: 73px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.textt {
+  color: #227FEB;
+  font-family: "SF Pro";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin-left: -27px;
+  cursor: pointer;
+}
+
+.inp {
+  display: flex;
+  width: 427px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  position: relative;
+  bottom: 31%;
+  left: 20%;
+}
+
+.inp2 {
+  display: flex;
+  width: 427px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  position: relative;
+  bottom: 44%;
+  left: 60%;
+}
+
+.inp3 {
+  display: flex;
+  width: 427px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  position: relative;
+  bottom: 40%;
+  left: 20%;
+}
+
+.inp4 {
+  display: flex;
+  width: 427px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  position: relative;
+  bottom: 53%;
+  left: 60%;
+}
+
+.inp5 {
+  display: flex;
+  width: 427px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  position: relative;
+  bottom: 50%;
+  left: 20%;
+}
+
+.inp6 {
+  display: flex;
+  width: 427px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  position: relative;
+  bottom: 63%;
+  left: 60%;
+}
+
+.inp7 {
+  display: flex;
+  width: 895px;
+  height: 72px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  position: relative;
+  bottom: 60%;
+  left: 19%;
+}
+
+.username {
+  display: flex;
+  width: 427px;
+  padding: 0px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--Medium, #878CA8);
+}
+
+.wraper {
+  display: flex;
+  height: 48px;
+  padding: 0px 24px;
+  align-items: center;
+  outline: none;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 10px;
+  border: 1px solid var(--Medium, #878CA8);
+}
+
+.wraper1 {
+  display: flex;
+  height: 72px;
+  padding: 36px 24px;
+  align-items: center;
+  outline: none;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 10px;
+  border: 1px solid var(--Medium, #878CA8);
+}
+
+.save {
+  width: 136px;
+  height: 48px;
+  position: relative;
+  left: 957px;
+  bottom: 280px;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px, 24px, 12px, 24px;
+  background-color: #183178;
+  gap: 8px;
+}
+
+.btn1 {
+  color: var(--Neutral-Lightest, #F5F6FA);
+  font-family: "SF Pro";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 24px;
+}
+.responsive{
+display: none;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 1200px) {
+.container{
+  display: none;
+}
+}
