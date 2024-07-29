@@ -12,6 +12,7 @@ import leftBlue from "../../../assets/icons/arrow/leftBlue.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { handleMenuFilter } from "../../../redux/features/mobileMenuFilterSlice";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const Title = () => {
   const { push } = useRouter();

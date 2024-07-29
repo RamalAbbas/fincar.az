@@ -13,6 +13,7 @@ import saved from "../../../assets/icons/saved/saved.svg";
 import notification from "../../../assets/icons/notification/notification.svg";
 import searchInput from "../../../assets/icons/mobileHeader/searchInput.svg";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const Header = ({ isSaved, isNotification }) => {
   const { push } = useRouter();
