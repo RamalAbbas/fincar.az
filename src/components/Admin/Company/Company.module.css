@@ -18,7 +18,7 @@
 }
 
 .text {
-  color: var(--Neutral-Text-Dark, #505673);
+  color: var(--Neutral-Text-Dark, #227FEB);
   font-family: "SF Pro";
   font-size: 19px;
   font-style: normal;
@@ -159,7 +159,10 @@
   bottom: 60%;
   left: 19%;
 }
-
+.inp7 ::placeholder{
+width: 870px;
+height: 48px;
+}
 .username {
   display: flex;
   width: 427px;
@@ -217,6 +220,9 @@
   font-style: normal;
   font-weight: 510;
   line-height: 24px;
+}
+.none{
+display: none;
 }
 .responsive{
 display: none;
