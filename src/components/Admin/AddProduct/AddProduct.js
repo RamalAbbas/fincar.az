@@ -60,10 +60,6 @@ const AddProduct = () => {
           </nav>
         </div>
 
-        <div className={styles.steps_body}>
-          <Image src={steps} />
-        </div>
-
         <div className={styles.photos_body}>
           <p className={styles.head_title}>Avtomobilin fotoları</p>
 
