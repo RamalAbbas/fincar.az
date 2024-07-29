@@ -1,9 +1,21 @@
+'use client'
 import React from 'react'
 import styles from "./Company.module.css";
 import Image from "next/image";
 import admin from '../../../assets/images/admin/mazda.png'
 import upload from '../../../assets/images/upload/Group.svg'
-const CompanyInf = () => {
+import {useRef, useState } from "react";
+const CompanyInf = () => { 
+  const inputRef =useRef(null)
+  const [image,SetImage] =useState("")
+const handleImageClick= () =>{
+ inputRef.current.click();
+}
+const handleImageChange = (event) =>{ 
+const file =event.target.files[0];
+console.log(file)
+SetImage('')
+}
   return (
       <>
     <div className={styles.container}>
@@ -13,12 +25,13 @@ const CompanyInf = () => {
     <div className={styles.img}>
     <Image src={admin}/>
     </div>
-    <div className={styles.uploadbtn}>
-          <button className={styles.button}> 
+    <div className={styles.uploadbtn} onClick={handleImageClick}>
+          <button className={styles.button} type='submit'> 
            <Image src={upload} className={styles.upload}/>
-            <p className={styles.textt}>Replace</p> 
+           <p className={styles.textt}>Replace</p> 
+           <input type='file' ref={inputRef} className={styles.none} onChange={handleImageChange} placeholder='Replace'></input>
            </button> 
-    </div>
+    </div> 
     <div className={styles.inp}>
           <label className={styles.username}>Company name</label>
           <input type='text' placeholder='AutoStar Kaukasus GmbH' className={styles.wraper} />
