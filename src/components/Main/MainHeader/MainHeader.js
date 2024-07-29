@@ -12,6 +12,7 @@ import leftBlue from "../../../assets/icons/arrow/leftBlue.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { handleMenuFilter } from "../../../redux/features/mobileMenuFilterSlice";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const Title = () => {
   const { push } = useRouter();
@@ -35,7 +36,7 @@ const Title = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    setData(localStorage.getItem("data") !== null ? JSON.parse(localStorage.getItem("data")) : []);
+    setData(JSON.parse(Cookies.get("data")));
   }, []);
 
   const isMobileFilterActive = useSelector(

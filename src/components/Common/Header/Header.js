@@ -13,6 +13,7 @@ import saved from "../../../assets/icons/saved/saved.svg";
 import notification from "../../../assets/icons/notification/notification.svg";
 import searchInput from "../../../assets/icons/mobileHeader/searchInput.svg";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const Header = ({ isSaved, isNotification }) => {
   const { push } = useRouter();
@@ -20,11 +21,7 @@ const Header = ({ isSaved, isNotification }) => {
   const [isNotificationHover, setIsNotificationHover] = useState(false);
   const [data, setData] = useState([]);
   useEffect(() => {
-    setData(
-           localStorage.getItem("data") !== null
-        ? JSON.parse(localStorage.getItem("data"))
-        : []
-    );
+    setData(JSON.parse(Cookies.get("data")));
   }, []);
 
   const handleSend = () => {
@@ -57,7 +54,7 @@ const Header = ({ isSaved, isNotification }) => {
                       />
                     </div>
 
-                    {localStorage.getItem("data") !== null ? (
+                    {JSON.parse(Cookies.get("data")) ? (
                       <div
                         className="cursor-pointer"
                         onClick={() => push("/saved")}
@@ -68,7 +65,7 @@ const Header = ({ isSaved, isNotification }) => {
                       <></>
                     )}
 
-                    {localStorage.getItem("data") !== null ? (
+                    {JSON.parse(Cookies.get("data")) ? (
                       <div className={styles.notificationBody}>
                         <Image
                           onMouseLeave={() => setIsNotificationHover(false)}
