@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar";
 import AddProduct from "../../../components/Admin/AddProduct/AddProduct";
