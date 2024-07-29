@@ -1,0 +1,47 @@
+.wrapper {
+  padding: 0px 24px;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add_product_button {
+  display: flex;
+  border-radius: 32px;
+  border: 1px solid #d9d9d9;
+  padding: 8px 16px;
+}
+
+.add_product_button span {
+  color: var(--Neutral-Text-Dark, #505673);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 20px; /* 142.857% */
+}
+
+.filter_title {
+  color: var(--Neutral-Text-Dark, #505673);
+
+  /* Body/B1/Semibold */
+  font-family: "SF Pro";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 590;
+  line-height: 28px; /* 155.556% */
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filterBody {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
