@@ -34,7 +34,6 @@ const Sidebar = () => {
           </li>
         </ul>
       </nav>
-
       <div className={styles.border}></div>
     </div>
   );
