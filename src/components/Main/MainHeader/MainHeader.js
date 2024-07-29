@@ -35,7 +35,7 @@ const Title = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    setData(JSON.parse(localStorage.getItem("data")));
+    setData(localStorage.getItem("data") !== null ? JSON.parse(localStorage.getItem("data")) : []);
   }, []);
 
   const isMobileFilterActive = useSelector(

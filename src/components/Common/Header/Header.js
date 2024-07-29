@@ -21,7 +21,7 @@ const Header = ({ isSaved, isNotification }) => {
   const [data, setData] = useState([]);
   useEffect(() => {
     setData(
-      localStorage.getItem("data") !== null
+           localStorage.getItem("data") !== null
         ? JSON.parse(localStorage.getItem("data"))
         : []
     );
