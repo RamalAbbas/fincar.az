@@ -21,7 +21,9 @@ const Header = ({ isSaved, isNotification }) => {
   const [isNotificationHover, setIsNotificationHover] = useState(false);
   const [data, setData] = useState([]);
   useEffect(() => {
-    setData(JSON.parse(Cookies.get("data")));
+    Cookies.get("data") == undefined
+      ? console.log("undefined")
+      : setData(JSON.parse(Cookies.get("data")));
   }, []);
 
   const handleSend = () => {
@@ -54,7 +56,7 @@ const Header = ({ isSaved, isNotification }) => {
                       />
                     </div>
 
-                    {JSON.parse(Cookies.get("data")) ? (
+                    {Cookies.get("data") !== undefined ? (
                       <div
                         className="cursor-pointer"
                         onClick={() => push("/saved")}
@@ -65,7 +67,7 @@ const Header = ({ isSaved, isNotification }) => {
                       <></>
                     )}
 
-                    {JSON.parse(Cookies.get("data")) ? (
+                    {Cookies.get("data") !== undefined ? (
                       <div className={styles.notificationBody}>
                         <Image
                           onMouseLeave={() => setIsNotificationHover(false)}
