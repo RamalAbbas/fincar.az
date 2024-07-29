@@ -31,9 +31,7 @@ const ChangePassword = () => {
           </div>
 
           <div className={styles.form_end}>
-            <button>
-                Save
-            </button>
+            <button>Save</button>
           </div>
         </div>
       </div>
