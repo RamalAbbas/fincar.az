@@ -38,17 +38,11 @@
   line-height: 24px; /* 150% */
 }
 
-.steps_body {
-  width: 100%;
-  display: flex;
-  justify-content: center !important;
-  padding: 52px 0px 48px 0px;
-}
-
 .photos_body {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-top: 24px;
 }
 
 .head_title {
