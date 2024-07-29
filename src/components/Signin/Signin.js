@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
 import { login } from "../../services";
+import Cookies from "js-cookie";
 
 const Signin = () => {
   const { push } = useRouter();
@@ -26,9 +27,9 @@ const Signin = () => {
       console.log("Please fill in all fields.");
     } else {
       const res = await login(data);
-      console.log(res);
       if (res?.status == 200) {
-        localStorage.setItem("data", JSON.stringify(res?.data));
+        Cookies.set("data", JSON.stringify(res?.data));
+
         push("/main");
       }
     }
@@ -40,7 +41,7 @@ const Signin = () => {
         <Image src={logo} alt="logo" />
 
         <div className={styles.box}>
-          <p className={styles.headTitle}>Sign in</p>
+          <p className={styles.headTitle}>Sign in +994505050505</p>
 
           <input
             placeholder="Fin code"
