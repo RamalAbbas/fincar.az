@@ -5,7 +5,7 @@ import Image from "next/image";
 import admin from '../../../assets/images/admin/mazda.png'
 import upload from '../../../assets/images/upload/Group.svg'
 import {useRef, useState } from "react";
-const CompanyInf = () => { 
+const CompanyInf = () => {
   const inputRef =useRef(null)
   const [image,SetImage] =useState("")
 const handleImageClick= () =>{
@@ -13,8 +13,35 @@ const handleImageClick= () =>{
 }
 const handleImageChange = (event) =>{ 
 const file =event.target.files[0];
-console.log(file)
-SetImage('')
+// const imgname =event.target.files[0]
+// const reader = new FileReader();
+// reader.readAsDataURL(file);
+// reader.onloadend = () =>{
+// const img = new Image();
+// img.src = reader.result;
+// img.onloadend = () =>{
+// const canvas = document.createElement("canvas")
+// const maxSize = Math.max(img.width , img.height);
+// canvas.width = maxSize;
+// canvas.height = maxSize;
+// const ctx = canvas.getContext("2d");
+// ctx.drawImage(
+// img,
+// (maxSize - img.width)/2
+// (maxSize - img.height)/2
+// );
+// canvas.toBlob(
+// (blob) =>{
+// const file = new File([blob],imgname,{
+// type:"image/png",
+// lastModified:Date.now()
+// })
+// }
+// )
+// }
+// }
+ console.log(file)
+ SetImage(event.target.files[0])
 }
   return (
       <>
@@ -22,8 +49,11 @@ SetImage('')
     <div className={styles.paragraph}>
     <p className={styles.text}>Company information</p>
     </div>
-    <div className={styles.img}>
-    <Image src={admin}/>
+    <div className={styles.img} onClick={handleImageClick}>
+    {image?(
+    <Image src={URL.createObjectURL(image)} width={116} height={200}/>
+    )
+    :(<Image src={admin}/>)}
     </div>
     <div className={styles.uploadbtn} onClick={handleImageClick}>
           <button className={styles.button} type='submit'> 
