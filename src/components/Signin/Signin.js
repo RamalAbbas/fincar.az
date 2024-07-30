@@ -27,6 +27,7 @@ const Signin = () => {
       console.log("Please fill in all fields.");
     } else {
       const res = await login(data);
+      console.log(data);
       if (res?.status == 200) {
         Cookies.set("data", JSON.stringify(res?.data));
 
@@ -41,7 +42,7 @@ const Signin = () => {
         <Image src={logo} alt="logo" />
 
         <div className={styles.box}>
-          <p className={styles.headTitle}>Sign in +994505050505</p>
+          <p className={styles.headTitle}>Sign in</p>
 
           <input
             placeholder="Fin code"

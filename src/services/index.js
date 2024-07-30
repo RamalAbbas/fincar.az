@@ -1,14 +1,25 @@
-
 import baseUrl from "../constants/baseUrl/baseUrl";
 import axios from "axios";
+import Cookies from "js-cookie";
+
+// Check if the cookie exists and is valid JSON
+let data;
+try {
+  const cookieData = Cookies.get("data");
+  data = cookieData ? JSON.parse(cookieData).access_token : "";
+} catch (error) {
+  console.error("Error parsing cookie data:", error);
+  data = "";
+}
+console.log(data);
+
 
 const instanceAxios = axios.create({
   baseURL: baseUrl,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNDYwNzEyLCJpYXQiOjE3MjE4MjA3MTIsImp0aSI6ImM3YzhlY2YxODIwMTQwYWJiNjcwOWRkYmI2OGY1ZGZlIiwidXNlcl9pZCI6OX0.7uDeHCEZNw0UnpOCVuLwygk123gyU9zgRhPQ6Vw0Jv0",
+    Authorization: data ? `Bearer ${data}` : "",
   },
 });
 
@@ -96,7 +107,7 @@ export const getDealerDetail = async (slug) => {
 
 export const getCarFeature = async () => {
   try {
-    const response = await instanceAxios.get(`/car-feature-list`);
+    const response = await instanceAxios.get(`car-feature-list`);
     return response.data;
   } catch (error) {
     console.log({ error });
@@ -147,4 +158,3 @@ export const carFeatureListModel = async (id) => {
     console.log({ error });
   }
 };
-

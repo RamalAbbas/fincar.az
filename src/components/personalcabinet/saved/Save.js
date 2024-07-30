@@ -43,7 +43,7 @@ const Saved = () => {
                   className="h-full object-cover rounded-t-[10px] w-[100%]"
                 />
                 <div className={styles.price}>
-                  {item?.payment?.initial_payment_azn.toFixed()} ₼ / ilkin
+                  {item?.payment?.initial_payment_azn?.toFixed()} ₼ / ilkin
                 </div>
               </div>
               <div

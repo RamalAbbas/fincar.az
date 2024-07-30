@@ -32,7 +32,6 @@ const CarCard = ({ data, callBackSlug }) => {
       }, 1000);
     }
   };
-  console.log(data);
   return (
     <>
       <div className={styles.card}>
@@ -46,7 +45,7 @@ const CarCard = ({ data, callBackSlug }) => {
             className="h-full object-cover rounded-t-[10px] cursor-no-drop"
           />
           <div className={styles.price}>
-            {data?.payment?.initial_payment_azn.toFixed()} ₼ / ilkin
+            {data?.payment?.initial_payment_azn?.toFixed()} ₼ / ilkin
           </div>
           {data?.is_saved ? (
             <div onClick={deleteCarFunction} className={styles.fav_disabled}>

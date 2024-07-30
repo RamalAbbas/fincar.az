@@ -28,10 +28,8 @@ const PaymentModal = ({ data }) => {
       loan_term: e.target.value,
     };
     const response = await carLoanCalculation(info);
-    console.log(response);
     setPayments(response);
   };
-  console.log(data);
   return (
     <div
       className={`${!isActivePaymentModal && "!translate-y-[-40px]"} ${
