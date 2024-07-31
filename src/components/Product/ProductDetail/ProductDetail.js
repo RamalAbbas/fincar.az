@@ -1,12 +1,13 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./ProductDetail.module.css";
 import PaymentModal from "../../../components/Common/PaymentModal/PaymentModal";
 import { useSelector, useDispatch } from "react-redux";
 import { handlePaymentModal } from "../../../redux/features/paymentModalSlice";
 
 const ProductDetail = ({ detail }) => {
+  const [mounthlyPayment, setMounthlyPayment] = useState(0);
   const insideRef = useRef(null);
   const isActivePaymentModal = useSelector(
     (state) => state.paymentModal.isActivePaymentModal
@@ -34,6 +35,10 @@ const ProductDetail = ({ detail }) => {
       handleClickPaymentModal();
     }
   };
+  // console.log(detail?.payment?.details[0]?.monthly_payment_azn);
+  useEffect(() => {
+    setMounthlyPayment(detail?.payment?.details[0]?.monthly_payment_azn);
+  });
 
   return (
     <div className={`${styles.productDetailContainer}`}>
@@ -41,7 +46,13 @@ const ProductDetail = ({ detail }) => {
         <span>
           {detail?.make?.name} {detail?.model?.name}
         </span>
-        <p>{detail?.price_azn} AZN</p>
+        <p className={styles.price_azn}>{detail?.price_azn} AZN</p>
+        <div className={styles.months_box}>
+          <div className={styles.price_box}>
+            <p>Aylıq ödəniş</p>
+            <p className={styles.mounthlyPrice}>{mounthlyPayment}</p>
+          </div>
+        </div>
         <div className={styles.details}>
           <div>
             <p>Şəhər</p>

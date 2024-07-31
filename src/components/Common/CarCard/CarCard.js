@@ -15,10 +15,6 @@ const CarCard = ({ data, callBackSlug }) => {
     const response = await carSave({ car: data.id });
     if (!!response) {
       toast.success("Elave Olundu");
-
-      setTimeout(() => {
-        push("/saved");
-      }, 1000);
     }
   };
 
@@ -26,23 +22,21 @@ const CarCard = ({ data, callBackSlug }) => {
     const response = await deleteSavedCar(data.id);
     if (response.length == 0) {
       toast.success("Silindi.");
-
-      setTimeout(() => {
-        push("/main");
-      }, 1000);
     }
   };
+
   return (
     <>
       <div className={styles.card}>
         <div className={styles.img}>
           <img
+            onClick={() => callBackSlug(data.slug)}
             src={data?.cover}
             loading="lazy"
             width={264}
             height={238}
             alt="car"
-            className="h-full object-cover rounded-t-[10px] cursor-no-drop"
+            className="h-full object-cover rounded-t-[10px]"
           />
           <div className={styles.price}>
             {data?.payment?.initial_payment_azn?.toFixed()} ₼ / ilkin
@@ -79,6 +73,10 @@ const CarCard = ({ data, callBackSlug }) => {
             {data?.make.name}
             {data?.model.name}
           </h1>
+          <p className={styles.totalPrice}>
+            {data?.price_azn}
+            {data?.currency}
+          </p>
           <h2>{data?.slug}</h2>
         </div>
       </div>

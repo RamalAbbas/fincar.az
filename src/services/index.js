@@ -13,7 +13,6 @@ try {
 }
 console.log(data);
 
-
 const instanceAxios = axios.create({
   baseURL: baseUrl,
   headers: {
@@ -153,6 +152,19 @@ export const deleteSavedCar = async (data) => {
 export const carFeatureListModel = async (id) => {
   try {
     const response = await instanceAxios.get(`car-feature-list/model/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
+export const createCar = async (data) => {
+  try {
+    const response = await instanceAxios.post("car/create", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response.data;
   } catch (error) {
     console.log({ error });
