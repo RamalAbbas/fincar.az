@@ -99,3 +99,38 @@
 
 @media screen and (max-width: 468px) {
 }
+
+.price_azn {
+  color: #777 !important;
+
+  /* Heading/H4 */
+  font-family: "SF Pro";
+  font-size: 20px !important;
+  font-style: normal !important;
+  font-weight: 590 !important;
+  line-height: 28px !important; /* 140% */
+}
+
+.months_box {
+  border-radius: 10px;
+  border: 1px solid var(--Neutral-Light, #dadef2);
+  padding: 12px;
+  margin-top: 12px;
+}
+
+.price_box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mounthlyPrice {
+  color: #f50100;
+
+  /* Body/B2/Medium */
+  font-family: "SF Pro";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 24px; /* 150% */
+}
