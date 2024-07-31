@@ -158,3 +158,12 @@ export const carFeatureListModel = async (id) => {
     console.log({ error });
   }
 };
+export const adminDealerUptade = async (data) => {
+  try {
+    const response = await instanceAxios.put(`dealer/update`,data);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
