@@ -6,7 +6,11 @@ import steps from "../../../assets/images/steps/steps.png";
 import Image from "next/image";
 import upload from "../../../assets/icons/upload/upload.svg";
 import upload2 from "../../../assets/icons/upload/upload2.svg";
-import { getCarFeature, carFeatureListModel } from "../../../services";
+import {
+  getCarFeature,
+  carFeatureListModel,
+  createCar,
+} from "../../../services";
 
 const AddProduct = () => {
   const initialState = {
@@ -36,11 +40,22 @@ const AddProduct = () => {
   const [selectedImages, setSelectedImages] = useState([]);
   const [inputKey, setInputKey] = useState(Date.now());
   const [hoveredImage, setHoveredImage] = useState(null);
-  const [carFeature, setCarFeature] = useState({});
+  const [carFeature, setCarFeature] = useState([]);
   const [models, setModels] = useState([]);
+  const minYear = 2000; // Define your minimum year here
+  const currentYear = new Date().getFullYear();
+  const years = Array.from(
+    { length: currentYear - minYear + 1 },
+    (_, i) => minYear + i
+  );
 
   const handleImageUpload = (event) => {
+    console.log(event.target.files);
     const files = Array.from(event.target.files);
+    setState((prevState) => ({
+      ...prevState,
+      uploaded_images: [event.target.files[0]],
+    }));
     const newImages = files.map((file) => {
       return new Promise((resolve) => {
         const reader = new FileReader();
@@ -53,13 +68,6 @@ const AddProduct = () => {
 
     Promise.all(newImages).then((images) => {
       setSelectedImages((prevImages) => [...prevImages, ...images]);
-      setState((prevState) => ({
-        ...prevState,
-        uploaded_images: [
-          ...prevState.uploaded_images,
-          ...images.map((image) => image.src),
-        ],
-      }));
       setInputKey(Date.now());
     });
   };
@@ -99,8 +107,10 @@ const AddProduct = () => {
     }));
   };
 
-  const addProduct = () => {
+  const addProduct = async () => {
+    const res = await createCar(state);
     console.log(state);
+    console.log(res);
   };
 
   const getCarFeatureData = async () => {
@@ -111,6 +121,26 @@ const AddProduct = () => {
 
   useEffect(() => {
     getCarFeatureData();
+  }, []);
+
+  const [options, setOptions] = useState([]);
+
+  const generateOptions = () => {
+    const newOptions = [];
+    for (let i = 0; i <= 6500; i += 100) {
+      newOptions.push(i);
+    }
+    for (let i = 7000; i <= 10000; i += 500) {
+      newOptions.push(i);
+    }
+    for (let i = 11000; i <= 16000; i += 1000) {
+      newOptions.push(i);
+    }
+    setOptions(newOptions);
+  };
+
+  useEffect(() => {
+    generateOptions();
   }, []);
 
   return (
@@ -250,10 +280,8 @@ const AddProduct = () => {
                 value={state.make}
                 onChange={handleChange}
               >
-                <option value="0" disabled>
-                  Marka seçin
-                </option>
-                {carFeature.makes?.map((item) => (
+                <option selected>Seçin</option>
+                {carFeature?.makes?.map((item) => (
                   <option key={item.id} value={item.id}>
                     {item.name}
                   </option>
@@ -268,10 +296,9 @@ const AddProduct = () => {
                 value={state.fuel}
                 onChange={handleChange}
               >
-                <option value="0" disabled>
-                  Yanacaq növü seçin
-                </option>
-                {carFeature.fuels?.map((item) => (
+                <option selected>Seçin</option>
+
+                {carFeature?.fuels?.map((item) => (
                   <option key={item.id} value={item.id}>
                     {item.name}
                   </option>
@@ -286,9 +313,8 @@ const AddProduct = () => {
                 value={state.model}
                 onChange={handleChange}
               >
-                <option value="0" disabled>
-                  Model seçin
-                </option>
+                <option selected>Seçin</option>
+
                 {models?.map((item) => (
                   <option key={item.id} value={item.id}>
                     {item.name}
@@ -313,11 +339,9 @@ const AddProduct = () => {
                   value={state.distance_unit}
                   onChange={handleChange}
                 >
-                  <option value="0" disabled>
-                    KM
-                  </option>
+                  <option selected>Seç</option>
                   <option value="1">KM</option>
-                  <option value="2">Miles</option>
+                  <option value="2">MPH</option>
                 </select>
               </div>
             </div>
@@ -329,10 +353,9 @@ const AddProduct = () => {
                 value={state.color}
                 onChange={handleChange}
               >
-                <option value="0" disabled>
-                  Rəng seçin
-                </option>
-                {carFeature.colors?.map((item) => (
+                <option selected>Seçin</option>
+
+                {carFeature?.colors?.map((item) => (
                   <option key={item.id} value={item.id}>
                     {item.name}
                   </option>
@@ -340,7 +363,7 @@ const AddProduct = () => {
               </select>
             </div>
             <div>
-              <label htmlFor="price">Qiymət</label>
+              <label htmlFor="price">Qiyməti</label>
               <div className={styles.custom_item}>
                 <input
                   type="text"
@@ -348,6 +371,7 @@ const AddProduct = () => {
                   value={state.price}
                   onChange={handleChange}
                 />
+
                 <div className={styles.border}></div>
                 <select
                   name="currency"
@@ -355,26 +379,20 @@ const AddProduct = () => {
                   value={state.currency}
                   onChange={handleChange}
                 >
-                  <option value="0" disabled>
-                    Currency
-                  </option>
-                  {carFeature.currencies?.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.name}
-                    </option>
-                  ))}
+                  <option selected>Seç</option>
+                  <option value="1">USD</option>
+                  <option value="2">EUR</option>
+                  <option value="3">MAN</option>
                 </select>
               </div>
             </div>
-            <div>
-              <label htmlFor="year">Buraxılış ili</label>
-              <input
-                type="text"
-                name="year"
-                value={state.year}
-                onChange={handleChange}
-              />
-            </div>
+          </div>
+        </div>
+
+        <div className={styles.indicators}>
+          <p className={styles.head_title}>Digər xüsusiyyətləri</p>
+
+          <div className={styles.grid}>
             <div>
               <label htmlFor="body">Ban növü</label>
               <select
@@ -383,28 +401,9 @@ const AddProduct = () => {
                 value={state.body}
                 onChange={handleChange}
               >
-                <option value="0" disabled>
-                  Ban növü seçin
-                </option>
-                {carFeature.bodies?.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label htmlFor="gearbox">Sürətlər qutusu</label>
-              <select
-                name="gearbox"
-                id="gearbox"
-                value={state.gearbox}
-                onChange={handleChange}
-              >
-                <option value="0" disabled>
-                  Sürətlər qutusu seçin
-                </option>
-                {carFeature.gearboxes?.map((item) => (
+                <option selected>Seçin</option>
+
+                {carFeature?.bans?.map((item) => (
                   <option key={item.id} value={item.id}>
                     {item.name}
                   </option>
@@ -419,113 +418,299 @@ const AddProduct = () => {
                 value={state.drive}
                 onChange={handleChange}
               >
-                <option value="0" disabled>
-                  Ötürücü seçin
-                </option>
-                {carFeature.drives?.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
-                  </option>
-                ))}
+                <option selected>Seçin</option>
+                <option value="0">a</option>
+                <option value="1">b</option>
               </select>
             </div>
             <div>
-              <label htmlFor="engine_power">Mühərrik gücü</label>
-              <input
-                type="text"
-                name="engine_power"
-                value={state.engine_power}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="engine_volume">Mühərrik həcmi</label>
-              <input
-                type="text"
-                name="engine_volume"
-                value={state.engine_volume}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="vin">VIN</label>
-              <input
-                type="text"
-                name="vin"
-                value={state.vin}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="market">Bazarı</label>
-              <select
-                name="market"
-                id="market"
-                value={state.market}
-                onChange={handleChange}
-              >
-                <option value="0" disabled>
-                  Bazar seçin
-                </option>
-                {carFeature.markets?.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label htmlFor="owner">Nə qədər sahibi olub</label>
+              <label htmlFor="owner">Neçənci sahibisiniz?</label>
               <select
                 name="owner"
                 id="owner"
                 value={state.owner}
                 onChange={handleChange}
               >
-                <option value="0" disabled>
-                  Seçin
-                </option>
-                {carFeature.owners?.map((item) => (
+                <option selected>Seçin</option>
+
+                <option value="0">a</option>
+                <option value="1">b</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="gearbox">Sürətlər qutusu</label>
+              <select
+                name="gearbox"
+                id="gearbox"
+                value={state.gearbox}
+                onChange={handleChange}
+              >
+                <option selected>Seçin</option>
+
+                {carFeature?.gears?.map((item) => (
                   <option key={item.id} value={item.id}>
                     {item.name}
                   </option>
                 ))}
               </select>
             </div>
-          </div>
-        </div>
+            <div>
+              <label htmlFor="market">Hansı bazar üçün yığılıb</label>
+              <select
+                name="market"
+                id="market"
+                value={state.market}
+                onChange={handleChange}
+              >
+                <option selected>Seçin</option>
 
-        <div className={styles.optional}>
-          <p className={styles.head_title}>Digər göstəricilər</p>
-          <div className={styles.flex}>
-            {carFeature.optionals?.map((item) => (
-              <div key={item.id} className={styles.checkbox}>
+                {carFeature?.markets?.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="year">İl</label>
+              <select
+                name="year"
+                id="year"
+                value={state.year}
+                onChange={handleChange}
+              >
+                <option selected>Seçin</option>
+
+                {years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="engine_power">Mühərrikin gücü, a.g. </label>
+              <input
+                name="engine_power"
+                className={styles.vin_code_input}
+                type="text"
+                value={state.engine_power}
+                onChange={handleChange}
+                id="engine_power"
+              />
+            </div>
+            <div>
+              <label htmlFor="engine_volume">Mühərrikin həcmi, sm3</label>
+              <select
+                name="engine_volume"
+                id="engine_volume"
+                value={state.engine_volume}
+                onChange={handleChange}
+              >
+                <option selected>Seçin</option>
+
+                {options.map((value) => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="vin">VIN-kod</label>
+              <input
+                name="vin"
+                className={styles.vin_code_input}
+                type="text"
+                value={state.vin}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={styles.vin_code_item}>
+              <p className={styles.vin_code_title}>VIN-kod nədir?</p>
+            </div>
+          </div>
+
+          <div className={styles.note}>
+            <label htmlFor="description">Qeydinizi əlavə edin</label>
+            <textarea
+              name="description"
+              id="description"
+              value={state.description}
+              onChange={handleChange}
+            ></textarea>
+            <label htmlFor="description">
+              Telefon nömrəsi qeyd etmək qadağandır
+            </label>
+          </div>
+
+          <div className={styles.supply}>
+            <p className={styles.head_title}>Avtomobilin təchizatı</p>
+
+            <div className={styles.checkbox_container}>
+              <div className={styles.checkbox_item}>
                 <input
                   type="checkbox"
-                  id={item.id}
-                  checked={state.optionals.includes(item.id)}
+                  id="1"
+                  checked={state.optionals.includes(1)}
                   onChange={handleCheckboxChange}
                 />
-                <label htmlFor={item.id}>{item.name}</label>
+                <label htmlFor="1"></label>
+                <label className={styles.custom_label} htmlFor="1">
+                  Yüngül lehimli disklər
+                </label>
               </div>
-            ))}
+
+              <div className={styles.checkbox_item}>
+                <input
+                  type="checkbox"
+                  id="2"
+                  checked={state.optionals.includes(2)}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor="2"></label>
+                <label className={styles.custom_label} htmlFor="2">
+                  ABS
+                </label>
+              </div>
+
+              <div className={styles.checkbox_item}>
+                <input
+                  type="checkbox"
+                  id="3"
+                  checked={state.optionals.includes(3)}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor="3"></label>
+                <label className={styles.custom_label} htmlFor="3">
+                  Kondisioner
+                </label>
+              </div>
+
+              <div className={styles.checkbox_item}>
+                <input
+                  type="checkbox"
+                  id="4"
+                  checked={state.optionals.includes(4)}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor="4"></label>
+                <label className={styles.custom_label} htmlFor="4">
+                  Mərkəzi qapanma
+                </label>
+              </div>
+
+              <div className={styles.checkbox_item}>
+                <input
+                  type="checkbox"
+                  id="5"
+                  checked={state.optionals.includes(5)}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor="5"></label>
+                <label className={styles.custom_label} htmlFor="5">
+                  Park radar
+                </label>
+              </div>
+
+              <div className={styles.checkbox_item}>
+                <input
+                  type="checkbox"
+                  id="6"
+                  checked={state.optionals.includes(6)}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor="6"></label>
+                <label className={styles.custom_label} htmlFor="6">
+                  Arxa görüntü kamerası
+                </label>
+              </div>
+
+              <div className={styles.checkbox_item}>
+                <input
+                  type="checkbox"
+                  id="7"
+                  checked={state.optionals.includes(7)}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor="7"></label>
+                <label className={styles.custom_label} htmlFor="7">
+                  Dəri salon
+                </label>
+              </div>
+
+              <div className={styles.checkbox_item}>
+                <input
+                  type="checkbox"
+                  id="8"
+                  checked={state.optionals.includes(8)}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor="8"></label>
+                <label className={styles.custom_label} htmlFor="8">
+                  Ksenon lampalar
+                </label>
+              </div>
+
+              <div className={styles.checkbox_item}>
+                <input
+                  type="checkbox"
+                  id="9"
+                  checked={state.optionals.includes(9)}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor="9"></label>
+                <label className={styles.custom_label} htmlFor="9">
+                  Yağış sensoru
+                </label>
+              </div>
+
+              <div className={styles.checkbox_item}>
+                <input
+                  type="checkbox"
+                  id="10"
+                  checked={state.optionals.includes(10)}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor="10"></label>
+                <label className={styles.custom_label} htmlFor="10">
+                  Oturacaqların ventilyasiyası
+                </label>
+              </div>
+
+              <div className={styles.checkbox_item}>
+                <input
+                  type="checkbox"
+                  id="11"
+                  checked={state.optionals.includes(11)}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor="11"></label>
+                <label className={styles.custom_label} htmlFor="11">
+                  Lyuk
+                </label>
+              </div>
+
+              <div className={styles.checkbox_item}>
+                <input
+                  type="checkbox"
+                  id="12"
+                  checked={state.optionals.includes(12)}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor="12"></label>
+                <label className={styles.custom_label} htmlFor="12">
+                  Oturacaqların isidilməsi
+                </label>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div className={styles.description}>
-          <p className={styles.head_title}>Əlavə məlumat</p>
-          <textarea
-            rows="5"
-            name="description"
-            value={state.description}
-            onChange={handleChange}
-          ></textarea>
-        </div>
-
-        <div className={styles.submit}>
-          <button type="submit" onClick={addProduct}>
-            Əlavə et
-          </button>
+          <div className={styles.bottom}>
+            <button onClick={addProduct} className={styles.add_button}>
+              Əlavə et
+            </button>
+          </div>
         </div>
       </div>
     </div>

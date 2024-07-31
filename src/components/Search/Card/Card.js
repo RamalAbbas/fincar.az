@@ -14,10 +14,6 @@ const Card = ({ data, callBackSlug }) => {
     const response = await carSave({ car: data.id });
     if (!!response) {
       toast.success("Elave Olundu");
-
-      setTimeout(() => {
-        push("/saved");
-      }, 1000);
     }
   };
 
@@ -25,16 +21,16 @@ const Card = ({ data, callBackSlug }) => {
     const response = await deleteSavedCar(data.id);
     if (response.length == 0) {
       toast.success("Silindi.");
-
-      setTimeout(() => {
-        push("/main");
-      }, 1000);
     }
   };
 
   return (
     <div className={styles.product}>
-      <img src={cover} className={`${styles.productImage} cursor-no-drop`} />
+      <img
+        onClick={() => callBackSlug(slug)}
+        src={cover}
+        className={`${styles.productImage}`}
+      />
 
       {data?.is_saved ? (
         <div onClick={deleteCarFunction} className={styles.fav_disabled}>

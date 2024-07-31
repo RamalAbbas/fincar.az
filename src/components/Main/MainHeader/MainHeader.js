@@ -13,8 +13,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleMenuFilter } from "../../../redux/features/mobileMenuFilterSlice";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import {
+  carFeatureListModel,
+  getCarFeature,
+  getCarFilter,
+} from "../../../services";
 
-const Title = () => {
+const Title = ({ filterData }) => {
   const { push } = useRouter();
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
@@ -30,10 +35,38 @@ const Title = () => {
   const [selectedForMarketFilter, setSelectedForMarketFilter] = useState("");
   const [selectedFuelTypeFilter, setSelectedFuelTypeFilter] = useState("");
   const [selectedColorFilter, setSelectedColorFilter] = useState("");
-
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
-
+  const [carFeature, setCarFeature] = useState([]);
+  const [models, setModels] = useState([]);
   const [data, setData] = useState([]);
+
+  const [options, setOptions] = useState([]);
+
+  const generateOptions = () => {
+    const newOptions = [];
+    for (let i = 0; i <= 6500; i += 100) {
+      newOptions.push(i);
+    }
+    for (let i = 7000; i <= 10000; i += 500) {
+      newOptions.push(i);
+    }
+    for (let i = 11000; i <= 16000; i += 1000) {
+      newOptions.push(i);
+    }
+    setOptions(newOptions);
+  };
+
+  useEffect(() => {
+    generateOptions();
+  }, []);
+
+  const [state, setState] = useState({
+    make: 0,
+    model: 0,
+    max_price_azn: "",
+    min_price_azn: "",
+    min_year: "",
+  });
 
   useEffect(() => {
     Cookies.get("data") == undefined
@@ -88,6 +121,38 @@ const Title = () => {
     }
   };
 
+  const getCarFeatureData = async () => {
+    const response = await getCarFeature();
+    console.log(response);
+    setCarFeature(response);
+  };
+
+  useEffect(() => {
+    getCarFeatureData();
+  }, []);
+
+  const handleChange = async (e) => {
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
+    if (name === "make") {
+      const data = await carFeatureListModel(e.target.value);
+      setModels(data);
+    }
+  };
+
+  const searchFunction = async () => {
+    const queryString = Object.keys(state)
+      .filter((key) => state[key])
+      .map((key) => `${key}=${state[key]}`)
+      .join("&");
+
+    const response = await getCarFilter(queryString);
+    filterData(response);
+  };
   return (
     <section>
       <div
@@ -115,38 +180,67 @@ const Title = () => {
           <div className="mt-[84px] flex gap-[12px] items-center justify-center">
             <div className={styles.search}>
               <select
-                className={`${styles.dropdown} ml-[37px]`}
-                name="cars"
-                id="cars"
-                value={selectedBrand}
-                onChange={(e) => setSelectedBrand(e.target.value)}
+                className={`${styles.dropdown} rounded-tr-sm rounded-br-sm rounded-tl-[30px]  rounded-bl-[30px] h-[56px]`}
+                name="make"
+                id="make"
+                value={state.make}
+                onChange={handleChange}
               >
-                <option value="" disabled hidden>
+                <option value="" selected>
                   Marka
                 </option>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
+                {carFeature?.makes?.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
               </select>
-              <div className="h-full w-[2px] rounded bg-[#cecece] mx-[16px]"></div>
               <select
-                className={`${styles.dropdown} `}
-                name="cars"
-                id="cars"
-                value={selectedModel}
-                onChange={(e) => setSelectedModel(e.target.value)}
+                className={`${styles.dropdown}  rounded-tr-sm rounded-br-sm rounded-tl-sm  rounded-bl-sm h-[56px] ml-[2px]`}
+                name="model"
+                id="model"
+                value={state.model}
+                onChange={handleChange}
               >
-                <option value="" disabled hidden>
+                <option value="" selected>
                   Model
                 </option>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
+                {models?.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
               </select>
-              <div className="h-full w-[2px] rounded bg-[#cecece] mx-[16px]"></div>
-              <input placeholder="Axtarış" type="text" maxLength={20} />
-              <button className={styles.searchButton}>Axtar </button>
+              <input
+                className="rounded-tr-sm rounded-br-sm rounded-tl-sm  rounded-bl-sm h-[56px] ml-[2px] bg-white"
+                placeholder="Qiymət min"
+                type="text"
+                name="min_price_azn"
+                value={state.min_price_azn}
+                onChange={handleChange}
+              />
+              <input
+                className="rounded-tr-sm rounded-br-sm rounded-tl-sm  rounded-bl-sm h-[56px] ml-[2px] bg-white"
+                placeholder="Qiymət max"
+                type="text"
+                name="max_price_azn"
+                value={state.max_price_azn}
+                onChange={handleChange}
+              />
+              <input
+                className="rounded-tr-sm rounded-br-sm rounded-tl-sm  rounded-bl-sm h-[56px] ml-[2px] bg-white"
+                placeholder="Buraxılış ili"
+                type="text"
+                name="min_year"
+                value={state.min_year}
+                onChange={handleChange}
+              />
+              <div
+                onClick={searchFunction}
+                className="searchContent bg-white p-1 rounded-tr-[30px] ml-1 rounded-br-[30px] h-[56px] rounded-tl-sm  rounded-bl-sm max-w-[116px] w-full"
+              >
+                <button className={styles.searchButton}>Axtar </button>
+              </div>
             </div>
             <button
               onClick={() => push("/search")}

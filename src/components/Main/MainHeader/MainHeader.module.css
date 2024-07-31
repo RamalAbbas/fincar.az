@@ -17,7 +17,7 @@
 }
 
 .headerContainer::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -71,7 +71,7 @@
   color: #3b5191;
 }
 .leftLogo a::after {
-  content: '';
+  content: "";
   position: relative;
   left: 0;
   bottom: 0;
@@ -133,7 +133,7 @@
   color: #3b5191;
 }
 .rightNav a::after {
-  content: '';
+  content: "";
   position: relative;
   left: 0;
   bottom: 0;
@@ -190,12 +190,24 @@
   display: flex;
   justify-content: space-between;
   border-radius: 30px;
-  background: var(--White, #f5f5f5);
   max-width: 793px;
   width: 60vw;
   height: 56px;
   flex-shrink: 0;
   padding: 4px;
+}
+
+.search select {
+  padding: 16px;
+  width: 100%;
+  width: 100%;
+  background: url("../../../assets/icons/arrow/select2.svg") no-repeat right
+    10px center;
+  background-color: #fff;
+  background-size: 24px 24px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .detailSearch {
@@ -222,12 +234,14 @@
 }
 
 .searchButton {
+  width: 100%;
   display: inline-flex;
   padding: 12px 24px;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  border-radius: 28px;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
   background: var(--Primary-05, #183178);
   color: var(--Neutral-Lightest, #f5f6fa);
   font-size: 16px;
@@ -243,11 +257,23 @@
 }
 
 .search input {
-  background: none;
-  outline: none;
-  box-shadow: none;
-  padding-left: 10px;
+  max-width: 126px;
   width: 100%;
+  padding: 16px;
+  outline: none;
+  color: var(--Neutral-Text-Dark, #505673);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 24px; /* 150% */
+
+  &&::placeholder {
+    color: var(--Neutral-Text-Dark, #505673);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 510;
+    line-height: 24px; /* 150% */
+  }
 }
 
 .dropdown {
@@ -259,7 +285,7 @@
   font-style: normal;
   font-weight: 590;
   line-height: 24px;
-  width: 150px;
+  width: 100%;
   cursor: pointer;
 }
 
@@ -379,7 +405,7 @@
 
 .mobileInput input::placeholder {
   color: var(--Neutral-Text-Soft, #8990b9);
-  font-family: 'SF Pro';
+  font-family: "SF Pro";
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

@@ -159,3 +159,13 @@
 
 @media screen and (max-width: 468px) {
 }
+
+.totalPrice {
+  overflow: hidden;
+  color: #e51a17;
+  text-overflow: ellipsis;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 28px; /* 155.556% */
+}
