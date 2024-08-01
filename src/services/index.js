@@ -2,7 +2,6 @@ import baseUrl from "../constants/baseUrl/baseUrl";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-// Check if the cookie exists and is valid JSON
 let data;
 try {
   const cookieData = Cookies.get("data");

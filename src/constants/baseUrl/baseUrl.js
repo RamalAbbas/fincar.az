@@ -1,2 +1,2 @@
-const baseUrl = "https://fincar.pythonanywhere.com/";
+const baseUrl = "https://fincarapi.pythonanywhere.com/";
 export default baseUrl;
