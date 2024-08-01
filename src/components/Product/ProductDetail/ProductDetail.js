@@ -7,8 +7,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { handlePaymentModal } from "../../../redux/features/paymentModalSlice";
 
 const ProductDetail = ({ detail }) => {
-  const [mounthlyPayment, setMounthlyPayment] = useState(0);
+  const [mounthlyPayment, setMounthlyPayment] = useState();
+  const [activeColor,setActiveColor] = useState(24)
   const insideRef = useRef(null);
+  console.log(detail?.payment?.details)
   const isActivePaymentModal = useSelector(
     (state) => state.paymentModal.isActivePaymentModal
   );
@@ -37,9 +39,13 @@ const ProductDetail = ({ detail }) => {
   };
   // console.log(detail?.payment?.details[0]?.monthly_payment_azn);
   useEffect(() => {
-    setMounthlyPayment(detail?.payment?.details[0]?.monthly_payment_azn);
-  });
+    setMounthlyPayment(detail?.payment?.details[1]?.monthly_payment_azn);
+  },[detail?.payment?.details[1]?.monthly_payment_azn]);
 
+  const handlePayment = (item) => {
+    setMounthlyPayment(item?.monthly_payment_azn)
+    setActiveColor(item.term)
+  }
   return (
     <div className={`${styles.productDetailContainer}`}>
       <div className={styles.title}>
@@ -48,10 +54,24 @@ const ProductDetail = ({ detail }) => {
         </span>
         <p className={styles.price_azn}>{detail?.price_azn} AZN</p>
         <div className={styles.months_box}>
+           {detail?.payment?.details?.map((item) =>
+
+          <div style={{background: activeColor == item.term ? "#DADEF2" : "white"}} className={styles.months} onClick={() => handlePayment(item)} >
+            <p>{item?.term}</p>
+          </div>
+        )} 
+          {/* <div className={styles.monthss}>
+            <p>24ay</p>
+          </div>
+          <div className={styles.monthsss}>
+            <p>36ay</p>
+          </div> */}
+         
           <div className={styles.price_box}>
             <p>Aylıq ödəniş</p>
             <p className={styles.mounthlyPrice}>{mounthlyPayment}</p>
           </div>
+          <div className={styles.border}></div>
         </div>
         <div className={styles.details}>
           <div>

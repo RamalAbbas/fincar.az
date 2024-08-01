@@ -28,6 +28,7 @@ const PaymentModal = ({ data }) => {
       loan_term: e.target.value,
     };
     const response = await carLoanCalculation(info);
+    console.log(info,response);
     setPayments(response);
   };
   return (
@@ -68,10 +69,9 @@ const PaymentModal = ({ data }) => {
             <option selected value="Seçin">
               Seçin
             </option>
+            <option value="24">24 ay</option>
             <option value="12">12 ay</option>
-            <option value="6">6 ay</option>
-            <option value="3">3 ay</option>
-            <option value="1">1 ay</option>
+            <option value="36">36 ay</option>
           </select>
         </div>
       </div>
