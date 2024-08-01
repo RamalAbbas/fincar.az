@@ -29,7 +29,7 @@ const Saved = () => {
         </button>
         <button className={styles.btn}>Saved</button>
       </div>
-      <div className={styles.grid}>
+       
         <div className={styles.container}>
           {carSave?.map((item) => (
             <div className={styles.card}>
@@ -59,7 +59,7 @@ const Saved = () => {
             </div>
           ))}
         </div>
-      </div>
+    
     </>
   );
 };

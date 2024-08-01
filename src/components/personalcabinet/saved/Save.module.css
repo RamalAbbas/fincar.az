@@ -1,34 +1,29 @@
 .testclass {
-    position: relative;
-    bottom: 0px;
-    padding: 10px;
-    height: 56px;
-    width: 1128px;
-    background-color: #F5F5F5;
-    left: 155px;
-    top: 30px;
+  padding: 10px;
+  height: 56px;
+  width: 1128px;
+  background-color: #F5F5F5;
+  display: flex;
+  margin-left: 97px;
+  align-items: center;
+
 }
 
 .navbar {
-    position: relative;
-    left: -3px;
-    bottom: 6px;
-    color: black;
-    cursor: pointer;
-    width: 126px;
-    padding: 12px 24px 12px 24px;
-    height: 48px;
+  color: black;
+  cursor: pointer;
+  width: 126px;
+  padding: 12px 24px 12px 24px;
+  height: 48px; 
 }
 
 .btn {
     height: 48px;
+    height: 48px;
     color: white;
-    /* background: red; */
-    position: relative;
     top: -22%;
     left: 1%;
     background-color: #183178;
-    /* padding: 10px 0px -18px; */
     padding: 12px 24px 12px 24px;
     border-radius: 10px;
     bottom: 40%;
@@ -37,42 +32,40 @@
 }
 
 .grid {
-    display: flex;
-    width:1158px;
-    align-items: flex-start;
-    gap: 24px;
-    position: relative;
-    z-index: -1;
-    top: 83px;
+  display: flex;
+  width: 1158px;
+  margin: px;
+  margin-top: 82px;
+  align-items: flex-start;
+  gap: 24px;
 }
 
 .container {
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    width: 100%;
-    padding-bottom: 260px;
-    align-items: flex-start;
-    gap: 10px;
-    flex-shrink: 0;
-    border-radius: 10px;
-    row-gap: 80px;
-    position: relative;
-    left: 13%;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  width: 100%;
+  padding-bottom: 260px;
+  align-items: flex-start;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  row-gap: 80px;
+  margin-left: 13%;
 }
 
 .card {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 85%;
-    gap: 16px;
-    border-radius: 10px;
-    background: #fff;
-    padding-bottom: 16px;
-    transition: 0.2s;
-    transition-timing-function: linear;
-    cursor: pointer;
-    height: 312px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 80%;
+  gap: 16px;
+  border-radius: 10px;
+  background: #fff;
+  padding-bottom: 16px;
+  transition: 0.2s;
+  transition-timing-function: linear;
+  cursor: pointer;
+  height: 312px;
   }
   .img {
     width: 100%;
