@@ -158,6 +158,15 @@ export const carFeatureListModel = async (id) => {
   }
 };
 
+export const carFeatureListDrive = async (id) => {
+  try {
+    const response = await instanceAxios.get(`car-feature-list/drive`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
 export const createCar = async (data) => {
   try {
     const response = await instanceAxios.post("car/create", data, {
@@ -180,3 +189,12 @@ export const adminDealerUptade = async (data) => {
     console.log({ error });
   }
 };
+
+export const dealerDetailSlug = async () => {
+  try {
+    const response = await instanceAxios.get(`dealer/detail/${slug}`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+}

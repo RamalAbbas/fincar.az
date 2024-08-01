@@ -140,10 +140,12 @@ const Title = ({ filterData }) => {
 
     if (name === "make") {
       const data = await carFeatureListModel(e.target.value);
+      console.log(data);
       setModels(data);
     }
-  };
 
+    
+  };
   const searchFunction = async () => {
     const queryString = Object.keys(state)
       .filter((key) => state[key])
@@ -206,9 +208,15 @@ const Title = ({ filterData }) => {
                   Model
                 </option>
                 {models?.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
-                  </option>
+                  <>
+                    <option key={item.id} value={item.id}>
+                      {item.name}
+                    </option>
+
+                    {item.models.map((item) => (
+                      <option value={item.id}>{item.name}</option>
+                    ))}
+                  </>
                 ))}
               </select>
               <input
