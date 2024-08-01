@@ -112,7 +112,8 @@ const  DealerUptade = async () => {
     <div className={styles.inp5}>
           <label className={styles.username}>Phone number</label>
           <input type='text' placeholder='+994 55 654 76 78' className={styles.wraper} name='phone1' value={data.phone1} onChange={handleInputChange}/>
-          <button type="submit" className={styles.addImageButton} onClick={handleAddField} disabled={tries >= maxTries}><Image src={group} className={styles.add}/><span>Add phone number</span></button>
+          <input type='text' placeholder='+994 55 654 76 78' className={styles.wraper} name='phone2' value={data.phone2} onChange={handleInputChange}/>
+          <input type='text' placeholder='+994 55 654 76 78' className={styles.wraper} name='phone3' value={data.phone3} onChange={handleInputChange}/>
     </div>
     ))}
     <div className={styles.inp6}>
