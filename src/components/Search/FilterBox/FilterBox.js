@@ -22,6 +22,8 @@ const FilterBox = ({ carfeature, filterData }) => {
     min_price_azn: "",
     min_year: "",
     model: "",
+    monthly_price_azn: "",
+    monthly_price_azn_max: "",
   });
   const [yearOptions, setYearOptions] = useState([]);
   const [models, setModels] = useState([]);
@@ -60,21 +62,70 @@ const FilterBox = ({ carfeature, filterData }) => {
   return (
     <div className={styles.box}>
       <p className={styles.headTitle}>Filtrlər</p>
+
       <div className={styles.filter_content}>
+        <div className={styles.special_select_content}>
+          <div className={styles.select_wrapper}>
+            <select name="make" onChange={handleChange} value={filters.make}>
+              <option value="" disabled>
+                Marka
+              </option>
+              {carfeature?.makes?.map((item) => (
+                <option value={item.id} key={item?.id}>
+                  {item?.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={styles.select_wrapper}>
+            <select name="model" onChange={handleChange} value={filters.model}>
+              <option value="" disabled>
+                Model
+              </option>
+              {models?.map((item) => (
+                <>
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+
+                  {item.models.map((item) => (
+                    <option value={item.id}>{item.name}</option>
+                  ))}
+                </>
+              ))}
+            </select>
+          </div>
+        </div>
         <label>Qiymət</label>
         <div className="flex gap-2 mt-2">
           <input
             name="min_price_azn"
             placeholder="Minimum"
-            type="number"
+            type="text"
             value={filters.min_price_azn}
             onChange={handleChange}
           />
           <input
             name="max_price_azn"
             placeholder="Maksimum"
-            type="number"
+            type="text"
             value={filters.max_price_azn}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex gap-2 mt-2">
+          <input
+            name="monthly_price_azn"
+            placeholder="Aylıq min."
+            type="text"
+            value={filters.monthly_price_azn}
+            onChange={handleChange}
+          />
+          <input
+            name="monthly_price_azn_max"
+            placeholder="Aylıq max."
+            type="text"
+            value={filters.monthly_price_azn_max}
             onChange={handleChange}
           />
         </div>
@@ -113,32 +164,7 @@ const FilterBox = ({ carfeature, filterData }) => {
             </select>
           </div>
         </div>
-        <div className="flex gap-2 my-4">
-          <div className={styles.select_wrapper}>
-            <select name="make" onChange={handleChange} value={filters.make}>
-              <option value="" disabled>
-                Marka
-              </option>
-              {carfeature?.makes?.map((item) => (
-                <option value={item.id} key={item?.id}>
-                  {item?.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className={styles.select_wrapper}>
-            <select name="model" onChange={handleChange} value={filters.model}>
-              <option value="" disabled>
-                Model
-              </option>
-              {models?.map((item) => (
-                <option value={item.id} key={item?.id}>
-                  {item?.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
+
         <label>İstehsal ili</label>
         <div className="flex gap-2 mb-4 mt-1">
           <div className={styles.select_wrapper}>

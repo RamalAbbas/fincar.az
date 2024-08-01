@@ -24,6 +24,8 @@ const Card = ({ data, callBackSlug }) => {
     }
   };
 
+  console.log(data);
+
   return (
     <div className={styles.product}>
       <img
@@ -60,7 +62,11 @@ const Card = ({ data, callBackSlug }) => {
         {slug}
       </p>
 
-      <p className={styles.productPrice}></p>
+      <p className={styles.productPrice}>
+        {
+          data?.price
+        }  ₼
+      </p>
     </div>
   );
 };

@@ -10,6 +10,7 @@ import {
   getCarFeature,
   carFeatureListModel,
   createCar,
+  carFeatureListDrive,
 } from "../../../services";
 
 const AddProduct = () => {
@@ -32,17 +33,27 @@ const AddProduct = () => {
     engine_volume: 0,
     vin: "",
     description: "",
-    optionals: [],
     uploaded_images: [],
+    optionals: 3,
   };
 
   const [state, setState] = useState(initialState);
+
+  const handleCheckboxChange = (e) => {
+    const { id, checked } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [`optionals_${id}`]: id,
+    }));
+  };
+
   const [selectedImages, setSelectedImages] = useState([]);
   const [inputKey, setInputKey] = useState(Date.now());
   const [hoveredImage, setHoveredImage] = useState(null);
   const [carFeature, setCarFeature] = useState([]);
   const [models, setModels] = useState([]);
-  const minYear = 2000; // Define your minimum year here
+  const [drives, setDrives] = useState([]);
+  const minYear = 2000;
   const currentYear = new Date().getFullYear();
   const years = Array.from(
     { length: currentYear - minYear + 1 },
@@ -54,7 +65,7 @@ const AddProduct = () => {
     const files = Array.from(event.target.files);
     setState((prevState) => ({
       ...prevState,
-      uploaded_images: [event.target.files[0]],
+      uploaded_images: [event.target.files[0].name],
     }));
     const newImages = files.map((file) => {
       return new Promise((resolve) => {
@@ -97,25 +108,13 @@ const AddProduct = () => {
     }
   };
 
-  const handleCheckboxChange = (e) => {
-    const { id, checked } = e.target;
-    setState((prevState) => ({
-      ...prevState,
-      optionals: checked
-        ? [...prevState.optionals, parseInt(id)]
-        : prevState.optionals.filter((opt) => opt !== parseInt(id)),
-    }));
-  };
-
   const addProduct = async () => {
     const res = await createCar(state);
-    console.log(state);
-    console.log(res);
+    console.log(res, state);
   };
 
   const getCarFeatureData = async () => {
     const response = await getCarFeature();
-    console.log(response);
     setCarFeature(response);
   };
 
@@ -141,6 +140,15 @@ const AddProduct = () => {
 
   useEffect(() => {
     generateOptions();
+  }, []);
+
+  const renderDrives = async () => {
+    const res = await carFeatureListDrive();
+    setDrives(res);
+  };
+
+  useEffect(() => {
+    renderDrives();
   }, []);
 
   return (
@@ -340,8 +348,11 @@ const AddProduct = () => {
                   onChange={handleChange}
                 >
                   <option selected>Seç</option>
-                  <option value="1">KM</option>
-                  <option value="2">MPH</option>
+                  {carFeature?.unit?.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.name}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -380,9 +391,11 @@ const AddProduct = () => {
                   onChange={handleChange}
                 >
                   <option selected>Seç</option>
-                  <option value="1">USD</option>
-                  <option value="2">EUR</option>
-                  <option value="3">MAN</option>
+                  {carFeature?.currency?.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.name}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -419,8 +432,9 @@ const AddProduct = () => {
                 onChange={handleChange}
               >
                 <option selected>Seçin</option>
-                <option value="0">a</option>
-                <option value="1">b</option>
+                {drives?.map((item) => (
+                  <option value={item.id}>{item.name}</option>
+                ))}
               </select>
             </div>
             <div>
@@ -433,8 +447,11 @@ const AddProduct = () => {
               >
                 <option selected>Seçin</option>
 
-                <option value="0">a</option>
-                <option value="1">b</option>
+                {carFeature?.owner?.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
@@ -548,161 +565,19 @@ const AddProduct = () => {
             <p className={styles.head_title}>Avtomobilin təchizatı</p>
 
             <div className={styles.checkbox_container}>
-              <div className={styles.checkbox_item}>
-                <input
-                  type="checkbox"
-                  id="1"
-                  checked={state.optionals.includes(1)}
-                  onChange={handleCheckboxChange}
-                />
-                <label htmlFor="1"></label>
-                <label className={styles.custom_label} htmlFor="1">
-                  Yüngül lehimli disklər
-                </label>
-              </div>
-
-              <div className={styles.checkbox_item}>
-                <input
-                  type="checkbox"
-                  id="2"
-                  checked={state.optionals.includes(2)}
-                  onChange={handleCheckboxChange}
-                />
-                <label htmlFor="2"></label>
-                <label className={styles.custom_label} htmlFor="2">
-                  ABS
-                </label>
-              </div>
-
-              <div className={styles.checkbox_item}>
-                <input
-                  type="checkbox"
-                  id="3"
-                  checked={state.optionals.includes(3)}
-                  onChange={handleCheckboxChange}
-                />
-                <label htmlFor="3"></label>
-                <label className={styles.custom_label} htmlFor="3">
-                  Kondisioner
-                </label>
-              </div>
-
-              <div className={styles.checkbox_item}>
-                <input
-                  type="checkbox"
-                  id="4"
-                  checked={state.optionals.includes(4)}
-                  onChange={handleCheckboxChange}
-                />
-                <label htmlFor="4"></label>
-                <label className={styles.custom_label} htmlFor="4">
-                  Mərkəzi qapanma
-                </label>
-              </div>
-
-              <div className={styles.checkbox_item}>
-                <input
-                  type="checkbox"
-                  id="5"
-                  checked={state.optionals.includes(5)}
-                  onChange={handleCheckboxChange}
-                />
-                <label htmlFor="5"></label>
-                <label className={styles.custom_label} htmlFor="5">
-                  Park radar
-                </label>
-              </div>
-
-              <div className={styles.checkbox_item}>
-                <input
-                  type="checkbox"
-                  id="6"
-                  checked={state.optionals.includes(6)}
-                  onChange={handleCheckboxChange}
-                />
-                <label htmlFor="6"></label>
-                <label className={styles.custom_label} htmlFor="6">
-                  Arxa görüntü kamerası
-                </label>
-              </div>
-
-              <div className={styles.checkbox_item}>
-                <input
-                  type="checkbox"
-                  id="7"
-                  checked={state.optionals.includes(7)}
-                  onChange={handleCheckboxChange}
-                />
-                <label htmlFor="7"></label>
-                <label className={styles.custom_label} htmlFor="7">
-                  Dəri salon
-                </label>
-              </div>
-
-              <div className={styles.checkbox_item}>
-                <input
-                  type="checkbox"
-                  id="8"
-                  checked={state.optionals.includes(8)}
-                  onChange={handleCheckboxChange}
-                />
-                <label htmlFor="8"></label>
-                <label className={styles.custom_label} htmlFor="8">
-                  Ksenon lampalar
-                </label>
-              </div>
-
-              <div className={styles.checkbox_item}>
-                <input
-                  type="checkbox"
-                  id="9"
-                  checked={state.optionals.includes(9)}
-                  onChange={handleCheckboxChange}
-                />
-                <label htmlFor="9"></label>
-                <label className={styles.custom_label} htmlFor="9">
-                  Yağış sensoru
-                </label>
-              </div>
-
-              <div className={styles.checkbox_item}>
-                <input
-                  type="checkbox"
-                  id="10"
-                  checked={state.optionals.includes(10)}
-                  onChange={handleCheckboxChange}
-                />
-                <label htmlFor="10"></label>
-                <label className={styles.custom_label} htmlFor="10">
-                  Oturacaqların ventilyasiyası
-                </label>
-              </div>
-
-              <div className={styles.checkbox_item}>
-                <input
-                  type="checkbox"
-                  id="11"
-                  checked={state.optionals.includes(11)}
-                  onChange={handleCheckboxChange}
-                />
-                <label htmlFor="11"></label>
-                <label className={styles.custom_label} htmlFor="11">
-                  Lyuk
-                </label>
-              </div>
-
-              <div className={styles.checkbox_item}>
-                <input
-                  type="checkbox"
-                  id="12"
-                  checked={state.optionals.includes(12)}
-                  onChange={handleCheckboxChange}
-                />
-                <label htmlFor="12"></label>
-                <label className={styles.custom_label} htmlFor="12">
-                  Oturacaqların isidilməsi
-                </label>
-              </div>
+              {carFeature?.optional?.map((item) => (
+                <div className={styles.checkbox_item} key={item.id}>
+                  <input
+                    type="checkbox"
+                    id={item.id}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label htmlFor={item.id}></label>
+                  <label className={styles.custom_label} htmlFor={item.id}>
+                    {item.name}
+                  </label>
+                </div>
+              ))}
             </div>
           </div>
 

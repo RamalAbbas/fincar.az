@@ -82,24 +82,25 @@
   display: inline-block;
 }
 
-.special_select_wrapper{
+.special_select_wrapper {
   max-width: 100%;
   width: 100%;
   position: relative;
   display: inline-block;
 }
 
-.special_select_wrapper::after{
-  content: ""; 
+.special_select_wrapper::after {
+  content: "";
   position: absolute;
   top: 50%;
-  right: 6px; 
+  right: 6px;
   transform: translateY(-50%);
   pointer-events: none;
-  width: 24px; 
-  height: 24px; 
-  background: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 10L12 14L16 10" stroke="%238990B9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat center center;
-  background-size: contain; 
+  width: 24px;
+  height: 24px;
+  background: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 10L12 14L16 10" stroke="%238990B9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+    no-repeat center center;
+  background-size: contain;
 }
 
 .box select {
@@ -109,14 +110,32 @@
 }
 
 .select_wrapper::after {
-  content: ""; 
+  content: "";
   position: absolute;
   top: 50%;
-  right: 6px; 
+  right: 6px;
   transform: translateY(-50%);
   pointer-events: none;
-  width: 24px; 
-  height: 24px; 
-  background: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 10L12 14L16 10" stroke="%238990B9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat center center;
-  background-size: contain; 
+  width: 24px;
+  height: 24px;
+  background: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 10L12 14L16 10" stroke="%238990B9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+    no-repeat center center;
+  background-size: contain;
+}
+
+.special_select_content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.special_select_content div {
+  max-width: 100%;
+  width: 100%;
+}
+
+.special_select_content select {
+  max-width: 100% !important;
 }
