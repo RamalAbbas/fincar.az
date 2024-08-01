@@ -1,7 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 import styles from "./Products.module.css";
-
+import card_img from "../../../assets/images/admin/card/card.png";
+import Image from "next/image";
 const Products = () => {
   const { push } = useRouter();
   return (
@@ -58,6 +59,80 @@ const Products = () => {
 
           <span>Add product</span>
         </button>
+      </div>
+
+      <div className={styles.cards}>
+        <div className={styles.card}>
+          <Image src={card_img} alt="" />
+          <p className={styles.name}>
+            Changan CS 85, 2.0 L <br></br> 2022 il, 25 000 km
+          </p>
+          <p className={styles.history}>07.05.2024</p>
+          <p className={styles.seenCount}>Baxış sayı: 7489</p>
+        </div>
+
+        <div className={styles.card}>
+          <Image src={card_img} alt="" />
+          <p className={styles.name}>
+            Changan CS 85, 2.0 L <br></br> 2022 il, 25 000 km
+          </p>
+          <p className={styles.history}>07.05.2024</p>
+          <p className={styles.seenCount}>Baxış sayı: 7489</p>
+        </div>
+
+        <div className={styles.card}>
+          <Image src={card_img} alt="" />
+          <p className={styles.name}>
+            Changan CS 85, 2.0 L <br></br> 2022 il, 25 000 km
+          </p>
+          <p className={styles.history}>07.05.2024</p>
+          <p className={styles.seenCount}>Baxış sayı: 7489</p>
+        </div>
+
+        <div className={styles.card}>
+          <Image src={card_img} alt="" />
+          <p className={styles.name}>
+            Changan CS 85, 2.0 L <br></br> 2022 il, 25 000 km
+          </p>
+          <p className={styles.history}>07.05.2024</p>
+          <p className={styles.seenCount}>Baxış sayı: 7489</p>
+        </div>
+
+        <div className={styles.card}>
+          <Image src={card_img} alt="" />
+          <p className={styles.name}>
+            Changan CS 85, 2.0 L <br></br> 2022 il, 25 000 km
+          </p>
+          <p className={styles.history}>07.05.2024</p>
+          <p className={styles.seenCount}>Baxış sayı: 7489</p>
+        </div>
+
+        <div className={styles.card}>
+          <Image src={card_img} alt="" />
+          <p className={styles.name}>
+            Changan CS 85, 2.0 L <br></br> 2022 il, 25 000 km
+          </p>
+          <p className={styles.history}>07.05.2024</p>
+          <p className={styles.seenCount}>Baxış sayı: 7489</p>
+        </div>
+
+        <div className={styles.card}>
+          <Image src={card_img} alt="" />
+          <p className={styles.name}>
+            Changan CS 85, 2.0 L <br></br> 2022 il, 25 000 km
+          </p>
+          <p className={styles.history}>07.05.2024</p>
+          <p className={styles.seenCount}>Baxış sayı: 7489</p>
+        </div>
+
+        <div className={styles.card}>
+          <Image src={card_img} alt="" />
+          <p className={styles.name}>
+            Changan CS 85, 2.0 L <br></br> 2022 il, 25 000 km
+          </p>
+          <p className={styles.history}>07.05.2024</p>
+          <p className={styles.seenCount}>Baxış sayı: 7489</p>
+        </div>
       </div>
     </div>
   );

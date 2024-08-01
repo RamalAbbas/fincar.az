@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { handlePaymentModal } from "../../../redux/features/paymentModalSlice";
 import styles from "./PaymentModal.module.css";
@@ -28,9 +28,11 @@ const PaymentModal = ({ data }) => {
       loan_term: e.target.value,
     };
     const response = await carLoanCalculation(info);
-    console.log(info,response);
-    setPayments(response);
+    let item = response?.details?.filter((item) => item.term == e.target.value);
+    console.log(item);
+    setPayments(item[0]);
   };
+
   return (
     <div
       className={`${!isActivePaymentModal && "!translate-y-[-40px]"} ${
@@ -55,7 +57,7 @@ const PaymentModal = ({ data }) => {
       <div className={styles.inputContainer}>
         <div className="w-full">
           <label>İlkin ödəniş</label>
-          <input disabled type="text" placeholder="$ 12.000" />
+          <input type="number" placeholder="$ 12.000" min="12000" />
         </div>
         <div className="w-full">
           <label>Kreditin müddəti</label>
@@ -66,9 +68,7 @@ const PaymentModal = ({ data }) => {
             value={selectedOption}
             onChange={handleSelectChange}
           >
-            <option selected value="Seçin">
-              Seçin
-            </option>
+            <option selected>Seçin</option>
             <option value="24">24 ay</option>
             <option value="12">12 ay</option>
             <option value="36">36 ay</option>
@@ -80,7 +80,7 @@ const PaymentModal = ({ data }) => {
         <div className={styles.firstPrice}>
           <p>Aylıq məbləğ</p>{" "}
           <span>
-            {payments.monthly_payment_azn ? payments?.monthly_payment_azn : 0}
+            {payments?.monthly_payment_azn ? payments?.monthly_payment_azn : 0}
             AZN
           </span>
         </div>

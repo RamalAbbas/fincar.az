@@ -10,7 +10,6 @@ const ProductDetail = ({ detail }) => {
   const [mounthlyPayment, setMounthlyPayment] = useState();
   const [activeColor, setActiveColor] = useState(24);
   const insideRef = useRef(null);
-  console.log(detail?.payment?.details);
   const isActivePaymentModal = useSelector(
     (state) => state.paymentModal.isActivePaymentModal
   );
