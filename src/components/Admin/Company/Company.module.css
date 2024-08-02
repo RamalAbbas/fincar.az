@@ -1,20 +1,33 @@
 .container {
+  display: flex;
+  flex-direction: column;
   width: 1132px;
-  height: 674px;
-  flex-shrink: 0;
+  padding: 32px;
   border-radius: 10px;
-  background: var(--White, #FFF);
-  position: relative;
-  bottom: 645px;
-  left: 287px;
+  justify-content: start;
+  background: #fff;
+  margin-left: 15px;
 }
-
+.parent{
+   display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px; 
+}
+.main{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: -20%;
+  margin-left: 18%;
+  max-width: 100%;
+  left: 20%;
+  
+}
 .paragraph {
-  width: 190px;
+  width: 204px;
   height: 28px;
-  position: relative;
-  top: 25px;
-  left: 40px;
+  padding: 13px;
+  margin: 5px;
 }
 
 .text {
@@ -28,14 +41,14 @@
 
 .img {
   width: 116px;
-  height: 116px;
   flex-shrink: 0;
   border-radius: 10px;
   border: 1px solid #C6CADC;
-  position: relative;
+ 
   top: 47px;
+  margin: 32px;
   left: 65px;
-  height: auto;
+  max-height: 200px;
   /* background: url(https://nashuacc.edu/wp-content/uploads/2022/06/Brand-Mark_0703_1.Primary_Brand_Mark_Primary_Vertical.png) lightgray 50% / cover no-repeat; */
 
 }
@@ -48,6 +61,7 @@
 .uploadbtn {
   display: inline-flex;
   height: 50px;
+  max-width: 17%;
   padding: 12px 24px;
   justify-content: center;
   align-items: center;
@@ -55,6 +69,8 @@
   flex-shrink: 0;
   border-radius: 10px;
   margin-top: 56px;
+  margin-left: -8px;
+  margin-top: -13px;
 }
 
 .button {
@@ -97,14 +113,16 @@
   top: -46px;
   gap: 4px;
 }
-
+.wraperr{
+  width: 100%;
+  padding-left: 13px;
+}
 .inp {
   display: flex;
   width: 427px;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  position: relative;
   bottom: 31%;
   left: 20%;
 }
@@ -117,7 +135,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  position: relative;
+ 
   bottom: 27%;
   left: 20%;
 }
@@ -128,9 +146,9 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  position: relative;
-  bottom: 54%;
-  left: 60%;
+ 
+  bottom: 84%;
+  left: 42%;
 }
 
 .inp5 {
@@ -139,7 +157,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  position: relative;
+  
   bottom: 35%;
   left: 20%;
 }
@@ -150,27 +168,26 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  position: absolute;
+ 
   bottom: 66%;
-  left: 60%;
+  left: 42%;
 }
 
 .inp7 {
   display: flex;
-  width: 895px;
+  width: 100%;
   height: 72px;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  position: relative;
   bottom: 33%;
   left: 19%;
 }
 
-.inp7 ::placeholder {
-  width: 870px;
-  height: 48px;
-}
+/* .inp7 input::placeholder{
+  font-size: 12px;
+  padding: 78px 24px;
+} */
 
 .username {
   display: flex;
@@ -201,8 +218,8 @@
 
 .wraper1 {
   display: flex;
-  height: 72px;
-  padding: 36px 24px;
+  height: 100px;
+  padding: 75px 24px;
   align-items: center;
   outline: none;
   gap: 8px;
@@ -212,19 +229,18 @@
 }
 
 .save {
-  width: 136px;
-  height: 48px;
-  position: relative;
-  left: 957px;
-  bottom: 159px;
-  border: 1px solid black;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 12px, 24px, 12px, 24px;
-  background-color: #183178;
-  gap: 8px;
+   width: 136px;
+    height: 48px;
+    left: 957px;
+    bottom: 159px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px, 24px, 12px, 24px;
+    background-color: #183178;
+    gap: 8px;
 }
 
 .btn1 {
