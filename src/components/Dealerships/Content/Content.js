@@ -59,7 +59,7 @@ const Content = ({dealerList,isLoading}) => {
           }
 
           {
-            dealerList.length == 0 ?  <p className={styles.errorText}>Axtarışa uyğun nəticə tapılmadı.</p> : <></>
+            dealerList?.length == 0 ?  <p className={styles.errorText}>Axtarışa uyğun nəticə tapılmadı.</p> : <></>
           }
          
       </div>
