@@ -10,31 +10,6 @@ import Cookies from "js-cookie";
 
 const Signin = () => {
   const { push } = useRouter();
-  const [data, setData] = useState({
-    fin: "",
-    phone: "",
-  });
-
-  const handleInputChange = (e) => {
-    setData((prevData) => ({
-      ...prevData,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const sendRequest = async () => {
-    if (Object.values(data).some((value) => value === "")) {
-      console.log("Please fill in all fields.");
-    } else {
-      const res = await login(data);
-      console.log(data);
-      if (res?.status == 200) {
-        Cookies.set("data", JSON.stringify(res?.data));
-
-        push("/main");
-      }
-    }
-  };
 
   return (
     <div className={styles.wrapper}>
@@ -44,27 +19,13 @@ const Signin = () => {
         <div className={styles.box}>
           <p className={styles.headTitle}>Sign in</p>
 
-          <input
-            placeholder="Fin code"
-            className={styles.signin_input}
-            type="number"
-            name="fin"
-            value={data.fin}
-            onChange={handleInputChange}
-          />
+          <div onClick={() => push("/signin/user")} className={styles.sigin_button}>
+            Sign in as User
+          </div>
 
-          <input
-            placeholder="Phone Number"
-            className={styles.signin_input}
-            type="text"
-            name="phone"
-            value={data.phone}
-            onChange={handleInputChange}
-          />
-
-          <button onClick={sendRequest} className={styles.signin_button}>
-            Sign in
-          </button>
+          <div onClick={() => push("/admin/signin")} className={styles.sigin_business}>
+            Sign in as a Business account
+          </div>
 
           <Image src={line} alt="line" />
 

@@ -16,6 +16,17 @@
   padding: 8px 16px;
 }
 
+.card div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.card img {
+  width: 100%;
+  object-fit: cover;
+}
+
 .add_product_button span {
   color: var(--Neutral-Text-Dark, #505673);
   font-size: 14px;
@@ -31,7 +42,7 @@
   font-family: "SF Pro";
   font-size: 18px;
   font-style: normal;
-  font-weight: 590;
+  font-weight: 600;
   line-height: 28px; /* 155.556% */
 }
 
@@ -55,7 +66,8 @@
 }
 
 .card {
-  width: fit-content;
+  position: relative;
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 8px 8px 12px 8px;
@@ -93,4 +105,130 @@
   font-style: normal;
   font-weight: 400;
   line-height: 20px; /* 142.857% */
+}
+
+.crudBody {
+  max-width: 152px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  top: 72px;
+  transform: translate(-50%, 0%);
+  z-index: 11;
+}
+
+.editButton {
+  padding: 8px 40px;
+  border-radius: 16px;
+  background: #2151d9;
+  color: var(--White, #fff);
+
+  /* Body/C1/Medium */
+  font-family: "SF Pro";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 16px; /* 133.333% */
+}
+
+.deleteButton {
+  border-radius: 16px;
+  background: var(--Neutral-Lightest, #f5f6fa);
+  padding: 8px 33px 8px 32px;
+  color: var(--Neutral-Text-Dark, #505673);
+
+  /* Body/C1/Medium */
+  font-family: "SF Pro";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 16px; /* 133.333% */
+}
+
+.deletemodal {
+  background: rgba(0, 0, 0, 0.25);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  right: 50%;
+  bottom: 50%;
+  z-index: 32132;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px 16px;
+  border-radius: 10px;
+  background: var(--Neutral-Lightest, #f5f6fa);
+}
+
+.deleteTitle {
+  color: var(--Neutral-Text-Dark, #505673);
+
+  /* Heading/H4 */
+  font-family: "SF Pro";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 590;
+  line-height: 28px; /* 140% */
+}
+
+.description {
+  max-width: 268px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+  color: var(--Neutral-Text-Dark, #505673);
+  text-align: center;
+
+  /* Body/B3/Regular */
+  font-family: "SF Pro";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+}
+
+.deleteButtonModal {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: #c10d0c;
+  padding: 12px 24px;
+  color: var(--Neutral-Lightest, #f5f6fa);
+
+  /* Body/B2/Medium */
+  font-family: "SF Pro";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 24px; /* 150% */
+  margin-bottom: 12px;
+}
+
+.cancelButtonModal {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid var(--Primary-05, #183178);
+  padding: 12px 24px;
+  color: var(--Neutral-Text-Dark, #505673);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 24px; /* 150% */
 }

@@ -8,6 +8,7 @@ import { handlePaymentModal } from "../../../redux/features/paymentModalSlice";
 
 const ProductDetail = ({ detail }) => {
   const [mounthlyPayment, setMounthlyPayment] = useState();
+  const [initialPayment, setInitialPayment] = useState();
   const [activeColor, setActiveColor] = useState(24);
   const insideRef = useRef(null);
   const isActivePaymentModal = useSelector(
@@ -36,15 +37,21 @@ const ProductDetail = ({ detail }) => {
       handleClickPaymentModal();
     }
   };
-  // console.log(detail?.payment?.details[0]?.monthly_payment_azn);
   useEffect(() => {
     setMounthlyPayment(detail?.payment?.details[1]?.monthly_payment_azn);
   }, [detail?.payment?.details[1]?.monthly_payment_azn]);
 
   const handlePayment = (item) => {
     setMounthlyPayment(item?.monthly_payment_azn);
+    setInitialPayment(item?.initial_payment_azn);
     setActiveColor(item.term);
   };
+
+  useEffect(() => {
+    if (detail?.payment?.details[1]) {
+      setInitialPayment(detail?.payment?.details[1]?.initial_payment_azn.toFixed(0));
+    }
+  }, [detail]);
   return (
     <div className={`${styles.productDetailContainer}`}>
       <div className={styles.title}>
@@ -53,7 +60,7 @@ const ProductDetail = ({ detail }) => {
         </span>
         <p className="mt-3">
           İlkin ödəniş -{" "}
-          {detail?.payment?.details[1].initial_payment_azn.toFixed(0)} ₼{" "}
+          {initialPayment} ₼{" "}
         </p>
         <p className={styles.price_azn}>{detail?.price_azn} AZN</p>
 
