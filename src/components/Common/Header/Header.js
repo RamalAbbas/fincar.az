@@ -35,6 +35,8 @@ const Header = ({ isSaved, isNotification }) => {
     <>
       {pathname !== "/main" &&
         pathname !== "/signin" &&
+        pathname !== "/signin/user" &&
+        pathname !== "/admin/signin" &&
         pathname !== "/signin/request" && (
           <>
             <div className="h-[56px] lg:hidden">

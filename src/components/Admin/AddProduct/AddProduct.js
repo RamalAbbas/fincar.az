@@ -12,6 +12,7 @@ import {
   createCar,
   carFeatureListDrive,
 } from "../../../services";
+import Cookies from "js-cookie";
 
 const AddProduct = () => {
   const initialState = {
@@ -65,8 +66,9 @@ const AddProduct = () => {
     const files = Array.from(event.target.files);
     setState((prevState) => ({
       ...prevState,
-      uploaded_images: [event.target.files[0].name],
+      uploaded_images: files, // Change here
     }));
+
     const newImages = files.map((file) => {
       return new Promise((resolve) => {
         const reader = new FileReader();
@@ -109,8 +111,17 @@ const AddProduct = () => {
   };
 
   const addProduct = async () => {
-    const res = await createCar(state);
-    console.log(res, state);
+    const token = Cookies.get("admin_data")
+      ? JSON.parse(Cookies.get("admin_data")).access_token
+      : "";
+    console.log("Token used for API call:", token);
+
+    try {
+      const res = await createCar(state, token);
+      console.log(res, state);
+    } catch (error) {
+      console.error("API call failed:", error);
+    }
   };
 
   const getCarFeatureData = async () => {
