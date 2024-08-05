@@ -69,21 +69,21 @@ console.log(data);
           onClick={() => callBackSlug(data.slug)}
           className={styles.bottomContent}
         >
-          <h1>
+          <h1 className="flex">
             {data?.make.name}
-            <span className="ml-1">{data?.model.name}</span>
+            <p className="ml-1">{data?.model.name}</p>
           </h1>
           <p className={styles.totalPrice}>
             {data?.price_azn}
-            <span className="ml-1">{data?.currency}</span>
+            <p className="ml-1">{data?.currency}</p>
           </p>
-          <h2>
+          <h2 className="flex">
             {data?.year}
-            <span className="ml-1">{data?.volume}L</span>
-            <span className="ml-1">
+            <p className="ml-1">{data?.volume}L</p>
+            <p className="ml-1">
               {data?.distance}
               {data?.distance_unit}
-            </span>
+            </p>
           </h2>
         </div>
       </div>

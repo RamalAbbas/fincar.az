@@ -161,6 +161,7 @@
 }
 
 .totalPrice {
+  display: flex;
   overflow: hidden;
   color: #e51a17;
   text-overflow: ellipsis;
