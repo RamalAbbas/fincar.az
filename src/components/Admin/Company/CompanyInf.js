@@ -103,7 +103,9 @@ const  DealerUptade = async () => {
     <div className={styles.inp4}>
           <label className={styles.username}>City</label>
           <select className={styles.wraper}> 
-          <option  name='city' value={data.city} onChange={handleInputChange}></option>
+            {/* {dealer?.city?.map((item)=>( */}
+          <option  name='city' value={data.city} onChange={handleInputChange} key={item.id}>City</option>
+        {/* ))} */}
             </select>
           {/* <input type='text' placeholder='Bakı' className={styles.wraper} name='city' value={data.city} onChange={handleInputChange} /> */}
     </div> 

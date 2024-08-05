@@ -184,10 +184,11 @@
   left: 19%;
 }
 
-/* .inp7 input::placeholder{
-  font-size: 12px;
-  padding: 78px 24px;
-} */
+ .inp7 input::placeholder{
+  font-size: 14px;
+  padding: 1px;
+  
+} 
 
 .username {
   display: flex;
