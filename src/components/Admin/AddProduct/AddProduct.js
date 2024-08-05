@@ -15,7 +15,17 @@ import {
 import Cookies from "js-cookie";
 
 const AddProduct = () => {
-  const initialState = {
+  const handleCheckboxChange = (e) => {
+    const { id, checked } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [`optionals_${id}`]: id,
+    }));
+  };
+
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [selectedImgs, setSelectedImgs] = useState([]);
+  const [state, setState] = useState({
     make: 0,
     model: 0,
     color: 0,
@@ -34,21 +44,9 @@ const AddProduct = () => {
     engine_volume: 0,
     vin: "",
     description: "",
-    uploaded_images: [],
+    uploaded_images: {...selectedImages},
     optionals: 3,
-  };
-
-  const [state, setState] = useState(initialState);
-
-  const handleCheckboxChange = (e) => {
-    const { id, checked } = e.target;
-    setState((prevState) => ({
-      ...prevState,
-      [`optionals_${id}`]: id,
-    }));
-  };
-
-  const [selectedImages, setSelectedImages] = useState([]);
+  });
   const [inputKey, setInputKey] = useState(Date.now());
   const [hoveredImage, setHoveredImage] = useState(null);
   const [carFeature, setCarFeature] = useState([]);
@@ -61,13 +59,18 @@ const AddProduct = () => {
     (_, i) => minYear + i
   );
 
+  // const initialState = {};
+
   const handleImageUpload = (event) => {
-    console.log(event.target.files);
-    const files = Array.from(event.target.files);
-    setState((prevState) => ({
-      ...prevState,
-      uploaded_images: files, // Change here
-    }));
+    const files = event.target.files[0];
+    console.log(event.target.files[0]);
+    if (files) {
+      alert("ds")
+      let lastFiles = [files];
+      setSelectedImgs(lastFiles);
+    }
+    console.log(files);
+    console.log(files);
 
     const newImages = files.map((file) => {
       return new Promise((resolve) => {
