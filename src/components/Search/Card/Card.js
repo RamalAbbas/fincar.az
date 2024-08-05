@@ -55,17 +55,22 @@ const Card = ({ data, callBackSlug }) => {
 
       <p onClick={() => callBackSlug(slug)} className={styles.productName}>
         {make.name}
-        {model.name}
+        <span className="ml-1">{model.name}</span>
       </p>
 
       <p onClick={() => callBackSlug(slug)} className={styles.productTitle}>
-        {slug}
+        {data?.year}
+        <span className="ml-1">
+        {data?.volume}L
+        </span>
+        <span className="ml-1">
+        {data?.distance}{data?.distance_unit} 
+        </span>
       </p>
 
       <p className={styles.productPrice}>
-        {
-          data?.price
-        }  ₼
+        {data?.price}
+        <span className="ml-1">{data?.currency}</span>
       </p>
     </div>
   );

@@ -135,7 +135,7 @@ const ProductDetail = ({ detail }) => {
           <div>
             <p>Mühərrik</p>
             <span>
-              {detail?.engine_volume} / {detail?.engine_power} .a.g / Elektro
+              {detail?.volume } L / {detail?.engine_power} .a.g / Elektro
             </span>
           </div>
           <div>
