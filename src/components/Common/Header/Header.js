@@ -48,7 +48,7 @@ const Header = ({ isSaved, isNotification }) => {
                     <a onClick={() => push("/search")}>Bütün Elanlar</a>
                     <a onClick={() => push("/dealerships")}>Salonlar</a>
                     <div className={styles.language}>
-                      EN
+                      AZ
                       <Image
                         src={languageIcon}
                         height={24}
