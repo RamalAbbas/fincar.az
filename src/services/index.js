@@ -18,7 +18,7 @@ const instanceAxios = axios.create({
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
-    Authorization: `Bearer ${data || ''}`, // Ensure this is correctly formatted
+    Authorization: data ? `Bearer ${data}` : "", 
   },
 });
 
