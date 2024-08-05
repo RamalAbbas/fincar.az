@@ -12,7 +12,7 @@ const Signin = () => {
   const { push } = useRouter();
   const [data, setData] = useState({
     fin: "",
-    phone: "",
+    phone: 0,
   });
 
   const handleInputChange = (e) => {
@@ -27,6 +27,7 @@ const Signin = () => {
       console.log("Please fill in all fields.");
     } else {
       const res = await login(data);
+      console.log(data);
       console.log(res);
       if (res?.status == 200) {
         Cookies.set("data", JSON.stringify(res?.data));

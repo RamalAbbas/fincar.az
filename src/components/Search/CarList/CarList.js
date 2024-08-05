@@ -11,6 +11,8 @@ const CarList = ({ cars, isLoading }) => {
     push(`/product/${slug}`);
   };
 
+  
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.cardBody}>
