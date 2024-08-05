@@ -24,7 +24,6 @@ const Card = ({ data, callBackSlug }) => {
     }
   };
 
-  console.log(data);
 
   return (
     <div className={styles.product}>

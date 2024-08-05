@@ -22,8 +22,10 @@ const FilterBox = ({ carfeature, filterData }) => {
     min_price_azn: "",
     min_year: "",
     model: "",
-    monthly_price_azn: "",
-    monthly_price_azn_max: "",
+    min_monthly_payment: "",
+    max_monthly_payment: "",
+    min_initial_payment: "",
+    max_initial_payment: ""
   });
   const [yearOptions, setYearOptions] = useState([]);
   const [models, setModels] = useState([]);
@@ -115,17 +117,33 @@ const FilterBox = ({ carfeature, filterData }) => {
         </div>
         <div className="flex gap-2 mt-2">
           <input
-            name="monthly_price_azn"
+            name="min_monthly_payment"
             placeholder="Aylıq min."
             type="text"
-            value={filters.monthly_price_azn}
+            value={filters.min_monthly_payment}
             onChange={handleChange}
           />
           <input
-            name="monthly_price_azn_max"
+            name="max_monthly_payment"
             placeholder="Aylıq max."
             type="text"
-            value={filters.monthly_price_azn_max}
+            value={filters.max_monthly_payment}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex gap-2 mt-2">
+          <input
+            name="min_initial_payment"
+            placeholder="Ilkin min."
+            type="text"
+            value={filters.min_initial_payment}
+            onChange={handleChange}
+          />
+          <input
+            name="max_initial_payment"
+            placeholder="Ilkin Max"
+            type="text"
+            value={filters.max_initial_payment}
             onChange={handleChange}
           />
         </div>
