@@ -191,15 +191,28 @@ export const createCar = async (data,token) => {
 };
 
 
-export const adminDealerUptade = async (data) => {
+export const adminDealerUptade = async (token) => {
   try {
-    const response = await instanceAxios.put(dealer/update,data);
+    const response = await instanceAxios.put(`dealer/update`,{
+      headers: {
+        // "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.log({ error });
   }
 };
-
+export const getDealerCity = async () => {
+  try {
+    const response = await instanceAxios.get(`dealer/city-list`)
+   
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
 export const dealerDetailSlug = async () => {
   try {
     const response = await instanceAxios.get(`dealer/detail/${slug}`);
