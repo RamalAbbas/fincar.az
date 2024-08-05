@@ -180,7 +180,7 @@ export const createCar = async (data,token) => {
   try {
     const response = await instanceAxios.post("car/create", data, {
       headers: {
-        // "Content-Type": "multipart/form-data",
+        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       },
     });

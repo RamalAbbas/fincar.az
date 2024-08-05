@@ -32,13 +32,12 @@ const Header = ({ isSaved, isNotification }) => {
     }
   };
   return (
-    <>
+    <div>
       {pathname !== "/main" &&
         pathname !== "/signin" &&
-        pathname !== "/signin/user" &&
         pathname !== "/admin/signin" &&
         pathname !== "/signin/request" && (
-          <>
+          <div>
             <div className="h-[56px] lg:hidden">
               <div className={styles.widhtLimitContainerLarge}>
                 <div
@@ -58,18 +57,16 @@ const Header = ({ isSaved, isNotification }) => {
                       />
                     </div>
 
-                    {Cookies.get("data") !== undefined ? (
+                    {data && (
                       <div
                         className="cursor-pointer"
                         onClick={() => push("/saved")}
                       >
                         <Image src={saved} alt="" />
                       </div>
-                    ) : (
-                      <></>
                     )}
 
-                    {Cookies.get("data") !== undefined ? (
+                    {data && (
                       <div className={styles.notificationBody}>
                         <Image
                           onMouseLeave={() => setIsNotificationHover(false)}
@@ -78,7 +75,7 @@ const Header = ({ isSaved, isNotification }) => {
                           alt=""
                         />
 
-                        {isNotificationHover ? (
+                        {isNotificationHover && (
                           <div className={styles.notification_box}>
                             <div className={styles.top}>Your notification</div>
                             <div className={styles.border}></div>
@@ -95,44 +92,15 @@ const Header = ({ isSaved, isNotification }) => {
                                   our system’s database at the moment.
                                 </p>
                               </div>
-
-                              <div className={styles.item}>
-                                <div className={styles.item_top}>
-                                  <p className={styles.item_left}>
-                                    Payment Received !
-                                  </p>
-                                  <p className={styles.item_right}>Jun 19</p>
-                                </div>
-                                <p className={styles.bottom}>
-                                  We’re encountering issues with connecting to
-                                  our system’s database at the moment.
-                                </p>
-                              </div>
-
-                              <div className={styles.item}>
-                                <div className={styles.item_top}>
-                                  <p className={styles.item_left}>
-                                    Payment Received !
-                                  </p>
-                                  <p className={styles.item_right}>Jun 19</p>
-                                </div>
-                                <p className={styles.bottom}>
-                                  We’re encountering issues with connecting to
-                                  our system’s database at the moment.
-                                </p>
-                              </div>
+                              {/* Repeat items as needed */}
                             </div>
                           </div>
-                        ) : (
-                          <></>
                         )}
                       </div>
-                    ) : (
-                      <></>
                     )}
 
                     <button onClick={handleSend}>
-                      {data?.username ? data?.username : "Daxil ol"}
+                      {data?.username ? data.username : "Daxil ol"}
                     </button>
                   </div>
                 </div>
@@ -166,9 +134,9 @@ const Header = ({ isSaved, isNotification }) => {
                 </div>
               </div>
             </div>
-          </>
+          </div>
         )}
-    </>
+    </div>
   );
 };
 
