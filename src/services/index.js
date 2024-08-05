@@ -18,7 +18,7 @@ const instanceAxios = axios.create({
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
-    Authorization: `Bearer ${data || ''}`, // Ensure this is correctly formatted
+    Authorization: data ? `Bearer ${data}` : "",
   },
 });
 
@@ -180,7 +180,7 @@ export const createCar = async (data,token) => {
   try {
     const response = await instanceAxios.post("car/create", data, {
       headers: {
-        // "Content-Type": "multipart/form-data",
+        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       },
     });
