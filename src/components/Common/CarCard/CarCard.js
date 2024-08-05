@@ -24,7 +24,7 @@ const CarCard = ({ data, callBackSlug }) => {
       toast.success("Silindi.");
     }
   };
-
+console.log(data);
   return (
     <>
       <div className={styles.card}>
@@ -39,7 +39,7 @@ const CarCard = ({ data, callBackSlug }) => {
             className="h-full object-cover rounded-t-[10px]"
           />
           <div className={styles.price}>
-            {data?.payment?.initial_payment_azn?.toFixed()} ₼ / ilkin
+            {data?.payment?.details[2].initial_payment_azn?.toFixed(0)} ₼ / ilkin
           </div>
           {data?.is_saved ? (
             <div onClick={deleteCarFunction} className={styles.fav_disabled}>
@@ -71,13 +71,20 @@ const CarCard = ({ data, callBackSlug }) => {
         >
           <h1>
             {data?.make.name}
-            {data?.model.name}
+            <span className="ml-1">{data?.model.name}</span>
           </h1>
           <p className={styles.totalPrice}>
             {data?.price_azn}
-            {data?.currency}
+            <span className="ml-1">{data?.currency}</span>
           </p>
-          <h2>{data?.slug}</h2>
+          <h2>
+            {data?.year}
+            <span className="ml-1">{data?.volume}L</span>
+            <span className="ml-1">
+              {data?.distance}
+              {data?.distance_unit}
+            </span>
+          </h2>
         </div>
       </div>
     </>
