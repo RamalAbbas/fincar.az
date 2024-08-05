@@ -21,6 +21,7 @@ const Signin = () => {
       [e.target.name]: e.target.value,
     }));
   };
+console.log(data);
 
   const sendRequest = async () => {
     if (Object.values(data).some((value) => value === "")) {
