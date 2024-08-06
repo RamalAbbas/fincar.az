@@ -127,13 +127,16 @@
   object-fit: cover;
 }
 
+.imageContainer {
+  display: flex;
+}
+
 .addImageButton {
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 24px;
   width: 120px;
   height: 120px;
   display: flex;
-  justify-content: center;
+  justify-content: center !important;
   align-items: center;
   flex-direction: column;
   gap: 4px;

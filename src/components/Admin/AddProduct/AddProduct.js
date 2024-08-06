@@ -23,8 +23,6 @@ const AddProduct = () => {
     }));
   };
 
-  const [selectedImages, setSelectedImages] = useState([]);
-  const [selectedImgs, setSelectedImgs] = useState([]);
   const [state, setState] = useState({
     make: 0,
     model: 0,
@@ -44,11 +42,9 @@ const AddProduct = () => {
     engine_volume: 0,
     vin: "",
     description: "",
-    uploaded_images: {...selectedImages},
+    uploaded_images: "",
     optionals: 3,
   });
-  const [inputKey, setInputKey] = useState(Date.now());
-  const [hoveredImage, setHoveredImage] = useState(null);
   const [carFeature, setCarFeature] = useState([]);
   const [models, setModels] = useState([]);
   const [drives, setDrives] = useState([]);
@@ -59,45 +55,22 @@ const AddProduct = () => {
     (_, i) => minYear + i
   );
 
-  // const initialState = {};
+  const [imagePreview, setImagePreview] = useState("");
+  const [isImageUploaded, setIsImageUploaded] = useState(false);
 
   const handleImageUpload = (event) => {
-    const files = event.target.files[0];
-    console.log(event.target.files[0]);
-    if (files) {
-      alert("ds")
-      let lastFiles = [files];
-      setSelectedImgs(lastFiles);
+    const file = event.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setImagePreview(imageUrl);
+      setIsImageUploaded(true);
+
+      // Save the file in the state if needed
+      setState((prevData) => ({
+        ...prevData,
+        uploaded_images: file,
+      }));
     }
-    console.log(files);
-    console.log(files);
-
-    const newImages = files.map((file) => {
-      return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          resolve({ id: file.name, src: e.target.result });
-        };
-        reader.readAsDataURL(file);
-      });
-    });
-
-    Promise.all(newImages).then((images) => {
-      setSelectedImages((prevImages) => [...prevImages, ...images]);
-      setInputKey(Date.now());
-    });
-  };
-
-  const deleteImage = (id) => {
-    setSelectedImages((prevImages) =>
-      prevImages.filter((image) => image.id !== id)
-    );
-    setState((prevState) => ({
-      ...prevState,
-      uploaded_images: prevState.uploaded_images.filter(
-        (image) => image !== id
-      ),
-    }));
   };
 
   const handleChange = async (e) => {
@@ -117,7 +90,6 @@ const AddProduct = () => {
     const token = Cookies.get("admin_data")
       ? JSON.parse(Cookies.get("admin_data")).access_token
       : "";
-    console.log("Token used for API call:", token);
 
     try {
       const res = await createCar(state, token);
@@ -195,98 +167,84 @@ const AddProduct = () => {
           <input
             type="file"
             id="uploadButton"
-            key={inputKey}
             onChange={handleImageUpload}
             multiple
             style={{ display: "none" }}
           />
 
           <div className={styles.uploadDiv}>
-            <div className={styles.center}>
-              {selectedImages.length > 0 ? (
-                <div className={styles.selectedImages}>
-                  {selectedImages.map((image) => (
-                    <div
-                      onMouseLeave={() => setHoveredImage(null)}
-                      onMouseEnter={() => setHoveredImage(image.id)}
-                      key={image.id}
-                      className={styles.imageWrapper}
-                    >
-                      <img
-                        src={image.src}
-                        alt="Selected"
-                        className={styles.uploadedImage}
-                      />
-                      {hoveredImage === image.id && (
-                        <div
-                          className={styles.remove_button}
-                          onClick={() => deleteImage(image.id)}
-                        >
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <rect
-                              width="24"
-                              height="24"
-                              rx="2"
-                              fill="#878CA8"
-                              fillOpacity="0.55"
-                            />
-                            <path
-                              d="M8 8L16 16"
-                              stroke="#141A33"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M16 8L8 16"
-                              stroke="#141A33"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                  <button
-                    type="button"
-                    onClick={() =>
-                      document.getElementById("uploadButton").click()
-                    }
-                    className={styles.addImageButton}
-                  >
-                    <Image src={upload2} />
-                    Add image
-                  </button>
-                </div>
-              ) : (
-                <>
+            {isImageUploaded ? (
+              <>
+                <div className={styles.imageContainer}>
+                  <img
+                    src={imagePreview}
+                    alt="Selected preview"
+                    className={styles.uploadedImage}
+                  />
+
                   <label className={styles.uploadLabel} htmlFor="uploadButton">
-                    <Image src={upload} />
-                    <p>Şəkilləri buraya yükləyin</p>
+                    <div className={styles.addImageButton}>
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M20 3V7"
+                          stroke="#505673"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M18 5H22"
+                          stroke="#505673"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M14 5H5C3.895 5 3 5.895 3 7V19C3 20.105 3.895 21 5 21H18C19.105 21 20 20.105 20 19V11"
+                          stroke="#505673"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M6.96642 14.467L8.47042 12.081C8.81942 11.528 9.59642 11.453 10.0444 11.929L11.1194 13.071L12.2464 10.676C12.5934 9.93801 13.6314 9.90401 14.0264 10.618L16.1804 14.516C16.5484 15.183 16.0654 16 15.3044 16H7.81242C7.02442 16 6.54642 15.133 6.96642 14.467Z"
+                          stroke="#505673"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      Add image
+                    </div>
                   </label>
-                  {selectedImages.length === 0 && (
-                    <nav>
-                      <ul>
-                        <li>
-                          Minimum – 3 şəkil (ön, arxa və bütöv ön panelin
-                          görüntüsü mütləqdir).
-                        </li>
-                        <li>Maksimum – 25 şəkil.</li>
-                        <li>Optimal ölçü – 1024x768 piksel.</li>
-                      </ul>
-                    </nav>
-                  )}
-                </>
-              )}
-            </div>
+                </div>
+              </>
+            ) : (
+              <div className={styles.center}>
+                <label className={styles.uploadLabel} htmlFor="uploadButton">
+                  <Image src={upload} alt="Upload" />
+                  <p>Şəkilləri buraya yükləyin</p>
+                </label>
+                <nav>
+                  <ul>
+                    <li>
+                      Minimum – 3 şəkil (ön, arxa və bütöv ön panelin görüntüsü
+                      mütləqdir).
+                    </li>
+                    <li>Maksimum – 25 şəkil.</li>
+                    <li>Optimal ölçü – 1024x768 piksel.</li>
+                  </ul>
+                </nav>
+              </div>
+            )}
           </div>
         </div>
 
