@@ -142,9 +142,12 @@ const Title = ({ filterData }) => {
       const data = await carFeatureListModel(e.target.value);
       console.log(data);
       setModels(data);
+    } else if (name == "model") {
+      console.log(e.target.value);
+      let item = models.filter((item) => item.id == e.target.value);
+      let modelsData = item[0]?.models?.map((item) => item.id);
+      console.log(modelsData);
     }
-
-    
   };
   const searchFunction = async () => {
     const queryString = Object.keys(state)
@@ -155,6 +158,7 @@ const Title = ({ filterData }) => {
     const response = await getCarFilter(queryString);
     filterData(response);
   };
+  console.log(models);
   return (
     <section>
       <div
