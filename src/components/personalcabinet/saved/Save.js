@@ -19,7 +19,7 @@ const Saved = () => {
     router.push(`/product/${slug}`);
   };
   return (
-    <>
+    <div className={styles.wrapper}>
       <div className={styles.testclass}>
         <button
           className={styles.navbar}
@@ -60,7 +60,7 @@ const Saved = () => {
           ))}
         </div>
     
-    </>
+    </div>
   );
 };
 

@@ -56,6 +56,10 @@ const CompanyInf = () => {
     const file = event.target.files[0];
     console.log(file)
     SetImage(event.target.files[0])
+    setData((prevData) => ({
+      ...prevData,
+      ["cover"]: event.target.files[0],
+    }));
   }
  
 
@@ -87,8 +91,9 @@ const CompanyInf = () => {
     : "";
     const res = await adminDealerUptade(data,token)
     console.log(res);
-    
+    console.log(data)
   }
+  
   return (
     <>
       <div className={styles.wraperr}>
@@ -117,13 +122,11 @@ const CompanyInf = () => {
               </div>
               <div className={styles.inp4}>
                 <label className={styles.username}>City</label>
-                <select className={styles.wraper}>
-                   
-                  {
-                    cities?.map((item) => (
-                      <option value={item.id} onChange={handleInputChange}>{item.name}</option>
-                    ))
-                  }
+                <select className={styles.wraper} name='city' value={data.city} onChange={handleInputChange}>
+                  <option value={0}>Select City</option>
+                  {cities?.map((item) => (
+                    <option key={item.id} value={item.id}>{item.name}</option>
+                  ))}
                 </select>
                 {/* <input type='text' placeholder='Bakı' className={styles.wraper} name='city' value={data.city} onChange={handleInputChange} /> */}
               </div>

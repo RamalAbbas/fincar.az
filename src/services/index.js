@@ -195,7 +195,7 @@ export const adminDealerUptade = async (data,token) => {
   try {
     const response = await instanceAxios.put(`dealer/update`,data,{
       headers: {
-        // "Content-Type": "multipart/form-data",
+        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       },
     });
