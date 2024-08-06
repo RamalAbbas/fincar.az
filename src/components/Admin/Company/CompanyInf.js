@@ -6,12 +6,12 @@ import admin from '../../../assets/images/admin/mazda.png'
 import upload from '../../../assets/images/upload/Group.svg'
 import group from '../../../assets/icons/group/Group.svg'
 import Cookies from "js-cookie";
-import { getDealerCity } from "../../../services";
+import { adminDealerUptade, getDealerCity } from "../../../services";
 import { useRef, useEffect, useState } from "react";
 const CompanyInf = () => {
   const inputRef = useRef(null)
   const [image, SetImage] = useState("")
-  const [cities,setCities] = useState("")
+  const [cities,setCities] = useState([])
  
   //add remove
   const [inputFields, setInputFields] = useState([{ value: '' }]);
@@ -21,7 +21,6 @@ const CompanyInf = () => {
   const [data, setData] = useState({
     cover: "",
     name: "",
-    address: "",
     opening_time: "",
     city: 0,
     phone1: "",
@@ -30,7 +29,7 @@ const CompanyInf = () => {
     street: "",
     about: ""
   });
-  // console.log(data)
+  console.log(data)
   const handleInputChange = (e) => {
     setData((prevData) => ({
       ...prevData,
@@ -42,7 +41,6 @@ const CompanyInf = () => {
     try {
       const response = await getDealerCity()
       setCities(response);
-      console.log(response)
     }
     catch (err) {
       console.error(err);
@@ -82,6 +80,15 @@ const CompanyInf = () => {
     newFields[index].value = event.target.value;
     setInputFields(newFields);
   };
+
+  const saveData = async () => {
+    const token = Cookies.get("admin_data")
+    ? JSON.parse(Cookies.get("admin_data")).access_token
+    : "";
+    const res = await adminDealerUptade(data,token)
+    console.log(res);
+    
+  }
   return (
     <>
       <div className={styles.wraperr}>
@@ -112,8 +119,11 @@ const CompanyInf = () => {
                 <label className={styles.username}>City</label>
                 <select className={styles.wraper}>
                    
-                    <option name='city' value={data.city} onChange={handleInputChange}></option>
-                 
+                  {
+                    cities?.map((item) => (
+                      <option value={item.id} onChange={handleInputChange}>{item.name}</option>
+                    ))
+                  }
                 </select>
                 {/* <input type='text' placeholder='Bakı' className={styles.wraper} name='city' value={data.city} onChange={handleInputChange} /> */}
               </div>
@@ -139,7 +149,7 @@ const CompanyInf = () => {
                 <input type='text' placeholder='AutoStar Kaukasus GmbH" MMC - Fiat avtomobillərinin Azərbaycanda rəsmi düstribüteri. 20% ilkin ödəniş,10% illik bank faizi, 5 illik kredit, yürüşdən asılı olmayaraq 2 il zəmanət.' className={styles.wraper1} name='about' value={data.about} onChange={handleInputChange} />
               </div>
               <div className={styles.save}>
-                <button className={styles.btn1}>Save</button>
+                <button onClick={saveData} className={styles.btn1}>Save</button>
               </div>
             </div>
           </div>
