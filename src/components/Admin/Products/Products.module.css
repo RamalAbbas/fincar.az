@@ -25,6 +25,7 @@
 .card img {
   width: 100%;
   object-fit: cover;
+  border-radius: 8px;
 }
 
 .add_product_button span {
