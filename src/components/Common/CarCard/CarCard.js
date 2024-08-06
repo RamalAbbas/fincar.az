@@ -75,15 +75,15 @@ const CarCard = ({ data, callBackSlug }) => {
           </h1>
           <p className={styles.totalPrice}>
             {data?.price}
-            <p className="ml-1">{data?.currency}</p>
+            <span className="ml-1">{data?.currency}</span>
           </p>
           <h2 className="flex">
             {data?.year}
-            <p className="ml-1">{data?.volume}L</p>
-            <p className="ml-1">
+            <span className="ml-1">{data?.volume}L</span>
+            <span className="ml-1">
               {data?.distance}
               {data?.distance_unit}
-            </p>
+            </span>
           </h2>
         </div>
       </div>
