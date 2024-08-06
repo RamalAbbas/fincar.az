@@ -5,22 +5,40 @@ import card_img from "../../../assets/images/admin/card/card.png";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { dealerDetailSlug } from "../../../services";
+import { dealerDetailSlug, deleteCar } from "../../../services";
 
 const Products = () => {
   const { push } = useRouter();
   const [isActiveCrud, setIsActiveCrud] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
-
-
+  const [data, setData] = useState([]);
+  const [slug, setSlug] = useState("");
+  const token = Cookies.get("admin_data")
+      ? JSON.parse(Cookies.get("admin_data")).access_token
+      : "";
   const renderProducts = async () => {
-    const res = await dealerDetailSlug(Cookies.get("admin_data").slug);
-    console.log(res);
+    const slug = Cookies.get("admin_data")
+      ? JSON.parse(Cookies.get("admin_data")).slug
+      : "";
+    const res = await dealerDetailSlug(slug);
+    console.log(res?.cars);
+    setData(res);
   };
 
   useEffect(() => {
     renderProducts();
   }, []);
+
+  const handleDelete = (slug) => {
+    setDeleteModal(true);
+    setSlug(slug);
+  };
+
+  const deleteCard = async () => {
+    const res = await deleteCar(slug,token);
+    setDeleteModal(false)
+    renderProducts()
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -78,34 +96,41 @@ const Products = () => {
       </div>
 
       <div className={styles.cards}>
-        <div
-          onMouseLeave={() => setIsActiveCrud(false)}
-          onMouseEnter={() => setIsActiveCrud(true)}
-          className={styles.card}
-        >
-          <div>
-            <Image src={card_img} alt="Product Image" />
-          </div>
-          <p className={styles.name}>
-            Changan CS 85, 2.0 L <br /> 2022 il, 25 000 km
-          </p>
-          <p className={styles.history}>07.05.2024</p>
-          <p className={styles.seenCount}>Baxış sayı: 7489</p>
-
-          {isActiveCrud ? (
-            <div className={styles.crudBody}>
-              <div className={styles.editButton}>Edit product</div>
-              <div
-                onClick={() => setDeleteModal(true)}
-                className={styles.deleteButton}
-              >
-                Delete product
-              </div>
+        {data?.cars?.map((item) => (
+          <div
+            onMouseLeave={() => setIsActiveCrud(false)}
+            onMouseEnter={() => setIsActiveCrud(true)}
+            className={styles.card}
+          >
+            <div>
+              <img
+                src={item?.cover}
+                style={styles.item_img}
+                alt="Product Image"
+              />
             </div>
-          ) : (
-            <></>
-          )}
-        </div>
+            <p className={styles.name}>
+              {item?.make?.name} {item?.model?.name} {item?.volume} L <br />{" "}
+              {item?.year} il, {item?.distance} {item?.distance_unit}
+            </p>
+            <p className={styles.history}>{item?.year}</p>
+            <p className={styles.seenCount}>Baxış sayı: {item?.views}</p>
+
+            {isActiveCrud ? (
+              <div className={styles.crudBody}>
+                <div className={styles.editButton}>Edit product</div>
+                <div
+                  onClick={() => handleDelete(item.slug)}
+                  className={styles.deleteButton}
+                >
+                  Delete product
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
+        ))}
       </div>
 
       {deleteModal ? (
@@ -115,7 +140,9 @@ const Products = () => {
             <p className={styles.description}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
-            <button className={styles.deleteButtonModal}>Delete</button>
+            <button onClick={deleteCard} className={styles.deleteButtonModal}>
+              Delete
+            </button>
             <button
               className={styles.cancelButtonModal}
               onClick={() => setDeleteModal(false)}
