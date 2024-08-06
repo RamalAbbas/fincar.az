@@ -295,7 +295,7 @@ const AddProduct = () => {
               >
                 <option selected>Seçin</option>
 
-                {models?.map((item) => (
+                {models[0]?.models?.map((item) => (
                   <option key={item.id} value={item.id}>
                     {item.name}
                   </option>

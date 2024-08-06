@@ -12,7 +12,6 @@ try {
 }
 console.log(data);
 
-
 const instanceAxios = axios.create({
   baseURL: baseUrl,
   headers: {
@@ -176,7 +175,7 @@ export const carFeatureListDrive = async (id) => {
   }
 };
 
-export const createCar = async (data,token) => {
+export const createCar = async (data, token) => {
   try {
     const response = await instanceAxios.post("car/create", data, {
       headers: {
@@ -190,10 +189,9 @@ export const createCar = async (data,token) => {
   }
 };
 
-
-export const adminDealerUptade = async (data,token) => {
+export const adminDealerUptade = async (data, token) => {
   try {
-    const response = await instanceAxios.put(`dealer/update`,data,{
+    const response = await instanceAxios.put(`dealer/update`, data, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
@@ -206,21 +204,21 @@ export const adminDealerUptade = async (data,token) => {
 };
 export const getDealerCity = async () => {
   try {
-    const response = await instanceAxios.get(`dealer/city-list`)
-   
+    const response = await instanceAxios.get(`dealer/city-list`);
+
     return response.data;
   } catch (error) {
     console.log({ error });
   }
 };
-export const dealerDetailSlug = async () => {
+export const dealerDetailSlug = async (slug) => {
   try {
     const response = await instanceAxios.get(`dealer/detail/${slug}`);
     return response.data;
   } catch (error) {
     console.log({ error });
   }
-}
+};
 
 export const dealerDetail = async () => {
   try {
@@ -229,4 +227,17 @@ export const dealerDetail = async () => {
   } catch (error) {
     console.log({ error });
   }
-}
+};
+
+export const deleteCar = async (slug, token) => {
+  try {
+    const response = await instanceAxios.delete(`car/delete/${slug}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
