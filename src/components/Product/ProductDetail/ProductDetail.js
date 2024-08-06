@@ -49,19 +49,19 @@ const ProductDetail = ({ detail }) => {
 
   useEffect(() => {
     if (detail?.payment?.details[1]) {
-      setInitialPayment(detail?.payment?.details[1]?.initial_payment_azn.toFixed(0));
+      setInitialPayment(
+        detail?.payment?.details[1]?.initial_payment_azn.toFixed(0)
+      );
     }
   }, [detail]);
+  console.log(detail);
   return (
     <div className={`${styles.productDetailContainer}`}>
       <div className={styles.title}>
         <span>
           {detail?.make?.name} {detail?.model?.name}
         </span>
-        <p className="mt-3">
-          İlkin ödəniş -{" "}
-          {initialPayment} ₼{" "}
-        </p>
+        <p className="mt-3">İlkin ödəniş - {initialPayment} ₼ </p>
         <p className={styles.price_azn}>{detail?.price_azn} AZN</p>
 
         <div className={styles.months_box}>
@@ -98,7 +98,7 @@ const ProductDetail = ({ detail }) => {
           </div>
           <div>
             <p>Ötürücü</p>
-            <span>Arxa</span>
+            <span>{detail?.drive}</span>
           </div>
           <div>
             <p>Model</p>
@@ -118,7 +118,7 @@ const ProductDetail = ({ detail }) => {
           </div>
           <div>
             <p>Ban növü</p>
-            <span>Offroader / SUV</span>
+            <span>Offroader / {detail?.body}</span>
           </div>
           <div>
             <p>Vəziyyəti</p>
@@ -135,7 +135,7 @@ const ProductDetail = ({ detail }) => {
           <div>
             <p>Mühərrik</p>
             <span>
-              {detail?.volume } L / {detail?.engine_power} .a.g / Elektro
+              {detail?.volume} L / {detail?.engine_power} .a.g / {detail?.fuel}
             </span>
           </div>
           <div>
