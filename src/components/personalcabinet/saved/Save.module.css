@@ -1,12 +1,12 @@
 .testclass {
   padding: 10px;
   height: 56px;
-  width: 1128px;
+  max-width: 1128px;
+  width: 100%;
   background-color: #F5F5F5;
   display: flex;
-  margin-left: 97px;
   align-items: center;
-
+  margin-bottom: 20px;
 }
 
 .navbar {
@@ -42,23 +42,30 @@
 
 .container {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: repeat(4,1fr);
+  max-width: 1128px;
   width: 100%;
   padding-bottom: 260px;
   align-items: flex-start;
-  gap: 10px;
+  gap: 24px;
   flex-shrink: 0;
   border-radius: 10px;
   row-gap: 80px;
-  margin-left: 13%;
+}
+
+.wrapper{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .card {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 80%;
-  gap: 16px;
+  gap: 14px;
   border-radius: 10px;
   background: #fff;
   padding-bottom: 16px;
