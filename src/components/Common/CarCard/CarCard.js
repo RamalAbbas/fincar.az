@@ -24,7 +24,7 @@ const CarCard = ({ data, callBackSlug }) => {
       toast.success("Silindi.");
     }
   };
-console.log(data);
+  console.log(data);
   return (
     <>
       <div className={styles.card}>
@@ -74,7 +74,7 @@ console.log(data);
             <p className="ml-1">{data?.model.name}</p>
           </h1>
           <p className={styles.totalPrice}>
-            {data?.price_azn}
+            {data?.price}
             <p className="ml-1">{data?.currency}</p>
           </p>
           <h2 className="flex">
