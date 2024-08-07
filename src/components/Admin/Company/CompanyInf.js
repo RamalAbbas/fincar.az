@@ -101,7 +101,7 @@ const CompanyInf = () => {
           <div className={styles.paragraph}>
             <p className={styles.text}>Company information</p>
           </div>
-          <div className={styles.img} onClick={handleImageClick}>
+          <div className={styles.img} onClick={handleImageClick} >
             {image ? (
               <Image src={URL.createObjectURL(image)} width={116} height={116} />
             )
