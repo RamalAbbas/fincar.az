@@ -39,7 +39,7 @@
 }
 
 .footerFirst h1:hover {
-  color: var(--Secondary-05, #3b5191);
+  color: var(--Secondary-05, #F5BD2F);
 }
 .footerFirst h1::after {
   content: '';
@@ -59,7 +59,7 @@
   overflow: hidden;
 }
 .footerFirst h1:hover::after {
-  border-bottom: 2px solid #3b5191;
+  border-bottom: 2px solid #F5BD2F;
 }
 
 .footerFirst {
@@ -131,7 +131,7 @@
 }
 
 .footerRight p:hover {
-  color: var(--Secondary-05, #3b5191);
+  color: var(--Secondary-05, #F5BD2F);
 }
 .footerRight p::after {
   content: '';
@@ -151,7 +151,7 @@
   overflow: hidden;
 }
 .footerRight p:hover::after {
-  border-bottom: 2px solid #3b5191;
+  border-bottom: 2px solid #F5BD2F;
 }
 
 .footerRight img {
