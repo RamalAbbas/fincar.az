@@ -29,9 +29,6 @@ const Sidebar = () => {
             )}
             <a>Change password</a>
           </li>
-          <li className={styles.delete_item}>
-            <a>Delete account</a>
-          </li>
         </ul>
       </nav>
       <div className={styles.border}></div>

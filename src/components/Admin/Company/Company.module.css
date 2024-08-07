@@ -1,56 +1,56 @@
 .container {
   display: flex;
-  flex-direction: column;
-  width: 1132px;
+  gap: 32px;
+  width: 100%;
   padding: 32px;
   border-radius: 10px;
   justify-content: start;
   background: #fff;
   margin-left: 15px;
+  height: 100%;
 }
-.parent{
-   display: grid;
+.parent {
+  display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px; 
+  gap: 24px;
 }
-.main{
+.main {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: -20%;
-  margin-left: 18%;
-  max-width: 100%;
-  left: 20%;
-  
+  width: 100%;
 }
 .paragraph {
-  width: 204px;
+  width: 100%;
   height: 28px;
-  padding: 13px;
-  margin: 5px;
+  margin: 16px;
+}
+
+.content_left{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .text {
-  color: var(--Neutral-Text-Dark, #227FEB);
+  color: var(--Neutral-Text-Dark, #505673);
+
+  /* Body/B1/Semibold */
   font-family: "SF Pro";
-  font-size: 19px;
+  font-size: 18px;
   font-style: normal;
-  font-weight: 700;
-  line-height: 28px;
+  font-weight: 590;
+  line-height: 28px; /* 155.556% */
+  white-space: nowrap;
 }
 
 .img {
   width: 116px;
   flex-shrink: 0;
   border-radius: 10px;
-  border: 1px solid #C6CADC;
- 
-  top: 47px;
-  margin: 32px;
-  left: 65px;
+  border: 1px solid #c6cadc;
   max-height: 200px;
   /* background: url(https://nashuacc.edu/wp-content/uploads/2022/06/Brand-Mark_0703_1.Primary_Brand_Mark_Primary_Vertical.png) lightgray 50% / cover no-repeat; */
-
 }
 
 .url {
@@ -94,7 +94,7 @@
 }
 
 .textt {
-  color: #227FEB;
+  color: #227feb;
   font-family: "SF Pro";
   font-size: 14px;
   font-style: normal;
@@ -113,70 +113,56 @@
   top: -46px;
   gap: 4px;
 }
-.wraperr{
+.wraperr {
   width: 100%;
   padding-left: 13px;
 }
 .inp {
   display: flex;
-  width: 427px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  bottom: 31%;
-  left: 20%;
 }
-
-
 
 .inp3 {
   display: flex;
-  width: 427px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
- 
-  bottom: 27%;
-  left: 20%;
+
 }
 
 .inp4 {
   display: flex;
-  width: 427px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
- 
-  bottom: 84%;
-  left: 42%;
+
 }
 
 .inp5 {
   display: flex;
-  width: 427px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  
-  bottom: 35%;
-  left: 20%;
 }
 
 .inp6 {
   display: flex;
-  width: 427px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
- 
-  bottom: 66%;
-  left: 42%;
 }
 
 .inp7 {
+  margin-top: 30px;
   display: flex;
-  width: 100%;
-  height: 72px;
+  width: 200%;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
@@ -184,11 +170,10 @@
   left: 19%;
 }
 
- .inp7 input::placeholder{
+.inp7 input::placeholder {
   font-size: 14px;
   padding: 1px;
-  
-} 
+}
 
 .username {
   display: flex;
@@ -197,7 +182,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  color: var(--Medium, #878CA8);
+  color: var(--Medium, #878ca8);
 }
 
 .wraper {
@@ -209,8 +194,7 @@
   gap: 8px;
   align-self: stretch;
   border-radius: 10px;
-  border: 1px solid var(--Medium, #878CA8);
-
+  border: 1px solid var(--Medium, #878ca8);
 }
 
 .url {
@@ -220,33 +204,30 @@
 .wraper1 {
   display: flex;
   height: 100px;
-  padding: 75px 24px;
+  padding: 24px 24px;
   align-items: center;
   outline: none;
   gap: 8px;
   align-self: stretch;
   border-radius: 10px;
-  border: 1px solid var(--Medium, #878CA8);
+  border: 1px solid var(--Medium, #878ca8);
 }
 
 .save {
-   width: 136px;
-    height: 48px;
-    left: 957px;
-    bottom: 159px;
-    border: 1px solid black;
-    border-radius: 10px;
-    display: flex;
-    margin-left: 172%;
-    justify-content: center;
-    align-items: center;
-    padding: 12px, 24px, 12px, 24px;
-    background-color: #183178;
-    gap: 8px;
+  width: 136px;
+  height: 48px;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px, 24px, 12px, 24px;
+  background-color: #183178;
+  gap: 8px;
 }
 
 .btn1 {
-  color: var(--Neutral-Lightest, #F5F6FA);
+  color: var(--Neutral-Lightest, #f5f6fa);
   font-family: "SF Pro";
   font-size: 16px;
   font-style: normal;
@@ -266,4 +247,12 @@
   .container {
     display: none;
   }
+}
+
+
+.saveBody{
+  width: 200%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 50px;
 }
