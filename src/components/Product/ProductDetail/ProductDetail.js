@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./ProductDetail.module.css";
 import PaymentModal from "../../../components/Common/PaymentModal/PaymentModal";

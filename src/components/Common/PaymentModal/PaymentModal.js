@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { handlePaymentModal } from "../../../redux/features/paymentModalSlice";
 import styles from "./PaymentModal.module.css";
 import Image from "next/image";
-import xmark from "../../../assets/icons/xmark.svg";
+import xmark from "../../../assets/icons/mark.svg";
 import { carLoanCalculation } from "../../../services";
 
 const PaymentModal = ({ data }) => {
   const [payments, setPayments] = useState([]);
-  const [initialPayment, setInitialPayment] = useState(""); // State for initial payment
-  const [error, setError] = useState(""); // State for validation error
+  const [initialPayment, setInitialPayment] = useState(""); 
+  const [error, setError] = useState(""); 
   const isActivePaymentModal = useSelector(
     (state) => state.paymentModal.isActivePaymentModal
   );
