@@ -9,11 +9,12 @@ import { carLoanCalculation } from "../../../services";
 
 const PaymentModal = ({ data }) => {
   const [payments, setPayments] = useState([]);
-  const [initialPayment, setInitialPayment] = useState(""); 
-  const [error, setError] = useState(""); 
+  const [error, setError] = useState("");
+  const [initialPrice, setInitialPrice] = useState(0);
   const isActivePaymentModal = useSelector(
     (state) => state.paymentModal.isActivePaymentModal
   );
+  const [firstPayment, setFirstPayment] = useState(0);
 
   const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState("");
@@ -26,33 +27,39 @@ const PaymentModal = ({ data }) => {
     setSelectedOption(e.target.value);
     let info = {
       car_slug: data?.slug,
-      loan_term: e.target.value,
+      initial_payment: initialPrice,
     };
     const response = await carLoanCalculation(info);
+
     let item = response?.details?.filter((item) => item.term == e.target.value);
-    console.log(item);
+
+    setFirstPayment(item[0].initial_payment_azn);
     setPayments(item[0]);
   };
 
   const handleInitialPaymentChange = async (e) => {
     const value = e.target.value;
-    setInitialPayment(value);
 
-    if (value < data?.payment?.details[2]?.initial_payment_azn) {
-      setError(
-        `İlkin ödəniş minimum ${data?.payment?.details[2]?.initial_payment_azn} olmalıdır.`
-      );
+    if (value < firstPayment) {
+      setError(`İlkin ödəniş minimum ${firstPayment} olmalıdır.`);
+    } else if (value > data?.price) {
+      setError(`İlkin ödəniş maksimum ${data?.price} olmalıdır.`);
     } else {
       setError("");
+      setInitialPrice(value);
       let info = {
         car_slug: data?.slug,
-        initial_payment: e.target.value,
+        initial_payment: value,
       };
       const response = await carLoanCalculation(info);
-      console.log(response);
+
+      let item = response?.details?.filter(
+        (item) => item.term == payments.term
+      );
+      setPayments(item[0]);
     }
   };
-
+  console.log(data);
   return (
     <div
       className={`${!isActivePaymentModal && "!translate-y-[-40px]"} ${
@@ -79,9 +86,9 @@ const PaymentModal = ({ data }) => {
           <label>İlkin ödəniş</label>
           <input
             type="number"
-            placeholder={data?.payment?.details[2]?.initial_payment_azn}
-            value={initialPayment}
+            placeholder={firstPayment}
             onChange={handleInitialPaymentChange}
+            max={data?.price}
           />
           {error && <p className={styles.error}>{error}</p>}{" "}
         </div>
@@ -106,13 +113,14 @@ const PaymentModal = ({ data }) => {
         <div className={styles.firstPrice}>
           <p>Aylıq məbləğ</p>{" "}
           <span>
-            {payments?.monthly_payment_azn ? payments?.monthly_payment_azn : 0}
+            {payments?.monthly_payment_azn ? payments?.monthly_payment_azn.toFixed(0)  : 0}
+            
             AZN
           </span>
         </div>
         <div className={styles.secondPrice}>
           <p>Ümumi məbləğ</p>{" "}
-          <span>{payments?.total ? payments?.total : 0}AZN</span>
+          <span>{payments?.total ? payments?.total.toFixed(0) : 0}AZN</span>
         </div>
       </div>
       <div className="bg-[#DADEF2] w-full h-[1px] mt-[16px]"></div>
