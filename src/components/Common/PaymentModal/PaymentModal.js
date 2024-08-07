@@ -9,12 +9,13 @@ import { carLoanCalculation } from "../../../services";
 
 const PaymentModal = ({ data }) => {
   const [payments, setPayments] = useState([]);
+  const [initialPayment, setInitialPayment] = useState(""); // State for initial payment
+  const [error, setError] = useState(""); // State for validation error
   const isActivePaymentModal = useSelector(
     (state) => state.paymentModal.isActivePaymentModal
   );
 
   const dispatch = useDispatch();
-
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleClickPaymentModal = () => {
@@ -31,6 +32,25 @@ const PaymentModal = ({ data }) => {
     let item = response?.details?.filter((item) => item.term == e.target.value);
     console.log(item);
     setPayments(item[0]);
+  };
+
+  const handleInitialPaymentChange = async (e) => {
+    const value = e.target.value;
+    setInitialPayment(value);
+
+    if (value < data?.payment?.details[2]?.initial_payment_azn) {
+      setError(
+        `İlkin ödəniş minimum ${data?.payment?.details[2]?.initial_payment_azn} olmalıdır.`
+      );
+    } else {
+      setError("");
+      let info = {
+        car_slug: data?.slug,
+        initial_payment: e.target.value,
+      };
+      const response = await carLoanCalculation(info);
+      console.log(response);
+    }
   };
 
   return (
@@ -57,7 +77,13 @@ const PaymentModal = ({ data }) => {
       <div className={styles.inputContainer}>
         <div className="w-full">
           <label>İlkin ödəniş</label>
-          <input type="number" placeholder="$ 12.000" min="12000" />
+          <input
+            type="number"
+            placeholder={data?.payment?.details[2]?.initial_payment_azn}
+            value={initialPayment}
+            onChange={handleInitialPaymentChange}
+          />
+          {error && <p className={styles.error}>{error}</p>}{" "}
         </div>
         <div className="w-full">
           <label>Kreditin müddəti</label>
@@ -90,9 +116,14 @@ const PaymentModal = ({ data }) => {
         </div>
       </div>
       <div className="bg-[#DADEF2] w-full h-[1px] mt-[16px]"></div>
+
       <div className={styles.contactFooter}>
         <label>Ad, soyad, ata adı</label>
         <input type="text" placeholder="Rahila Mammadli Raşad" />
+      </div>
+      <div className={styles.contactFooter}>
+        <label>Əlaqə Nömrəsi</label>
+        <input type="number" placeholder="+994 50 555 55 55" />
       </div>
       <div className={styles.contactFooter}>
         <label>Email</label>

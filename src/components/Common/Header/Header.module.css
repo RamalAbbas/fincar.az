@@ -75,7 +75,7 @@
 }
 
 .headerContainer a:hover {
-  color: var(--Secondary-05, #3b5191);
+  color: var(--Secondary-05, #f5bd2f);
 }
 .headerContainer a::after {
   content: "";
@@ -95,7 +95,7 @@
   overflow: hidden;
 }
 .headerContainer a:hover::after {
-  border-bottom: 2px solid #3b5191;
+  border-bottom: 2px solid #f5bd2f;
 }
 
 .language {

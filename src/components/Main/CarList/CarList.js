@@ -4,12 +4,16 @@ import styles from "./CarList.module.css";
 import CarCard from "../../Common/CarCard/CarCard";
 import { useRouter } from "next/navigation";
 
-const CarList = ({ cars }) => {
+const CarList = ({ cars , renderProduct }) => {
   const { push } = useRouter();
 
   const callBackSlug = (slug) => {
     push(`/product/${slug}`);
   };
+
+  const renderProducts = () => {
+    renderProduct()
+  }
   return (
     <>
       <div className={styles.widhtLimitContainerLarge}>
@@ -18,7 +22,7 @@ const CarList = ({ cars }) => {
         >
           <div className={styles.carList}>
             {cars?.map((info, index) => (
-              <CarCard key={index} callBackSlug={callBackSlug} data={info} />
+              <CarCard key={index} callBackSlug={callBackSlug} data={info} renderProducts={renderProducts} />
             ))}
 
             {cars?.length == 0 ? <p className={styles.noData}>No Data</p> : <></>}

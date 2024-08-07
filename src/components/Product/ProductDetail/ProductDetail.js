@@ -54,7 +54,6 @@ const ProductDetail = ({ detail }) => {
       );
     }
   }, [detail]);
-  console.log(detail);
   return (
     <div className={`${styles.productDetailContainer}`}>
       <div className={styles.title}>
@@ -149,7 +148,7 @@ const ProductDetail = ({ detail }) => {
             </span>
           </div>
         </div>
-        <button onClick={() => handleClickPaymentModal()}>Hesabla</button>
+        <button onClick={() => handleClickPaymentModal()}>Ətrafli Hesabla</button>
         <div
           onClick={handleClickOutside}
           className={`${styles.paymentModal} ${

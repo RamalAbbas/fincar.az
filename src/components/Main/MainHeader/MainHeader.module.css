@@ -68,7 +68,7 @@
 }
 
 .leftLogo a:hover {
-  color: #3b5191;
+  color: #f5bd2f;
 }
 .leftLogo a::after {
   content: "";
@@ -88,7 +88,7 @@
   overflow: hidden;
 }
 .leftLogo a:hover::after {
-  border-bottom: 2px solid rgb(59, 81, 145);
+  border-bottom: 2px solid #f5bd2f;
 }
 .rightNav {
   display: flex;
@@ -130,7 +130,7 @@
 }
 
 .rightNav a:hover {
-  color: #3b5191;
+  color: #f5bd2f;
 }
 .rightNav a::after {
   content: "";
@@ -150,7 +150,7 @@
   overflow: hidden;
 }
 .rightNav a:hover::after {
-  border-bottom: 2px solid rgb(59, 81, 145);
+  border-bottom: 2px solid #f5bd2f;
 }
 
 .languageDivar {

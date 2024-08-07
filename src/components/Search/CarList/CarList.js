@@ -4,12 +4,16 @@ import { useRouter } from "next/navigation";
 import styles from "./CarList.module.css";
 import Card from "../Card/Card";
 
-const CarList = ({ cars, isLoading }) => {
+const CarList = ({ cars, isLoading , renderProduct }) => {
   const { push } = useRouter();
 
   const callBackSlug = (slug) => {
     push(`/product/${slug}`);
   };
+
+  const renderProducts = () => {
+    renderProduct()
+  }
 
   
 
@@ -19,7 +23,7 @@ const CarList = ({ cars, isLoading }) => {
         {isLoading ? <span className={styles.loader}></span> : null}
 
         {cars?.map((info, index) => (
-          <Card key={index} callBackSlug={callBackSlug} data={info} />
+          <Card renderProducts={renderProducts} key={index} callBackSlug={callBackSlug} data={info} />
         ))}
 
         {cars?.length === 0 && !isLoading ? (

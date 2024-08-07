@@ -30,6 +30,10 @@ const page = ({ params }) => {
     getCarsData()
   }, [])
 
+  const renderProduct = () => {
+    getCarsData()
+  }
+
   return (
     <div>
       <BreadCrumb
@@ -42,7 +46,7 @@ const page = ({ params }) => {
       />
       <div className="lg:hidden">
         <Profile dealerdetail={dealerDetail}/>
-        <ProductList dealerdetail={dealerDetail}/>
+        <ProductList renderProduct={renderProduct} dealerdetail={dealerDetail}/>
       </div>
       {/* mobile design start*/}
       <div className="min-lg:hidden pb-[40px]">

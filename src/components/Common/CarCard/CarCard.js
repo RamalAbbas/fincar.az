@@ -9,22 +9,17 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const CarCard = ({ data, callBackSlug }) => {
+const CarCard = ({ data, callBackSlug , renderProducts }) => {
   const { push } = useRouter();
   const saveCarFunction = async () => {
     const response = await carSave({ car: data.id });
-    if (!!response) {
-      toast.success("Elave Olundu");
-    }
+    renderProducts()
   };
 
   const deleteCarFunction = async () => {
     const response = await deleteSavedCar(data.id);
-    if (response.length == 0) {
-      toast.success("Silindi.");
-    }
+    renderProducts()
   };
-  console.log(data);
   return (
     <>
       <div className={styles.card}>
@@ -73,17 +68,17 @@ const CarCard = ({ data, callBackSlug }) => {
             {data?.make.name}
             <p className="ml-1">{data?.model.name}</p>
           </h1>
-          <p className={styles.totalPrice}>
+          <div className={styles.totalPrice}>
             {data?.price}
-            <span className="ml-1">{data?.currency}</span>
-          </p>
+            <p className="ml-1">{data?.currency}</p>
+          </div>
           <h2 className="flex">
-            {data?.year}
-            <span className="ml-1">{data?.volume}L</span>
-            <span className="ml-1">
+            {data?.year}, 
+            <p className="ml-1">{data?.volume}L</p>, 
+            <p className="ml-1">
               {data?.distance}
               {data?.distance_unit}
-            </span>
+            </p>
           </h2>
         </div>
       </div>

@@ -27,11 +27,15 @@ const page = () => {
   const filterData = (items) => {
     setCars(items);
   };
+
+  const renderProduct = () => {
+    getCarsData()
+  }
   return (
     <>
       <MainHeader filterData={filterData} />
       <Popular />
-      <CarList cars={cars} />
+      <CarList renderProduct={renderProduct} cars={cars} />
       <div className="pb-[90px] min-lg:hidden">
         <MobileCarList title="Popular maşınlar" />
         <MobileCarList title="Son elanlar" />
