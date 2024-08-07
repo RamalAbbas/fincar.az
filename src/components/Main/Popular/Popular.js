@@ -107,6 +107,10 @@ const Popular = () => {
     push(`/product/${slug}`);
   };
 
+  const renderProducts = () => {
+    getPopularsCarsData()
+  }
+
   return (
     <>
       <div className={styles.widhtLimitContainerLarge}>
@@ -130,7 +134,7 @@ const Popular = () => {
             <Slider ref={sliderRef} {...settings}>
               {popularCars?.map((info, index) => (
                 <div className="px-[12px]" key={index}>
-                  <CarCard callBackSlug={callBackSlug} data={info} />
+                  <CarCard renderProducts={renderProducts} callBackSlug={callBackSlug} data={info} />
                 </div>
               ))}
             </Slider>

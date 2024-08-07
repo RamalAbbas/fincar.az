@@ -32,6 +32,11 @@ const OtherCars = () => {
   const callBackSlug = (slug) => {
     push(`/product/${slug}`);
   }
+
+  const renderProducts = () => {
+    getCarsData()
+  }
+
   return (
     <div className={`${styles.widhtLimitContainerLarge} lg:hidden`}>
       <div
@@ -41,7 +46,7 @@ const OtherCars = () => {
         <div className="flex justify-between items-center gap-[24px] w-full mt-[24px]">
               {
                 cars?.slice(0,4)?.map((info,index) => 
-                  <CarCard key={index} callBackSlug={callBackSlug} data={info} />
+                  <CarCard renderProducts={renderProducts} key={index} callBackSlug={callBackSlug} data={info} />
                 )
               }
         </div>

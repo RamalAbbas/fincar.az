@@ -6,24 +6,19 @@ import { carSave, deleteSavedCar } from "../../../services";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 
-const Card = ({ data, callBackSlug }) => {
+const Card = ({ data, callBackSlug, renderProducts }) => {
   const { slug, cover, make, model } = data;
-
   const { push } = useRouter();
+
   const saveCarFunction = async () => {
     const response = await carSave({ car: data.id });
-    if (!!response) {
-      toast.success("Elave Olundu");
-    }
+    renderProducts();
   };
 
   const deleteCarFunction = async () => {
     const response = await deleteSavedCar(data.id);
-    if (response.length == 0) {
-      toast.success("Silindi.");
-    }
+    renderProducts();
   };
-
 
   return (
     <div className={styles.product}>

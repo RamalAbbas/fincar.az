@@ -43,11 +43,15 @@ const Main = ({ params }) => {
     getCarsData();
   }, []);
 
+  const renderProduct = () => {
+    getCarsData()
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <FilterBox filterData={filterData} carfeature={carFeature} />
-        <CarList isLoading={isLoading} cars={cars} />
+        <CarList isLoading={isLoading} cars={cars} renderProduct={renderProduct} />
       </div>
     </div>
   );

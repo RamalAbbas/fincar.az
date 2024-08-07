@@ -17,18 +17,21 @@ import car6 from '../../../assets/images/carCardExample/car4.png'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react';
 
-const ProductList = ({dealerdetail}) => {
+const ProductList = ({dealerdetail,renderProduct}) => {
   const { push } = useRouter();
   console.log(dealerdetail)
   const callBackSlug = (slug) => {
     push(`/product/${slug}`);
+  }
+  const renderProducts = () => {
+    renderProduct()
   }
   return (
     <div className={styles.px}>
       {
             dealerdetail?.cars?.map((info,index) => (
       <div className={styles.titleContainer}>
-      <CarCard key={index} callBackSlug={callBackSlug} data={info}/>
+      <CarCard renderProducts={renderProducts} key={index} callBackSlug={callBackSlug} data={info}/>
       </div>
             ))
           }
