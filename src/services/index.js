@@ -220,6 +220,19 @@ export const dealerDetailSlug = async (slug) => {
   }
 };
 
+export const getDealerInfo = async (token) => {
+  try {
+    const response = await instanceAxios.get(`dealer/detail`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
 export const dealerDetail = async () => {
   try {
     const response = await instanceAxios.get(`dealer/list`);
