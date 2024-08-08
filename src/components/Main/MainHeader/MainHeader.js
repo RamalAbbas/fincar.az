@@ -23,6 +23,7 @@ const Title = ({ filterData }) => {
   const { push } = useRouter();
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
+  const [isMenu, setIsMenu] = useState(false);
 
   const [selectedBrandFilter, setSelectedBrandFilter] = useState("");
   const [selectedModelFilter, setSelectedModelFilter] = useState("");
@@ -158,7 +159,10 @@ const Title = ({ filterData }) => {
     const response = await getCarFilter(queryString);
     filterData(response);
   };
-  console.log(models);
+  const exitFunction = () => {
+    Cookies.remove("data");
+    push("/signin");
+  };
   return (
     <section>
       <div
@@ -177,9 +181,23 @@ const Title = ({ filterData }) => {
                 AZ
                 <Image src={azFlag} width={20} height={15} alt="header-bg" />
               </div>
-              <button onClick={handleSend}>
-                {data?.username ? data?.username : "Daxil ol"}
-              </button>
+              <div
+                onMouseEnter={() => setIsMenu(true)}
+                onMouseLeave={() => setIsMenu(false)}
+                className={styles.user_body}
+              >
+                <button onClick={handleSend}>
+                  {data?.username ? data.username : "Daxil ol"}
+                </button>
+                {isMenu && data.username ? (
+                  <div className={styles.user_menu}>
+                    <p onClick={() => push("/personalcabinet")}>User account</p>
+                    <p onClick={exitFunction}>Exit</p>
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
           </nav>
           <h1 className={styles.desc}>Xəyalınızın maşınına bizlə sahib olun</h1>

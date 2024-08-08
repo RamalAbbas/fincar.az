@@ -7,12 +7,13 @@ import Image from "next/image";
 import { useState } from "react";
 import { login } from "../../../services";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 const Signin = () => {
   const { push } = useRouter();
   const [data, setData] = useState({
     fin: "",
-    phone: 0,
+    phone: "",
   });
 
   const handleInputChange = (e) => {
@@ -21,19 +22,21 @@ const Signin = () => {
       [e.target.name]: e.target.value,
     }));
   };
-console.log(data);
 
   const sendRequest = async () => {
     if (Object.values(data).some((value) => value === "")) {
-      console.log("Please fill in all fields.");
+      toast.error("İnputlari doldrun !");
     } else {
       const res = await login(data);
-      console.log(data);
-      console.log(res);
       if (res?.status == 200) {
+        toast.success("Login Olundu");
         Cookies.set("data", JSON.stringify(res?.data));
 
-        push("/main");
+        setTimeout(() => {
+          push("/main");
+        }, 1000);
+      } else {
+        toast.error("Yanliş Fin code və ya nömrə !");
       }
     }
   };

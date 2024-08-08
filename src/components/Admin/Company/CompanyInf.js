@@ -12,14 +12,14 @@ import {
   getDealerInfo,
 } from "../../../services";
 import { useRef, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 const CompanyInf = () => {
   const inputRef = useRef(null);
   const [cities, setCities] = useState([]);
 
-  //add remove
   const [inputFields, setInputFields] = useState([{ value: "" }]);
   const [dealerInfo, setDealerInfo] = useState([]);
-  //
+
   const [data, setData] = useState({
     name: "",
     opening_time: "",
@@ -51,8 +51,11 @@ const CompanyInf = () => {
       ? JSON.parse(Cookies.get("admin_data")).access_token
       : "";
     const res = await adminDealerUptade(data, token);
-    console.log(res);
-    console.log(data);
+    if(!!res){
+      toast.success("Salon yeniləndi")
+    }else{
+      toast.error("Düzgün Məlumat Daxil edin")
+    }
   };
 
   const renderDetailInfo = async () => {
@@ -66,7 +69,6 @@ const CompanyInf = () => {
   useEffect(() => {
     renderDetailInfo();
   }, []);
-  console.log(dealerInfo);
 
   return (
     <>

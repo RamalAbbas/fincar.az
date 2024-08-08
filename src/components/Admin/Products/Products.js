@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { dealerDetailSlug, deleteCar } from "../../../services";
+import { toast } from "react-toastify";
 
 const Products = () => {
   const { push } = useRouter();
@@ -14,8 +15,8 @@ const Products = () => {
   const [data, setData] = useState([]);
   const [slug, setSlug] = useState("");
   const token = Cookies.get("admin_data")
-      ? JSON.parse(Cookies.get("admin_data")).access_token
-      : "";
+    ? JSON.parse(Cookies.get("admin_data")).access_token
+    : "";
   const renderProducts = async () => {
     const slug = Cookies.get("admin_data")
       ? JSON.parse(Cookies.get("admin_data")).slug
@@ -35,9 +36,15 @@ const Products = () => {
   };
 
   const deleteCard = async () => {
-    const res = await deleteCar(slug,token);
-    setDeleteModal(false)
-    renderProducts()
+    const res = await deleteCar(slug, token);
+    console.log(!res);
+    if (!res) {
+      toast.success("Silindi");
+      renderProducts();
+    } else {
+      toast.error("Silinmədi !");
+    }
+    setDeleteModal(false);
   };
 
   return (
@@ -110,7 +117,7 @@ const Products = () => {
               />
             </div>
             <p className={styles.name}>
-              {item?.make?.name} {item?.model?.name} {item?.volume} L <br />{" "}
+              {item?.make?.name} {item?.model?.name}, {item?.volume} L,{" "}
               {item?.year} il, {item?.distance} {item?.distance_unit}
             </p>
             <p className={styles.history}>{item?.year}</p>

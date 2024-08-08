@@ -20,6 +20,7 @@ const Header = ({ isSaved, isNotification }) => {
   const pathname = usePathname();
   const [isNotificationHover, setIsNotificationHover] = useState(false);
   const [data, setData] = useState([]);
+  const [isMenu, setIsMenu] = useState(false);
   useEffect(() => {
     Cookies.get("data") == undefined
       ? console.log("undefined")
@@ -31,6 +32,12 @@ const Header = ({ isSaved, isNotification }) => {
       push("/signin");
     }
   };
+
+  const exitFunction = () => {
+    Cookies.remove("data");
+    push("/signin");
+  };
+
   return (
     <div>
       {pathname !== "/main" &&
@@ -100,9 +107,25 @@ const Header = ({ isSaved, isNotification }) => {
                       </div>
                     )}
 
-                    <button onClick={handleSend}>
-                      {data?.username ? data.username : "Daxil ol"}
-                    </button>
+                    <div
+                      onMouseEnter={() => setIsMenu(true)}
+                      onMouseLeave={() => setIsMenu(false)}
+                      className={styles.user_body}
+                    >
+                      <button onClick={handleSend}>
+                        {data?.username ? data.username : "Daxil ol"}
+                      </button>
+                      {isMenu && data.username ? (
+                        <div className={styles.user_menu}>
+                          <p onClick={() => push("/personalcabinet")}>
+                            User account
+                          </p>
+                          <p onClick={exitFunction}>Exit</p>
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

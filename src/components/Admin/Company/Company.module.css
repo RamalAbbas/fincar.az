@@ -177,7 +177,6 @@
 
 .username {
   display: flex;
-  width: 427px;
   padding: 0px 16px;
   flex-direction: column;
   align-items: flex-start;

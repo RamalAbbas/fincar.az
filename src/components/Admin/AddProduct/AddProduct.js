@@ -13,6 +13,7 @@ import {
   carFeatureListDrive,
 } from "../../../services";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 const AddProduct = () => {
   const handleCheckboxChange = (e) => {
@@ -60,15 +61,15 @@ const AddProduct = () => {
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setImagePreview(imageUrl);
-      setIsImageUploaded(true);
 
-      // Save the file in the state if needed
+    if (file) {
+      // const imageUrl = URL.createObjectURL(file);
+      // setImagePreview(imageUrl);
+      // setIsImageUploaded(true);
+
       setState((prevData) => ({
         ...prevData,
-        uploaded_images: file,
+        uploaded_images: {...event.target.files},
       }));
     }
   };
@@ -93,6 +94,11 @@ const AddProduct = () => {
 
     try {
       const res = await createCar(state, token);
+      if (!!res) {
+        toast.success("Maşin Əlavə Olundu .");
+      } else {
+        toast.error("Düzgün Melumat Daxil Edin");
+      }
       console.log(res, state);
     } catch (error) {
       console.error("API call failed:", error);
