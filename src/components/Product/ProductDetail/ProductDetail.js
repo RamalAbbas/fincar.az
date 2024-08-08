@@ -49,7 +49,7 @@ const ProductDetail = ({ detail }) => {
   useEffect(() => {
     if (detail?.payment?.details[1]) {
       setInitialPayment(
-        detail?.payment?.details[1]?.initial_payment_azn.toFixed(0)
+        detail?.payment?.details[1]?.initial_payment_azn?.toFixed(0)
       );
     }
   }, [detail]);
@@ -78,7 +78,9 @@ const ProductDetail = ({ detail }) => {
           </div>
           <div className={styles.price_box}>
             <p>Aylıq ödəniş</p>
-            <p className={styles.mounthlyPrice}>{mounthlyPayment}</p>
+            <p className={styles.mounthlyPrice}>
+              {mounthlyPayment?.toFixed(0)}
+            </p>
           </div>
         </div>
         <div className={styles.details}>
@@ -147,7 +149,9 @@ const ProductDetail = ({ detail }) => {
             </span>
           </div>
         </div>
-        <button onClick={() => handleClickPaymentModal()}>Ətrafli Hesabla</button>
+        <button onClick={() => handleClickPaymentModal()}>
+          Ətrafli Hesabla
+        </button>
         <div
           onClick={handleClickOutside}
           className={`${styles.paymentModal} ${

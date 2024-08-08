@@ -251,3 +251,35 @@
 .item:last-child {
   border-bottom: none;
 }
+
+.user_body {
+  position: relative;
+}
+
+.user_menu {
+  position: absolute;
+  background: #f5f6fa;
+  padding: 0px 12px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  top: 37px;
+  left: -30px;
+  z-index: 1012120;
+
+}
+
+.user_menu p {
+  color: var(--Neutral-Text-Dark, #505673);
+
+  /* Body/B2/Medium */
+  font-family: "SF Pro";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 24px; /* 150% */
+  padding: 12px 24px;
+  width: 100%;
+  white-space: nowrap;
+  cursor: pointer;
+}

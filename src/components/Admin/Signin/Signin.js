@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { dealerLogin } from "../../../services";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 const Signin = () => {
   const { push } = useRouter();
@@ -24,15 +25,19 @@ const Signin = () => {
 
   const sendRequest = async () => {
     if (Object.values(data).some((value) => value === "")) {
-      console.log("Please fill in all fields.");
+      toast.error("İnputlari doldrun !");
     } else {
       const res = await dealerLogin(data);
-      console.log(res);
 
       if (res?.status == 200) {
+        toast.success("Daxil Olundu");
         Cookies.set("admin_data", JSON.stringify(res?.data));
 
-        push("/admin/company_information");
+        setTimeout(() => {
+          push("/admin/company_information");
+        }, 1000);
+      } else {
+        toast.error("Yanliş ad vəya şifrə !");
       }
     }
   };
