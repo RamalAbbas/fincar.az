@@ -25,6 +25,9 @@
 }
 
 @media (max-width: 1080px) {
+  .productContainer {
+    display: none;
+  }
 }
 
 @media (max-width: 468px) {

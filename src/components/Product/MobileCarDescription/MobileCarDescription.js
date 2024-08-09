@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import styles from './MobileCarDescription.module.css'
 
-const MobileCarDescription = () => {
+const MobileCarDescription = ({optionals}) => {
   const [appealDiv, setApeealDiv] = useState(false)
 
   const toggleButtonVisibility = () => {
@@ -54,11 +54,11 @@ const MobileCarDescription = () => {
           appealDiv ? 'max-h-[1500px]' : 'max-h-[358px] '
         } overflow-hidden`}
       >
-        {appeals.map((appeal, index) => (
-          <span key={index}>{appeal}</span>
+        {optionals?.map((item, index) => (
+          <span key={index}>{item.name}</span>
         ))}
       </div>
-      {appeals.length > 15 && (
+      {optionals?.length > 15 && (
         <p onClick={toggleButtonVisibility}>
           {appealDiv ? 'Close' : 'Read more'}
         </p>

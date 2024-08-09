@@ -5,7 +5,8 @@ import { handlePaymentModal } from "../../../redux/features/paymentModalSlice";
 import styles from "./PaymentModal.module.css";
 import Image from "next/image";
 import xmark from "../../../assets/icons/mark.svg";
-import { carLoanCalculation } from "../../../services";
+import { carLoanCalculation, carLoanRequest } from "../../../services";
+import { toast } from "react-toastify";
 
 const PaymentModal = ({ data }) => {
   const [payments, setPayments] = useState([]);
@@ -14,6 +15,11 @@ const PaymentModal = ({ data }) => {
   const isActivePaymentModal = useSelector(
     (state) => state.paymentModal.isActivePaymentModal
   );
+  const [requestData, setRequestData] = useState({
+    phone: "",
+    email: "",
+    full_name: "",
+  });
   const [firstPayment, setFirstPayment] = useState(0);
 
   const dispatch = useDispatch();
@@ -59,7 +65,29 @@ const PaymentModal = ({ data }) => {
       setPayments(item[0]);
     }
   };
-  console.log(data);
+
+  const handleInputChange = (e) => {
+    setRequestData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const requestFunction = async () => {
+    const info = {
+      car_slug: data?.slug,
+      full_name: requestData.full_name,
+      phone: requestData.phone,
+      email: requestData.email,
+    };
+    const res = await carLoanRequest(info);
+    if (!!res) {
+      toast.success("Mürəaciət olundu");
+    } else {
+      toast.error("Zəhmət olmasa Düzgün Məlumat Daxil Edin !");
+    }
+  };
+
   return (
     <div
       className={`${!isActivePaymentModal && "!translate-y-[-40px]"} ${
@@ -113,8 +141,9 @@ const PaymentModal = ({ data }) => {
         <div className={styles.firstPrice}>
           <p>Aylıq məbləğ</p>{" "}
           <span>
-            {payments?.monthly_payment_azn ? payments?.monthly_payment_azn.toFixed(0)  : 0}
-            
+            {payments?.monthly_payment_azn
+              ? payments?.monthly_payment_azn.toFixed(0)
+              : 0}
             AZN
           </span>
         </div>
@@ -127,17 +156,35 @@ const PaymentModal = ({ data }) => {
 
       <div className={styles.contactFooter}>
         <label>Ad, soyad, ata adı</label>
-        <input type="text" placeholder="Rahila Mammadli Raşad" />
+        <input
+          type="text"
+          placeholder="Rahila Mammadli Raşad"
+          name="full_name"
+          value={requestData.full_name}
+          onChange={handleInputChange}
+        />
       </div>
       <div className={styles.contactFooter}>
         <label>Əlaqə Nömrəsi</label>
-        <input type="number" placeholder="+994 50 555 55 55" />
+        <input
+          type="number"
+          placeholder="+994 50 555 55 55"
+          name="phone"
+          value={requestData.phone}
+          onChange={handleInputChange}
+        />
       </div>
       <div className={styles.contactFooter}>
         <label>Email</label>
-        <input type="mail" placeholder="mmdvrhle@gmail.com" />
+        <input
+          type="mail"
+          placeholder="mmdvrhle@gmail.com"
+          name="email"
+          value={requestData.email}
+          onChange={handleInputChange}
+        />
       </div>
-      <button>Müraciət et</button>
+      <button onClick={requestFunction}>Müraciət et</button>
     </div>
   );
 };

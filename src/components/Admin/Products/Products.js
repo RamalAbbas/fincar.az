@@ -22,7 +22,6 @@ const Products = () => {
       ? JSON.parse(Cookies.get("admin_data")).slug
       : "";
     const res = await dealerDetailSlug(slug);
-    console.log(res?.cars);
     setData(res);
   };
 
@@ -37,7 +36,6 @@ const Products = () => {
 
   const deleteCard = async () => {
     const res = await deleteCar(slug, token);
-    console.log(!res);
     if (!res) {
       toast.success("Silindi");
       renderProducts();
@@ -46,6 +44,10 @@ const Products = () => {
     }
     setDeleteModal(false);
   };
+
+  const editProductFunction = (slug) => {
+    push(`/admin/edit_product/${slug}`)
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -125,7 +127,7 @@ const Products = () => {
 
             {isActiveCrud ? (
               <div className={styles.crudBody}>
-                <div className={styles.editButton}>Edit product</div>
+                <div onClick={() => editProductFunction(item.slug)} className={styles.editButton}>Edit product</div>
                 <div
                   onClick={() => handleDelete(item.slug)}
                   className={styles.deleteButton}

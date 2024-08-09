@@ -57,7 +57,8 @@ const ProductDetail = ({ detail }) => {
     <div className={`${styles.productDetailContainer}`}>
       <div className={styles.title}>
         <span>
-          {detail?.make?.name} {detail?.model?.name}
+          {detail?.make?.name} {detail?.model?.name}, {detail?.volume} L,{" "}
+          {detail?.year} il, {detail?.distance} {detail?.distance_unit}
         </span>
         <p className="mt-3">İlkin ödəniş - {initialPayment} ₼ </p>
         <p className={styles.price_azn}>{detail?.price_azn} AZN</p>

@@ -27,7 +27,6 @@ const ProductPage = ({ params }) => {
     getProductInfo();
   }, []);
 
-  console.log(data);
   return (
     <>
       <BreadCrumb items={["Homepage", "Product page"]} />
@@ -48,10 +47,10 @@ const ProductPage = ({ params }) => {
       <OtherCars />
       {/* mobile design start*/}
       <div className="min-lg:hidden pb-[40px]">
-        <MobileCarImgSlider />
-        <MobileCarDetail />
-        <MobileCarDescription />
-        <MobileCarProfile />
+        <MobileCarImgSlider images={data?.images} />
+        <MobileCarDetail detail={data} />
+        <MobileCarDescription optionals={data?.optionals} />
+        <MobileCarProfile detail={data} />
         <div className="px-[15px]">
           <div className="w-full bg-[#DADEF2] h-[1px]"></div>
         </div>
