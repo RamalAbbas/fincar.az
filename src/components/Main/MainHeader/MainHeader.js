@@ -19,7 +19,7 @@ import {
   getCarFilter,
 } from "../../../services";
 
-const Title = ({ filterData }) => {
+const Title = ({ filterData}) => {
   const { push } = useRouter();
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
@@ -121,9 +121,7 @@ const Title = ({ filterData }) => {
       push("/signin");
     }
   };
-  const callBackSlug = (slug) => {
-    push(`/search/${slug}`);
-  };
+
   const getCarFeatureData = async () => {
     const response = await getCarFeature();
     console.log(response);
@@ -332,7 +330,7 @@ const Title = ({ filterData }) => {
               <h1>Fincar.az</h1>
             </a>
             <div className={styles.mobileList}>
-              <div className="mt-[18px]" >
+              <div className="mt-[18px]">
                 <a  onClick={() => push("/search")}>
                   <span>Bütün elanlar</span>
                 </a>
@@ -358,7 +356,7 @@ const Title = ({ filterData }) => {
               </div>
               <div className="mt-[18px]">
                 <div className="flex justify-between items-center">
-                  <a onClick={() => push("/personalcabinet")}>
+                  <a  onClick={() => push("/personalcabinet")}>
                     <span>Şəxsi kabinet</span>
                   </a>
                   <div>
@@ -404,12 +402,11 @@ const Title = ({ filterData }) => {
                 onChange={(e) => setSelectedBrandFilter(e.target.value)}
               >
                 <option value="" disabled hidden>
-                  Marka
+                Marka
                 </option>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
+              
+                
+            
               </select>
             </div>
             <div className="mt-[16px]">
