@@ -68,7 +68,7 @@ const Profile = ({ dealerdetail }) => {
             />
             <div>
               <p className=" text-[#505673]">
-                Bakı ş., Xətai r., Babək pr., 74
+                {dealerdetail?.addresss}
               </p>
             </div>
           </div>

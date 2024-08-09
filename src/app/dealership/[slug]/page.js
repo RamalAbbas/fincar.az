@@ -50,9 +50,9 @@ const page = ({ params }) => {
       </div>
       {/* mobile design start*/}
       <div className="min-lg:hidden pb-[40px]">
-        <MobileCarProfile />
-        <MobileDealershipContact />
-        <MobileCarList />
+        <MobileCarProfile detail={dealerDetail} />
+        <MobileDealershipContact detail={dealerDetail} />
+        <MobileCarList renderProduct={renderProduct} dealerdetail={dealerDetail} />
       </div>
       {/* mobile design end*/}
     </div>

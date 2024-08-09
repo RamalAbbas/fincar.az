@@ -19,13 +19,14 @@ import { useEffect, useState } from 'react';
 
 const ProductList = ({dealerdetail,renderProduct}) => {
   const { push } = useRouter();
-  console.log(dealerdetail)
   const callBackSlug = (slug) => {
     push(`/product/${slug}`);
   }
   const renderProducts = () => {
     renderProduct()
   }
+  console.log(dealerdetail);
+  
   return (
     <div className={styles.px}>
       {
