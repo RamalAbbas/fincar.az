@@ -46,11 +46,14 @@ const AddProduct = () => {
     uploaded_images: "",
     optionals: 3,
   });
+
   const [carFeature, setCarFeature] = useState([]);
   const [models, setModels] = useState([]);
   const [drives, setDrives] = useState([]);
   const minYear = 2000;
   const currentYear = new Date().getFullYear();
+  const [errorText, setErrorText] = useState("");
+  const [imageDelete, setImageDelete] = useState(false);
   const years = Array.from(
     { length: currentYear - minYear + 1 },
     (_, i) => minYear + i
@@ -60,18 +63,59 @@ const AddProduct = () => {
   const [isImageUploaded, setIsImageUploaded] = useState(false);
 
   const handleImageUpload = (event) => {
-    const file = event.target.files[0];
+    const files = event.target.files;
+    if (files.length < 3) {
+      setErrorText("Minimum 3 şəkil olmalıdır");
 
-    if (file) {
-      // const imageUrl = URL.createObjectURL(file);
-      // setImagePreview(imageUrl);
-      // setIsImageUploaded(true);
+      const previews = [];
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+          previews.push(reader.result);
+          if (previews.length === files.length) {
+            setImagePreview(previews);
+            setIsImageUploaded(true);
+          }
+        };
+
+        reader.readAsDataURL(file);
+      }
 
       setState((prevData) => ({
         ...prevData,
-        uploaded_images: {...event.target.files},
+        uploaded_images: { ...files },
       }));
+      return;
     }
+
+    if (files.length > 24) {
+      setErrorText("Maksimum 24 şəkil ola bilər");
+    }
+
+    const previews = [];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        previews.push(reader.result);
+        if (previews.length === files.length) {
+          setImagePreview(previews);
+          setIsImageUploaded(true);
+        }
+      };
+
+      reader.readAsDataURL(file);
+    }
+
+    setState((prevData) => ({
+      ...prevData,
+      uploaded_images: { ...files },
+    }));
+
+    setErrorText("");
   };
 
   const handleChange = async (e) => {
@@ -180,59 +224,98 @@ const AddProduct = () => {
 
           <div className={styles.uploadDiv}>
             {isImageUploaded ? (
-              <>
-                <div className={styles.imageContainer}>
-                  <img
-                    src={imagePreview}
-                    alt="Selected preview"
-                    className={styles.uploadedImage}
-                  />
-
-                  <label className={styles.uploadLabel} htmlFor="uploadButton">
-                    <div className={styles.addImageButton}>
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M20 3V7"
-                          stroke="#505673"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                        <path
-                          d="M18 5H22"
-                          stroke="#505673"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                        <path
-                          d="M14 5H5C3.895 5 3 5.895 3 7V19C3 20.105 3.895 21 5 21H18C19.105 21 20 20.105 20 19V11"
-                          stroke="#505673"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M6.96642 14.467L8.47042 12.081C8.81942 11.528 9.59642 11.453 10.0444 11.929L11.1194 13.071L12.2464 10.676C12.5934 9.93801 13.6314 9.90401 14.0264 10.618L16.1804 14.516C16.5484 15.183 16.0654 16 15.3044 16H7.81242C7.02442 16 6.54642 15.133 6.96642 14.467Z"
-                          stroke="#505673"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                      Add image
-                    </div>
-                  </label>
-                </div>
-              </>
+              <div className={styles.imageContainer}>
+                {imagePreview.map((image, index) => (
+                  <div
+                    onMouseEnter={() => setImageDelete(true)}
+                    onMouseLeave={() => setImageDelete(false)}
+                    className={styles.imgBody}
+                  >
+                    <img
+                      key={index}
+                      src={image}
+                      alt={`Selected preview ${index}`}
+                      className={styles.uploadedImage}
+                    />
+                  </div>
+                ))}
+                {imageDelete ? (
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      width="24"
+                      height="24"
+                      rx="2"
+                      fill="#878CA8"
+                      fill-opacity="0.55"
+                    />
+                    <path
+                      d="M8 8L16 16"
+                      stroke="#141A33"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M16 8L8 16"
+                      stroke="#141A33"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                ) : (
+                  <></>
+                )}
+                <label className={styles.uploadLabel} htmlFor="uploadButton">
+                  <div className={styles.addImageButton}>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M20 3V7"
+                        stroke="#505673"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M18 5H22"
+                        stroke="#505673"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M14 5H5C3.895 5 3 5.895 3 7V19C3 20.105 3.895 21 5 21H18C19.105 21 20 20.105 20 19V11"
+                        stroke="#505673"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M6.96642 14.467L8.47042 12.081C8.81942 11.528 9.59642 11.453 10.0444 11.929L11.1194 13.071L12.2464 10.676C12.5934 9.93801 13.6314 9.90401 14.0264 10.618L16.1804 14.516C16.5484 15.183 16.0654 16 15.3044 16H7.81242C7.02442 16 6.54642 15.133 6.96642 14.467Z"
+                        stroke="#505673"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    Add image
+                  </div>
+                </label>
+              </div>
             ) : (
               <div className={styles.center}>
                 <label className={styles.uploadLabel} htmlFor="uploadButton">
@@ -251,6 +334,7 @@ const AddProduct = () => {
                 </nav>
               </div>
             )}
+            <p className={styles.errorText}>{errorText}</p>
           </div>
         </div>
 
