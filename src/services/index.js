@@ -148,6 +148,15 @@ export const carLoanCalculation = async (data) => {
   }
 };
 
+export const carLoanRequest = async (data) => {
+  try {
+    const response = await instanceAxios.post(`car/loan-request`, data);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
 export const deleteSavedCar = async (data) => {
   try {
     const response = await instanceAxios.delete(`car-save/delete/${data}`);
