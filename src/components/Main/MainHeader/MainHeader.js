@@ -121,7 +121,9 @@ const Title = ({ filterData }) => {
       push("/signin");
     }
   };
-
+  const callBackSlug = (slug) => {
+    push(`/search/${slug}`);
+  };
   const getCarFeatureData = async () => {
     const response = await getCarFeature();
     console.log(response);
@@ -330,14 +332,14 @@ const Title = ({ filterData }) => {
               <h1>Fincar.az</h1>
             </a>
             <div className={styles.mobileList}>
-              <div className="mt-[18px]">
-                <a>
+              <div className="mt-[18px]" >
+                <a  onClick={() => push("/search")}>
                   <span>Bütün elanlar</span>
                 </a>
                 <div className="h-[1px] w-full bg-[#D9D9D9] mt-[10px]"></div>
               </div>
               <div className="mt-[18px]">
-                <a>
+                <a onClick={() => push("/dealerships")}>
                   <span>Salonlar</span>
                 </a>
                 <div className="h-[1px] w-full bg-[#D9D9D9] mt-[10px]"></div>
@@ -356,7 +358,7 @@ const Title = ({ filterData }) => {
               </div>
               <div className="mt-[18px]">
                 <div className="flex justify-between items-center">
-                  <a>
+                  <a onClick={() => push("/personalcabinet")}>
                     <span>Şəxsi kabinet</span>
                   </a>
                   <div>
