@@ -4,12 +4,14 @@ import MainHeader from "../../components/Main/MainHeader/MainHeader";
 import Popular from "../../components/Main/Popular/Popular";
 import CarList from "../../components/Main/CarList/CarList";
 import MobileCarList from "../../components/Common/MobileCarList/MobileCarList";
+import { getPopularCars } from "../../services";
 import { getCars } from "../../services";
 
 const page = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [cars, setCars] = useState([]);
-
+  const [popularCars, setPopularCars] = useState([]);
+  console.log(popularCars)
   //! Fetching Data
   const getCarsData = async () => {
     try {
@@ -22,6 +24,21 @@ const page = () => {
 
   useEffect(() => {
     getCarsData();
+  }, []);
+  //mobilecarlist
+  const getPopularsCarsData = async () => {
+    try {
+      setIsLoading(true);
+      const response = await getPopularCars();
+      setPopularCars(response);
+      console.log(response)
+    } catch (err) {
+      console.error(err);
+    }  
+  };
+
+  useEffect(() => {
+    getPopularsCarsData([]);
   }, []);
 
   const filterData = (items) => {
@@ -37,7 +54,7 @@ const page = () => {
       <Popular />
       <CarList renderProduct={renderProduct} cars={cars} />
       <div className="pb-[90px] min-lg:hidden">
-        <MobileCarList title="Popular maşınlar" />
+        <MobileCarList title="Popular maşınlar"  popularCars={popularCars} />
         <MobileCarList title="Son elanlar" />
       </div>
     </>

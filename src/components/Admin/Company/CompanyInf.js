@@ -79,7 +79,7 @@ const CompanyInf = () => {
               <p className={styles.text}>Company information</p>
             </div>
             <div className={styles.img}>
-              <img src={dealerInfo.cover} width={116} height={116} />
+              <img src={dealerInfo?.cover} width={116} height={116} />
             </div>
           </div>
           <div className={styles.main}>
