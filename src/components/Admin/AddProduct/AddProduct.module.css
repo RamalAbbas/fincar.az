@@ -128,11 +128,19 @@
 }
 
 .imageContainer {
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  gap: 24px;
+}
+
+.imgBody{
+  width: 100%;
   display: flex;
+  justify-content: center !important;
+  align-items: center;
 }
 
 .addImageButton {
-  margin-left: 24px;
   width: 120px;
   height: 120px;
   display: flex;
@@ -154,6 +162,14 @@
   position: relative;
   display: flex;
   justify-content: center !important;
+}
+
+.errorText{
+  color: red;
+  margin-top: 80px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 40px;
 }
 
 .indicators {
