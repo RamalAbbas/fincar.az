@@ -1,5 +1,4 @@
 'use client'
-import React from 'react'
 import styles from './MobileCarList.module.css'
 import CarCard from '../CarCard/CarCard'
 import car1 from '../../../assets/images/carCardExample/bmwe46.jpg'
@@ -8,12 +7,21 @@ import car3 from '../../../assets/images/carCardExample/car1.png'
 import car4 from '../../../assets/images/carCardExample/car2.png'
 import car5 from '../../../assets/images/carCardExample/car3.png'
 import car6 from '../../../assets/images/carCardExample/car4.png'
+import React, { useEffect,useState } from "react";
 import { useSelector } from 'react-redux'
-
-const MobileCarList = ({ title }) => {
+import { useRouter } from "next/navigation";
+const MobileCarList = ({ title,popularCars }) => {
   const isMobileFilterActive = useSelector(
     (state) => state.mobileMenuFilter.isMobileFilterActive
   )
+  const {push}= useRouter()
+  const callBackSlug = (slug) => {
+    push(`/product/${slug}`);
+  };
+
+  const renderProducts = () => {
+    getPopularsCarsData()
+  }
   return (
     <div
       className={`${styles.wrapper} ${
@@ -22,18 +30,10 @@ const MobileCarList = ({ title }) => {
     >
       {title && <h1>{title}</h1>}
       <div className={styles.list}>
-        <CarCard src={car1} />
-        <CarCard src={car2} />
-        <CarCard src={car3} />
-        <CarCard src={car4} />
-        <CarCard src={car5} />
-        <CarCard src={car6} />
-        <CarCard src={car1} />
-        <CarCard src={car2} />
-        <CarCard src={car3} />
-        <CarCard src={car4} />
-        <CarCard src={car5} />
-        <CarCard src={car6} />
+      {popularCars?.map((info, index) => (
+         
+      <CarCard renderProducts={renderProducts}  data={info} callBackSlug={callBackSlug} key={index}/>
+    ))}
       </div>
     </div>
   )

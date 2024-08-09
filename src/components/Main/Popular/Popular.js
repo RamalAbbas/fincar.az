@@ -59,7 +59,6 @@ const Popular = () => {
   const { push } = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [popularCars, setPopularCars] = useState([]);
-
   useEffect(() => {
     if (sliderRef.current) {
       setSlideCount(sliderRef.current.innerSlider.props.children.length - 0.3);
@@ -92,6 +91,7 @@ const Popular = () => {
       setIsLoading(true);
       const response = await getPopularCars();
       setPopularCars(response);
+      
     } catch (err) {
       console.error(err);
     } finally {
