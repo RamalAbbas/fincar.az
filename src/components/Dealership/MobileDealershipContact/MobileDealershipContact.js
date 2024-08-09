@@ -1,11 +1,11 @@
-import React from 'react'
-import styles from './MobileDealershipContact.module.css'
-import Image from 'next/image'
-import phone from '../../../assets/icons/contact/phone.svg'
-import time from '../../../assets/icons/contact/time.svg'
-import location from '../../../assets/icons/contact/location.svg'
+import React from "react";
+import styles from "./MobileDealershipContact.module.css";
+import Image from "next/image";
+import phone from "../../../assets/icons/contact/phone.svg";
+import time from "../../../assets/icons/contact/time.svg";
+import location from "../../../assets/icons/contact/location.svg";
 
-const MobileDealershipContact = () => {
+const MobileDealershipContact = ({ detail }) => {
   return (
     <div className={styles.wrapper}>
       <div>
@@ -17,9 +17,9 @@ const MobileDealershipContact = () => {
           className="self-start"
         />
         <div className="flex flex-wrap gap-[16px] gap-y-[4px]">
-          <p>+994 51 656 76 76</p>
-          <p>+994 51 656 76 76</p>
-          <p>+994 51 656 76 76</p>
+          <p>{detail?.phone1}</p>
+          <p>{detail?.phone2}</p>
+          <p>{detail?.phone3}</p>
         </div>
       </div>
       <div>
@@ -31,9 +31,7 @@ const MobileDealershipContact = () => {
           className="self-start"
         />
         <div className="flex flex-wrap gap-[16px]">
-          <span>
-            Həftə içi: 09:00–18:30; Şənbə: 10:00–17:00; Bazar: 11:00–16:00
-          </span>
+          <span>{detail?.opening_time}</span>
         </div>
       </div>
       <div>
@@ -45,11 +43,11 @@ const MobileDealershipContact = () => {
           className="self-start"
         />
         <div className="flex flex-wrap gap-[16px]">
-          <h5>Bakı ş., Xətai r., Babək pr., 74</h5>
+          <h5>{detail?.addresss}</h5>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MobileDealershipContact
+export default MobileDealershipContact;

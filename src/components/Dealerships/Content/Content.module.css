@@ -26,7 +26,6 @@
 }
 
 .salonName {
- 
   color: #505673;
   text-overflow: ellipsis;
   font-size: 24px;
@@ -35,7 +34,7 @@
   line-height: 36px;
 }
 
-.salonImage{
+.salonImage {
   width: 144px;
   height: 144px;
   border-radius: 10px;
@@ -75,156 +74,152 @@
 }
 
 @media screen and (max-width: 1160px) {
-    .container{
-      max-width: 1000px;
-    }
+  .container {
+    max-width: 1000px;
+  }
 }
-
 
 @media screen and (max-width: 1079px) {
-    .wrapper{
-      margin-top: 8px;
-    }
-    .container{
-      grid-template-columns: repeat(1,1fr);
-      gap: 0px;
-    }
-    .item{
-      background: none;
-      border: 0;
-      border-bottom: 1px solid var(--Neutral-Light, #DADEF2);
-      border-radius: 0px;
-    }
+  .wrapper {
+    margin-top: 8px;
+  }
+  .errorText {
+    left: 13% !important;
+  }
+  .container {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0px;
+  }
+  .item {
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--Neutral-Light, #dadef2);
+    border-radius: 0px;
+  }
 
-    .salonImage{
-        width: 100px;
-        height: 100px;
-    }
+  .salonImage {
+    width: 100px;
+    height: 100px;
+  }
+  .number {
+    font-size: 12px;
+    line-height: 22px;
+    white-space: nowrap;
+    overflow-x: scroll;
+  }
 
-    .salonName{
-      color: #505673;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 590;
-      line-height: 24px; 
-    }
-    .item{
-      margin-left: 16px;
-      margin-right: 16px;
-      margin-top: 0px;
-      margin-bottom: 0px;
-      padding-top: 16px;
-      padding-bottom: 16px;
-      padding-right: 0px;
-      padding-left: 0px;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 0px;
-    }
+  .salonName {
+    color: #505673;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 590;
+    line-height: 24px;
+  }
+  .item {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-right: 0px;
+    padding-left: 0px;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 0px;
+  }
 
-    .numbers{
-      grid-template-columns: repeat(1,1fr);
-    }
+  .numbers {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    .numbers p{
-      margin-left: 0px;
-    }
+  .numbers p {
+    margin-left: 0px;
+  }
 
-    .phoneImage{
-        width: 16px;
-        height: 20px;
-    }
+  .phoneImage {
+    width: 16px;
+    height: 20px;
+  }
 
-    .itemRight{
-      gap: 4px;
-    }
+  .itemRight {
+    gap: 4px;
+  }
 
-    .location{
-      display: flex;
-      align-items: center;
-      color: #505673;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 20px; 
-    }
+  .location {
+    white-space: nowrap;
+    overflow-x: scroll;
+    display: flex;
+    align-items: center;
+    color: #505673;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+  }
 
-    .locationImage{
-      width: 16px;
-      height: 16px;
-    }
+  .locationImage {
+    width: 16px;
+    height: 16px;
+  }
 
-    .no_border{
-      border-bottom: 0px;
-    }
+  .no_border {
+    border-bottom: 0px;
+  }
 }
-
 
 .loader {
-    color: black;
-    font-size: 10px;
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    position: relative;
-    text-indent: -9999em;
-    animation: mulShdSpin 1.3s infinite linear;
-    transform: translateZ(0);
-    position: absolute;
-    left: 50%;
-    top: 35%;
-}
-  
-@keyframes mulShdSpin {
-    0%,
-    100% {
-        box-shadow: 0 -3em 0 0.2em, 
-        2em -2em 0 0em, 3em 0 0 -1em, 
-        2em 2em 0 -1em, 0 3em 0 -1em, 
-        -2em 2em 0 -1em, -3em 0 0 -1em, 
-        -2em -2em 0 0;
-    }
-    12.5% {
-        box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 
-        3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, 
-        -2em 2em 0 -1em, -3em 0 0 -1em, 
-        -2em -2em 0 -1em;
-    }
-    25% {
-        box-shadow: 0 -3em 0 -0.5em, 
-        2em -2em 0 0, 3em 0 0 0.2em, 
-        2em 2em 0 0, 0 3em 0 -1em, 
-        -2em 2em 0 -1em, -3em 0 0 -1em, 
-        -2em -2em 0 -1em;
-    }
-    37.5% {
-        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em,
-        3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, 
-        -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
-    }
-    50% {
-        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em,
-        3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, 
-        -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
-    }
-    62.5% {
-        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em,
-        3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, 
-        -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
-    }
-    75% {
-        box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 
-        3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, 
-        -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
-    }
-    87.5% {
-        box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 
-        3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, 
-        -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
-    }
+  color: black;
+  font-size: 10px;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  text-indent: -9999em;
+  animation: mulShdSpin 1.3s infinite linear;
+  transform: translateZ(0);
+  position: absolute;
+  left: 50%;
+  top: 35%;
 }
 
-.errorText{
+@keyframes mulShdSpin {
+  0%,
+  100% {
+    box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em,
+      0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
+  }
+  12.5% {
+    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em,
+      0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+  }
+  25% {
+    box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0,
+      0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+  }
+  37.5% {
+    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em,
+      0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+  }
+  50% {
+    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em,
+      0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+  }
+  62.5% {
+    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em,
+      0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+  }
+  75% {
+    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em,
+      0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
+  }
+  87.5% {
+    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em,
+      0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+  }
+}
+
+.errorText {
   position: absolute;
   left: 50%;
   right: 50%;

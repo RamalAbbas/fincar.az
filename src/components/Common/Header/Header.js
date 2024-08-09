@@ -11,12 +11,11 @@ import { usePathname } from "next/navigation";
 import leftBlue from "../../../assets/icons/arrow/leftBlue.svg";
 import saved from "../../../assets/icons/saved/saved.svg";
 import notification from "../../../assets/icons/notification/notification.svg";
-import searchInput from "../../../assets/icons/mobileHeader/searchInput.svg";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
 const Header = ({ isSaved, isNotification }) => {
-  const { push } = useRouter();
+  const { push , back } = useRouter();
   const pathname = usePathname();
   const [isNotificationHover, setIsNotificationHover] = useState(false);
   const [data, setData] = useState([]);
@@ -132,30 +131,16 @@ const Header = ({ isSaved, isNotification }) => {
             </div>
             <div
               className={`min-lg:hidden ${
-                pathname === "/dealership" ? "h-[44px]" : "h-[96px]"
+                pathname === "/dealership" ? "h-[44px]" : "h-[44px]"
               }`}
             >
               <div className={styles.wrapperMobile}>
                 <div className="h-[44px] flex items-center">
-                  <div className="ml-[16px]">
+                  <div onClick={() => back()} className="ml-[16px]">
                     <Image src={leftBlue} width={10} height={15} alt="arrow" />
                   </div>
                 </div>
-                <div
-                  className={`${styles.mobileHeaderSecond} ${
-                    pathname === "/dealership" && "hidden"
-                  }`}
-                >
-                  <div className={styles.mobileSearchInput}>
-                    <Image
-                      src={searchInput}
-                      width={25}
-                      height={22}
-                      alt="search"
-                    />
-                    <input type="text" placeholder="Search" />
-                  </div>
-                </div>
+                
               </div>
             </div>
           </div>

@@ -6,20 +6,21 @@ import { useRouter } from "next/navigation";
 
 const MobileCarProfile = ({ detail }) => {
   const { push } = useRouter();
+  
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>
         <div className=" overflow-hidden">
-          <img src={detail?.dealer?.cover} width={56} height={56} alt="logo" />
+          <img src={detail?.cover} className="rounded-lg" width={56} height={56} alt="logo" />
         </div>
         <div>
-          <p>{detail?.dealer?.name}</p>
-          <span>{detail?.dealer?.phone1}</span>
+          <p>{detail?.name}</p>
+          <span>{detail?.phone1}</span>
         </div>
       </div>
       <div className={styles.desc}>
         <span>Simply Cleaver</span>
-        <p>{detail?.dealer?.about}</p>
+        <p>{detail?.about}</p>
       </div>
     </div>
   );
