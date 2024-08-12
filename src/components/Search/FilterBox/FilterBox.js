@@ -77,12 +77,7 @@ const FilterBox = ({ carfeature, filterData }) => {
 
       <div className={styles.filter_content}>
         <div className={styles.special_select_content}>
-            {/* <select name="make" onChange={handleChange} value={filters.make}>
-              <option value="" disabled>
-                Marka
-              </option>
-              
-            </select> */}
+          <div className={styles.select_wrapper}>
             <Dropdown callBackValue={callBackValue} carfeature={carfeature?.makes} name={"make"} placeholder={"Marka"} />
             
             <Dropdown callBackValue={callBackValue} carfeature={models} name={"model"} placeholder={"Model"} />

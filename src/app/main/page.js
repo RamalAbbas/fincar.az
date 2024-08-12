@@ -10,8 +10,8 @@ import { getCars } from "../../services";
 const page = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [cars, setCars] = useState([]);
-  const [popularCars, setPopularCars] = useState([]);
-  console.log(popularCars)
+  const [ carPopulars, setPopularCars] = useState([]);
+  // console.log(carPopulars)
   //! Fetching Data
   const getCarsData = async () => {
     try {
@@ -31,7 +31,7 @@ const page = () => {
       setIsLoading(true);
       const response = await getPopularCars();
       setPopularCars(response);
-      console.log(response)
+      // console.log(response)
     } catch (err) {
       console.error(err);
     }  
@@ -54,7 +54,7 @@ const page = () => {
       <Popular />
       <CarList renderProduct={renderProduct} cars={cars} />
       <div className="pb-[90px] min-lg:hidden">
-        <MobileCarList title="Popular maşınlar"  popularCars={popularCars} />
+        <MobileCarList title="Popular maşınlar"  carPopulars={ carPopulars} />
         <MobileCarList title="Son elanlar" />
       </div>
     </>
