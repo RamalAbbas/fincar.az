@@ -6,9 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { handlePaymentModal } from "../../../redux/features/paymentModalSlice";
 
 const ProductDetail = ({ detail }) => {
+  const [isMenu,setIsMenu] = useState(false)
   const [mounthlyPayment, setMounthlyPayment] = useState();
   const [initialPayment, setInitialPayment] = useState();
   const [activeColor, setActiveColor] = useState(24);
+  const [isActiveMonth, setIsActiveMonth] = useState("")
   const insideRef = useRef(null);
   const isActivePaymentModal = useSelector(
     (state) => state.paymentModal.isActivePaymentModal
@@ -41,6 +43,7 @@ const ProductDetail = ({ detail }) => {
   }, [detail?.payment?.details[1]?.monthly_payment_azn]);
 
   const handlePayment = (item) => {
+    setIsMenu(false)
     setMounthlyPayment(item?.monthly_payment_azn);
     setInitialPayment(item?.initial_payment_azn);
     setActiveColor(item.term);
@@ -53,6 +56,10 @@ const ProductDetail = ({ detail }) => {
       );
     }
   }, [detail]);
+
+  const handleMenu = () => {
+    setIsMenu(!isMenu)
+  }
   return (
     <div className={`${styles.productDetailContainer}`}>
       <div className={styles.title}>
@@ -60,27 +67,47 @@ const ProductDetail = ({ detail }) => {
           {detail?.make?.name} {detail?.model?.name}, {detail?.volume} L,{" "}
           {detail?.year} il, {detail?.distance} {detail?.distance_unit}
         </span>
-        <p className="mt-3">İlkin ödəniş - {initialPayment} ₼ </p>
-        <p className={styles.price_azn}>{detail?.price_azn} AZN</p>
+        <p className={styles.price_azn}>İlkin ödəniş <span className={styles.initial_payment_title}>{initialPayment} ₼</span> </p>
+        <p className={styles.price_azn}>Ümumi məbləği <span className={styles.price_valditation}>{detail?.price_azn} ₼</span></p>
 
         <div className={styles.months_box}>
           <div className={styles.months_center}>
-            {detail?.payment?.details?.map((item) => (
-              <div
-                style={{
-                  background: activeColor == item.term ? "#DADEF2" : "white",
-                }}
-                className={styles.months}
-                onClick={() => handlePayment(item)}
-              >
-                <p>{item?.term}</p>
+            <p className={styles.credit_time}>
+              Kredit müddəti
+            </p>
+
+            <div className={styles.dropdown_content}>
+              <div onClick={handleMenu} className={styles.dropdown_box}>
+                  <p className={styles.dropdown_active_title}>
+                    {activeColor} ay
+                  </p>
+
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 10L12 14L16 10" stroke="#8990B9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
               </div>
-            ))}
+              {
+                isMenu ? (
+                  <div className={styles.dropdown_menu}>
+                    {detail?.payment?.details?.map((item) => (
+                      <div
+                        className={styles.months}
+                        onClick={() => handlePayment(item)}
+                      >
+                        <p>{item?.term} ay</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : <></>
+              }
+              
+            </div>
+              
           </div>
           <div className={styles.price_box}>
-            <p>Aylıq ödəniş</p>
+            <p className={styles.montly_title}>Aylıq ödəniş</p>
             <p className={styles.mounthlyPrice}>
-              {mounthlyPayment?.toFixed(0)}
+              {mounthlyPayment?.toFixed(0)} ₼
             </p>
           </div>
         </div>

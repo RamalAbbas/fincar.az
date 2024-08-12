@@ -3,6 +3,7 @@ import styles from "./FilterBox.module.css";
 import { useRouter } from "next/navigation";
 import { carFeatureListModel, getCarFilter } from "../../../services";
 import { data } from "autoprefixer";
+import Dropdown from '../../Dropdown/Dropdown'
 // import { data, data } from "autoprefixer";
 const FilterBox = ({ carfeature, filterData }) => {
   const { push } = useRouter();
@@ -61,6 +62,15 @@ const FilterBox = ({ carfeature, filterData }) => {
     }
   }, [filters.min_year]);
 
+  const callBackValue = async (name, id) => {
+    setFilters({ ...filters, [name]: id });
+
+    if (name === "make") {
+      const data = await carFeatureListModel(id);
+      setModels(data);
+    }
+  }
+
   return (
     <div className={styles.box}>
       <p className={styles.headTitle}>Filtrlər</p>
@@ -68,17 +78,11 @@ const FilterBox = ({ carfeature, filterData }) => {
       <div className={styles.filter_content}>
         <div className={styles.special_select_content}>
           <div className={styles.select_wrapper}>
-            <select name="make" onChange={handleChange} value={filters.make}  >
-              <option value="" disabled>
-                Marka
-              </option>
-              {carfeature?.makes?.map((item) => (
-                <option value={item.id} key={item?.id}>
-                  {item?.name}
-                </option>
-              ))}
-            </select>
-          </div>
+            <Dropdown callBackValue={callBackValue} carfeature={carfeature?.makes} name={"make"} placeholder={"Marka"} />
+            
+            <Dropdown callBackValue={callBackValue} carfeature={models} name={"model"} placeholder={"Model"} />
+{/* 
+            
           <div className={styles.select_wrapper}>
             <select name="model" onChange={handleChange} value={filters.model}>
               <option value="" disabled>
@@ -147,11 +151,7 @@ const FilterBox = ({ carfeature, filterData }) => {
             onChange={handleChange}
           />
         </div>
-        {/* <<<<<<< HEAD */}
 
-        {/*  */}
-        {/* // ======= */}
-        {/* >>>>>>> 965eb1173a86d263e27f78d6e9ae8886dbb54f83 */}
         <div className="flex gap-2 mt-4">
           <div className={styles.select_wrapper}>
             <select name="body" onChange={handleChange} value={filters.body}>
@@ -300,10 +300,11 @@ const FilterBox = ({ carfeature, filterData }) => {
               ))}
             </select>
           </div>
-        </div>
+        </div> */}
         <button className={styles.searchButton} onClick={handleSearch}>
           Search
         </button>
+      </div>
       </div>
     </div>
   );
