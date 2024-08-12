@@ -10,7 +10,8 @@ import car6 from "../../../assets/images/carCardExample/car4.png";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-const MobileCarList = ({ dealerdetail,renderProduct }) => {
+import { dealerDetail } from "../../../services";
+const MobileCarList = ({  carPopulars,renderProduct }) => {
   const isMobileFilterActive = useSelector(
     (state) => state.mobileMenuFilter.isMobileFilterActive
   );
@@ -30,7 +31,7 @@ const MobileCarList = ({ dealerdetail,renderProduct }) => {
     >
       {/* {title && <h1>{title}</h1>} */}
       <div className={styles.list}>
-        {dealerdetail?.cars?.map((info, index) => (
+        {carPopulars?.cars?.map((info, index) => (
           <CarCard
             renderProducts={renderProducts}
             data={info}

@@ -68,7 +68,7 @@ const FilterBox = ({ carfeature, filterData }) => {
       <div className={styles.filter_content}>
         <div className={styles.special_select_content}>
           <div className={styles.select_wrapper}>
-            <select name="make" onChange={handleChange} value={filters.make}>
+            <select name="make" onChange={handleChange} value={filters.make}  >
               <option value="" disabled>
                 Marka
               </option>

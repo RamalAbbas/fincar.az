@@ -107,6 +107,7 @@
   font-weight: 510;
   line-height: 24px;
   cursor: pointer;
+  position: relative;
 }
 
 .wrapperMobile {
