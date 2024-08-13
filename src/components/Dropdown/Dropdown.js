@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styles from './Dropdown.module.css'
+import { all } from 'axios'
 
 const Dropdown = ({ carfeature , name , callBackValue , placeholder }) => {
     const [dropdownMenu,setDropdownMenu] = useState(false)
@@ -12,19 +13,42 @@ const Dropdown = ({ carfeature , name , callBackValue , placeholder }) => {
     }
 
     const handleChange = (item) => {
-        callBackValue(name, item.id)
-        // setDropdownMenu(!dropdownMenu)
-        setActiveTitle(item.name)
+        if(name != 'model'){
+            setDropdownMenu(!dropdownMenu)
+            callBackValue(name, item.id)
+            setActiveTitle(item.name)
+            setAllIds([])
+        }else {
+            callBackValue(name, allIds)
+        }
     }
 
     const handleCheckboxChange = (event) => {
         const item = carfeature.filter((item) => item.id == event.target.value)
         let ids = item[0].models?.map(item => item.id)
+        let names = item[0].models?.map(item => item.name)
         
-        setActiveIds((prev) => [...prev,ids])
-        console.log(activeIds);
+        let selectors = names?.map((item) => `#prefix${item}`)
+        selectors.forEach((item) => document.querySelectorAll(item)[0].checked = true)
+        
+          
+        if (event.target.checked) {
+            setAllIds(prevIds => [...prevIds, ...ids]);
+        } else {
+            setAllIds(prevIds => prevIds.filter(id => !ids.includes(id)));
+            selectors.forEach((item) => document.querySelectorAll(item)[0].checked = false)
+        }
+        callBackValue(name,ids.flat())
+    };
 
-        setAllIds(activeIds.flat());
+    const removeCheckboxChange = (event) => {
+        if(allIds.includes(Number(event.target.value))){
+            setAllIds(allIds.filter((item) => item != Number(event.target.value)))
+            callBackValue(name,allIds.filter((item) => item != Number(event.target.value)))
+        }else{
+            setAllIds((prev) => [...prev,Number(event.target.value)])
+            callBackValue(name,[...allIds,Number(event.target.value)])
+        }
     };
 
     return (
@@ -39,8 +63,7 @@ const Dropdown = ({ carfeature , name , callBackValue , placeholder }) => {
                     </svg>
                 </div>
 
-                {dropdownMenu ? (
-                    <div className={styles.dropdown_menu}>
+                    <div style={{display: dropdownMenu ? "flex": "none"}} className={styles.dropdown_menu}>
                         {name == "model" ? (
                             carfeature?.map((item) => (
                                 <div key={item.id}>
@@ -54,13 +77,13 @@ const Dropdown = ({ carfeature , name , callBackValue , placeholder }) => {
 
                                     {
                                         item?.models ? (
-                                            item.models.map((item) => (
+                                            item?.models.map((item) => (
                                                 <div key={item.id} className={styles.check_item}>
-                                                    <label htmlFor={item.name} onClick={() => handleChange(item)} className={styles.dropdown_option}>
+                                                    <label htmlFor={item.name} className={styles.dropdown_option}>
                                                         {item?.name}
                                                     </label>
             
-                                                    <input checked={allIds.includes(item.id)} id={item.name} type="checkbox" />
+                                                    <input id={"prefix"+item.name} value={item.id} onChange={removeCheckboxChange} type="checkbox" />
                                                 </div>
                                             ))
                                         ) : null
@@ -71,7 +94,7 @@ const Dropdown = ({ carfeature , name , callBackValue , placeholder }) => {
                             carfeature?.map((item) => (
                                 <div key={item.id}>
                                     <div className={styles.check_item}>
-                                        <p onClick={() => handleChange(item)} className={styles.dropdown_option}>
+                                        <p onClick={() => handleChange(item)} id={item.id} className={styles.dropdown_option}>
                                             {item?.name}
                                         </p>
                                     </div>
@@ -80,7 +103,6 @@ const Dropdown = ({ carfeature , name , callBackValue , placeholder }) => {
                         )}
                         
                     </div> 
-                ) : <></>}
             </div>
     )
 }
