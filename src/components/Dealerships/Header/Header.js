@@ -27,7 +27,7 @@ const Header = ({ callBackData }) => {
               placeholder="Search"
               type="text"
             />
-            <Image className={styles.searchIcon} src={Search} alt="Search Icon" />
+            {/* <Image className={styles.searchIcon} src={Search} alt="Search Icon" /> */}
           </div>
           <button onClick={searchFunction} className={styles.searchButton}>Search</button>
         </form>

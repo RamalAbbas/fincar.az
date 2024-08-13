@@ -250,6 +250,7 @@
   position: absolute;
   top: 101%;
   left: 56%;
+  display: none;
 }
 .frame{
    display: flex;
