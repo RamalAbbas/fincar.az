@@ -28,7 +28,8 @@
   transform: translateZ(0);
   position: absolute;
   left: 50%;
-  top: 20%;
+  top: 50%;
+  margin-top: 200px;
 }
 
 @keyframes mulShdSpin {
