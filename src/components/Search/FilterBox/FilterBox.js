@@ -306,6 +306,9 @@ const FilterBox = ({ carfeature, filterData }) => {
         </button>
       </div>
       </div>
+      </div>
+      
+
     </div>
   );
 };
