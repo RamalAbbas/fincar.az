@@ -40,11 +40,22 @@ const FilterBox = ({ carfeature, filterData }) => {
       setModels(data);
     }
   };
+
   const handleSearch = async () => {
-    const queryString = Object.keys(filters)
-      .filter((key) => filters[key] !== "")
-      .map((key) => `${key}=${filters[key]}`)
-      .join("&");
+    const queryParams = Object.keys(filters)
+      .reduce((acc, key) => {
+        const value = filters[key];
+        if (value !== "") {
+          if (key === "model" && Array.isArray(value)) {
+            value.forEach((model) => acc.push(`${key}=${model}`));
+          } else {
+            acc.push(`${key}=${value}`);
+          }
+        }
+        return acc;
+      }, []);
+
+    const queryString = queryParams.join("&");
 
     push(`/search?${queryString}`);
     const response = await getCarFilter(queryString);
@@ -63,13 +74,22 @@ const FilterBox = ({ carfeature, filterData }) => {
   }, [filters.min_year]);
 
   const callBackValue = async (name, id) => {
-    setFilters({ ...filters, [name]: id });
-
     if (name === "make") {
       const data = await carFeatureListModel(id);
       setModels(data);
+      setFilters(prevFilters => ({
+        ...prevFilters,
+        [name]: id,
+        model: "" 
+      }));
+    } else {
+      setFilters(prevFilters => ({
+        ...prevFilters,
+        [name]: id
+      }));
     }
-  }
+  };
+  console.log(filters);
 
   return (
     <div className={styles.box}>
@@ -77,30 +97,9 @@ const FilterBox = ({ carfeature, filterData }) => {
 
       <div className={styles.filter_content}>
         <div className={styles.special_select_content}>
-          <div className={styles.select_wrapper}>
             <Dropdown callBackValue={callBackValue} carfeature={carfeature?.makes} name={"make"} placeholder={"Marka"} />
             
             <Dropdown callBackValue={callBackValue} carfeature={models} name={"model"} placeholder={"Model"} />
-{/* 
-            
-          <div className={styles.select_wrapper}>
-            <select name="model" onChange={handleChange} value={filters.model}>
-              <option value="" disabled>
-                Model
-              </option>
-              {models?.map((item) => (
-                <>
-                  <option key={item.id} value={item.id}>
-                    {item.name}
-                  </option>
-
-                  {item.models.map((item) => (
-                    <option value={item.id}>{item.name}</option>
-                  ))}
-                </>
-              ))}
-            </select>
-          </div>
         </div>
         <label>Qiymət</label>
         <div className="flex gap-2 mt-2">
@@ -119,6 +118,7 @@ const FilterBox = ({ carfeature, filterData }) => {
             onChange={handleChange}
           />
         </div>
+
         <div className="flex gap-2 mt-2">
           <input
             name="min_monthly_payment"
@@ -135,6 +135,7 @@ const FilterBox = ({ carfeature, filterData }) => {
             onChange={handleChange}
           />
         </div>
+
         <div className="flex gap-2 mt-2">
           <input
             name="min_initial_payment"
@@ -153,34 +154,9 @@ const FilterBox = ({ carfeature, filterData }) => {
         </div>
 
         <div className="flex gap-2 mt-4">
-          <div className={styles.select_wrapper}>
-            <select name="body" onChange={handleChange} value={filters.body}>
-              <option value="" disabled>
-                Ban növü
-              </option>
-              {carfeature?.bans?.map((item) => (
-                <option value={item.id} key={item.id}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className={styles.select_wrapper}>
-            <select
-              name="gearbox"
-              onChange={handleChange}
-              value={filters.gearbox}
-            >
-              <option value="" disabled>
-                Sürət qutusu
-              </option>
-              {carfeature?.gears?.map((item) => (
-                <option value={item.id} key={item.id}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <Dropdown callBackValue={callBackValue} carfeature={carfeature.bans} name={"body"} placeholder={"Ban növü"} />
+
+          <Dropdown callBackValue={callBackValue} carfeature={carfeature.gears} name={"gearbox"} placeholder={"Sürət qutusu"} />
         </div>
 
         <label>İstehsal ili</label>
@@ -214,6 +190,8 @@ const FilterBox = ({ carfeature, filterData }) => {
             </select>
           </div>
         </div>
+
+        
         <label>Güc (a.g.)</label>
         <div className="flex gap-2 mt-1 mb-4">
           <input
@@ -231,6 +209,7 @@ const FilterBox = ({ carfeature, filterData }) => {
             onChange={handleChange}
           />
         </div>
+
         <label>Motorun həcmi</label>
         <div className="flex gap-2 mb-4 mt-1">
           <div className={styles.select_wrapper}>
@@ -258,53 +237,18 @@ const FilterBox = ({ carfeature, filterData }) => {
             </select>
           </div>
         </div>
-        <div className={styles.special_select_wrapper}>
-          <select
-            className={styles.special_select}
-            name="market"
-            onChange={handleChange}
-            value={filters.market}
-          >
-            <option value="" disabled>
-              Hansı bazar üçün yığılıb
-            </option>
-            {carfeature?.markets?.map((item) => (
-              <option value={item.id} key={item.id}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </div>
+
+        <Dropdown callBackValue={callBackValue} carfeature={carfeature.markets} name={"market"} placeholder={"Hansı bazar üçün yığılıb"} />
+       
         <div className="flex gap-2 mb-4 mt-4">
-          <div className={styles.select_wrapper}>
-            <select name="fuel" onChange={handleChange} value={filters.fuel}>
-              <option value="" disabled>
-                Yanacaq növü
-              </option>
-              {carfeature?.fuels?.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className={styles.select_wrapper}>
-            <select name="color" onChange={handleChange} value={filters.color}>
-              <option value="" disabled>
-                Rəng
-              </option>
-              {carfeature?.colors?.map((item) => (
-                <option value={item.id} key={item.id}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div> */}
+          <Dropdown callBackValue={callBackValue} carfeature={carfeature.fuels} name={"fuel"} placeholder={"Yanacaq növü"} />
+          
+          <Dropdown callBackValue={callBackValue} carfeature={carfeature.colors} name={"color"} placeholder={"Rəng"} />
+        </div> 
+
         <button className={styles.searchButton} onClick={handleSearch}>
           Search
         </button>
-      </div>
       </div>
     </div>
   );
