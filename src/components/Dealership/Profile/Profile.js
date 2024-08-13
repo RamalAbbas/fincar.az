@@ -68,7 +68,7 @@ const Profile = ({ dealerdetail }) => {
             />
             <div>
               <p className=" text-[#505673]">
-                {dealerdetail?.addresss}
+                {dealerdetail?.address}
               </p>
             </div>
           </div>
