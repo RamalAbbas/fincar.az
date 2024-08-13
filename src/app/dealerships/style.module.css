@@ -1,5 +1,5 @@
 .mobileHeaderSecond {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   height: 66px;
@@ -44,4 +44,9 @@
 .mobileSearchInput input:focus {
   box-shadow: none;
   outline: none;
+}
+@media screen and (max-width: 1079px) {
+  .mobileHeaderSecond {
+      display: flex;
+  }
 }
