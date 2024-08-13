@@ -19,9 +19,13 @@
     font-style: normal;
     font-weight: 400;
     line-height: 24px; /* 150% */
+    white-space: nowrap;
+    overflow-x: scroll;
 }
 
 .dropdown_menu{
+    width: 100%;
+    flex-direction: column;
     position: absolute;
     border-radius: 10px;
     background: #FFF;
@@ -31,6 +35,7 @@
 }
 
 .dropdown_option{
+    width: 100%;
     color: #000;
     font-size: 16px;
     font-style: normal;
@@ -42,6 +47,7 @@
 
 .check_item{
     display: flex;
+    align-items: center;
     justify-content: space-between;
     cursor: pointer;
 }
