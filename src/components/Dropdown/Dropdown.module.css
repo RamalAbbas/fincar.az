@@ -21,6 +21,10 @@
     line-height: 24px; /* 150% */
     white-space: nowrap;
     overflow-x: scroll;
+
+    &&::-webkit-scrollbar{
+        display: none !important;
+    }
 }
 
 .dropdown_menu{

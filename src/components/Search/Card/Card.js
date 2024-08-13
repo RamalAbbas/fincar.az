@@ -57,7 +57,7 @@ const Card = ({ data, callBackSlug, renderProducts }) => {
         <span className="ml-1">{data?.volume}L</span>
         <span className="ml-1">
           {data?.distance}
-          {data?.distance_unit}
+          <span>{data?.distance_unit}</span>
         </span>
       </p>
 
