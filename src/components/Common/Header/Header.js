@@ -7,6 +7,7 @@ import instagram from "../../../assets/icons//contact/instagram.svg";
 import linkedIn from "../../../assets/icons//contact/linkedIn.svg";
 import Link from "next/link";
 import languageIcon from "../../../assets/icons/languageIcon.svg";
+import  rec from "../../../assets/icons/rec/Rectangle 141.svg";
 import { usePathname } from "next/navigation";
 import leftBlue from "../../../assets/icons/arrow/leftBlue.svg";
 import saved from "../../../assets/icons/saved/saved.svg";
@@ -64,7 +65,16 @@ const Header = ({ isSaved, isNotification }) => {
                       
                       />
                     </div>
-
+                    <div className={styles.cont}>
+                    <Image
+                        src={rec}
+                        height={24}
+                        width={24}
+                        alt="languageIcon"
+                        className={styles.frame}
+                      />
+                    
+                    </div>
                     {data && (
                       <div
                         className="cursor-pointer"
