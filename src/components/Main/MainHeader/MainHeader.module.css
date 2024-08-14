@@ -192,7 +192,6 @@
   border-radius: 30px;
   max-width: 793px;
   width: 60vw;
-  height: 56px;
   flex-shrink: 0;
   padding: 4px;
 }
@@ -276,18 +275,7 @@
   }
 }
 
-.dropdown {
-  background-color: #f5f5f5;
-  outline: none;
-  box-shadow: none;
-  color: var(--Neutral-Text-Dark, #505673);
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 590;
-  line-height: 24px;
-  width: 100%;
-  cursor: pointer;
-}
+
 
 /* Styles for mobile devices */
 

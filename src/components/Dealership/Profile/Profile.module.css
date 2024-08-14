@@ -32,6 +32,11 @@
   line-height: 24px;
   max-width: 456px;
   margin-top: 8px;
+  height: 72px;
+  overflow-y: scroll;
+  &&::-webkit-scrollbar{
+    display: none;
+  }
 }
 
 .eyeCheck {

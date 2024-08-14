@@ -53,7 +53,7 @@ const Dropdown = ({ carfeature , name , callBackValue , placeholder }) => {
 
     return (
             <div className={styles.dropdown_content}>
-                <div onClick={handleMenu} className={styles.dropdown_top}>
+                <div style={{borderTopLeftRadius: name == "make" ? "30px" : "2px",borderBottomLeftRadius: name == "make" ? "30px" : "2px"}} onClick={handleMenu} className={styles.dropdown_top}>
                     <p className={styles.dropdown_active_title}>
                         {activeTitle ? activeTitle : placeholder}
                     </p>
@@ -66,13 +66,13 @@ const Dropdown = ({ carfeature , name , callBackValue , placeholder }) => {
                     <div style={{display: dropdownMenu ? "flex": "none"}} className={styles.dropdown_menu}>
                         {name == "model" ? (
                             carfeature?.map((item) => (
-                                <div key={item.id}>
+                                <div className={styles.dropdown_body} key={item.id}>
                                     <div className={styles.check_item}>
                                         <label htmlFor={item.name} onClick={() => handleChange(item)} className={styles.dropdown_option}>
                                             {item?.name}
                                         </label>
 
-                                        <input id={item.name} value={item.id} type="checkbox" onChange={handleCheckboxChange} />
+                                        <input className={styles.checkbox_item} id={item.name} value={item.id} type="checkbox" onChange={handleCheckboxChange} />
                                     </div>
 
                                     {
@@ -83,7 +83,7 @@ const Dropdown = ({ carfeature , name , callBackValue , placeholder }) => {
                                                         {item?.name}
                                                     </label>
             
-                                                    <input id={"prefix"+item.name} value={item.id} onChange={removeCheckboxChange} type="checkbox" />
+                                                    <input className={styles.checkbox_item} id={"prefix"+item.name} value={item.id} onChange={removeCheckboxChange} type="checkbox" />
                                                 </div>
                                             ))
                                         ) : null

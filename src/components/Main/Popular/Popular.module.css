@@ -22,7 +22,6 @@
 
 .title {
   display: flex;
-  padding: 0 15px;
   justify-content: space-between;
 }
 
