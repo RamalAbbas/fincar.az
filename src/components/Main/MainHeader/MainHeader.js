@@ -18,6 +18,7 @@ import {
   getCarFeature,
   getCarFilter,
 } from "../../../services";
+import Dropdown2 from "../../Dropdown2/Dropdown";
 
 const Title = ({ filterData}) => {
   const { push } = useRouter();
@@ -150,19 +151,51 @@ const Title = ({ filterData}) => {
       console.log(modelsData);
     }
   };
-  const searchFunction = async () => {
-    const queryString = Object.keys(state)
-      .filter((key) => state[key])
-      .map((key) => `${key}=${state[key]}`)
-      .join("&");
 
+  const searchFunction = async () => {
+    const queryParams = Object.keys(state)
+      .reduce((acc, key) => {
+        const value = state[key];
+        if (value !== "") {
+          if (key === "model" && Array.isArray(value)) {
+            value.forEach((model) => acc.push(`${key}=${model}`));
+          } else {
+            acc.push(`${key}=${value}`);
+          }
+        }
+        return acc;
+      }, []);
+
+    const queryString = queryParams.join("&");
+
+    push(`/main?${queryString}`);
     const response = await getCarFilter(queryString);
     filterData(response);
   };
+
+
   const exitFunction = () => {
     Cookies.remove("data");
     push("/signin");
   };
+
+  const callBackValue = async (name, id) => {
+    if (name === "make") {
+      const data = await carFeatureListModel(id);
+      setModels(data);
+      setState(prevFilters => ({
+        ...prevFilters,
+        [name]: id,
+        model: "" 
+      }));
+    } else {
+      setState(prevFilters => ({
+        ...prevFilters,
+        [name]: id
+      }));
+    }
+  };
+
   return (
     <section>
       <div
@@ -203,45 +236,12 @@ const Title = ({ filterData}) => {
           <h1 className={styles.desc}>Xəyalınızın maşınına bizlə sahib olun</h1>
           <div className="mt-[84px] flex gap-[12px] items-center justify-center">
             <div className={styles.search}>
-              <select
-                className={`${styles.dropdown} rounded-tr-sm rounded-br-sm rounded-tl-[30px]  rounded-bl-[30px] h-[56px]`}
-                name="make"
-                id="make"
-                value={state.make}
-                onChange={handleChange}
-              >
-                <option value="" selected>
-                  Marka
-                </option>
-                {carFeature?.makes?.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
-              <select
-                className={`${styles.dropdown}  rounded-tr-sm rounded-br-sm rounded-tl-sm  rounded-bl-sm h-[56px] ml-[2px]`}
-                name="model"
-                id="model"
-                value={state.model}
-                onChange={handleChange}
-              >
-                <option value="" selected>
-                  Model
-                </option>
-                {models?.map((item) => (
-                  <>
-                    <option key={item.id} value={item.id}>
-                      {item.name}
-                    </option>
-
-                    {item.models.map((item) => (
-                      <option value={item.id}>{item.name}</option>
-                    ))}
-                  </>
-                ))}
-              </select>
-              
+                <div className={styles.dropdown}>
+                  <Dropdown2 callBackValue={callBackValue} carfeature={carFeature?.makes} name={"make"} placeholder={"Marka"} />
+                </div>
+                <div className={styles.dropdown2}>
+                  <Dropdown2 callBackValue={callBackValue} carfeature={models} name={"model"} placeholder={"Model"} />
+                </div>
               <input
                 className="rounded-tr-sm rounded-br-sm rounded-tl-sm  rounded-bl-sm h-[56px] ml-[2px] bg-white"
                 placeholder="Qiymət min"
@@ -403,12 +403,14 @@ const Title = ({ filterData}) => {
                 onChange={(e) => setSelectedBrandFilter(e.target.value)}
               >
                 <option value="" disabled hidden>
-                Marka
+                  Marka
                 </option>
               
                 
             
               </select>
+              
+
             </div>
             <div className="mt-[16px]">
               <select

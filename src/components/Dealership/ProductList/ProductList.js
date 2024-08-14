@@ -31,9 +31,9 @@ const ProductList = ({dealerdetail,renderProduct}) => {
     <div className={styles.px}>
       {
             dealerdetail?.cars?.map((info,index) => (
-      <div className={styles.titleContainer}>
-      <CarCard renderProducts={renderProducts} key={index} callBackSlug={callBackSlug} data={info}/>
-      </div>
+                <div className={styles.titleContainer}>
+                  <CarCard renderProducts={renderProducts} key={index} callBackSlug={callBackSlug} data={info}/>
+                </div>
             ))
           }
 
