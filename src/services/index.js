@@ -1,6 +1,7 @@
 import baseUrl from "../constants/baseUrl/baseUrl";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 let data;
 try {
@@ -126,6 +127,7 @@ export const carSave = async (data) => {
     const response = await instanceAxios.post(`car-save`, data);
     return response.data;
   } catch (error) {
+    toast.error("Sistemə Daxil olun")
     console.log({ error });
   }
 };

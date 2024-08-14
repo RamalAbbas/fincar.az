@@ -14,7 +14,7 @@
 .sliderContainer {
   position: relative;
   margin-top: -116px;
-  z-index: 6;
+  z-index: 2;
   border-radius: 30px;
   padding: 36px 88px 100px 88px;
   background: #f9f8fc;

@@ -20,9 +20,10 @@ const AddProduct = () => {
     const { id, checked } = e.target;
     setState((prevState) => ({
       ...prevState,
-      [`optionals_${id}`]: id,
+      optionals: Number(id),
     }));
   };
+
 
   const [state, setState] = useState({
     make: 0,
@@ -44,8 +45,10 @@ const AddProduct = () => {
     vin: "",
     description: "",
     uploaded_images: "",
-    optionals: 3,
+    optionals:0,
   });
+  console.log(state);
+  
 
   const [carFeature, setCarFeature] = useState([]);
   const [models, setModels] = useState([]);

@@ -241,6 +241,7 @@ const Title = ({ filterData}) => {
                   </>
                 ))}
               </select>
+              
               <input
                 className="rounded-tr-sm rounded-br-sm rounded-tl-sm  rounded-bl-sm h-[56px] ml-[2px] bg-white"
                 placeholder="Qiymət min"

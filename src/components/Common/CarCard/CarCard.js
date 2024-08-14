@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CarCard.module.css";
 import Image from "next/image";
 import car from "../../../assets/images/carCardExample/bmwm3nfs.jpg";
@@ -8,9 +8,11 @@ import { carSave, deleteSavedCar } from "../../../services";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cookies from "js-cookie";
 
 const CarCard = ({ data, callBackSlug , renderProducts }) => {
   const { push } = useRouter();
+
   const saveCarFunction = async () => {
     const response = await carSave({ car: data.id });
     renderProducts()
@@ -36,29 +38,32 @@ const CarCard = ({ data, callBackSlug , renderProducts }) => {
           <div className={styles.price}>
             {data?.payment?.details[2].initial_payment_azn?.toFixed(0)} ₼ / ilkin
           </div>
-          {data?.is_saved ? (
-            <div onClick={deleteCarFunction} className={styles.fav_disabled}>
-              <Image
-                src={favouriteblack}
-                loading="lazy"
-                width={20}
-                height={20}
-                alt="car"
-                className="h-full w-full object-cover rounded-t-[10px]"
-              />
-            </div>
-          ) : (
-            <div onClick={saveCarFunction} className={styles.fav}>
-              <Image
-                src={favorite}
-                loading="lazy"
-                width={20}
-                height={20}
-                alt="car"
-                className="h-full w-full object-cover rounded-t-[10px]"
-              />
-            </div>
-          )}
+          {             
+          data?.is_saved ? (
+              <div onClick={deleteCarFunction} className={styles.fav_disabled}>
+                <Image
+                  src={favouriteblack}
+                  loading="lazy"
+                  width={20}
+                  height={20}
+                  alt="car"
+                  className="h-full w-full object-cover rounded-t-[10px]"
+                />
+              </div>
+            ) : (
+              <div onClick={saveCarFunction} className={styles.fav}>
+                <Image
+                  src={favorite}
+                  loading="lazy"
+                  width={20}
+                  height={20}
+                  alt="car"
+                  className="h-full w-full object-cover rounded-t-[10px]"
+                />
+              </div>
+            )
+          }
+
         </div>
         <div
           onClick={() => callBackSlug(data.slug)}
