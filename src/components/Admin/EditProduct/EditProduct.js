@@ -24,7 +24,6 @@ const AddProduct = ({ slug }) => {
       [`optionals_${id}`]: id,
     }));
   };
-  console.log(slug);
 
   const [state, setState] = useState({
     make: 0,
@@ -46,7 +45,7 @@ const AddProduct = ({ slug }) => {
     vin: "",
     description: "",
     uploaded_images: "",
-    optionals: 3,
+    optionals: 0,
   });
 
   const [carFeature, setCarFeature] = useState([]);
@@ -140,6 +139,7 @@ const AddProduct = ({ slug }) => {
       : "";
 
     try {
+      console.log(state);
       const res = await createCar(state, token);
       if (!!res) {
         toast.success("Maşin Əlavə Olundu .");
@@ -151,14 +151,12 @@ const AddProduct = ({ slug }) => {
     }
   };
 
-  const getCarFeatureData = async () => {
+  const getCarDetailData = async () => {
     const response = await getCarDetail(slug);
-    console.log(response);
-
     setCarDetail(response);
   };
 
-  const getCarDetailData = async () => {
+  const getCarFeatureData = async () => {
     const response = await getCarFeature();
     setCarFeature(response);
   };
@@ -200,6 +198,20 @@ const AddProduct = ({ slug }) => {
     getCarDetailData();
   }, []);
 
+  useEffect(() => {
+    if (carDetail) {
+      setState((prevState) => ({
+        ...prevState,
+        price: carDetail.price || prevState.price,
+        distance: carDetail.distance || prevState.distance,
+        vin: carDetail.vin || prevState.vin,
+        description: carDetail.description || prevState.description,
+      }));
+    }
+  }, [carDetail]);
+  console.log(carDetail);
+  
+  
   return (
     <div className={styles.wrapper}>
       <BreadCrumb isPaddding={true} items={["Products", "Add products"]} />
@@ -571,7 +583,7 @@ const AddProduct = ({ slug }) => {
                 value={state.year}
                 onChange={handleChange}
               >
-                <option selected>Seçin</option>
+                <option selected>{carDetail?.year}</option>
 
                 {years.map((year) => (
                   <option key={year} value={year}>
@@ -646,6 +658,7 @@ const AddProduct = ({ slug }) => {
                     type="checkbox"
                     id={item.id}
                     onChange={handleCheckboxChange}
+
                   />
                   <label htmlFor={item.id}></label>
                   <label className={styles.custom_label} htmlFor={item.id}>
