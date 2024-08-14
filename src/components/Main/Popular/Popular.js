@@ -67,7 +67,7 @@ const Popular = () => {
   const settings = {
     dots: false,
     infinite: true,
-    slidesToShow: 3.3,
+    slidesToShow: 3.1,
     arrows: false,
     swipeToSlide: true,
     slidesToScroll: 1,
@@ -133,7 +133,7 @@ const Popular = () => {
           <div className={`${styles.slider} slider-container`}>
             <Slider ref={sliderRef} {...settings}>
               {popularCars?.map((info, index) => (
-                <div className="px-[12px]" key={index}>
+                <div className={styles.px12} key={index}>
                   <CarCard renderProducts={renderProducts} callBackSlug={callBackSlug} data={info} />
                 </div>
               ))}
