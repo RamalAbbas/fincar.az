@@ -13,11 +13,9 @@ import { useRouter } from "next/navigation";
 const SampleNextArrow = ({ className, style, onClick, disabled }) => {
   return (
     <div
-      className={`${className} ${styles.customArrowRight} ${
-        disabled ? styles.disabled : ""
-      } ${styles.customArrow}`}
+      className={`${className} ${styles.customArrowRight} ${styles.customArrow}`}
       style={{ ...style }}
-      onClick={disabled ? null : onClick}
+      onClick={onClick}
     >
       <Image
         src={sliderArrow}
@@ -34,11 +32,9 @@ const SampleNextArrow = ({ className, style, onClick, disabled }) => {
 const SamplePrevArrow = ({ className, style, onClick, disabled }) => {
   return (
     <div
-      className={`${className} ${styles.customArrowLeft} ${
-        disabled ? styles.disabled : ""
-      } ${styles.customArrow}`}
+      className={`${className} ${styles.customArrowLeft} ${styles.customArrow}`}
       style={{ ...style }}
-      onClick={disabled ? null : onClick}
+      onClick={onClick}
     >
       <Image
         src={sliderArrow}
@@ -59,11 +55,13 @@ const Popular = () => {
   const { push } = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [popularCars, setPopularCars] = useState([]);
+
   useEffect(() => {
     if (sliderRef.current) {
       setSlideCount(sliderRef.current.innerSlider.props.children.length - 0.3);
     }
   }, [sliderRef.current]);
+  
   const settings = {
     dots: false,
     infinite: true,
@@ -124,6 +122,7 @@ const Popular = () => {
                 onClick={() => sliderRef.current.slickPrev()}
                 disabled={currentSlide === 0}
               />
+
               <SampleNextArrow
                 onClick={() => sliderRef.current.slickNext()}
                 disabled={currentSlide >= slideCount - 3}
