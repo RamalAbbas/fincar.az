@@ -22,7 +22,6 @@
 
 .title {
   display: flex;
-  padding: 0 15px;
   justify-content: space-between;
 }
 
@@ -88,4 +87,8 @@
   .widhtLimitContainer {
     display: none;
   }
+}
+.px12{
+  padding-left: 28px;
+  padding-right: 12px;
 }
