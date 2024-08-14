@@ -40,123 +40,123 @@ const Header = ({ isSaved, isNotification }) => {
 
   return (
     <div>
-      {pathname !== "/main" &&
-        pathname !== "/signin" &&
-        pathname !== "/signin/user" &&
-        pathname !== "/admin/signin" &&
-        pathname !== "/signin/request" && (
-          <div>
-            <div className="h-[56px] lg:hidden">
-              <div className={styles.widhtLimitContainerLarge}>
-                <div
-                  className={`${styles.headerContainer} ${styles.widhtLimitContainer}`}
-                >
-                  <a onClick={() => push("/main")}>Fincar.az</a>
-                  <div className={styles.rightNav}>
-                    <a onClick={() => push("/search")}>Bütün Elanlar</a>
-                    <a onClick={() => push("/dealerships")}>Salonlar</a>
-                    <div className={styles.language}>
-                      AZ
-                      <Image
-                        src={languageIcon}
-                        height={24}
-                        width={24}
-                        alt="languageIcon"
-                      
-                      />
-                    </div>
-                    <div className={styles.cont}>
+    {pathname !== "/main" &&
+      pathname !== "/signin" &&
+      pathname !== "/signin/user" &&
+      pathname !== "/admin/signin" &&
+      pathname !== "/signin/request" && (
+        <div>
+          <div className="h-[56px] lg:hidden">
+            <div className={styles.widhtLimitContainerLarge}>
+              <div
+                className={`${styles.headerContainer} ${styles.widhtLimitContainer}`}
+              >
+                <a onClick={() => push("/main")}>Fincar.az</a>
+                <div className={styles.rightNav}>
+                  <a onClick={() => push("/search")}>Bütün Elanlar</a>
+                  <a onClick={() => push("/dealerships")}>Salonlar</a>
+                  <div className={styles.language}>
+                    AZ
                     <Image
-                        src={rec}
-                        height={24}
-                        width={24}
-                        alt="languageIcon"
-                        className={styles.frame}
-                      />
+                      src={languageIcon}
+                      height={24}
+                      width={24}
+                      alt="languageIcon"
                     
-                    </div>
-                    {data && (
-                      <div
-                        className="cursor-pointer"
-                        onClick={() => push("/saved")}
-                      >
-                        <Image src={saved} alt="" />
-                      </div>
-                    )}
-
-                    {data && (
-                      <div className={styles.notificationBody}>
-                        <Image
-                          onMouseLeave={() => setIsNotificationHover(false)}
-                          onMouseEnter={() => setIsNotificationHover(true)}
-                          src={notification}
-                          alt=""
-                        />
-
-                        {isNotificationHover && (
-                          <div className={styles.notification_box}>
-                            <div className={styles.top}>Your notification</div>
-                            <div className={styles.border}></div>
-                            <div className={styles.items}>
-                              <div className={styles.item}>
-                                <div className={styles.item_top}>
-                                  <p className={styles.item_left}>
-                                    Payment Received !
-                                  </p>
-                                  <p className={styles.item_right}>Jun 19</p>
-                                </div>
-                                <p className={styles.bottom}>
-                                  We’re encountering issues with connecting to
-                                  our system’s database at the moment.
-                                </p>
-                              </div>
-                              {/* Repeat items as needed */}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    )}
-
+                    />
+                  </div>
+                  <div className={styles.cont}>
+                  <Image
+                      src={rec}
+                      height={24}
+                      width={24}
+                      alt="languageIcon"
+                      className={styles.frame}
+                    />
+                  
+                  </div>
+                  {data && (
                     <div
-                      onMouseEnter={() => setIsMenu(true)}
-                      onMouseLeave={() => setIsMenu(false)}
-                      className={styles.user_body}
+                      className="cursor-pointer"
+                      onClick={() => push("/saved")}
                     >
-                      <button onClick={handleSend}>
-                        {data?.username ? data.username : "Daxil ol"}
-                      </button>
-                      {isMenu && data.username ? (
-                        <div className={styles.user_menu}>
-                          <p onClick={() => push("/personalcabinet")}>
-                            User account
-                          </p>
-                          <p onClick={exitFunction}>Exit</p>
+                      <Image src={saved} alt="" />
+                    </div>
+                  )}
+
+                  {data && (
+                    <div className={styles.notificationBody}>
+                      <Image
+                        onMouseLeave={() => setIsNotificationHover(false)}
+                        onMouseEnter={() => setIsNotificationHover(true)}
+                        src={notification}
+                        alt=""
+                      />
+
+                      {isNotificationHover && (
+                        <div className={styles.notification_box}>
+                          <div className={styles.top}>Your notification</div>
+                          <div className={styles.border}></div>
+                          <div className={styles.items}>
+                            <div className={styles.item}>
+                              <div className={styles.item_top}>
+                                <p className={styles.item_left}>
+                                  Payment Received !
+                                </p>
+                                <p className={styles.item_right}>Jun 19</p>
+                              </div>
+                              <p className={styles.bottom}>
+                                We’re encountering issues with connecting to
+                                our system’s database at the moment.
+                              </p>
+                            </div>
+                            {/* Repeat items as needed */}
+                          </div>
                         </div>
-                      ) : (
-                        <></>
                       )}
                     </div>
+                  )}
+
+                  <div
+                    onMouseEnter={() => setIsMenu(true)}
+                    onMouseLeave={() => setIsMenu(false)}
+                    className={styles.user_body}
+                  >
+                    <button onClick={handleSend}>
+                      {data?.username ? data.username : "Daxil ol"}
+                    </button>
+                    {isMenu && data.username ? (
+                      <div className={styles.user_menu}>
+                        <p onClick={() => push("/personalcabinet")}>
+                          User account
+                        </p>
+                        <p onClick={exitFunction}>Exit</p>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </div>
-              </div>
-            </div>
-            <div
-              className={`min-lg:hidden ${
-                pathname === "/dealership" ? "h-[44px]" : "h-[44px]"
-              }`}
-            >
-              <div className={styles.wrapperMobile}>
-                <div className="h-[44px] flex items-center">
-                  <div onClick={() => back()} className="ml-[16px]">
-                    <Image src={leftBlue} width={10} height={15} alt="arrow" />
-                  </div>
-                </div>
-                
               </div>
             </div>
           </div>
-        )}
-    </div>
+          <div
+            className={`min-lg:hidden ${
+              pathname === "/dealership" ? "h-[44px]" : "h-[44px]"
+            }`}
+          >
+            <div className={styles.wrapperMobile}>
+              <div className="h-[44px] flex items-center">
+                <div onClick={() => back()} className="ml-[16px]">
+                  <Image src={leftBlue} width={10} height={15} alt="arrow" />
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      )}
+  </div>
   );
 };
 
