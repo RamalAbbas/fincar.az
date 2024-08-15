@@ -11,7 +11,7 @@ const page = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [cars, setCars] = useState([]);
   const [ carPopulars, setPopularCars] = useState([]);
-  // console.log(carPopulars)
+ console.log(carPopulars)
   //! Fetching Data
   const getCarsData = async () => {
     try {
