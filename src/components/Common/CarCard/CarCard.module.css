@@ -144,6 +144,11 @@
     right: 8px;
   }
 
+  .fav_disabled{
+    top: 8px;
+    right: 8px;
+  }
+
   .card {
     background: var(--Neutral-Background, #f0eff5);
     padding-bottom: 8px;

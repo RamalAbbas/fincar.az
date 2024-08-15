@@ -33,6 +33,7 @@ const page = ({ params }) => {
   const renderProduct = () => {
     getCarsData()
   }
+console.log(dealerDetail);
 
   return (
     <div>
@@ -52,7 +53,7 @@ const page = ({ params }) => {
       <div className="min-lg:hidden pb-[40px]">
         <MobileCarProfile detail={dealerDetail} />
         <MobileDealershipContact detail={dealerDetail} />
-        <MobileCarList renderProduct={renderProduct} dealerdetail={dealerDetail} />
+        <MobileCarList renderProduct={renderProduct} carPopulars={dealerDetail.cars} />
       </div>
       {/* mobile design end*/}
     </div>

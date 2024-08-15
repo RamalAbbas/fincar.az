@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { dealerDetail } from "../../../services";
-const MobileCarList = ({  carPopulars, renderProduct }) => {
+const MobileCarList = ({  carPopulars, renderProduct , title }) => {
   const isMobileFilterActive = useSelector(
     (state) => state.mobileMenuFilter.isMobileFilterActive
   );
@@ -29,7 +29,7 @@ const MobileCarList = ({  carPopulars, renderProduct }) => {
         isMobileFilterActive && "max-h-[200px] overflow-hidden"
       }`}
     >
-      {/* {title && <h1>{title}</h1>} */}
+      {title && <h1>{title}</h1>}
       <div className={styles.list}>
         {carPopulars?.map((info, index) => (
           <CarCard

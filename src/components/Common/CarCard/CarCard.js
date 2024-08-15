@@ -15,6 +15,8 @@ const CarCard = ({ data, callBackSlug , renderProducts }) => {
 
   const saveCarFunction = async () => {
     const response = await carSave({ car: data.id });
+    console.log(response);
+    
     renderProducts()
   };
 

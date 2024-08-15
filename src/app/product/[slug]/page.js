@@ -12,20 +12,31 @@ import MobileCarDetail from "../../../components/Product/MobileCarDetail/MobileC
 import MobileCarDescription from "../../../components/Product/MobileCarDescription/MobileCarDescription";
 import MobileCarProfile from "../../../components/Common/MobileCarProfile/MobileCarProfile";
 import MobileCarList from "../../../components/Common/MobileCarList/MobileCarList";
-import { getCarDetail } from "../../../services";
+import { getCarDetail, getDealerDetail } from "../../../services";
 
 const ProductPage = ({ params }) => {
+  const [dealerDetailData,setDealerDetailData] = useState([])
   const [data, setData] = useState([]);
 
   const getProductInfo = async () => {
     const response = await getCarDetail(params.slug);
-    console.log(response);
-    setData(response);
+    renderDetailSlug(response?.dealer?.slug)
+    setData(response)
+    console.log(response?.dealer?.slug);
   };
 
   useEffect(() => {
     getProductInfo();
   }, []);
+
+  const renderDetailSlug = async (slug) => {
+    const res = await getDealerDetail(slug)
+    setDealerDetailData(res?.cars);
+  }
+
+  const renderProduct2 = () => {
+    getProductInfo()
+  }
 
   return (
     <>
@@ -50,11 +61,11 @@ const ProductPage = ({ params }) => {
         <MobileCarImgSlider images={data?.images} />
         <MobileCarDetail detail={data} />
         <MobileCarDescription optionals={data?.optionals} />
-        <MobileCarProfile detail={data} />
+        <MobileCarProfile detail={data.dealer} />
         <div className="px-[15px]">
           <div className="w-full bg-[#DADEF2] h-[1px]"></div>
         </div>
-        <MobileCarList />
+        <MobileCarList  renderProduct={renderProduct2} carPopulars={dealerDetailData} />
       </div>
       {/* mobile design end*/}
     </>

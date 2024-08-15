@@ -22,11 +22,16 @@
   .wrapper {
     display: none;
   }
+  
 }
 
 @media (max-width: 1080px) {
   .wrapper > h1 {
     font-size: 28px;
+  }
+
+  .wrapper{
+    margin-top: 0px !important;
   }
 }
 @media (max-width: 460px) {

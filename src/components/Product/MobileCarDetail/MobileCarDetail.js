@@ -1,11 +1,14 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./MobileCarDetail.module.css";
 import PaymentModal from "../../../components/Common/PaymentModal/PaymentModal";
 import { useSelector, useDispatch } from "react-redux";
 import { handlePaymentModal } from "../../../redux/features/paymentModalSlice";
 
 const MobileCarDetail = ({ detail }) => {
+  const [mounthlyPayment, setMounthlyPayment] = useState();
+  const [initialPayment, setInitialPayment] = useState();
+  const [activeColor, setActiveColor] = useState(24);
   const insideRef = useRef(null);
   const isActivePaymentModal = useSelector(
     (state) => state.paymentModal.isActivePaymentModal
@@ -33,9 +36,32 @@ const MobileCarDetail = ({ detail }) => {
       handleClickPaymentModal();
     }
   };
+  useEffect(() => {
+    setMounthlyPayment(detail?.payment?.details[1]?.monthly_payment_azn);
+  }, [detail?.payment?.details[1]?.monthly_payment_azn]);
+
+  const handlePayment = (item) => {
+    setIsMenu(false)
+    setMounthlyPayment(item?.monthly_payment_azn);
+    setInitialPayment(item?.initial_payment_azn);
+    setActiveColor(item.term);
+  };
+
+  useEffect(() => {
+    if (detail?.payment?.details[1]) {
+      setInitialPayment(
+        detail?.payment?.details[1]?.initial_payment_azn?.toFixed(0)
+      );
+    }
+  }, [detail]);
+
+  console.log(detail);
+  
   return (
     <div className={`${styles.wrapper}`}>
-      <h1>{detail?.price_azn} AZN</h1>
+      <h1>İlkin ödəniş - <span className={styles.initial_payment_title}> {initialPayment} ₼</span></h1>
+      <p className={styles.price_azn_ttitle}>{detail?.price_azn} ₼</p>
+
       <h2>{detail?.make?.name} {detail?.model?.name}, {detail?.volume} L, {detail?.year} il, {detail?.distance} {detail?.distance_unit}</h2>
       <button onClick={() => handleClickPaymentModal()}>Hesabla</button>
       <div

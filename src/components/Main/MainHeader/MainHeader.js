@@ -327,12 +327,12 @@ const Title = ({ filterData}) => {
               !isMobileMenuActive && "!left-[-100vw]"
             }`}
           >
-            <a>
+            <a onClick={() => push("/main")}>
               <h1>Fincar.az</h1>
             </a>
             <div className={styles.mobileList}>
               <div className="mt-[18px]">
-                <a  onClick={() => push("/search")}>
+                <a  onClick={() => push("/main")}>
                   <span>Bütün elanlar</span>
                 </a>
                 <div className="h-[1px] w-full bg-[#D9D9D9] mt-[10px]"></div>
