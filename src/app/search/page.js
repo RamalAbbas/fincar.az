@@ -6,7 +6,7 @@ const Page = () => {
     
     return (
         <div>
-            <BreadCrumb items={["Homepage", "Search"]} />
+            <BreadCrumb items={["Ana Səhifə", "Axtarış"]} />
 
             <Main />
         </div>
