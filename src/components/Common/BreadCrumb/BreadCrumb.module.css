@@ -56,6 +56,10 @@
         width: 24px;
         height: 24px;
     }
+
+    .container{
+      padding-top: 16px !important;
+    }
 }
 
 @media screen and (max-width: 1160px) {

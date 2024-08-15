@@ -11,7 +11,7 @@ const page = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [cars, setCars] = useState([]);
   const [ carPopulars, setPopularCars] = useState([]);
- console.log(carPopulars)
+  // console.log(carPopulars)
   //! Fetching Data
   const getCarsData = async () => {
     try {
@@ -48,14 +48,17 @@ const page = () => {
   const renderProduct = () => {
     getCarsData()
   }
+
+  const renderProduct2 = () => {
+    getPopularsCarsData()
+  }
   return (
     <>
       <MainHeader filterData={filterData} />
       <Popular />
       <CarList renderProduct={renderProduct} cars={cars} />
       <div className="pb-[90px] min-lg:hidden">
-        <MobileCarList title="Popular maşınlar"  carPopulars={ carPopulars} />
-        <MobileCarList title="Son elanlar" />
+        <MobileCarList title="Popular maşınlar" renderProduct={renderProduct2} carPopulars={carPopulars} />
       </div>
     </>
   );

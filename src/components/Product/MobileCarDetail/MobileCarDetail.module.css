@@ -46,6 +46,17 @@
   gap: 18px;
 }
 
+.initial_payment_title{
+  color: #F50100;
+
+  /* Heading/H3 */
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 590;
+  line-height: 32px; /* 133.333% */
+}
+
+
 .content span {
   color: #848488;
   font-size: 16px;
@@ -86,5 +97,28 @@
 
   100% {
     opacity: 1;
+  }
+}
+
+.price_azn_ttitle{
+  color: #777;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 590;
+  line-height: 28px; /* 140% */
+  margin-top: 4px;
+}
+
+
+@media screen and (max-width: 1080px) {
+  .wrapper h1 {
+    color: #F50100 !important;
+
+    /* Heading/H3 */
+    font-size: 24px !important;
+    font-style: normal !important;
+    font-weight: 590 !important;
+    line-height: 32px !important; /* 133.333% */
+    margin-bottom: 4px;
   }
 }
