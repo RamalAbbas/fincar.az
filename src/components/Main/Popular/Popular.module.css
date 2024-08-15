@@ -16,13 +16,14 @@
   margin-top: -116px;
   z-index: 2;
   border-radius: 30px;
-  padding: 36px 88px 100px 88px;
+  padding: 36px 88px 29px 24px;
   background: #f9f8fc;
 }
-
+ 
 .title {
   display: flex;
   justify-content: space-between;
+  padding-left: 60px;
 }
 
 .title h1 {
@@ -89,6 +90,6 @@
   }
 }
 .px12{
-  padding-left: 28px;
+  padding-left: 60px;
   padding-right: 12px;
 }

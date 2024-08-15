@@ -65,7 +65,7 @@ const Popular = () => {
   const settings = {
     dots: false,
     infinite: true,
-    slidesToShow: 3.1,
+    slidesToShow: 3,
     arrows: false,
     swipeToSlide: true,
     slidesToScroll: 1,
@@ -116,7 +116,7 @@ const Popular = () => {
           className={`${styles.sliderContainer} ${styles.widhtLimitContainer}`}
         >
           <div className={styles.title}>
-            <h1>Popular maşınlar</h1>
+            <h1>Popular avtomobillər</h1>
             <div className={styles.arrowContainer}>
               <SamplePrevArrow
                 onClick={() => sliderRef.current.slickPrev()}
@@ -129,7 +129,7 @@ const Popular = () => {
               />
             </div>
           </div>
-          <div className={`${styles.slider} slider-container`}>
+          <div className={`${styles.slider} slider-container`} >
             <Slider ref={sliderRef} {...settings}>
               {popularCars?.map((info, index) => (
                 <div className={styles.px12} key={index}>

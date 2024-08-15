@@ -50,7 +50,7 @@ const Profile = ({ detail }) => {
           <span>{detail?.dealer?.address}</span>
         </div>
         <button onClick={() => push(`/dealership/${detail?.dealer?.slug}`)}>
-          Salona keç
+          Salona daxil ol
         </button>
       </div>
     </div>
