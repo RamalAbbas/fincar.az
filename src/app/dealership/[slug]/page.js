@@ -38,13 +38,7 @@ console.log(dealerDetail);
   return (
     <div>
       <BreadCrumb
-        items={[
-          'Home page ',
-          'Product page',
-          'Car dealerships',
-          `${dealerDetail.name}`,
-        ]}
-      />
+        items={["Ana Səhifə", "Məhsul Səhifəsi", "Avtomobil satıcıları",`${dealerDetail.name}`,]}/>
       <div className="lg:hidden">
         <Profile dealerdetail={dealerDetail}/>
         <ProductList renderProduct={renderProduct} dealerdetail={dealerDetail}/>

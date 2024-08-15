@@ -62,7 +62,7 @@ const page = () => {
           />
         </div>
       </div>
-      <BreadCrumb items={["Homepage", "Product page", "Car dealerships"]} />
+      <BreadCrumb items={["Ana Səhifə", "Məhsul Səhifəsi", "Avtomobil Salonları"]}/>
       <Header callBackData={callBackData} />
       <Content isLoading={isLoading} dealerList={dealerList} />
     </div>

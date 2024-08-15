@@ -40,7 +40,7 @@ const ProductPage = ({ params }) => {
 
   return (
     <>
-      <BreadCrumb items={["Homepage", "Product page"]} />
+      <BreadCrumb items={["Ana Səhifə", "Məhsul Səhifəsi"]}/>
       <div className={styles.widhtLimitContainerLarge}>
         <div
           className={`${styles.productContainer} ${styles.widhtLimitContainer}`}
