@@ -436,6 +436,10 @@
   /* left: 100vw; */
 }
 
+.w_fit{
+  width: fit-content !important;
+}
+
 .logout_title p{
   color: #F50100;
   margin-top: 44px;

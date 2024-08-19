@@ -21,23 +21,10 @@ import {
 import Dropdown2 from "../../Dropdown2/Dropdown";
 import DropdownMobile from "../../DropdownMobile/Dropdown";
 
-const Title = ({ filterData}) => {
+const Title = ({ filterData }) => {
   const { push } = useRouter();
-  const [selectedBrand, setSelectedBrand] = useState("");
-  const [selectedModel, setSelectedModel] = useState("");
+  const [yearOptions, setYearOptions] = useState([]);
   const [isMenu, setIsMenu] = useState(false);
-
-  const [selectedBrandFilter, setSelectedBrandFilter] = useState("");
-  const [selectedModelFilter, setSelectedModelFilter] = useState("");
-  const [selectedTypeOfBanFilter, setSelectedTypeOfBanFilter] = useState("");
-  const [selectedTransmissionFilter, setSelectedTransmissionFilter] =
-    useState("");
-  const [selectedYearFilter, setSelectedYearFilter] = useState("");
-  const [selectedEngineMinFilter, setSelectedEngineMinFilter] = useState("");
-  const [selectedEngineMaxFilter, setSelectedEngineMaxFilter] = useState("");
-  const [selectedForMarketFilter, setSelectedForMarketFilter] = useState("");
-  const [selectedFuelTypeFilter, setSelectedFuelTypeFilter] = useState("");
-  const [selectedColorFilter, setSelectedColorFilter] = useState("");
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
   const [carFeature, setCarFeature] = useState([]);
   const [models, setModels] = useState([]);
@@ -59,18 +46,43 @@ const Title = ({ filterData}) => {
     setOptions(newOptions);
   };
 
+  
+
   useEffect(() => {
     generateOptions();
   }, []);
 
   const [state, setState] = useState({
-    make: 0,
-    model: 0,
+    body: "",
+    color: "",
+    fuel: "",
+    gearbox: "",
+    make: "",
+    market: "",
+    max_engine_power: "",
+    max_engine_volume: "",
     max_price_azn: "",
+    max_year: "",
+    min_engine_power: "",
+    min_engine_volume: "",
     min_price_azn: "",
     min_year: "",
+    model: "",
+    min_monthly_payment: "",
+    max_monthly_payment: "",
+    min_initial_payment: "",
+    max_initial_payment: ""
   });
-
+  useEffect(() => {
+    if (state.min_year) {
+      const currentYear = new Date().getFullYear();
+      const years = [];
+      for (let year = parseInt(state.min_year); year <= currentYear; year++) {
+        years.push(year);
+      }
+      setYearOptions(years);
+    }
+  }, [state.min_year]);
   useEffect(() => {
     Cookies.get("data") == undefined
       ? console.log("undefined")
@@ -172,6 +184,9 @@ const Title = ({ filterData}) => {
     push(`/main?${queryString}`);
     const response = await getCarFilter(queryString);
     filterData(response);
+    console.log(response);
+    document.querySelector("#mobileHeaderContainer").style.display = "none"
+    
   };
 
 
@@ -283,7 +298,7 @@ const Title = ({ filterData}) => {
           </div>
         </div>
       </div>
-      <div className={styles.mobileHeaderContainer}>
+      <div  className={styles.mobileHeaderContainer}>
         <div className={styles.mobileTitle}>
           <div
             onClick={handleToggleMobileMenu}
@@ -380,6 +395,7 @@ const Title = ({ filterData}) => {
           className={`${styles.mobileFliter} ${
             !isMobileFilterActive && "hidden !opacity-1 !top-[100vh]"
           }`}
+          id="mobileHeaderContainer"
         >
           <div
             className={`${styles.fixedHeader}  ${
@@ -403,79 +419,112 @@ const Title = ({ filterData}) => {
           <div className={`${styles.filterMobileContent}`}>
               <div className="flex flex-col gap-4">
                 <DropdownMobile callBackValue={callBackValue} carfeature={carFeature?.makes} name={"make"} placeholder={"Marka"} />
-                <DropdownMobile callBackValue={callBackValue} carfeature={models} name={"model"} placeholder={"Modela"} />
+                <DropdownMobile callBackValue={callBackValue} carfeature={models} name={"model"} placeholder={"Model"} />
               </div>
             
               <div className="mt-[24px]">
                 <label>Qiymət</label>
                 <div className="flex gap-[20px] mt-[8px]">
                   <div className="w-full">
-                    <input type="text" placeholder="Minimum" />
+                    <input
+                      name="min_price_azn"
+                      placeholder="Minimum"
+                      type="text"
+                      value={state.min_price_azn}
+                      onChange={handleChange}
+                    />
                   </div>
                   <div className="w-full">
-                    <input type="text" placeholder="Maksimum" />
+                  <input
+                    name="max_price_azn"
+                    placeholder="Maksimum"
+                    type="text"
+                    value={state.max_price_azn}
+                    onChange={handleChange}
+                  />
                   </div>
                 </div>
-                <div className="flex gap-[20px] mt-[21px]">
+
+                <div className="flex gap-[20px] mt-[8px]">
                   <div className="w-full">
-                    <select
-                      className={`${styles.dropdown} ml-[37px]`}
-                      name="cars"
-                      id="cars"
-                      value={selectedTypeOfBanFilter}
-                      onChange={(e) => setSelectedTypeOfBanFilter(e.target.value)}
-                    >
-                      <option value="" disabled hidden>
-                        Ban növü
-                      </option>
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="opel">Opel</option>
-                      <option value="audi">Audi</option>
-                    </select>
+                  <input
+                    name="min_monthly_payment"
+                    placeholder="Aylıq min."
+                    type="text"
+                    value={state.min_monthly_payment}
+                    onChange={handleChange}
+                  />
                   </div>
                   <div className="w-full">
-                    <select
-                      className={`${styles.dropdown} ml-[37px]`}
-                      name="cars"
-                      id="cars"
-                      value={selectedTransmissionFilter}
-                      onChange={(e) =>
-                        setSelectedTransmissionFilter(e.target.value)
-                      }
-                    >
-                      <option value="" disabled hidden>
-                        Sürət qutusu
-                      </option>
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="opel">Opel</option>
-                      <option value="audi">Audi</option>
-                    </select>
+                  <input
+                    name="max_monthly_payment"
+                    placeholder="Aylıq max."
+                    type="text"
+                    value={state.max_monthly_payment}
+                    onChange={handleChange}
+                  />
+                  </div>
+                </div>
+
+                <div className="flex gap-[20px] mt-[8px]">
+                  <div className="w-full">
+                    <input
+                      name="min_initial_payment"
+                      placeholder="Ilkin min."
+                      type="text"
+                      value={state.min_initial_payment}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="w-full">
+                  <input
+                    name="max_initial_payment"
+                    placeholder="Ilkin Max"
+                    type="text"
+                    value={state.max_initial_payment}
+                    onChange={handleChange}
+                  />
+                  </div>
+                </div>
+
+                <div className="flex gap-[20px] mt-[21px]">
+                  <div className="w-full">
+                    <DropdownMobile callBackValue={callBackValue} carfeature={carFeature?.bans} name={"body"} placeholder={"Ban növü"} />
+                  </div>
+                  <div className="w-full">
+                    <DropdownMobile callBackValue={callBackValue} carfeature={carFeature?.gears} name={"gearbox"} placeholder={"Sürət qutusu"} />
                   </div>
                 </div>
               </div>
               <div className="mt-[24px]">
-                <label>Qiymət</label>
+                <label>İstehsal ili</label>
                 <div className="flex gap-[20px] mt-[8px]">
                   <div className="w-full">
-                    <input type="text" placeholder="Minimum" />
+                  <select
+                    name="min_year"
+                    onChange={handleChange}
+                    value={state.min_year}
+                  >
+                    <option value="" disabled>
+                      Minimum
+                    </option>
+                    <option value="1992">1992</option>
+                  </select>
                   </div>
                   <div className="w-full">
-                    <select
-                      className={`${styles.dropdown} ml-[37px]`}
-                      name="cars"
-                      id="cars"
-                      value={selectedYearFilter}
-                      onChange={(e) => setSelectedYearFilter(e.target.value)}
+                  <select
+                      name="max_year"
+                      onChange={handleChange}
+                      value={state.max_year}
                     >
-                      <option value="" disabled hidden>
-                        2023
+                      <option value="" disabled>
+                        Maksimum
                       </option>
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="opel">Opel</option>
-                      <option value="audi">Audi</option>
+                      {yearOptions.map((year) => (
+                        <option key={year} value={year}>
+                          {year}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -484,10 +533,22 @@ const Title = ({ filterData}) => {
                 <label>Güc (a.g.)</label>
                 <div className="flex gap-[20px] mt-[8px]">
                   <div className="w-full">
-                    <input type="text" placeholder="Minimum" />
+                    <input
+                      name="min_engine_power"
+                      placeholder="Minimum"
+                      type="number"
+                      value={state.min_engine_power}
+                      onChange={handleChange}
+                    />
                   </div>
                   <div className="w-full">
-                    <input type="text" placeholder="Maksimum" />
+                    <input
+                        name="max_engine_power"
+                        placeholder="Maksimum"
+                        type="number"
+                        value={state.max_engine_power}
+                        onChange={handleChange}
+                      />
                   </div>
                 </div>
               </div>
@@ -496,95 +557,43 @@ const Title = ({ filterData}) => {
                 <div className="flex gap-[20px] mt-[8px]">
                   <div className="w-full">
                     <select
-                      className={`${styles.dropdown} ml-[37px]`}
-                      name="cars"
-                      id="cars"
-                      value={selectedEngineMinFilter}
-                      onChange={(e) => setSelectedEngineMinFilter(e.target.value)}
+                      name="min_engine_volume"
+                      onChange={handleChange}
+                      value={state.min_engine_volume}
                     >
-                      <option value="" disabled hidden>
+                      <option value="" disabled>
                         Minimum
                       </option>
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="opel">Opel</option>
-                      <option value="audi">Audi</option>
+                      <option value="1500">1500</option>
                     </select>
-                  </div>
+                    </div>
                   <div className="w-full">
-                    <select
-                      className={`${styles.dropdown} ml-[37px]`}
-                      name="cars"
-                      id="cars"
-                      value={selectedEngineMaxFilter}
-                      onChange={(e) => setSelectedEngineMaxFilter(e.target.value)}
-                    >
-                      <option value="" disabled hidden>
-                        Maksimum
-                      </option>
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="opel">Opel</option>
-                      <option value="audi">Audi</option>
-                    </select>
+                  <select
+                    name="max_engine_volume"
+                    onChange={handleChange}
+                    value={state.max_engine_volume}
+                  >
+                    <option value="" disabled>
+                      Maksimum
+                    </option>
+                    <option value="5000">5000</option>
+                  </select>
                   </div>
                 </div>
                 <div className="w-full mt-[24px]">
-                  <select
-                    className={`${styles.dropdown} ml-[37px]`}
-                    name="cars"
-                    id="cars"
-                    value={selectedForMarketFilter}
-                    onChange={(e) => setSelectedForMarketFilter(e.target.value)}
-                  >
-                    <option value="" disabled hidden>
-                      Hansı bazar üçün yığılıb
-                    </option>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
-                  </select>
+                  <DropdownMobile callBackValue={callBackValue} carfeature={carFeature?.markets} name={"market"} placeholder={"Hansı bazar üçün yığılıb"} />
                 </div>
                 <div className="flex gap-[20px] mt-[24px]">
                   <div className="w-full">
-                    <select
-                      className={`${styles.dropdown} ml-[37px]`}
-                      name="cars"
-                      id="cars"
-                      value={selectedFuelTypeFilter}
-                      onChange={(e) => setSelectedFuelTypeFilter(e.target.value)}
-                    >
-                      <option value="" disabled hidden>
-                        Yanacaq növü
-                      </option>
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="opel">Opel</option>
-                      <option value="audi">Audi</option>
-                    </select>
+                      <DropdownMobile callBackValue={callBackValue} carfeature={carFeature?.fuels} name={"fuel"} placeholder={"Yanacaq növü"} />
                   </div>
                   <div className="w-full">
-                    <select
-                      className={`${styles.dropdown} ml-[37px]`}
-                      name="cars"
-                      id="cars"
-                      value={selectedColorFilter}
-                      onChange={(e) => setSelectedColorFilter(e.target.value)}
-                    >
-                      <option value="" disabled hidden>
-                        Color
-                      </option>
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="opel">Opel</option>
-                      <option value="audi">Audi</option>
-                    </select>
+                      <DropdownMobile callBackValue={callBackValue} carfeature={carFeature?.colors} name={"color"} placeholder={"Rəng"} />
                   </div>
                 </div>
               </div>
               
-              <button>Search</button>
+              <button onClick={searchFunction}>Search</button>
           </div>
         </div>
       </div>

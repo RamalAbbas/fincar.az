@@ -28,9 +28,8 @@ const Dropdown = ({ carfeature , name , callBackValue , placeholder }) => {
         let ids = item[0].models?.map(item => item.id)
         let names = item[0].models?.map(item => item.name)
          
-        let selectors = names?.map((item) => `#prefix${item}`)
+        let selectors = names?.map((item) => `#prefixa${item}`)
         selectors.forEach((item) => document.querySelectorAll(item)[0].checked = true)
-        console.log(selectors.forEach((item) => item));
         
           
         if (event.target.checked) {
@@ -80,11 +79,11 @@ const Dropdown = ({ carfeature , name , callBackValue , placeholder }) => {
                                         item?.models ? (
                                             item?.models.map((item) => (
                                                 <div key={item.id} className={styles.check_item}>
-                                                    <label htmlFor={"prefix"+item.name} className={styles.dropdown_option}>
+                                                    <label htmlFor={"prefixa"+item.name} className={styles.dropdown_option}>
                                                         {item?.name}
                                                     </label>
             
-                                                    <input id={"prefix"+item.name} value={item.id} onChange={removeCheckboxChange} type="checkbox" />
+                                                    <input id={"prefixa"+item.name} value={item.id} onChange={removeCheckboxChange} type="checkbox" />
                                                 </div>
                                             ))
                                         ) : null
