@@ -162,8 +162,7 @@
   }
 }
 
-@media screen and (max-width: 468px) {
-}
+
 
 .totalPrice {
   display: flex;
@@ -174,4 +173,18 @@
   font-style: normal;
   font-weight: 510;
   line-height: 28px; /* 155.556% */
+}
+
+
+@media screen and (max-width: 992px) {
+  .totalPrice {
+    display: flex;
+    overflow: hidden;
+    color: #e51a17;
+    text-overflow: ellipsis;
+    font-size: 16px !important;
+    font-style: normal;
+    font-weight: 510;
+    line-height: 28px; /* 155.556% */
+  }
 }

@@ -436,6 +436,11 @@
   /* left: 100vw; */
 }
 
+.logout_title p{
+  color: #F50100;
+  margin-top: 44px;
+}
+
 .mobileFliter h1 {
   color: var(--Neutral-Text-Dark, #505673);
   font-size: 34px;

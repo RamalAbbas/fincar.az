@@ -79,6 +79,45 @@ const Signin = () => {
           </p>
         </div>
       </div>
+
+      <div className={styles.mobileContainer}>
+          <p className={styles.mobileLogo} style={{cursor: "pointer"}} onClick={() => push("/main")}>
+            Fincar.az
+          </p>
+
+          <p className={styles.mobileHeadTitle} >
+            Sign in
+          </p>
+
+          <input
+            placeholder="Fin code"
+            className={styles.signin_input}
+            type="number"
+            name="fin"
+            value={data.fin}
+            onChange={handleInputChange}
+          />
+
+          <input
+            placeholder="Phone Number"
+            className={styles.signin_input}
+            type="text"
+            name="phone"
+            value={data.phone}
+            onChange={handleInputChange}
+          />
+
+          <button onClick={sendRequest} className={styles.signin_button}>
+            Sign in
+          </button>
+
+          <Image src={line} className={styles.mobileLine} alt="line" />
+      
+          <p onClick={() => push("/signin/request")} className={styles.route}>
+            New user?
+            <span className={styles.blue}>Request for registration</span>
+          </p>
+      </div>
     </div>
   );
 };

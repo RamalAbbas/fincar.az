@@ -19,6 +19,7 @@ import {
   getCarFilter,
 } from "../../../services";
 import Dropdown2 from "../../Dropdown2/Dropdown";
+import DropdownMobile from "../../DropdownMobile/Dropdown";
 
 const Title = ({ filterData}) => {
   const { push } = useRouter();
@@ -327,35 +328,35 @@ const Title = ({ filterData}) => {
               !isMobileMenuActive && "!left-[-100vw]"
             }`}
           >
-            <a onClick={() => push("/main")}>
+            <a onClick={() => push("/main")} className={styles.mobileFincarTitle}>
               <h1>Fincar.az</h1>
             </a>
             <div className={styles.mobileList}>
-              <div className="mt-[18px]">
+              <div className="pt-[18px]">
                 <a  onClick={() => push("/main")}>
                   <span>Bütün elanlar</span>
                 </a>
-                <div className="h-[1px] w-full bg-[#D9D9D9] mt-[10px]"></div>
+                <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>
               </div>
-              <div className="mt-[18px]">
+              <div className="pt-[18px]">
                 <a onClick={() => push("/dealerships")}>
                   <span>Salonlar</span>
                 </a>
-                <div className="h-[1px] w-full bg-[#D9D9D9] mt-[10px]"></div>
+                <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>
               </div>
-              <div className="mt-[18px]">
+              <div className="pt-[18px]">
                 <a>
                   <span>Dil</span>
                 </a>
-                <div className="h-[1px] w-full bg-[#D9D9D9] mt-[10px]"></div>
+                <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>
               </div>
-              <div className="mt-[18px]">
+              <div className="pt-[18px]">
                 <a>
                   <span>Haqqımızda</span>
                 </a>
-                <div className="h-[1px] w-full bg-[#D9D9D9] mt-[10px]"></div>
+                <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>
               </div>
-              <div className="mt-[18px]">
+              <div className="pt-[18px]">
                 <div className="flex justify-between items-center">
                   <a  onClick={() => push("/personalcabinet")}>
                     <span>Şəxsi kabinet</span>
@@ -364,7 +365,13 @@ const Title = ({ filterData}) => {
                     <Image src={downArrow} width={24} height={24} />
                   </div>
                 </div>
-                <div className="h-[1px] w-full bg-[#D9D9D9] mt-[10px]"></div>
+                <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>
+              </div>
+              <div onClick={exitFunction} className="">
+                <a className={styles.logout_title}>
+                  <p>Çıxış</p>
+                </a>
+                <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>
               </div>
             </div>
           </div>
@@ -394,219 +401,190 @@ const Title = ({ filterData}) => {
             </div>
           </div>
           <div className={`${styles.filterMobileContent}`}>
-            <div>
-              <select
-                className={`${styles.dropdown} ml-[37px]`}
-                name="cars"
-                id="cars"
-                value={selectedBrandFilter}
-                onChange={(e) => setSelectedBrandFilter(e.target.value)}
-              >
-                <option value="" disabled hidden>
-                  Marka
-                </option>
-              
-                
+              <div className="flex flex-col gap-4">
+                <DropdownMobile callBackValue={callBackValue} carfeature={carFeature?.makes} name={"make"} placeholder={"Marka"} />
+                <DropdownMobile callBackValue={callBackValue} carfeature={models} name={"model"} placeholder={"Modela"} />
+              </div>
             
-              </select>
+              <div className="mt-[24px]">
+                <label>Qiymət</label>
+                <div className="flex gap-[20px] mt-[8px]">
+                  <div className="w-full">
+                    <input type="text" placeholder="Minimum" />
+                  </div>
+                  <div className="w-full">
+                    <input type="text" placeholder="Maksimum" />
+                  </div>
+                </div>
+                <div className="flex gap-[20px] mt-[21px]">
+                  <div className="w-full">
+                    <select
+                      className={`${styles.dropdown} ml-[37px]`}
+                      name="cars"
+                      id="cars"
+                      value={selectedTypeOfBanFilter}
+                      onChange={(e) => setSelectedTypeOfBanFilter(e.target.value)}
+                    >
+                      <option value="" disabled hidden>
+                        Ban növü
+                      </option>
+                      <option value="volvo">Volvo</option>
+                      <option value="saab">Saab</option>
+                      <option value="opel">Opel</option>
+                      <option value="audi">Audi</option>
+                    </select>
+                  </div>
+                  <div className="w-full">
+                    <select
+                      className={`${styles.dropdown} ml-[37px]`}
+                      name="cars"
+                      id="cars"
+                      value={selectedTransmissionFilter}
+                      onChange={(e) =>
+                        setSelectedTransmissionFilter(e.target.value)
+                      }
+                    >
+                      <option value="" disabled hidden>
+                        Sürət qutusu
+                      </option>
+                      <option value="volvo">Volvo</option>
+                      <option value="saab">Saab</option>
+                      <option value="opel">Opel</option>
+                      <option value="audi">Audi</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-[24px]">
+                <label>Qiymət</label>
+                <div className="flex gap-[20px] mt-[8px]">
+                  <div className="w-full">
+                    <input type="text" placeholder="Minimum" />
+                  </div>
+                  <div className="w-full">
+                    <select
+                      className={`${styles.dropdown} ml-[37px]`}
+                      name="cars"
+                      id="cars"
+                      value={selectedYearFilter}
+                      onChange={(e) => setSelectedYearFilter(e.target.value)}
+                    >
+                      <option value="" disabled hidden>
+                        2023
+                      </option>
+                      <option value="volvo">Volvo</option>
+                      <option value="saab">Saab</option>
+                      <option value="opel">Opel</option>
+                      <option value="audi">Audi</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-[24px]">
+                <label>Güc (a.g.)</label>
+                <div className="flex gap-[20px] mt-[8px]">
+                  <div className="w-full">
+                    <input type="text" placeholder="Minimum" />
+                  </div>
+                  <div className="w-full">
+                    <input type="text" placeholder="Maksimum" />
+                  </div>
+                </div>
+              </div>
+              <div className="mt-[24px]">
+                <label>Motorun həcmi </label>
+                <div className="flex gap-[20px] mt-[8px]">
+                  <div className="w-full">
+                    <select
+                      className={`${styles.dropdown} ml-[37px]`}
+                      name="cars"
+                      id="cars"
+                      value={selectedEngineMinFilter}
+                      onChange={(e) => setSelectedEngineMinFilter(e.target.value)}
+                    >
+                      <option value="" disabled hidden>
+                        Minimum
+                      </option>
+                      <option value="volvo">Volvo</option>
+                      <option value="saab">Saab</option>
+                      <option value="opel">Opel</option>
+                      <option value="audi">Audi</option>
+                    </select>
+                  </div>
+                  <div className="w-full">
+                    <select
+                      className={`${styles.dropdown} ml-[37px]`}
+                      name="cars"
+                      id="cars"
+                      value={selectedEngineMaxFilter}
+                      onChange={(e) => setSelectedEngineMaxFilter(e.target.value)}
+                    >
+                      <option value="" disabled hidden>
+                        Maksimum
+                      </option>
+                      <option value="volvo">Volvo</option>
+                      <option value="saab">Saab</option>
+                      <option value="opel">Opel</option>
+                      <option value="audi">Audi</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="w-full mt-[24px]">
+                  <select
+                    className={`${styles.dropdown} ml-[37px]`}
+                    name="cars"
+                    id="cars"
+                    value={selectedForMarketFilter}
+                    onChange={(e) => setSelectedForMarketFilter(e.target.value)}
+                  >
+                    <option value="" disabled hidden>
+                      Hansı bazar üçün yığılıb
+                    </option>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="opel">Opel</option>
+                    <option value="audi">Audi</option>
+                  </select>
+                </div>
+                <div className="flex gap-[20px] mt-[24px]">
+                  <div className="w-full">
+                    <select
+                      className={`${styles.dropdown} ml-[37px]`}
+                      name="cars"
+                      id="cars"
+                      value={selectedFuelTypeFilter}
+                      onChange={(e) => setSelectedFuelTypeFilter(e.target.value)}
+                    >
+                      <option value="" disabled hidden>
+                        Yanacaq növü
+                      </option>
+                      <option value="volvo">Volvo</option>
+                      <option value="saab">Saab</option>
+                      <option value="opel">Opel</option>
+                      <option value="audi">Audi</option>
+                    </select>
+                  </div>
+                  <div className="w-full">
+                    <select
+                      className={`${styles.dropdown} ml-[37px]`}
+                      name="cars"
+                      id="cars"
+                      value={selectedColorFilter}
+                      onChange={(e) => setSelectedColorFilter(e.target.value)}
+                    >
+                      <option value="" disabled hidden>
+                        Color
+                      </option>
+                      <option value="volvo">Volvo</option>
+                      <option value="saab">Saab</option>
+                      <option value="opel">Opel</option>
+                      <option value="audi">Audi</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
               
-
-            </div>
-            <div className="mt-[16px]">
-              <select
-                className={`${styles.dropdown} ml-[37px]`}
-                name="cars"
-                id="cars"
-                value={selectedModelFilter}
-                onChange={(e) => setSelectedModelFilter(e.target.value)}
-              >
-                <option value="" disabled hidden>
-                  Model
-                </option>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
-              </select>
-            </div>
-            <div className="mt-[24px]">
-              <label>Qiymət</label>
-              <div className="flex gap-[20px] mt-[8px]">
-                <div className="w-full">
-                  <input type="text" placeholder="Minimum" />
-                </div>
-                <div className="w-full">
-                  <input type="text" placeholder="Maksimum" />
-                </div>
-              </div>
-              <div className="flex gap-[20px] mt-[21px]">
-                <div className="w-full">
-                  <select
-                    className={`${styles.dropdown} ml-[37px]`}
-                    name="cars"
-                    id="cars"
-                    value={selectedTypeOfBanFilter}
-                    onChange={(e) => setSelectedTypeOfBanFilter(e.target.value)}
-                  >
-                    <option value="" disabled hidden>
-                      Ban növü
-                    </option>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
-                  </select>
-                </div>
-                <div className="w-full">
-                  <select
-                    className={`${styles.dropdown} ml-[37px]`}
-                    name="cars"
-                    id="cars"
-                    value={selectedTransmissionFilter}
-                    onChange={(e) =>
-                      setSelectedTransmissionFilter(e.target.value)
-                    }
-                  >
-                    <option value="" disabled hidden>
-                      Sürət qutusu
-                    </option>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div className="mt-[24px]">
-              <label>Qiymət</label>
-              <div className="flex gap-[20px] mt-[8px]">
-                <div className="w-full">
-                  <input type="text" placeholder="Minimum" />
-                </div>
-                <div className="w-full">
-                  <select
-                    className={`${styles.dropdown} ml-[37px]`}
-                    name="cars"
-                    id="cars"
-                    value={selectedYearFilter}
-                    onChange={(e) => setSelectedYearFilter(e.target.value)}
-                  >
-                    <option value="" disabled hidden>
-                      2023
-                    </option>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div className="mt-[24px]">
-              <label>Güc (a.g.)</label>
-              <div className="flex gap-[20px] mt-[8px]">
-                <div className="w-full">
-                  <input type="text" placeholder="Minimum" />
-                </div>
-                <div className="w-full">
-                  <input type="text" placeholder="Maksimum" />
-                </div>
-              </div>
-            </div>
-            <div className="mt-[24px]">
-              <label>Motorun həcmi </label>
-              <div className="flex gap-[20px] mt-[8px]">
-                <div className="w-full">
-                  <select
-                    className={`${styles.dropdown} ml-[37px]`}
-                    name="cars"
-                    id="cars"
-                    value={selectedEngineMinFilter}
-                    onChange={(e) => setSelectedEngineMinFilter(e.target.value)}
-                  >
-                    <option value="" disabled hidden>
-                      Minimum
-                    </option>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
-                  </select>
-                </div>
-                <div className="w-full">
-                  <select
-                    className={`${styles.dropdown} ml-[37px]`}
-                    name="cars"
-                    id="cars"
-                    value={selectedEngineMaxFilter}
-                    onChange={(e) => setSelectedEngineMaxFilter(e.target.value)}
-                  >
-                    <option value="" disabled hidden>
-                      Maksimum
-                    </option>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
-                  </select>
-                </div>
-              </div>
-              <div className="w-full mt-[24px]">
-                <select
-                  className={`${styles.dropdown} ml-[37px]`}
-                  name="cars"
-                  id="cars"
-                  value={selectedForMarketFilter}
-                  onChange={(e) => setSelectedForMarketFilter(e.target.value)}
-                >
-                  <option value="" disabled hidden>
-                    Hansı bazar üçün yığılıb
-                  </option>
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="opel">Opel</option>
-                  <option value="audi">Audi</option>
-                </select>
-              </div>
-              <div className="flex gap-[20px] mt-[24px]">
-                <div className="w-full">
-                  <select
-                    className={`${styles.dropdown} ml-[37px]`}
-                    name="cars"
-                    id="cars"
-                    value={selectedFuelTypeFilter}
-                    onChange={(e) => setSelectedFuelTypeFilter(e.target.value)}
-                  >
-                    <option value="" disabled hidden>
-                      Yanacaq növü
-                    </option>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
-                  </select>
-                </div>
-                <div className="w-full">
-                  <select
-                    className={`${styles.dropdown} ml-[37px]`}
-                    name="cars"
-                    id="cars"
-                    value={selectedColorFilter}
-                    onChange={(e) => setSelectedColorFilter(e.target.value)}
-                  >
-                    <option value="" disabled hidden>
-                      Color
-                    </option>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="opel">Opel</option>
-                    <option value="audi">Audi</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <button>Search</button>
+              <button>Search</button>
           </div>
         </div>
       </div>

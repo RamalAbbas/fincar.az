@@ -15,7 +15,7 @@ const Footer = () => {
 
   return (
     <>
-      {pathname !== '/signin' && pathname !== '/signin/request' && (
+      {pathname !== '/signin' && pathname !== '/signin/request' && pathname !== '/signin/user' && pathname !== '/admin/signin' && (
          <div className={styles.divarrrrrrrrr}>
           <div className={styles.widhtLimitContainerLarge}>
             <div
