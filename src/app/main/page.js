@@ -58,7 +58,7 @@ const page = () => {
       <Popular />
       <CarList renderProduct={renderProduct} cars={cars} />
       <div className="pb-[90px] min-lg:hidden">
-        <MobileCarList title="Popular maşınlar" renderProduct={renderProduct2} carPopulars={carPopulars} />
+        <MobileCarList title="Popular maşınlar" renderProduct={renderProduct} carPopulars={cars} />
       </div>
     </>
   );

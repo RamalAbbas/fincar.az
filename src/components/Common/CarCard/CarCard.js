@@ -32,8 +32,6 @@ const CarCard = ({ data, callBackSlug , renderProducts }) => {
             onClick={() => callBackSlug(data.slug)}
             src={data?.cover}
             loading="lazy"
-            width={264}
-            height={238}
             alt="car"
             className="h-full object-cover rounded-t-[10px]"
           />

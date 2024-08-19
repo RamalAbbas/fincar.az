@@ -150,6 +150,7 @@
   }
 
   .card {
+    min-width: -webkit-fill-available;
     background: var(--Neutral-Background, #f0eff5);
     padding-bottom: 8px;
     gap: 8px;
@@ -158,6 +159,13 @@
     max-height: 288px;
   }
   .img img {
+    width: 100%;
+  }
+  .card h1{
+    max-width: 80%;
+    overflow-x: scroll;
+  }
+  .bottomContent{
     width: 100%;
   }
 }
