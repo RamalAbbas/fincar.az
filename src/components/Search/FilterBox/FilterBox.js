@@ -1,10 +1,9 @@
+import { carFeatureListModel, getCarFilter } from "../../../services";
 import React, { useState, useEffect } from "react";
+import Dropdown from '../../Dropdown/Dropdown';
 import styles from "./FilterBox.module.css";
 import { useRouter } from "next/navigation";
-import { carFeatureListModel, getCarFilter } from "../../../services";
-import { data } from "autoprefixer";
-import Dropdown from '../../Dropdown/Dropdown'
-// import { data, data } from "autoprefixer";
+
 const FilterBox = ({ carfeature, filterData }) => {
   const { push } = useRouter();
   const [filters, setFilters] = useState({
@@ -89,7 +88,6 @@ const FilterBox = ({ carfeature, filterData }) => {
       }));
     }
   };
-  console.log(filters);
 
   return (
     <div className={styles.box}>
@@ -154,9 +152,9 @@ const FilterBox = ({ carfeature, filterData }) => {
         </div>
 
         <div className="flex gap-2 mt-4">
-          <Dropdown callBackValue={callBackValue} carfeature={carfeature.bans} name={"body"} placeholder={"Ban növü"} />
+          <Dropdown callBackValue={callBackValue} carfeature={carfeature?.bans} name={"body"} placeholder={"Ban növü"} />
 
-          <Dropdown callBackValue={callBackValue} carfeature={carfeature.gears} name={"gearbox"} placeholder={"Sürət qutusu"} />
+          <Dropdown callBackValue={callBackValue} carfeature={carfeature?.gears} name={"gearbox"} placeholder={"Sürət qutusu"} />
         </div>
 
         <label>İstehsal ili</label>
@@ -238,12 +236,12 @@ const FilterBox = ({ carfeature, filterData }) => {
           </div>
         </div>
 
-        <Dropdown callBackValue={callBackValue} carfeature={carfeature.markets} name={"market"} placeholder={"Hansı bazar üçün yığılıb"} />
+        <Dropdown callBackValue={callBackValue} carfeature={carfeature?.markets} name={"market"} placeholder={"Hansı bazar üçün yığılıb"} />
        
         <div className="flex gap-2 mb-4 mt-4">
-          <Dropdown callBackValue={callBackValue} carfeature={carfeature.fuels} name={"fuel"} placeholder={"Yanacaq növü"} />
+          <Dropdown callBackValue={callBackValue} carfeature={carfeature?.fuels} name={"fuel"} placeholder={"Yanacaq növü"} />
           
-          <Dropdown callBackValue={callBackValue} carfeature={carfeature.colors} name={"color"} placeholder={"Rəng"} />
+          <Dropdown callBackValue={callBackValue} carfeature={carfeature?.colors} name={"color"} placeholder={"Rəng"} />
         </div> 
 
         <button className={styles.searchButton} onClick={handleSearch}>

@@ -91,3 +91,56 @@
     color: #2151D9;
     margin-left: 8px;
 }
+
+
+/* Mobile */
+
+.mobileContainer{
+    display: none;
+    flex-direction: column;
+    padding: 44px 24px;
+}
+
+.mobileLogo{
+    color: var(--Neutral-Text-Dark, #505673);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 28px; 
+}
+
+.mobileHeadTitle{
+    color: var(--Neutral-Darkest, #141A33);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 590;
+    line-height: 40px; 
+    margin-top: 44px;
+    margin-bottom: 16px;
+}
+
+.mobileLine{
+    margin-top: 40px;
+}
+
+
+@media screen and (max-width: 1300px) {
+    .container{
+        padding-left: 150px !important;
+        padding-right: 150px !important;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .container{
+        display: none;
+    }
+
+    .mobileContainer{
+        display: flex;
+    }
+
+    .wrapper{
+        background-image: none;
+    }
+}
