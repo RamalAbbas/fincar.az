@@ -5,7 +5,7 @@
     background-image: url('../../../assets/images/signin/car/car.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;    
+    background-size: cover; 
 }
 
 .container{
@@ -90,6 +90,11 @@
     color: #2151D9;
     margin-left: 8px;
 }
+
+@media only screen and (min-device-width: 555px) and (max-device-width: 1080px) {
+    .wrapper {
+    display: none;
+    }
 
 /* Mobile */
 
