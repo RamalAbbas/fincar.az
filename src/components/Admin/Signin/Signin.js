@@ -73,6 +73,38 @@ const Signin = () => {
           </button>
         </div>
       </div>
+
+      <div className={styles.mobileContainer}>
+          <p className={styles.mobileLogo} style={{cursor: "pointer"}} onClick={() => push("/main")}>
+            Fincar.az
+          </p>
+
+          <p className={styles.mobileHeadTitle}>
+            Sign in as a business account
+          </p>
+
+          <input
+            placeholder="User Name"
+            className={styles.signin_input}
+            type="text"
+            name="username"
+            value={data.username}
+            onChange={handleInputChange}
+          />
+
+          <input
+            placeholder="Password"
+            className={styles.signin_input}
+            type="password"
+            name="password"
+            value={data.password}
+            onChange={handleInputChange}
+          />
+
+          <button onClick={sendRequest} className={styles.signin_button}>
+            Sign in
+          </button>
+      </div>
     </div>
   );
 };

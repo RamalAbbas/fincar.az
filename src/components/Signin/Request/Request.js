@@ -1,5 +1,4 @@
 "use client";
-
 import line from "../../../assets/images/signin/line/line.png";
 import logo from "../../../assets/images/logo/logo.png";
 import { useRouter } from "next/navigation";
@@ -68,6 +67,43 @@ const Request = () => {
             <span className={styles.blue}>Sign in</span>
           </p>
         </div>
+      </div>
+
+       <div className={styles.mobileContainer}>
+          <p className={styles.mobileLogo} style={{cursor: "pointer"}} onClick={() => push("/main")}>
+            Fincar.az
+          </p>
+
+          <p className={styles.mobileHeadTitle}>
+            Request for registration
+          </p>
+
+          <input
+            placeholder="Email"
+            name="email"
+            value={data.email}
+            onChange={handleInputChange}
+            className={styles.signin_input}
+            type="email"
+          />
+          <input
+            placeholder="Phone Number"
+            name="phone"
+            value={data.phone}
+            onChange={handleInputChange}
+            className={styles.signin_input}
+            type="text"
+          />
+          <button onClick={sendRequest} className={styles.signin_button}>
+            Send Request
+          </button>
+
+          <Image src={line} className={styles.mobileLine} alt="line" />
+      
+          <p onClick={() => push("/signin")} className={styles.route}>
+            Do you have an account?
+            <span className={styles.blue}>Sign in</span>
+          </p>
       </div>
     </div>
   );
