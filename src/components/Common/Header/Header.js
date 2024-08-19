@@ -41,6 +41,7 @@ const Header = ({ isSaved, isNotification }) => {
   return (
     <div>
     {pathname !== "/main" &&
+     pathname !== "/about" &&
       pathname !== "/signin" &&
       pathname !== "/signin/user" &&
       pathname !== "/admin/signin" &&
