@@ -28,7 +28,7 @@ const Footer = () => {
               </div>
               <div className={styles.footerRight}>
                 <div>
-                  <a>
+                  <a onClick={() => push("/about")}>
                     <p>Haqqımızda</p>
                   </a>
                   <a>
