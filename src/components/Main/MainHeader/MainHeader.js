@@ -185,8 +185,6 @@ const Title = ({ filterData }) => {
     const response = await getCarFilter(queryString);
     filterData(response);
     console.log(response);
-    document.querySelector("#mobileHeaderContainer").style.display = "none"
-    
   };
 
 
