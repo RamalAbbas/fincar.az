@@ -162,7 +162,7 @@
     width: 100%;
   }
   .card h1{
-    max-width: 80%;
+    max-width: 100%;
     overflow-x: scroll;
   }
   .bottomContent{

@@ -4,17 +4,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from "./MobileCarImgSlider.module.css";
+import { Pagination } from 'swiper/modules';
+import favorite from "../../../assets/icons/favorite.svg";
+import favouriteblack from "../../../assets/icons/favouriteblack.svg";
 import Image from "next/image";
-import car1 from "../../../assets/images/carCardExample/bmwe46.jpg";
-import car2 from "../../../assets/images/carCardExample/bmwm3nfs.jpg";
-import car3 from "../../../assets/images/carCardExample/car1.png";
-import car4 from "../../../assets/images/carCardExample/car2.png";
-import car5 from "../../../assets/images/carCardExample/car3.png";
-import car6 from "../../../assets/images/carCardExample/car4.png";
-
-const MobileCarImgSlider = ({ images }) => {
+const MobileCarImgSlider = ({ images , data }) => {
   const settings = {
-    dots: true,
     infinite: false,
     speed: 500,
     slidesToShow: 1,
@@ -22,6 +17,7 @@ const MobileCarImgSlider = ({ images }) => {
     draggable: true,
     touchMove: true,
     arrows: false,
+    dots: true,
     appendDots: (dots) => (
       <div
         style={{
@@ -39,6 +35,18 @@ const MobileCarImgSlider = ({ images }) => {
     ),
   };
 
+  const saveCarFunction = async () => {
+    const response = await carSave({ car: data.id });
+    console.log(response);
+    
+    renderProducts()
+  };
+
+  const deleteCarFunction = async () => {
+    const response = await deleteSavedCar(data.id);
+    renderProducts()
+  };
+
   return (
     <div className={`${styles.widhtLimitContainerLarge}`}>
       <div
@@ -46,18 +54,43 @@ const MobileCarImgSlider = ({ images }) => {
       >
         <div className="slider-container">
           <Slider className={styles.slider} {...settings}>
-            {images?.map((item) => (
-              <div className={`w-full overflow-hidden ${styles.sliderCard}`} key={item.id}>
-                <img
-                  src={item.image}
-                  loading="lazy"
-                  width={1120}
-                  height={536}
-                  alt="slider image 1"
-                  className="object-cover w-full h-full"
-                />
-              </div>
-            ))}
+              {images?.map((item) => (
+                <div className={`w-full overflow-hidden ${styles.sliderCard}`} key={item.id}>
+                  <img
+                    src={item.image}
+                    loading="lazy"
+                    width={1120}
+                    height={536}
+                    alt="slider image 1"
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+              ))}
+              {/* {             
+                true ? (
+                    <div onClick={deleteCarFunction} className={styles.fav_disabled}>
+                      <Image
+                        src={favouriteblack}
+                        loading="lazy"
+                        width={20}
+                        height={20}
+                        alt="car"
+                        className="h-full w-full object-cover rounded-t-[10px]"
+                      />
+                    </div>
+                  ) : (
+                    <div onClick={saveCarFunction} className={styles.fav}>
+                      <Image
+                        src={favorite}
+                        loading="lazy"
+                        width={20}
+                        height={20}
+                        alt="car"
+                        className="h-full w-full object-cover rounded-t-[10px]"
+                      />
+                    </div>
+                  )
+                } */}
           </Slider>
         </div>
       </div>
