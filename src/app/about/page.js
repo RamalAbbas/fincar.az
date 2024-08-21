@@ -9,9 +9,9 @@ import Frame from "../../assets/images/about/Frame 247.png"
 import good from "../../assets/icons/about/good.svg"
 import call from "../../assets/icons/about/call.svg"
 import mobileMenu from "../../assets/icons/mobileHeader/menu.svg";
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 const page = () => {
- 
+ const {push} = useRouter()
   return (
     <>
     <div
@@ -74,6 +74,14 @@ const page = () => {
       <div className={styles.fincar}>
         <div className={styles.fincarr}>
         <Image src={Frame}></Image>
+        </div>
+        <div className={styles.tak}>
+          <p className={styles.paragraph}>Bizim missiyamız</p>
+        </div>
+        <div className={styles.div}>
+          <div className={styles.box}>
+            <p className={styles.boxs}>Fincar, ən yaxşı avtomobil təcrübəsini təmin etmək məqsədi ilə yaranıb. Biz, müştərilərimizə keyfiyyətli və etibarlı avtomobillər təqdim edərək, onlara sərfəli qiymətlərlə yüksək xidmət göstərmək üçün çalışırıq. Avtomobil alqı-satqısı və icarəsində inam və rahatlıq yaratmaq əsas məqsədimizdir.</p>
+          </div>
         </div>
       </div>
      </>
