@@ -58,7 +58,7 @@ const ProductPage = ({ params }) => {
       <OtherCars />
       {/* mobile design start*/}
       <div className="min-lg:hidden pb-[40px]">
-        <MobileCarImgSlider images={data?.images} />
+        <MobileCarImgSlider images={data?.images} data={data} />
         <MobileCarDetail detail={data} />
         <MobileCarDescription optionals={data?.optionals} />
         <MobileCarProfile detail={data.dealer} />

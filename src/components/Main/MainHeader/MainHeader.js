@@ -50,6 +50,7 @@ const Title = ({ filterData }) => {
 
   useEffect(() => {
     generateOptions();
+
   }, []);
 
   const [state, setState] = useState({
@@ -339,6 +340,7 @@ const Title = ({ filterData }) => {
             </div>
           </div>
         </div>
+
         <div
           onClick={handleClickOutside}
           className={`${!isMobileMenuActive && "hidden !opacity-0"} ${
@@ -354,6 +356,7 @@ const Title = ({ filterData }) => {
             <a onClick={() => push("/main")} className={styles.mobileFincarTitle}>
               <h1>Fincar.az</h1>
             </a>
+            
             <div className={styles.mobileList}>
               <div className="pt-[18px]">
                 <a  onClick={() => push("/main")}>
@@ -412,6 +415,7 @@ const Title = ({ filterData }) => {
             </div>
           </div>
         </div>
+
         <div
           className={`${styles.mobileFliter} ${
             !isMobileFilterActive && "hidden !opacity-1 !top-[100vh]"
