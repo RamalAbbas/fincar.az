@@ -43,8 +43,6 @@
   display: flex;
   margin-top: 36px;
   justify-content: space-between;
-  padding-left: 129px;
-  padding-right: 15px;
   max-width: 1128px !important;
   left: 0;
   right: 0;
@@ -65,6 +63,7 @@
   line-height: 32px;
   transition: 0.2s;
   transition-timing-function: linear;
+  display: flex;
 }
 
 .leftLogo a:hover {
@@ -110,16 +109,17 @@
   font-weight: 500;
   line-height: 24px;
   border-radius: 10px;
-  background: var(--Secondary-05, #f5bd2f);
+  background: var(--Secondary-05, #F5BD2F);
   transition: 0.2s;
   transition-timing-function: linear;
 }
 
 .rightNav button:hover {
-  background: var(--Secondary-05, #f5d52f);
+  background: var(--Secondary-05, #F5BD2F);
 }
 
 .rightNav a {
+  display: flex;
   color: var(--Neutral-Lightest, #f5f6fa);
   font-size: 16px;
   font-style: normal;
@@ -131,6 +131,7 @@
 
 .rightNav a:hover {
   color: #f5bd2f;
+  border-bottom: 1px solid #f5bd2f;
 }
 .rightNav a::after {
   content: "";
@@ -616,27 +617,46 @@
 
 .user_menu {
   position: absolute;
-  background: #f5f6fa;
-  padding: 0px 12px;
-  border-radius: 10px;
   display: flex;
+  gap: 12px;
   flex-direction: column;
-  top: 38px;
-  left: -30px;
-  z-index: 1012120;
+  left: -45px;
+  padding: 16px;
+  font-weight: 400;
+  background-color: #fff;
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.07);
+  border: solid 1px #D9D9D9;
+  border-radius: 8px;
+  z-index: 999;
+  width: 177px;
+  height: auto;
+  top: 37px;
 }
 
-.user_menu p {
-  color: var(--Neutral-Text-Dark, #505673);
-
-  /* Body/B2/Medium */
-  font-family: "SF Pro";
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 510;
-  line-height: 24px; /* 150% */
-  padding: 12px 24px;
+.logout_button{
+  box-sizing: border-box;
+  color: #fff;
+  background-color: #F5BD2F;
   width: 100%;
-  white-space: nowrap;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.userAccontTitle{
+  box-sizing: border-box;
+  color: #666;
+  border: solid 1px #dedede;
+  width: 100%;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 6px;
+  font-size: 14px;
 }

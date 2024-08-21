@@ -25,7 +25,7 @@ const CarList = ({ cars , renderProduct }) => {
               <CarCard key={index} callBackSlug={callBackSlug} data={info} renderProducts={renderProducts} />
             ))}
 
-            {cars?.length == 0 ? <p className={styles.noData}>No Data</p> : <></>}
+            {cars?.length == 0 ? <p className={styles.noData}>Axtarisa uygun netice yoxdur</p> : <></>}
           </div>
         </div>
       </div>

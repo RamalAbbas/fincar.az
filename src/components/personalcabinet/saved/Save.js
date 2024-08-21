@@ -99,7 +99,7 @@ const Saved = () => {
             >
               <h1>
                 {item?.make.name}
-                {item?.model.name}
+                <span className="ml-1">{item?.model.name}</span>
               </h1>
               <p className={styles.totalPrice}>
                 {item?.price}

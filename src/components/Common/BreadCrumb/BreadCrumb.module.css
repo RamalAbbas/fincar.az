@@ -60,10 +60,20 @@
     .container{
       padding-top: 16px !important;
     }
+
+    .noBreadCumb{
+      display: none;
+    }
 }
 
 @media screen and (max-width: 1160px) {
   .container{
     max-width: 1000px;
+  }
+}
+
+@media screen and (max-width: 1280px){
+  .container{
+    max-width: 900px;
   }
 }

@@ -30,15 +30,14 @@ const Dropdown = ({ carfeature , name , callBackValue , placeholder }) => {
         
         let selectors = names?.map((item) => `#prefix${item}`)
         selectors.forEach((item) => document.querySelectorAll(item)[0].checked = true)
-        
           
         if (event.target.checked) {
-            // setAllIds(prevIds => [...prevIds, ...ids]);
-            callBackValue([...allIds, ...ids])
+            setAllIds(prevIds => [...prevIds, ...ids]);
+            callBackValue(name,[...allIds, ...ids])
         } else {
             setAllIds(prevIds => prevIds.filter(id => !ids.includes(id)));
             selectors.forEach((item) => document.querySelectorAll(item)[0].checked = false)
-            callBackValue(name,allIds)
+            callBackValue(name,allIds.filter(id => !ids.includes(id)))
         }
     };
 

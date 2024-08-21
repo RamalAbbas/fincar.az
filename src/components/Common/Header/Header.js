@@ -56,7 +56,10 @@ const Header = ({ isSaved, isNotification }) => {
                 <div className={styles.rightNav}>
                   <a onClick={() => push("/search")}>Bütün Elanlar</a>
                   <a onClick={() => push("/dealerships")}>Salonlar</a>
-                  <div className={styles.language}>
+                  <a onClick={() => push("/about")}>Haqqımızda</a>
+                  <a onClick={() => push("/contactus")}>Bizimlə əlaqə</a>
+                  <a onClick={() => push("/faqs")}>FAQ</a>
+                  {/* <div className={styles.language}>
                     AZ
                     <Image
                       src={languageIcon}
@@ -65,7 +68,7 @@ const Header = ({ isSaved, isNotification }) => {
                       alt="languageIcon"
                     
                     />
-                  </div>
+                  </div> */}
                   <div className={styles.cont}>
                   <Image
                       src={rec}
@@ -85,7 +88,7 @@ const Header = ({ isSaved, isNotification }) => {
                     </div>
                   )}
 
-                  {data && (
+                  {/* {data && (
                     <div className={styles.notificationBody}>
                       <Image
                         onMouseLeave={() => setIsNotificationHover(false)}
@@ -111,13 +114,13 @@ const Header = ({ isSaved, isNotification }) => {
                                 our system’s database at the moment.
                               </p>
                             </div>
-                            {/* Repeat items as needed */}
                           </div>
                         </div>
                       )}
                     </div>
-                  )}
+                  )} */}
 
+                  
                   <div
                     onMouseEnter={() => setIsMenu(true)}
                     onMouseLeave={() => setIsMenu(false)}
@@ -128,10 +131,8 @@ const Header = ({ isSaved, isNotification }) => {
                     </button>
                     {isMenu && data.username ? (
                       <div className={styles.user_menu}>
-                        <p onClick={() => push("/personalcabinet")}>
-                          User account
-                        </p>
-                        <p onClick={exitFunction}>Exit</p>
+                        <p className={styles.userAccontTitle} onClick={() => push("/personalcabinet")}>User account</p>
+                        <p className={styles.logout_button} onClick={exitFunction}>Çıxış</p>
                       </div>
                     ) : (
                       <></>

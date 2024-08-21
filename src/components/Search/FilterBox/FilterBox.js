@@ -58,6 +58,8 @@ const FilterBox = ({ carfeature, filterData }) => {
 
     push(`/search?${queryString}`);
     const response = await getCarFilter(queryString);
+    console.log(response,queryString);
+    
     filterData(response);
   };
 
