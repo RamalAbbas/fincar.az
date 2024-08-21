@@ -46,7 +46,7 @@ const ProductPage = ({ params }) => {
           className={`${styles.productContainer} ${styles.widhtLimitContainer}`}
         >
           <div>
-            <CarImgSlider images={data?.images} />
+            <CarImgSlider data={data} images={data?.images} />
             <Stocks optionals={data?.optionals} />
           </div>
           <div>

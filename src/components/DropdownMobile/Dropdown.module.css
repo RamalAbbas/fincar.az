@@ -7,8 +7,8 @@
 .dropdown_top{
     display: flex;
     justify-content: space-between;
-    border: 1px solid var(--Neutral-Text-Soft, #8990B9);
     padding: 14px 16px;
+    background-color: #F5F6FA;
     border-radius: 10px;
     cursor: pointer;
 }
@@ -28,6 +28,9 @@
 
 .dropdown_menu{
     width: 100%;
+    max-height: 250px;
+    overflow-y: scroll;
+    margin-top: 10px;
     flex-direction: column;
     position: absolute;
     border-radius: 10px;

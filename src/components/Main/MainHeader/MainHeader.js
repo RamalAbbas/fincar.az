@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleMenuFilter } from "../../../redux/features/mobileMenuFilterSlice";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import saved from "../../../assets/icons/saved/saved.svg";
+
 import {
   carFeatureListModel,
   getCarFeature,
@@ -45,8 +47,6 @@ const Title = ({ filterData }) => {
     }
     setOptions(newOptions);
   };
-
-  
 
   useEffect(() => {
     generateOptions();
@@ -102,7 +102,6 @@ const Title = ({ filterData }) => {
   const insideMobileMenu = useRef(null);
 
   const handleToggleMobileMenu = () => {
-    console.log("click");
     setIsMobileMenuActive((prevState) => !prevState);
   };
 
@@ -184,7 +183,7 @@ const Title = ({ filterData }) => {
     push(`/main?${queryString}`);
     const response = await getCarFilter(queryString);
     filterData(response);
-    console.log(response);
+    handleClickMenuFilter(false)
   };
 
 
@@ -224,10 +223,21 @@ const Title = ({ filterData }) => {
             <div className={styles.rightNav}>
               <a onClick={() => push("/search")}>Bütün Elanlar</a>
               <a onClick={() => push("/dealerships")}>Salonlar</a>
-              <div className={styles.languageDivar}>
+              <a onClick={() => push("/about")}>Haqqımızda</a>
+              <a onClick={() => push("/contactus")}>Bizimlə əlaqə</a>
+              <a onClick={() => push("/faqs")}>FAQ</a>
+              {data && (
+                    <div
+                      className="cursor-pointer"
+                      onClick={() => push("/saved")}
+                    >
+                      <Image src={saved} alt="" />
+                    </div>
+                  )}
+              {/* <div className={styles.languageDivar}>
                 AZ
                 <Image src={azFlag} width={20} height={15} alt="header-bg" />
-              </div>
+              </div> */}
               <div
                 onMouseEnter={() => setIsMenu(true)}
                 onMouseLeave={() => setIsMenu(false)}
@@ -238,8 +248,8 @@ const Title = ({ filterData }) => {
                 </button>
                 {isMenu && data.username ? (
                   <div className={styles.user_menu}>
-                    <p onClick={() => push("/personalcabinet")}>User account</p>
-                    <p onClick={exitFunction}>Exit</p>
+                    <p className={styles.userAccontTitle} onClick={() => push("/personalcabinet")}>User account</p>
+                    <p className={styles.logout_button} onClick={exitFunction}>Çıxış</p>
                   </div>
                 ) : (
                   <></>
@@ -364,8 +374,21 @@ const Title = ({ filterData }) => {
                 <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>
               </div>
               <div className="pt-[18px]">
-                <a>
+                <a onClick={() => push("/about")}>
                   <span>Haqqımızda</span>
+                </a>
+                <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>
+              </div>
+              
+              <div className="pt-[18px]">
+                <a onClick={() => push("/contactus")}>
+                  <span>Bizimlə əlaqə</span>
+                </a>
+                <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>
+              </div>
+              <div className="pt-[18px]">
+                <a onClick={() => push("/faqs")}>
+                  <span>FAQ</span>
                 </a>
                 <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>
               </div>
@@ -408,7 +431,6 @@ const Title = ({ filterData }) => {
                 <Image src={leftBlue} width={10} height={15} alt="arrow" />
                 <p>Back</p>
               </div>
-              <p>Reset</p>
             </div>
             <div>
               <h1>Filtrlər</h1>

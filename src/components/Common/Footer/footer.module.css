@@ -184,3 +184,9 @@
 
 @media (max-width: 468px) {
 }
+
+@media screen and (max-width: 1280px){
+  .widhtLimitContainer{
+    max-width: 900px;
+  }
+}

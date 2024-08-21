@@ -65,7 +65,7 @@ const Popular = () => {
   const settings = {
     dots: false,
     infinite: true,
-    slidesToShow: 3,
+    slidesToShow: 3, 
     arrows: false,
     swipeToSlide: true,
     slidesToScroll: 1,

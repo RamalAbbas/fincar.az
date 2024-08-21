@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styles from './Dropdown.module.css'
-import { all } from 'axios'
 
 const Dropdown = ({ carfeature , name , callBackValue , placeholder }) => {
     const [dropdownMenu,setDropdownMenu] = useState(false)
@@ -28,20 +27,23 @@ const Dropdown = ({ carfeature , name , callBackValue , placeholder }) => {
         let ids = item[0].models?.map(item => item.id)
         let names = item[0].models?.map(item => item.name)
          
-        let selectors = names?.map((item) => `#prefixa${item}`)
+        let selectors = names?.map((item) => `#prefixx${item}`)
         selectors.forEach((item) => document.querySelectorAll(item)[0].checked = true)
         
           
         if (event.target.checked) {
             setAllIds(prevIds => [...prevIds, ...ids]);
+            callBackValue(name,[...allIds, ...ids])
         } else {
             setAllIds(prevIds => prevIds.filter(id => !ids.includes(id)));
             selectors.forEach((item) => document.querySelectorAll(item)[0].checked = false)
+            callBackValue(name,allIds.filter(id => !ids.includes(id)))
         }
-        callBackValue(name,ids.flat())
     };
 
     const removeCheckboxChange = (event) => {
+        console.log(event.target.value);
+        
         if(allIds.includes(Number(event.target.value))){
             setAllIds(allIds.filter((item) => item != Number(event.target.value)))
             callBackValue(name,allIds.filter((item) => item != Number(event.target.value)))
@@ -79,11 +81,11 @@ const Dropdown = ({ carfeature , name , callBackValue , placeholder }) => {
                                         item?.models ? (
                                             item?.models.map((item) => (
                                                 <div key={item.id} className={styles.check_item}>
-                                                    <label htmlFor={"prefixa"+item.name} className={styles.dropdown_option}>
+                                                    <label htmlFor={"prefixx"+item.name} className={styles.dropdown_option}>
                                                         {item?.name}
                                                     </label>
             
-                                                    <input id={"prefixa"+item.name} value={item.id} onChange={removeCheckboxChange} type="checkbox" />
+                                                    <input id={"prefixx"+item.name} value={item.id} onChange={removeCheckboxChange} type="checkbox" />
                                                 </div>
                                             ))
                                         ) : null
