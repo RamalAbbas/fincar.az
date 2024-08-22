@@ -117,16 +117,22 @@
   width: 100%;
 }
 
-
+.aboutActive{
+  display: none;
+}
 
 
 @media (min-width: 1080px) {
   .widhtLimitContainer {
     max-width: 1128px;
   }
+  
 }
 
 @media (max-width: 1080px) {
+  .aboutActive{
+    display: flex !important;
+  }
 }
 
 @media (max-width: 468px) {
