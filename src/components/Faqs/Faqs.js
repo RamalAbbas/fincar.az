@@ -1,6 +1,7 @@
 'use client'
+import { getFaqs } from '../../services';
 import styles from './Faqs.module.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const funding_data = [
     {
@@ -57,6 +58,7 @@ const payment_system = [
 ];
 
 const Faqs = () => {
+    const [data,setData] = useState([])
     const [expandedItems, setExpandedItems] = useState([])
 
     const toggleItem = (itemId) => {
@@ -66,6 +68,16 @@ const Faqs = () => {
             setExpandedItems([...expandedItems, itemId]);
         }
     };
+
+    const renderFaqs = async () => {
+        const response = await getFaqs()
+        console.log(response);
+        setData(response)
+    }
+
+    useEffect(() => {
+        renderFaqs()
+    },[])
 
     return (
         <div className={styles.container}>
@@ -90,90 +102,55 @@ const Faqs = () => {
 
            
             <div>
-                    <p className={styles.faqs_item_head_title}>
-                        Maliyyələşdirmə
-                    </p>
+                {
+                    data.map((item) => (
+                        <>
+                            <p className={styles.faqs_item_head_title}>
+                                {
+                                    item.name
+                                }
+                            </p>
 
-                    <div className={styles.faq_items_body}>
-                            {
-                                funding_data.map((item) => (
-                                    <div className={styles.faq_item} key={item.id}>
-                                        <div className={styles.faq_item_top} onClick={() => toggleItem(item.id)}>
+                            <div className={styles.faq_items_body}>
+                                    {
+                                        item.faqs.map((faq_data) => (
+                                            <div className={styles.faq_item} key={faq_data.id}>
+                                                <div className={styles.faq_item_top} onClick={() => toggleItem(faq_data.id)}>
+                                                    {
+                                                        expandedItems.includes(faq_data.id) ? (
+                                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M8 16.6667V15.3333H24V16.6667H8Z" fill="#3B5191"/>
+                                                            </svg>
+                                                        ) : (
+                                                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M15.3333 16.6667H8V15.3333H15.3333V8H16.6667V15.3333H24V16.6667H16.6667V24H15.3333V16.6667Z" fill="#3B5191"/>
+                                                            </svg>
+                                                        )
+                                                    }
 
-                                                {
-                                                    expandedItems.includes(item.id) ? (
-                                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8 16.6667V15.3333H24V16.6667H8Z" fill="#3B5191"/>
-                                                        </svg>
-                                                    ) : (
-                                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M15.3333 16.6667H8V15.3333H15.3333V8H16.6667V15.3333H24V16.6667H16.6667V24H15.3333V16.6667Z" fill="#3B5191"/>
-                                                        </svg>
-                                                    )
-                                                }
+                                                    <p className={styles.faq_name}>
+                                                        {
+                                                            faq_data.question
+                                                        } 
+                                                    </p>
+                                                </div>
 
-                                            <p className={styles.faq_name}>
-                                                {
-                                                    item.title
-                                                } 
-                                            </p>
-                                        </div>
-
-                                        {expandedItems.includes(item.id) && (
-                                            <p className={styles.faq_description}>
-                                                {
-                                                    item.description
-                                                }
-                                            </p>
-                                        )}
-                                    </div>
-                                ))
-                            }
-                    </div>
+                                                {expandedItems.includes(faq_data.id) && (
+                                                    <p className={styles.faq_description}>
+                                                        {
+                                                            faq_data.answer
+                                                        }
+                                                    </p>
+                                                )}
+                                            </div>
+                                        ))
+                                    }
+                            </div>
+                        </>
+                    ))
+                }
+                    
             </div>
-
-            <div>
-                    <p className={styles.faqs_item_head_title}>
-                        Ödəniş sistemi
-                    </p>
-
-                    <div className={styles.faq_items_body}>
-                            {
-                                payment_system.map((item) => (
-                                    <div className={styles.faq_item} key={item.id}>
-                                        <div className={styles.faq_item_top} onClick={() => toggleItem(item.id)}>
-                                                {
-                                                    expandedItems.includes(item.id) ? (
-                                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M8 16.6667V15.3333H24V16.6667H8Z" fill="#3B5191"/>
-                                                        </svg>
-                                                    ) : (
-                                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M15.3333 16.6667H8V15.3333H15.3333V8H16.6667V15.3333H24V16.6667H16.6667V24H15.3333V16.6667Z" fill="#3B5191"/>
-                                                        </svg>
-                                                    )
-                                                }
-
-                                            <p className={styles.faq_name}>
-                                                {
-                                                    item.title
-                                                } 
-                                            </p>
-                                        </div>
-
-                                        {expandedItems.includes(item.id) && (
-                                            <p className={styles.faq_description}>
-                                                {
-                                                    item.description
-                                                }
-                                            </p>
-                                        )}
-                                    </div>
-                                ))
-                            }
-                    </div>
-            </div>
-            
         </div>
     )
 }
