@@ -265,3 +265,13 @@ export const deleteCar = async (slug, token) => {
     console.log({ error });
   }
 };
+
+
+export const getFaqs = async () => {
+  try {
+    const response = await instanceAxios.get(`faq/category/list`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
