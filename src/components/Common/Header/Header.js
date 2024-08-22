@@ -38,15 +38,16 @@ const Header = ({ isSaved, isNotification }) => {
     push("/signin");
   };
 
+
+
   return (
     <div>
     {pathname !== "/main" &&
-     pathname !== "/about" &&
       pathname !== "/signin" &&
       pathname !== "/signin/user" &&
       pathname !== "/admin/signin" &&
       pathname !== "/signin/request" && (
-        <div>
+      <div className={pathname !== "/about" ? styles.noAbout: styles.aboutActive}>
           <div className="h-[56px] lg:hidden">
             <div className={styles.widhtLimitContainerLarge}>
               <div
