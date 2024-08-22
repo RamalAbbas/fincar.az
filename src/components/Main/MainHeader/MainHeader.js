@@ -375,12 +375,7 @@ const Title = ({ filterData }) => {
                 </a>
                 <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>
               </div>
-              <div className="pt-[18px]">
-                <a>
-                  <span>Dil</span>
-                </a>
-                <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>
-              </div>
+              
               <div className="pt-[18px]">
                 <a onClick={() => push("/about")}>
                   <span>Haqqımızda</span>
