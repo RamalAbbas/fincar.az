@@ -12,7 +12,7 @@
 }
 .px{
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: repeat(4,1fr);
     max-width: 1128px;
     margin-right: auto;
     margin-left: auto;
