@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import styles from "./style.module.css";
 import searchInput from "../../assets/icons/mobileHeader/searchInput.svg";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 const page = () => {
   const pathname = usePathname();
@@ -53,7 +54,7 @@ const page = () => {
         }`}
       >
         <div className={styles.mobileSearchInput}>
-          <img src={searchInput} width={25} height={22} alt="search" />
+          <Image src={searchInput} width={25} height={22} alt="search" />
 
           <input
             type="text"

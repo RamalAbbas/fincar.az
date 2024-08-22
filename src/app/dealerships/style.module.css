@@ -18,8 +18,9 @@
   background: var(--Fills-Tertiary, rgba(118, 118, 128, 0.12));
   padding: 7px 8px;
   display: flex;
-  gap: 3px;
-  align-items: flex-start;
+  gap: 12px;
+  align-items: center;
+
 }
 
 .mobileSearchInput input {
