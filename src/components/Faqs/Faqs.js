@@ -1,6 +1,6 @@
+'use client'
 import styles from './Faqs.module.css'
 import { useState } from 'react';
-'use client'
 
 const funding_data = [
     {
