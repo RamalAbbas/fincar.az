@@ -40,7 +40,7 @@ const Saved = () => {
           <MobileCarList renderProduct={renderSavedCars} carPopulars={carSaved} />
 
           {
-            carSaved.length == 0 ? "There are no Data" : ""
+            carSaved?.length == 0 ? "There are no Data" : ""
           }
         </div>
     </div>
