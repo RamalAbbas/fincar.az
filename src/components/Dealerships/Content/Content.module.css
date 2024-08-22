@@ -148,7 +148,6 @@
 
   .location {
     white-space: nowrap;
-    overflow-x: scroll;
     display: flex;
     align-items: center;
     color: #505673;

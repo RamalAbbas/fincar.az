@@ -43,7 +43,7 @@ const MobileDealershipContact = ({ detail }) => {
           className="self-start"
         />
         <div className="flex flex-wrap gap-[16px]">
-          <h5>{detail?.addresss}</h5>
+          <h5>{detail?.address}</h5>
         </div>
       </div>
     </div>
