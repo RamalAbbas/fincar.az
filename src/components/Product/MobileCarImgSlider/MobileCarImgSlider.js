@@ -7,8 +7,9 @@ import styles from "./MobileCarImgSlider.module.css";
 import favorite from "../../../assets/icons/favorite.svg";
 import favouriteblack from "../../../assets/icons/favouriteblack.svg";
 import Image from "next/image";
+import { carSave, deleteSavedCar } from "../../../services";
 
-const MobileCarImgSlider = ({ images, data }) => {
+const MobileCarImgSlider = ({ images, data , renderData }) => {
   const [currentSlide, setCurrentSlide] = useState(1);
 
   const settings = {
@@ -41,12 +42,12 @@ const MobileCarImgSlider = ({ images, data }) => {
   const saveCarFunction = async () => {
     const response = await carSave({ car: data.id });
     console.log(response);
-    renderProducts();
+    renderData()
   };
 
   const deleteCarFunction = async () => {
     const response = await deleteSavedCar(data.id);
-    renderProducts();
+    renderData()
   };
 
   return (
@@ -72,8 +73,8 @@ const MobileCarImgSlider = ({ images, data }) => {
               </div>
             ))}
           </Slider>
-          {/* {
-                true ? (
+            {
+                data?.is_saved ? (
                     <div onClick={deleteCarFunction} className={styles.fav_disabled}>
                       <Image
                         src={favouriteblack}
@@ -96,7 +97,7 @@ const MobileCarImgSlider = ({ images, data }) => {
                       />
                     </div>
                   )
-                } */}
+                }
 
             <div className={styles.slideNumber}>
               <p className={styles.slideTitle}>

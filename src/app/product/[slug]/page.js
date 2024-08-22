@@ -22,7 +22,6 @@ const ProductPage = ({ params }) => {
     const response = await getCarDetail(params.slug);
     renderDetailSlug(response?.dealer?.slug)
     setData(response)
-    console.log(response?.dealer?.slug);
   };
 
   useEffect(() => {
@@ -58,7 +57,7 @@ const ProductPage = ({ params }) => {
       <OtherCars />
       {/* mobile design start*/}
       <div className="min-lg:hidden pb-[40px]">
-        <MobileCarImgSlider images={data?.images} data={data} />
+        <MobileCarImgSlider images={data?.images} data={data} renderData={renderProduct2} />
         <MobileCarDetail detail={data} />
         <MobileCarDescription optionals={data?.optionals} />
         <MobileCarProfile detail={data.dealer} />
