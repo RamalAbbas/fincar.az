@@ -141,3 +141,9 @@
         width: 389px;
     }
 }
+
+@media screen and (max-width: 450px) {
+    .container{
+        width: 350px;
+    }
+}
