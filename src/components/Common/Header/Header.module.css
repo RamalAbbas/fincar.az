@@ -252,6 +252,9 @@
   .widhtLimitContainer{
     max-width: 900px;
   }
+  .rightNav a{
+    font-size: 14px;
+  }
 }
 
 

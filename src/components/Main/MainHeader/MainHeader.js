@@ -32,6 +32,7 @@ const Title = ({ filterData }) => {
   const [models, setModels] = useState([]);
   const [data, setData] = useState([]);
 
+
   const [options, setOptions] = useState([]);
 
   const generateOptions = () => {
@@ -190,6 +191,10 @@ const Title = ({ filterData }) => {
 
   const exitFunction = () => {
     Cookies.remove("data");
+    push("/signin");
+  };
+
+  const loginFunction = () => {
     push("/signin");
   };
 
@@ -397,7 +402,7 @@ const Title = ({ filterData }) => {
               </div>
               <div className="pt-[18px]">
                 <div className="flex justify-between items-center">
-                  <a  onClick={() => push("/personalcabinet")}>
+                  <a  onClick={() => push("/mobilepersonalcabinet")}>
                     <span>Şəxsi kabinet</span>
                   </a>
                   <div>
@@ -406,9 +411,9 @@ const Title = ({ filterData }) => {
                 </div>
                 <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>
               </div>
-              <div onClick={exitFunction} className="">
-                <a className={styles.logout_title}>
-                  <p>Çıxış</p>
+              <div onClick={data?.username ? exitFunction : loginFunction } className="">
+                <a className={`${data?.username ? styles.logout_title : styles.login_title} `}>
+                  <p>{data?.username ? "Çıxış" : "Daxil ol"}</p>
                 </a>
                 <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>
               </div>

@@ -1,0 +1,11 @@
+@media (min-device-width: 0px) and (max-device-width: 1070px) {
+    .breadcrumb_container {
+      display: none;
+    }
+  }
+  
+  @media (min-device-width: 1071px) {
+    .breadcrumb_container {
+      display: block;
+    }
+  }

@@ -240,7 +240,8 @@
 
 @media screen and (max-width: 486px) {
   .modal {
-    scale: 0.7;
+    scale: .85;
+    border-radius: 10px;
   }
 }
 

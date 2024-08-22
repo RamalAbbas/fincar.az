@@ -59,6 +59,10 @@ const User = () => {
             </div>
           </div>
 
+          <div className={styles.board_border}>
+
+          </div>
+
           <div className={styles.boardRight}>
             {/* side line */}
             {/* Username */}
@@ -69,6 +73,7 @@ const User = () => {
                   type="text"
                   placeholder="Vusal Əliyev"
                   className={styles.wraper}
+                  disabled
                 />
                 {/* Pin Code */}
               </div>
@@ -85,21 +90,21 @@ const User = () => {
 
             <div className={styles.bottomContent}>
               <div className={styles.inp1}>
-                <label className={styles.username}>Email</label>
-                <input type="email" className={styles.wraper} />
+                <label className={styles.usernameactive}>Email</label>
+                <input type="email" className={styles.wraper} value={"mmdvrhle@gmail.com"} />
               </div>
 
               {/* Password */}
               <div className={styles.inp3}>
-                <label className={styles.password}>Password</label>
-                <input type="password" className={styles.wraperr} />
+                <label className={styles.passwordactive}>Password</label>
+                <input type="password" className={styles.wraperr} value={"mmdvrhle@gmail.com"} />
               </div>
             </div>
             {/* Email */}
 
-            <div className={styles.change}>
-              <p className={styles.psw}>Cahnge Password</p>
-            </div>
+            {/* <div className={styles.change}> */}
+              {/* <p className={styles.psw}>Cahnge Password</p> */}
+            {/* </div> */}
             <div className={styles.save}>
               <button className={styles.btn1}>Save</button>
             </div>
@@ -116,6 +121,26 @@ const User = () => {
             <div className={styles.borders}></div>
           </div>
         </div>
+      </div>
+
+      <div className={styles.mobileWrapper}>
+          <Image src={personalcabinet} className={styles.mobileImage} alt="" />
+
+          <p className={styles.mobile_name}>
+            Vüsal Əliyev
+          </p>
+
+          <div className={styles.mobileData}>
+              <div className={styles.mobileItem}>
+                <input type="text" className={styles.mobileEmailInput} value={"mmdvrhle@gmail.com"} disabled />
+              </div>
+              <div className={styles.mobileItem}>
+                <input type="text" className={styles.mobileFinInput} value={"2RH3YDR"} disabled />
+              </div>
+              <div className={styles.mobileItem}>
+                <input type="password" className={styles.mobilePassInput}  value={"121212"} disabled />
+              </div>
+          </div>
       </div>
     </div>
   );
