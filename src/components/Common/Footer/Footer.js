@@ -5,6 +5,7 @@ import Image from 'next/image'
 import facebook from '../../../assets/icons//contact/facebook.svg'
 import instagram from '../../../assets/icons//contact/instagram.svg'
 import linkedIn from '../../../assets/icons//contact/linkedIn.svg'
+import tiktok from '../../../assets/icons//contact/tiktok.svg'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
@@ -75,6 +76,15 @@ const Footer = () => {
                     <a>
                       <Image
                         src={linkedIn}
+                        loading="lazy"
+                        width={20}
+                        height={20}
+                        alt="contact"
+                      />
+                    </a>
+                    <a>
+                      <Image
+                        src={tiktok}
                         loading="lazy"
                         width={20}
                         height={20}
