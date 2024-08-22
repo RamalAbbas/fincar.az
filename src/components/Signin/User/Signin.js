@@ -61,7 +61,7 @@ const Signin = () => {
           <input
             placeholder="Phone Number"
             className={styles.signin_input}
-            type="text"
+            type="number"
             name="phone"
             value={data.phone}
             onChange={handleInputChange}
@@ -101,7 +101,7 @@ const Signin = () => {
           <input
             placeholder="Phone Number"
             className={styles.signin_input}
-            type="text"
+            type="number"
             name="phone"
             value={data.phone}
             onChange={handleInputChange}

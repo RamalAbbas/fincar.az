@@ -92,7 +92,7 @@ const Request = () => {
             value={data.phone}
             onChange={handleInputChange}
             className={styles.signin_input}
-            type="text"
+            type="number"
           />
           <button onClick={sendRequest} className={styles.signin_button}>
             Send Request
