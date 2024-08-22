@@ -1,14 +1,10 @@
 .navbar {
-  position: relative;
-  left: -3px;
-  bottom: 6px;
   color: white;
   cursor: pointer;
   background-color: #183178;
   width: 126px;
   border-radius: 10px;
   padding: 12px 24px 12px 24px;
-  height: 48px;
 }
 
 .container {
@@ -19,7 +15,6 @@
 
 .button {
   display: inline-flex;
-  height: 36px;
   padding: 12px 24px;
   justify-content: center;
   align-items: center;
@@ -29,20 +24,16 @@
 }
 
 .btn {
-  height: 48px;
   color: black;
-  /* background: red; */
   position: relative;
-  top: -22%;
-  left: 1%;
-  /* padding: 10px 0px -18px; */
-  padding: 12px 24px 12px 24px;
-  bottom: 40%;
+  padding: 12px 24px 12px 32px;
   width: 96px;
   font-size: 15px;
 }
 
 .testclass {
+  display: flex;
+  align-items: center;
   width: 100%;
   border-radius: 10px;
   padding: 10px;
@@ -54,6 +45,10 @@
 .boardLeft {
   max-width: 210px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 0px;
 }
 
 .board {
@@ -72,9 +67,11 @@
 }
 
 .text {
-  color: #000000;
-  margin-left: 43px;
-  margin-top: 40px;
+  color: var(--Neutral-Text-Dark, #505673);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 590;
+  line-height: 24px; /* 150% */
 }
 
 .img {
@@ -83,9 +80,7 @@
   flex-shrink: 0;
   border-radius: 60px;
   border: 1px solid #c6cadc;
-  position: relative;
-  left: 45%;
-  top: 20%;
+  object-fit: cover;
 }
 
 .topContent {
@@ -102,24 +97,23 @@
 .layout {
   width: 116px;
   height: 116px;
+  margin-top: 36px;
+
 }
 
 .uploadbtn {
   display: inline-flex;
   height: 50px;
-  padding: 12px 24px;
   justify-content: center;
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
   border-radius: 10px;
-  margin-top: 27px;
+  margin-top: 8px;
 }
 
 .upload {
   display: flex;
-  width: 73px;
-  height: 24px;
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -132,7 +126,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
-  margin-left: -27px;
   cursor: pointer;
 }
 
@@ -152,6 +145,22 @@
   align-items: flex-start;
   gap: 8px;
   color: var(--Medium, #878ca8);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 20px; /* 142.857% */
+}
+
+.usernameactive{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--Medium, #141A33);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 20px; /* 142.857% */
 }
 
 .inp {
@@ -200,6 +209,25 @@
   align-self: stretch;
   border-radius: 10px;
   border: 1px solid var(--Medium, #878ca8);
+  background-color: transparent;
+}
+
+.wraper:disabled{
+  border-color: #B9B9B9;
+  color: #B9B9B9;
+
+  &&::placeholder{
+    color: #B9B9B9;
+  }
+}
+
+.board_border{
+  width: 1px;
+  background: #D9D9D9;
+  max-height: 380px;
+  margin-top: 68px;
+  margin-right: 12px;
+  margin-left: 12px;
 }
 
 .wraperr {
@@ -210,6 +238,7 @@
   align-items: center;
   outline: none;
   gap: 8px;
+  background-color: transparent;
   align-self: stretch;
   border-radius: 10px;
   border: 1px solid;
@@ -221,6 +250,18 @@
   align-items: flex-start;
   gap: 8px;
   color: var(--Medium, #878ca8);
+}
+
+.passwordactive{
+  color: #141A33;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 20px; /* 142.857% */
 }
 
 .change {
@@ -243,11 +284,11 @@
 .save {
   width: 136px;
   height: 48px;
+  margin-top: 20px;
   position: relative;
-  left: 780px;
+  left: 84%;
   border: 1px solid black;
   border-radius: 10px;
-  left: 730px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -272,11 +313,114 @@
   display: none;
 }
 
-@media only screen and (min-device-width: 555px) and (max-device-width: 1070px) {
-  .container {
-    display: none;
-  }
+.mobileWrapper{
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
 
+.mobileImage{
+    width: 102px;
+    height: 102px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.mobile_name{
+  color: var(--Neutral-Text-Dark, #505673);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 590;
+  line-height: 28px; 
+  margin-bottom: 26px;
+  margin-top: 22px;
+}
+
+.mobileData{
+  width:80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileItem{
+  border-bottom: 1px solid #D9D9D9;
+  margin: 10px;
+}
+
+.mobileEmailInput{
+  background: transparent;
+  outline: none;
+  border: none;
+  margin-bottom: 8px;
+  color: var(--Darkest, #141A33);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; 
+
+  &&::placeholder{
+    color: var(--Darkest, #141A33);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; 
+  }
+}
+
+
+.mobileFinInput{
+  background: transparent;
+  outline: none;
+  border: none;
+  margin-bottom: 8px;
+  color: var(--Medium, #878CA8);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+
+  &&::placeholder{
+    color: var(--Medium, #878CA8);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+  }
+}
+
+
+.mobilePassInput{
+  background: transparent;
+  outline: none;
+  border: none;
+  margin-bottom: 8px;
+  color: var(--Medium, #878CA8);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+
+  &&::placeholder{
+    color: var(--Medium, #878CA8);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+  }
+}
+
+@media only screen and (min-device-width: 0px) and (max-device-width: 1070px) {
+  .wrapper{
+    display: none !important;
+  }
+  .mobileWrapper{
+    display: flex;
+  }
   .board {
     display: none;
   }
@@ -348,4 +492,13 @@
 .wrapper {
   max-width: 1128px;
   width: 100%;
+}
+
+@media screen and (max-width: 1280px) {
+    .wrapper{
+      max-width: 900px;
+    }
+    .save{
+      left: 78%;
+    }
 }

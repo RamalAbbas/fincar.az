@@ -2,10 +2,14 @@
 import React from "react";
 import BreadCrumb from "../../components/Common/BreadCrumb/BreadCrumb";
 import User from "../../components/personalcabinet/header/User";
+import styles from './style.module.css'
 const Page = () => {
+
   return (
     <>
-      <BreadCrumb items={["User Account"]} />
+      <div className={styles.breadcrumb_container}>
+        <BreadCrumb items={["User Account"]} />
+      </div>
       <User />
     </>
   );

@@ -20,6 +20,7 @@ const PaymentModal = ({ data }) => {
     email: "",
     full_name: "",
   });
+  
   const [firstPayment, setFirstPayment] = useState(0);
 
   const dispatch = useDispatch();
@@ -114,7 +115,7 @@ const PaymentModal = ({ data }) => {
           <label>İlkin ödəniş</label>
           <input
             type="number"
-            placeholder={firstPayment}
+            placeholder={firstPayment == 0 ? data?.payment?.details?.[2]?.initial_payment_azn : firstPayment}
             onChange={handleInitialPaymentChange}
             max={data?.price}
           />

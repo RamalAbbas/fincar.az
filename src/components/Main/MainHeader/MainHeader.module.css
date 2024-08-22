@@ -444,6 +444,19 @@
 .logout_title p{
   color: #F50100;
   margin-top: 44px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 24px;
+}
+
+.login_title p{
+  margin-top: 44px;
+  color: var(--Neutral-Text-Dark, #505673);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 510;
+  line-height: 24px;
 }
 
 .mobileFliter h1 {
