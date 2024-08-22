@@ -1,4 +1,5 @@
 .modal {
+  z-index: 2121212;
   transition: 0.3s;
   transition-timing-function: linear;
   transform: translateY(0px);
