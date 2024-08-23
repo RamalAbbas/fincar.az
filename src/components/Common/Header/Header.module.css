@@ -25,7 +25,7 @@
 .rightNav {
   display: flex;
   align-items: center;
-  gap: 48px;
+  gap: 36px;
 }
 
 .rightNav button {
@@ -53,7 +53,7 @@
 .rightNav a {
   display: flex;
   color: var(--Neutral-Lightest, #f5f6fa);
-  font-size: 16px;
+  font-size: 15px;
   font-style: normal;
   font-weight: 510;
   line-height: 24px;

@@ -12,6 +12,7 @@ import {
   createCar,
   carFeatureListDrive,
   getCarDetail,
+  getCarDetailAdmin,
 } from "../../../services";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
@@ -63,6 +64,9 @@ const AddProduct = ({ slug }) => {
 
   const [imagePreview, setImagePreview] = useState("");
   const [isImageUploaded, setIsImageUploaded] = useState(false);
+
+  console.log(imagePreview,"imagePreview");
+  
 
   const handleImageUpload = (event) => {
     const files = event.target.files;
@@ -152,8 +156,10 @@ const AddProduct = ({ slug }) => {
   };
 
   const getCarDetailData = async () => {
-    const response = await getCarDetail(slug);
+    const response = await getCarDetailAdmin(slug);
     setCarDetail(response);
+    console.log(response);
+    
   };
 
   const getCarFeatureData = async () => {
@@ -202,15 +208,27 @@ const AddProduct = ({ slug }) => {
     if (carDetail) {
       setState((prevState) => ({
         ...prevState,
+        body: carDetail?.body?.id || prevState.body,
+        make: carDetail?.make?.id || prevState.make,
+        gearbox: carDetail?.gearbox?.id || prevState.gearbox,
+        owner: carDetail?.owner?.id || prevState.owner,
+        drive: carDetail?.drive?.id || prevState.drive,
+        currency: carDetail?.currency?.id || prevState.currency,
+        model: carDetail?.model?.id || prevState.model,
+        color: carDetail?.color?.id || prevState.color,
         price: carDetail.price || prevState.price,
+        market: carDetail?.market?.id || prevState.market,
         distance: carDetail.distance || prevState.distance,
+        engine_power: carDetail?.engine_power || prevState.engine_power,
+        distance_unit: carDetail?.distance_unit?.id || prevState.distance_unit,
         vin: carDetail.vin || prevState.vin,
         description: carDetail.description || prevState.description,
+        engine_volume: carDetail.engine_volume || prevState.engine_volume,
+        year: carDetail?.year || prevState.year,
+        fuel: carDetail?.fuel?.id || prevState.fuel,
       }));
     }
   }, [carDetail]);
-  console.log(carDetail);
-  
   
   return (
     <div className={styles.wrapper}>
@@ -391,7 +409,7 @@ const AddProduct = ({ slug }) => {
                 value={state.fuel}
                 onChange={handleChange}
               >
-                <option selected>Seçin</option>
+                <option selected>{carDetail?.fuel?.name}</option>
 
                 {carFeature?.fuels?.map((item) => (
                   <option key={item.id} value={item.id}>
@@ -408,12 +426,14 @@ const AddProduct = ({ slug }) => {
                 value={state.model}
                 onChange={handleChange}
               >
-                <option selected>Seçin</option>
+                <option selected>{carDetail?.model?.name}</option>
 
-                {models[0]?.models?.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
-                  </option>
+                {models?.map((item) => (
+                  item?.models?.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.name}
+                    </option>
+                  ))
                 ))}
               </select>
             </div>
@@ -434,7 +454,7 @@ const AddProduct = ({ slug }) => {
                   value={state.distance_unit}
                   onChange={handleChange}
                 >
-                  <option selected>Seç</option>
+                  <option selected>{carDetail?.distance_unit?.name}</option>
                   {carFeature?.unit?.map((item) => (
                     <option key={item.id} value={item.id}>
                       {item.name}
@@ -451,7 +471,7 @@ const AddProduct = ({ slug }) => {
                 value={state.color}
                 onChange={handleChange}
               >
-                <option selected>Seçin</option>
+                <option selected>{carDetail?.color?.name}</option>
 
                 {carFeature?.colors?.map((item) => (
                   <option key={item.id} value={item.id}>
@@ -477,12 +497,12 @@ const AddProduct = ({ slug }) => {
                   value={state.currency}
                   onChange={handleChange}
                 >
-                  <option selected>Seç</option>
-                  {/* {carFeature?.currency?.map((item) => (
+                  <option selected>{carDetail?.currency?.name}</option>
+                  {carFeature?.currency?.map((item) => (
                     <option key={item.id} value={item.id}>
                       {item.name}
                     </option>
-                  ))} */}
+                  ))}
                 </select>
               </div>
             </div>
@@ -501,7 +521,7 @@ const AddProduct = ({ slug }) => {
                 value={state.body}
                 onChange={handleChange}
               >
-                <option selected>Seçin</option>
+                <option selected>{carDetail?.body?.name}</option>
 
                 {carFeature?.bans?.map((item) => (
                   <option key={item.id} value={item.id}>
@@ -518,7 +538,7 @@ const AddProduct = ({ slug }) => {
                 value={state.drive}
                 onChange={handleChange}
               >
-                <option selected>Seçin</option>
+                <option selected>{carDetail?.drive?.name}</option>
                 {drives?.map((item) => (
                   <option value={item.id}>{item.name}</option>
                 ))}
@@ -532,13 +552,13 @@ const AddProduct = ({ slug }) => {
                 value={state.owner}
                 onChange={handleChange}
               >
-                <option selected>Seçin</option>
+                <option selected>{carDetail?.owner?.name}</option>
 
-                {/* {carFeature?.owner?.map((item) => (
+                {carFeature?.owner?.map((item) => (
                   <option key={item.id} value={item.id}>
                     {item.name}
                   </option>
-                ))} */}
+                ))}
               </select>
             </div>
             <div>
@@ -549,7 +569,7 @@ const AddProduct = ({ slug }) => {
                 value={state.gearbox}
                 onChange={handleChange}
               >
-                <option selected>Seçin</option>
+                <option selected>{carDetail?.gearbox?.name}</option>
 
                 {carFeature?.gears?.map((item) => (
                   <option key={item.id} value={item.id}>
@@ -566,7 +586,7 @@ const AddProduct = ({ slug }) => {
                 value={state.market}
                 onChange={handleChange}
               >
-                <option selected>Seçin</option>
+                <option selected>{carDetail?.market?.name}</option>
 
                 {carFeature?.markets?.map((item) => (
                   <option key={item.id} value={item.id}>
@@ -611,7 +631,7 @@ const AddProduct = ({ slug }) => {
                 value={state.engine_volume}
                 onChange={handleChange}
               >
-                <option selected>Seçin</option>
+                <option selected>{carDetail?.engine_volume}</option>
 
                 {options.map((value) => (
                   <option key={value} value={value}>

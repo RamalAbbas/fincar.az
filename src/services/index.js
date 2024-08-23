@@ -50,6 +50,15 @@ export const getCarDetail = async (slug) => {
   }
 };
 
+export const getCarDetailAdmin = async (slug) => {
+  try {
+    const response = await instanceAxios.get(`car/detail/admin/${slug}`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
 export const getCarFilter = async (data) => {
   try {
     const response = await instanceAxios.get(`car/filter/?${data}`);
@@ -270,6 +279,15 @@ export const deleteCar = async (slug, token) => {
 export const getFaqs = async () => {
   try {
     const response = await instanceAxios.get(`faq/category/list`);
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
+export const faqSearchQuery = async (query) => {
+  try {
+    const response = await instanceAxios.get(`faq/search/${query}`);
     return response.data;
   } catch (error) {
     console.log({ error });
