@@ -16,15 +16,6 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 
 const AddProduct = () => {
-  const handleCheckboxChange = (e) => {
-    const { id, checked } = e.target;
-    setState((prevState) => ({
-      ...prevState,
-      optionals: Number(id),
-    }));
-  };
-
-
   const [state, setState] = useState({
     make: 0,
     model: 0,
@@ -45,11 +36,9 @@ const AddProduct = () => {
     vin: "",
     description: "",
     uploaded_images: "",
-    optionals:0,
+    optionals: ""
   });
-  console.log(state);
   
-
   const [carFeature, setCarFeature] = useState([]);
   const [models, setModels] = useState([]);
   const [drives, setDrives] = useState([]);
@@ -61,9 +50,28 @@ const AddProduct = () => {
     { length: currentYear - minYear + 1 },
     (_, i) => minYear + i
   );
-
   const [imagePreview, setImagePreview] = useState("");
   const [isImageUploaded, setIsImageUploaded] = useState(false);
+
+  const handleCheckboxChange = (e) => {
+    const { id, checked } = e.target;
+  
+    setState((prevState) => {
+      let updatedOptionals = prevState.optionals ? prevState.optionals.split(" ") : [];
+  
+      if (checked) {
+        updatedOptionals.push(id);
+      } else {
+        updatedOptionals = updatedOptionals.filter((value) => value !== id);
+      }
+  
+      return {
+        ...prevState,
+        optionals: updatedOptionals.join(" "), // Convert array back to string with space-separated values
+      };
+    });
+  };
+  
 
   const handleImageUpload = (event) => {
     const files = event.target.files;
@@ -356,10 +364,12 @@ const AddProduct = () => {
               >
                 <option selected>Seçin</option>
 
-                {models[0]?.models?.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
-                  </option>
+                {models?.map((item) => (
+                  item.models.map((info) => (
+                    <option key={info.id} value={info.id}>
+                      {info.name}
+                    </option>
+                  ))
                 ))}
               </select>
             </div>

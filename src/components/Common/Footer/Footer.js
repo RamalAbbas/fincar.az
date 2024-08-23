@@ -32,7 +32,7 @@ const Footer = () => {
                   <a onClick={() => push("/about")}>
                     <p>Haqqımızda</p>
                   </a>
-                  <a>
+                  <a onClick={() => push("/privacypolicy")}>
                     <p>Məxfilik siyasəti</p>
                   </a>
                   <a>

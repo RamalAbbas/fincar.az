@@ -232,6 +232,7 @@ const Title = ({ filterData }) => {
               <a onClick={() => push("/about")}>Haqqımızda</a>
               <a onClick={() => push("/contactus")}>Bizimlə əlaqə</a>
               <a onClick={() => push("/faqs")}>FAQ</a>
+              <a onClick={() => push("/privacypolicy")}>Məxfilik siyasəti</a>
               {data && (
                     <div
                       className="cursor-pointer"
@@ -392,6 +393,13 @@ const Title = ({ filterData }) => {
               <div className="pt-[18px]">
                 <a onClick={() => push("/faqs")}>
                   <span>FAQ</span>
+                </a>
+                <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>
+              </div>
+              <div className="pt-[18px]">
+                <a onClick={() => push("/privacypolicy")}>
+                  <span>Məxfilik siyasəti
+                  </span>
                 </a>
                 <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>
               </div>

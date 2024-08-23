@@ -60,6 +60,7 @@ const Header = ({ isSaved, isNotification }) => {
                   <a onClick={() => push("/about")}>Haqqımızda</a>
                   <a onClick={() => push("/contactus")}>Bizimlə əlaqə</a>
                   <a onClick={() => push("/faqs")}>FAQ</a>
+                  <a onClick={() => push("/privacypolicy")}>Məxfilik siyasəti</a>
                   {/* <div className={styles.language}>
                     AZ
                     <Image
