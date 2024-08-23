@@ -46,7 +46,7 @@ const Footer = () => {
                   <a>
                     <p onClick={() => push("/dealerships")}>Salonlar</p>
                   </a>
-                  <a>
+                  <a onClick={() => push("/contact")}>
                     <p>Bizimlə əlaqə</p>
                   </a>
                 </div>
