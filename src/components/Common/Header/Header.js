@@ -48,7 +48,8 @@ const Header = ({ isSaved, isNotification }) => {
       pathname !== "/signin/user" &&
       pathname !== "/admin/signin" &&
       pathname !== "/signin/request" && (
-      <div className={pathname !== "/about" ? styles.noAbout: styles.aboutActive}>
+      <div className={pathname !== "/about"? styles.noAbout: styles.aboutActive}>
+        <div className={pathname !== "/contact"? styles.noAbout: styles.aboutActive}>
           <div className="h-[56px] lg:hidden">
             <div className={styles.widhtLimitContainerLarge}>
               <div
@@ -59,7 +60,7 @@ const Header = ({ isSaved, isNotification }) => {
                   <a onClick={() => push("/search")}>Bütün Elanlar</a>
                   <a onClick={() => push("/dealerships")}>Salonlar</a>
                   <a onClick={() => push("/about")}>Haqqımızda</a>
-                  <a onClick={() => push("/contactus")}>Bizimlə əlaqə</a>
+                  <a onClick={() => push("/contact")}>Bizimlə əlaqə</a>
                   <a onClick={() => push("/faqs")}>FAQ</a>
                   <a onClick={() => push("/privacypolicy")}>Məxfilik siyasəti</a>
                   {/* <div className={styles.language}>
@@ -159,6 +160,7 @@ const Header = ({ isSaved, isNotification }) => {
               
             </div>
           </div>
+        </div>
         </div>
       )}
   </div>

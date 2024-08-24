@@ -230,7 +230,7 @@ const Title = ({ filterData }) => {
               <a onClick={() => push("/search")}>Bütün Elanlar</a>
               <a onClick={() => push("/dealerships")}>Salonlar</a>
               <a onClick={() => push("/about")}>Haqqımızda</a>
-              <a onClick={() => push("/contactus")}>Bizimlə əlaqə</a>
+              <a onClick={() => push("/contact")}>Bizimlə əlaqə</a>
               <a onClick={() => push("/faqs")}>FAQ</a>
               <a onClick={() => push("/privacypolicy")}>Məxfilik siyasəti</a>
               {data && (
@@ -385,7 +385,7 @@ const Title = ({ filterData }) => {
               </div>
               
               <div className="pt-[18px]">
-                <a onClick={() => push("/contactus")}>
+                <a onClick={() => push("/contact")}>
                   <span>Bizimlə əlaqə</span>
                 </a>
                 <div className="h-[1px] w-full bg-[#D9D9D9] mt-[18px]"></div>

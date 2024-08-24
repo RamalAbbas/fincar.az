@@ -81,12 +81,12 @@ const page = () => {
       <div className={styles.container}>
       <div className={styles.main}>
           <p className={styles.text}>Müştəri xidmətləri</p>
-          <p className={styles.text}>+994 51 678 56 4</p>
+          <p className={styles.textt}>+994 51 678 56 43</p>
           <span className={styles.texts}>Mon-Sat 9am-6pm</span>
         </div>
         <div className={styles.main}>
           <p className={styles.text}>Email</p>
-          <p className={styles.text}>loremipsum@gmail.com</p>
+          <p className={styles.textt}>loremipsum@gmail.com</p>
         </div>
         </div>
         </div>

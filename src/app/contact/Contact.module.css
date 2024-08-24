@@ -269,7 +269,15 @@
     font-weight: 590;
     line-height: 56px;
   }
-
+.textt {
+  color: var(--Neutral-Darkest, #141A33);
+  text-align: center;
+  font-family: "SF Pro";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 590;
+  line-height: 40px; 
+}
 .texts{
   color: var(--Neutral-Text-Dark, #505673);
   text-align: center;
@@ -278,7 +286,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 28px;
-  padding: 0px 17px 10px 66px;;
+  padding: 0px 17px 10px 66px;
 }
 @media (min-width:360px) and (max-width:768px) {
   .navbar {
@@ -311,17 +319,31 @@
     margin-top: 65px;
   }
   .main{
-  width: 169px;
-  height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    top: -20%;
   }
   .text{
-    color: var(--Primary-04, #3B5191);
+    color: var(--Neutral-Darkest,#3B5191 );
     text-align: center;
-    font-family: "Poppins";
-    font-size: 32px;
+    font-size: 24px;
     font-style: normal;
     font-weight: 590;
-    line-height: 40px; 
+    line-height: 32px;
+  }
+  .textt{
+    color: var(--Neutral-Darkest, #141A33);
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 590;
+    line-height: 32px; 
+  }
+  .texts{
+    padding: 3px;
   }
   .contents{
       padding: 0px 40px;
