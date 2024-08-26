@@ -160,6 +160,7 @@ const CompanyInf = () => {
                     />
                   </div>
                 ))}
+                <div className={styles.admindiv}>
                 <div className={styles.inp7}>
                   <label className={styles.username}>About your company</label>
                   <input
@@ -171,7 +172,7 @@ const CompanyInf = () => {
                     onChange={handleInputChange}
                   />
                 </div>
-
+</div>
                 <div className={styles.saveBody}>
                   <div className={styles.save}>
                     <button onClick={saveData} className={styles.btn1}>
