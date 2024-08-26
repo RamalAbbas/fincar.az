@@ -221,6 +221,7 @@
   padding: 12px, 24px, 12px, 24px;
   background-color: #183178;
   gap: 8px;
+  margin-top: 16px;
 }
 
 .btn1 {
@@ -269,11 +270,13 @@ width: 100%;
   .save
   {
   display: flex;
-width: 398px;
+width: 100%;
 padding: 12px 24px;
 justify-content: center;
 align-items: center;
 gap: 8px;
+margin-top: 16px;
+margin-bottom: 40px;
   }
   .wraper1{
     height: 172px;
@@ -285,5 +288,9 @@ align-self: stretch;
     align-items: flex-start;
     gap: 8px;
     align-self: stretch;
+  }
+
+  .wraperr{
+    padding-left: 0px !important;
   }
 }
