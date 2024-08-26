@@ -67,7 +67,7 @@ const AddProduct = () => {
   
       return {
         ...prevState,
-        optionals: updatedOptionals.join(" "), // Convert array back to string with space-separated values
+        optionals: updatedOptionals.join(" "), 
       };
     });
   };
@@ -141,6 +141,8 @@ const AddProduct = () => {
       setModels(data);
     }
   };
+  console.log(models);
+  
 
   const addProduct = async () => {
     const token = Cookies.get("admin_data")
@@ -364,13 +366,21 @@ const AddProduct = () => {
               >
                 <option selected>Seçin</option>
 
-                {models?.map((item) => (
-                  item.models.map((info) => (
-                    <option key={info.id} value={info.id}>
-                      {info.name}
-                    </option>
+              {
+                  models?.map((item) => (
+                    item.models.length > 0 ? (
+                        item.models.map((info) => (
+                          <option key={info.id} value={info.id}>
+                            {info.name}
+                          </option>
+                        ))
+                    ) : (
+                      <option key={item.id} value={item.id}>
+                        {item.name}
+                      </option>
+                    ) 
                   ))
-                ))}
+                }
               </select>
             </div>
             <div>

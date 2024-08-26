@@ -6,6 +6,7 @@ import steps from "../../../assets/images/steps/steps.png";
 import Image from "next/image";
 import upload from "../../../assets/icons/upload/upload.svg";
 import upload2 from "../../../assets/icons/upload/upload2.svg";
+import CardImage from '../CardImage/CardImage'
 import {
   getCarFeature,
   carFeatureListModel,
@@ -13,6 +14,7 @@ import {
   carFeatureListDrive,
   getCarDetail,
   getCarDetailAdmin,
+  editCar,
 } from "../../../services";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
@@ -20,33 +22,45 @@ import { toast } from "react-toastify";
 const AddProduct = ({ slug }) => {
   const handleCheckboxChange = (e) => {
     const { id, checked } = e.target;
-    setState((prevState) => ({
-      ...prevState,
-      [`optionals_${id}`]: id,
-    }));
+  
+    setState((prevState) => {
+      let updatedOptionals = prevState.new_optionals ? prevState.new_optionals.split(" ") : [];
+  
+      if (checked) {
+        updatedOptionals.push(id);
+      } else {
+        updatedOptionals = updatedOptionals.filter((value) => value !== id);
+      }
+  
+      return {
+        ...prevState,
+        new_optionals: updatedOptionals.join(" "), 
+      };
+    });
   };
 
+
   const [state, setState] = useState({
-    make: 0,
-    model: 0,
-    color: 0,
+    car: slug,
+    new_make: 0,
+    new_model: 0,
+    new_color: 0,
     fuel: 0,
-    distance: 0,
-    distance_unit: 0,
-    price: 0,
-    currency: 0,
-    body: 0,
-    drive: 0,
-    owner: 0,
-    gearbox: 0,
-    market: 0,
-    year: 0,
-    engine_power: 0,
-    engine_volume: 0,
-    vin: "",
-    description: "",
-    uploaded_images: "",
-    optionals: 0,
+    new_distance: 0,
+    new_distance_unit: 0,
+    new_price: 0,
+    new_currency: 0,
+    new_body: 0,
+    new_drive: 0,
+    new_owner: 0,
+    new_gearbox: 0,
+    new_market: 0,
+    new_year: 0,
+    new_engine_power: 0,
+    new_engine_volume: 0,
+    new_vin: "",
+    new_description: "",
+    new_optionals: "",
   });
 
   const [carFeature, setCarFeature] = useState([]);
@@ -62,10 +76,9 @@ const AddProduct = ({ slug }) => {
     (_, i) => minYear + i
   );
 
-  const [imagePreview, setImagePreview] = useState("");
+  const [imagePreview, setImagePreview] = useState([]);
   const [isImageUploaded, setIsImageUploaded] = useState(false);
 
-  console.log(imagePreview,"imagePreview");
   
 
   const handleImageUpload = (event) => {
@@ -81,7 +94,7 @@ const AddProduct = ({ slug }) => {
         reader.onloadend = () => {
           previews.push(reader.result);
           if (previews.length === files.length) {
-            setImagePreview(previews);
+            setImagePreview((prev) => [...prev,...previews]);
             setIsImageUploaded(true);
           }
         };
@@ -91,7 +104,7 @@ const AddProduct = ({ slug }) => {
 
       setState((prevData) => ({
         ...prevData,
-        uploaded_images: { ...files },
+        new_images: { ...files },
       }));
       return;
     }
@@ -108,7 +121,7 @@ const AddProduct = ({ slug }) => {
       reader.onloadend = () => {
         previews.push(reader.result);
         if (previews.length === files.length) {
-          setImagePreview(previews);
+          setImagePreview((prev) => [...prev,...previews]);
           setIsImageUploaded(true);
         }
       };
@@ -118,7 +131,7 @@ const AddProduct = ({ slug }) => {
 
     setState((prevData) => ({
       ...prevData,
-      uploaded_images: { ...files },
+      new_images: { ...files },
     }));
 
     setErrorText("");
@@ -131,7 +144,7 @@ const AddProduct = ({ slug }) => {
       [name]: value,
     }));
 
-    if (name === "make") {
+    if (name === "new_make") {
       const data = await carFeatureListModel(e.target.value);
       setModels(data);
     }
@@ -144,9 +157,9 @@ const AddProduct = ({ slug }) => {
 
     try {
       console.log(state);
-      const res = await createCar(state, token);
+      const res = await editCar(state, token);
       if (!!res) {
-        toast.success("Maşin Əlavə Olundu .");
+        toast.success("Maşin Update Olundu .");
       } else {
         toast.error("Düzgün Melumat Daxil Edin");
       }
@@ -157,9 +170,12 @@ const AddProduct = ({ slug }) => {
 
   const getCarDetailData = async () => {
     const response = await getCarDetailAdmin(slug);
-    setCarDetail(response);
     console.log(response);
     
+    setCarDetail(response);
+    setIsImageUploaded(true);
+    let a = response?.images?.map((item) => item.image)
+    setImagePreview(a)
   };
 
   const getCarFeatureData = async () => {
@@ -206,33 +222,57 @@ const AddProduct = ({ slug }) => {
 
   useEffect(() => {
     if (carDetail) {
+      const optionalsString = carDetail?.optionals?.map((item) => item.id).join(" ") || "";
+      
       setState((prevState) => ({
         ...prevState,
-        body: carDetail?.body?.id || prevState.body,
-        make: carDetail?.make?.id || prevState.make,
-        gearbox: carDetail?.gearbox?.id || prevState.gearbox,
-        owner: carDetail?.owner?.id || prevState.owner,
-        drive: carDetail?.drive?.id || prevState.drive,
-        currency: carDetail?.currency?.id || prevState.currency,
-        model: carDetail?.model?.id || prevState.model,
-        color: carDetail?.color?.id || prevState.color,
-        price: carDetail.price || prevState.price,
-        market: carDetail?.market?.id || prevState.market,
-        distance: carDetail.distance || prevState.distance,
-        engine_power: carDetail?.engine_power || prevState.engine_power,
-        distance_unit: carDetail?.distance_unit?.id || prevState.distance_unit,
-        vin: carDetail.vin || prevState.vin,
-        description: carDetail.description || prevState.description,
-        engine_volume: carDetail.engine_volume || prevState.engine_volume,
-        year: carDetail?.year || prevState.year,
-        fuel: carDetail?.fuel?.id || prevState.fuel,
+        new_body: carDetail?.body?.id || prevState.new_body,
+        new_make: carDetail?.make?.id || prevState.new_make,
+        new_gearbox: carDetail?.gearbox?.id || prevState.new_gearbox,
+        new_owner: carDetail?.owner?.id || prevState.new_owner,
+        new_drive: carDetail?.drive?.id || prevState.new_drive,
+        new_currency: carDetail?.currency?.id || prevState.new_currency,
+        new_model: carDetail?.model?.id || prevState.new_model,
+        new_color: carDetail?.color?.id || prevState.new_color,
+        new_price: carDetail.price || prevState.new_price,
+        new_market: carDetail?.market?.id || prevState.new_market,
+        new_distance: carDetail.distance || prevState.new_distance,
+        new_engine_power: carDetail?.engine_power || prevState.new_engine_power,
+        new_distance_unit: carDetail?.distance_unit?.id || prevState.new_distance_unit,
+        new_vin: carDetail.vin || prevState.new_vin,
+        new_description: carDetail.description || prevState.new_description,
+        new_engine_volume: carDetail.engine_volume || prevState.new_engine_volume,
+        new_year: carDetail?.year || prevState.new_year,
+        new_fuel: carDetail?.fuel?.id || prevState.new_fuel,
+        car: carDetail.id || prevState.id,
+        new_optionals: optionalsString || prevState.new_optionals
       }));
     }
   }, [carDetail]);
+
+  const [imageIds, setImageIds] = useState([]);
+
+  const deleteImage = (img) => {
+    let imageItem = carDetail?.images?.filter((item) => item.image === img);
+    let a = imagePreview.filter((item) => item !== imageItem[0].image);
+    
+    setImagePreview(a);
+  
+    setImageIds((prev) => {
+      const updatedImageIds = [...prev, imageItem[0].id];
+      
+      setState((prevState) => ({
+        ...prevState,
+        "images_to_delete": updatedImageIds.join(' '), 
+      }));
+  
+      return updatedImageIds;
+    });
+  };
   
   return (
     <div className={styles.wrapper}>
-      <BreadCrumb isPaddding={true} items={["Products", "Add products"]} />
+      <BreadCrumb isPaddding={true} items={["Products", "Edit product"]} />
 
       <div className={styles.content}>
         <div className={styles.top}>
@@ -268,53 +308,10 @@ const AddProduct = ({ slug }) => {
           <div className={styles.uploadDiv}>
             {isImageUploaded ? (
               <div className={styles.imageContainer}>
-                {imagePreview.map((image, index) => (
-                  <div
-                    onMouseEnter={() => setImageDelete(true)}
-                    onMouseLeave={() => setImageDelete(false)}
-                    className={styles.imgBody}
-                  >
-                    <img
-                      key={index}
-                      src={image}
-                      alt={`Selected preview ${index}`}
-                      className={styles.uploadedImage}
-                    />
-                  </div>
+                {imagePreview?.map((image, index) => (
+                  <CardImage image={image} index={index} deleteImage={deleteImage} />
                 ))}
-                {imageDelete ? (
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect
-                      width="24"
-                      height="24"
-                      rx="2"
-                      fill="#878CA8"
-                      fill-opacity="0.55"
-                    />
-                    <path
-                      d="M8 8L16 16"
-                      stroke="#141A33"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M16 8L8 16"
-                      stroke="#141A33"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                ) : (
-                  <></>
-                )}
+               
                 <label className={styles.uploadLabel} htmlFor="uploadButton">
                   <div className={styles.addImageButton}>
                     <svg
@@ -386,11 +383,11 @@ const AddProduct = ({ slug }) => {
 
           <div className={styles.grid}>
             <div>
-              <label htmlFor="make">Marka</label>
+              <label htmlFor="new_make">Marka</label>
               <select
-                name="make"
-                id="make"
-                value={state.make}
+                name="new_make"
+                id="new_make"
+                value={state.new_make}
                 onChange={handleChange}
               >
                 <option selected>{carDetail?.make?.name}</option>
@@ -402,11 +399,11 @@ const AddProduct = ({ slug }) => {
               </select>
             </div>
             <div>
-              <label htmlFor="fuel">Yanacaq növü</label>
+              <label htmlFor="new_fuel">Yanacaq növü</label>
               <select
-                name="fuel"
-                id="fuel"
-                value={state.fuel}
+                name="new_fuel"
+                id="new_fuel"
+                value={state.new_fuel}
                 onChange={handleChange}
               >
                 <option selected>{carDetail?.fuel?.name}</option>
@@ -419,11 +416,11 @@ const AddProduct = ({ slug }) => {
               </select>
             </div>
             <div>
-              <label htmlFor="model">Model</label>
+              <label htmlFor="new_model">Model</label>
               <select
-                name="model"
-                id="model"
-                value={state.model}
+                name="new_model"
+                id="new_model"
+                value={state.new_model}
                 onChange={handleChange}
               >
                 <option selected>{carDetail?.model?.name}</option>
@@ -438,20 +435,20 @@ const AddProduct = ({ slug }) => {
               </select>
             </div>
             <div>
-              <label htmlFor="distance">Yürüş</label>
+              <label htmlFor="new_distance">Yürüş</label>
               <div className={styles.custom_item}>
                 <input
                   type="text"
-                  name="distance"
-                  value={state.distance}
+                  name="new_distance"
+                  value={state.new_distance}
                   onChange={handleChange}
                 />
 
                 <div className={styles.border}></div>
                 <select
-                  name="distance_unit"
-                  id="distance_unit"
-                  value={state.distance_unit}
+                  name="new_distance_unit"
+                  id="new_distance_unit"
+                  value={state.new_distance_unit}
                   onChange={handleChange}
                 >
                   <option selected>{carDetail?.distance_unit?.name}</option>
@@ -464,11 +461,11 @@ const AddProduct = ({ slug }) => {
               </div>
             </div>
             <div>
-              <label htmlFor="color">Rəng</label>
+              <label htmlFor="new_color">Rəng</label>
               <select
-                name="color"
-                id="color"
-                value={state.color}
+                name="new_color"
+                id="new_color"
+                value={state.new_color}
                 onChange={handleChange}
               >
                 <option selected>{carDetail?.color?.name}</option>
@@ -481,20 +478,20 @@ const AddProduct = ({ slug }) => {
               </select>
             </div>
             <div>
-              <label htmlFor="price">Qiyməti</label>
+              <label htmlFor="new_price">Qiyməti</label>
               <div className={styles.custom_item}>
                 <input
                   type="text"
-                  name="price"
-                  value={state.price}
+                  name="new_price"
+                  value={state.new_price}
                   onChange={handleChange}
                 />
 
                 <div className={styles.border}></div>
                 <select
-                  name="currency"
-                  id="currency"
-                  value={state.currency}
+                  name="new_currency"
+                  id="new_currency"
+                  value={state.new_currency}
                   onChange={handleChange}
                 >
                   <option selected>{carDetail?.currency?.name}</option>
@@ -514,11 +511,11 @@ const AddProduct = ({ slug }) => {
 
           <div className={styles.grid}>
             <div>
-              <label htmlFor="body">Ban növü</label>
+              <label htmlFor="new_body">Ban növü</label>
               <select
-                name="body"
-                id="body"
-                value={state.body}
+                name="new_body"
+                id="new_body"
+                value={state.new_body}
                 onChange={handleChange}
               >
                 <option selected>{carDetail?.body?.name}</option>
@@ -531,11 +528,11 @@ const AddProduct = ({ slug }) => {
               </select>
             </div>
             <div>
-              <label htmlFor="drive">Ötürücü</label>
+              <label htmlFor="new_drive">Ötürücü</label>
               <select
-                name="drive"
-                id="drive"
-                value={state.drive}
+                name="new_drive"
+                id="new_drive"
+                value={state.new_drive}
                 onChange={handleChange}
               >
                 <option selected>{carDetail?.drive?.name}</option>
@@ -545,11 +542,11 @@ const AddProduct = ({ slug }) => {
               </select>
             </div>
             <div>
-              <label htmlFor="owner">Neçənci sahibisiniz?</label>
+              <label htmlFor="new_owner">Neçənci sahibisiniz?</label>
               <select
-                name="owner"
-                id="owner"
-                value={state.owner}
+                name="new_owner"
+                id="new_owner"
+                value={state.new_owner}
                 onChange={handleChange}
               >
                 <option selected>{carDetail?.owner?.name}</option>
@@ -562,11 +559,11 @@ const AddProduct = ({ slug }) => {
               </select>
             </div>
             <div>
-              <label htmlFor="gearbox">Sürətlər qutusu</label>
+              <label htmlFor="new_gearbox">Sürətlər qutusu</label>
               <select
-                name="gearbox"
-                id="gearbox"
-                value={state.gearbox}
+                name="new_gearbox"
+                id="new_gearbox"
+                value={state.new_gearbox}
                 onChange={handleChange}
               >
                 <option selected>{carDetail?.gearbox?.name}</option>
@@ -579,11 +576,11 @@ const AddProduct = ({ slug }) => {
               </select>
             </div>
             <div>
-              <label htmlFor="market">Hansı bazar üçün yığılıb</label>
+              <label htmlFor="new_market">Hansı bazar üçün yığılıb</label>
               <select
-                name="market"
-                id="market"
-                value={state.market}
+                name="new_market"
+                id="new_market"
+                value={state.new_market}
                 onChange={handleChange}
               >
                 <option selected>{carDetail?.market?.name}</option>
@@ -596,11 +593,11 @@ const AddProduct = ({ slug }) => {
               </select>
             </div>
             <div>
-              <label htmlFor="year">İl</label>
+              <label htmlFor="new_year">İl</label>
               <select
-                name="year"
-                id="year"
-                value={state.year}
+                name="new_year"
+                id="new_year"
+                value={state.new_year}
                 onChange={handleChange}
               >
                 <option selected>{carDetail?.year}</option>
@@ -613,22 +610,22 @@ const AddProduct = ({ slug }) => {
               </select>
             </div>
             <div>
-              <label htmlFor="engine_power">Mühərrikin gücü, a.g. </label>
+              <label htmlFor="new_engine_power">Mühərrikin gücü, a.g. </label>
               <input
-                name="engine_power"
+                name="new_engine_power"
                 className={styles.vin_code_input}
                 type="text"
-                value={state.engine_power}
+                value={state.new_engine_power}
                 onChange={handleChange}
-                id="engine_power"
+                id="new_engine_power"
               />
             </div>
             <div>
-              <label htmlFor="engine_volume">Mühərrikin həcmi, sm3</label>
+              <label htmlFor="new_engine_volume">Mühərrikin həcmi, sm3</label>
               <select
-                name="engine_volume"
-                id="engine_volume"
-                value={state.engine_volume}
+                name="new_engine_volume"
+                id="new_engine_volume"
+                value={state.new_engine_volume}
                 onChange={handleChange}
               >
                 <option selected>{carDetail?.engine_volume}</option>
@@ -641,12 +638,12 @@ const AddProduct = ({ slug }) => {
               </select>
             </div>
             <div>
-              <label htmlFor="vin">VIN-kod</label>
+              <label htmlFor="new_vin">VIN-kod</label>
               <input
-                name="vin"
+                name="new_vin"
                 className={styles.vin_code_input}
                 type="text"
-                value={state.vin}
+                value={state.new_vin}
                 onChange={handleChange}
               />
             </div>
@@ -656,14 +653,14 @@ const AddProduct = ({ slug }) => {
           </div>
 
           <div className={styles.note}>
-            <label htmlFor="description">Qeydinizi əlavə edin</label>
+            <label htmlFor="new_description">Qeydinizi əlavə edin</label>
             <textarea
-              name="description"
-              id="description"
-              value={state.description}
+              name="new_description"
+              id="new_description"
+              value={state.new_description}
               onChange={handleChange}
             ></textarea>
-            <label htmlFor="description">
+            <label htmlFor="new_description">
               Telefon nömrəsi qeyd etmək qadağandır
             </label>
           </div>
@@ -678,7 +675,7 @@ const AddProduct = ({ slug }) => {
                     type="checkbox"
                     id={item.id}
                     onChange={handleCheckboxChange}
-
+                    checked={state.new_optionals.includes(item.id)}
                   />
                   <label htmlFor={item.id}></label>
                   <label className={styles.custom_label} htmlFor={item.id}>
@@ -691,7 +688,7 @@ const AddProduct = ({ slug }) => {
 
           <div className={styles.bottom}>
             <button onClick={addProduct} className={styles.add_button}>
-              Əlavə et
+                Update
             </button>
           </div>
         </div>

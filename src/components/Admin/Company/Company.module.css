@@ -36,7 +36,6 @@
   color: var(--Neutral-Text-Dark, #505673);
 
   /* Body/B1/Semibold */
-  font-family: "SF Pro";
   font-size: 18px;
   font-style: normal;
   font-weight: 590;
@@ -95,7 +94,6 @@
 
 .textt {
   color: #227feb;
-  font-family: "SF Pro";
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -227,7 +225,6 @@
 
 .btn1 {
   color: var(--Neutral-Lightest, #f5f6fa);
-  font-family: "SF Pro";
   font-size: 16px;
   font-style: normal;
   font-weight: 510;

@@ -54,22 +54,7 @@ const Products = () => {
       <div className={styles.header}>
         <div className={styles.top}>
           <div className={styles.filterBody}>
-            <span className={styles.filter_title}>All product</span>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8 10L12 14L16 10"
-                stroke="#878CA8"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <span className={styles.filter_title}>All products</span>
           </div>
           <div></div>
         </div>
@@ -106,14 +91,14 @@ const Products = () => {
 
       <div className={styles.cards}>
         {data?.cars?.map((item) => (
-          <Card  item={item} renderDelete={renderProducts} />
+          <Card item={item} renderDelete={renderProducts} />
         ))}
       </div>
 
       {deleteModal ? (
         <div className={styles.deletemodal}>
           <div className={styles.content}>
-            <p className={styles.deleteTitle}>Delete Account?</p>
+            <p className={styles.deleteTitle}>Delete Car?</p>
             <p className={styles.description}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>

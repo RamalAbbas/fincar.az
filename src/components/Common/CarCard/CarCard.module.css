@@ -4,7 +4,6 @@
 @import url("https://fonts.cdnfonts.com/css/sf-pro-display");
 
 @font-face {
-  font-family: "SF Pro";
   font-weight: 400;
   src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
 }
@@ -98,7 +97,6 @@
   overflow: hidden;
   color: var(--White, #f5f5f5);
   text-overflow: ellipsis;
-  font-family: Inter;
   font-size: 12px;
   font-style: normal;
   font-weight: 600;

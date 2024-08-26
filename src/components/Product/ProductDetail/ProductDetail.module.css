@@ -166,7 +166,6 @@
 }
 .months {
   color: var(--Neutral-Text-Soft, #8990B9);
-  font-family: "SF Pro";
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
