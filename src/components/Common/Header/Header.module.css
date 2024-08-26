@@ -254,12 +254,16 @@
   border-radius: 10px; 
 }
 
-@media screen and (max-width: 1280px){
+@media screen and (max-width: 1281px){
   .widhtLimitContainer{
     max-width: 900px;
   }
   .rightNav a{
-    font-size: 14px;
+    font-size: 13px;
+  }
+
+  .rightNav{
+    gap: 24px;
   }
 }
 
