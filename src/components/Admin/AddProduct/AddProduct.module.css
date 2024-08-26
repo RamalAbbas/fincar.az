@@ -374,3 +374,130 @@
   right: 13px;
   top: -8px;
 }
+
+@media screen and (max-width: 1440px) {
+  .imageContainer{
+    grid-template-columns: repeat(5,1fr);
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .imageContainer{
+      grid-template-columns: repeat(4,1fr);
+  }
+
+  .uploadedImage {
+    width: 100px;
+    height: 100px;
+  }
+
+  .addImageButton{
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .content{
+      padding: 15px;
+      margin-left: 0px !important;
+  }
+}
+
+@media screen and (max-width: 692px) {
+    .custom_label{
+      font-size: 10px;
+    }
+
+    .top ul li {
+      color: #e58117;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 510;
+      line-height: 24px; /* 150% */
+    }
+
+    .head_title{
+      font-size: 16px;
+    }
+
+    .checkbox_container{
+      grid-template-columns: repeat(2,1fr);
+    }
+
+    .photos_body nav ul li {
+      font-size: 10px;
+    }
+
+    .photos_body .center p {
+      font-size: 13px;
+    }
+
+    .vin_code_title{
+      font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 580px) {
+  .top ul li {
+    color: #e58117;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 510;
+    line-height: 24px; /* 150% */
+  }
+
+
+  .photos_body nav ul li {
+    font-size: 8px;
+  }
+
+
+  .imageContainer{
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .grid{
+    gap: 14px;
+  }
+
+  .wrapper{
+    padding-left: 0px;
+  }
+
+  .grid div select {
+    width: 100%;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid #878ca8;
+    padding: 0px 14px 0px 14px;
+    color: #505673;
+    outline: none;
+    background: url("../../../assets/icons/arrow/select.svg") no-repeat right 14px
+      center;
+    background-size: 24px 24px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin-right: 0px !important;
+    font-size: 14px;
+  }
+
+  .custom_item .border {
+    margin-right: 8px !important;
+  }
+  
+  .checkbox_container{
+    padding: 24px;
+  }
+
+  .grid div label {
+    color: #878ca8;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 510;
+    line-height: 20px; /* 142.857% */
+    margin-left: 16px;
+  }
+  
+}

@@ -131,8 +131,8 @@ const PaymentModal = ({ data }) => {
             onChange={handleSelectChange}
           >
             <option selected>Seçin</option>
-            <option value="24">24 ay</option>
             <option value="12">12 ay</option>
+            <option value="24">24 ay</option>
             <option value="36">36 ay</option>
           </select>
         </div>
