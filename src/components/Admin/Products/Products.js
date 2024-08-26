@@ -54,22 +54,7 @@ const Products = () => {
       <div className={styles.header}>
         <div className={styles.top}>
           <div className={styles.filterBody}>
-            <span className={styles.filter_title}>All product</span>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8 10L12 14L16 10"
-                stroke="#878CA8"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <span className={styles.filter_title}>All products</span>
           </div>
           <div></div>
         </div>

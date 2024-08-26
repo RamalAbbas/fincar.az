@@ -209,6 +209,20 @@ export const createCar = async (data, token) => {
   }
 };
 
+export const editCar = async (data, token) => {
+  try {
+    const response = await instanceAxios.post("car/update", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
 export const adminDealerUptade = async (data, token) => {
   try {
     const response = await instanceAxios.put(`dealer/update`, data, {

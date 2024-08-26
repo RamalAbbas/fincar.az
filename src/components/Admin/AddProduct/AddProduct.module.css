@@ -247,7 +247,6 @@
   border: none !important;
   border-radius: 0px;
   color: var(--Neutral-Text-Soft, #8990b9) !important;
-  font-family: "SF Pro";
   font-size: 16px;
   font-style: normal;
   font-weight: 510;
@@ -347,7 +346,6 @@
 
 .custom_label {
   color: var(--Neutral-Text-Dark, #505673);
-  font-family: "SF Pro";
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
