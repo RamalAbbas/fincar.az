@@ -113,7 +113,7 @@ const Products = ({item,renderDelete}) => {
                       onClick={() => handleDelete(item.slug)}
                       className={styles.deleteButtonMobile}
                     >
-                      Delete product
+                      Delete Car
                     </div>
                   </div>
                 </div>
@@ -136,7 +136,7 @@ const Products = ({item,renderDelete}) => {
       {deleteModal ? (
         <div className={styles.deletemodal}>
           <div className={styles.content}>
-            <p className={styles.deleteTitle}>Delete Account?</p>
+            <p className={styles.deleteTitle}>Delete Car?</p>
             <p className={styles.description}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>

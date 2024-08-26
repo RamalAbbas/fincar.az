@@ -91,14 +91,14 @@ const Products = () => {
 
       <div className={styles.cards}>
         {data?.cars?.map((item) => (
-          <Card  item={item} renderDelete={renderProducts} />
+          <Card item={item} renderDelete={renderProducts} />
         ))}
       </div>
 
       {deleteModal ? (
         <div className={styles.deletemodal}>
           <div className={styles.content}>
-            <p className={styles.deleteTitle}>Delete Account?</p>
+            <p className={styles.deleteTitle}>Delete Car?</p>
             <p className={styles.description}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>

@@ -270,7 +270,7 @@ const AddProduct = ({ slug }) => {
   
   return (
     <div className={styles.wrapper}>
-      <BreadCrumb isPaddding={true} items={["Products", "Add products"]} />
+      <BreadCrumb isPaddding={true} items={["Products", "Edit products"]} />
 
       <div className={styles.content}>
         <div className={styles.top}>
