@@ -170,6 +170,8 @@ const AddProduct = ({ slug }) => {
 
   const getCarDetailData = async () => {
     const response = await getCarDetailAdmin(slug);
+    console.log(response);
+    
     setCarDetail(response);
     setIsImageUploaded(true);
     let a = response?.images?.map((item) => item.image)
@@ -270,7 +272,7 @@ const AddProduct = ({ slug }) => {
   
   return (
     <div className={styles.wrapper}>
-      <BreadCrumb isPaddding={true} items={["Products", "Edit products"]} />
+      <BreadCrumb isPaddding={true} items={["Products", "Edit product"]} />
 
       <div className={styles.content}>
         <div className={styles.top}>
