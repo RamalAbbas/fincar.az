@@ -59,6 +59,7 @@
   border: 1px solid #0000;
   border-radius: 10px;
   margin-top: 16px;
+  margin-bottom: 100px;
 }
 
 .boardRight {
@@ -121,7 +122,6 @@
 
 .paragraph {
   color: #227feb;
-  font-family: "SF Pro";
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -271,7 +271,6 @@
 
 .psw {
   color: var(--Neutral-Text-Soft, #8990b9);
-  font-family: Roboto;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -301,7 +300,6 @@
   color: var(--Neutral-Lightest, #f5f6fa);
 
   /* Body/B2/Medium */
-  font-family: "SF Pro";
   font-size: 16px;
   font-style: normal;
   font-weight: 510;
@@ -434,7 +432,6 @@
   .text {
     color: var(--Neutral-Text-Dark, #505673);
     /* Body/B2/Medium */
-    font-family: "SF Pro";
     font-size: 16px;
     font-style: normal;
     font-weight: 510;
@@ -480,7 +477,6 @@
 
   .saved {
     color: var(--Neutral-Text-Dark, #505673);
-    font-family: "SF Pro";
     font-size: 17px;
     font-style: normal;
     font-weight: 510;

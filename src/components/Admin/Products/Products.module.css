@@ -40,7 +40,6 @@
   color: var(--Neutral-Text-Dark, #505673);
 
   /* Body/B1/Semibold */
-  font-family: "SF Pro";
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -128,7 +127,6 @@
   color: var(--White, #fff);
 
   /* Body/C1/Medium */
-  font-family: "SF Pro";
   font-size: 12px;
   font-style: normal;
   font-weight: 510;
@@ -142,7 +140,6 @@
   color: var(--Neutral-Text-Dark, #505673);
 
   /* Body/C1/Medium */
-  font-family: "SF Pro";
   font-size: 12px;
   font-style: normal;
   font-weight: 510;
@@ -178,7 +175,6 @@
   color: var(--Neutral-Text-Dark, #505673);
 
   /* Heading/H4 */
-  font-family: "SF Pro";
   font-size: 20px;
   font-style: normal;
   font-weight: 590;
@@ -193,7 +189,6 @@
   text-align: center;
 
   /* Body/B3/Regular */
-  font-family: "SF Pro";
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -211,7 +206,6 @@
   color: var(--Neutral-Lightest, #f5f6fa);
 
   /* Body/B2/Medium */
-  font-family: "SF Pro";
   font-size: 16px;
   font-style: normal;
   font-weight: 510;
@@ -232,4 +226,48 @@
   font-style: normal;
   font-weight: 510;
   line-height: 24px; /* 150% */
+}
+
+.mobileCrudButton{
+  display: none;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+@media screen and (max-width: 1260px) {
+    .cards{
+      grid-template-columns: repeat(3,1fr);
+    }
+
+    .top{
+      display: none;
+    }
+
+    .header{
+      justify-content: flex-end;
+    }
+
+    .crudBody{
+      display: none !important;
+    }
+
+    .mobileCrudButton{
+      display: flex !important;
+    }
+
+}
+
+@media screen and (max-width: 850px) {
+  .cards{
+    grid-template-columns: repeat(2,1fr);
+    gap: 16px;
+    row-gap: 24px;
+  }
+
+  .wrapper{
+    padding: 16px;
+  }
 }

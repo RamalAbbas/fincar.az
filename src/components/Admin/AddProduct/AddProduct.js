@@ -67,7 +67,7 @@ const AddProduct = () => {
   
       return {
         ...prevState,
-        optionals: updatedOptionals.join(" "), // Convert array back to string with space-separated values
+        optionals: updatedOptionals.join(" "), 
       };
     });
   };

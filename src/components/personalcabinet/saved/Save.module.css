@@ -94,7 +94,6 @@
   overflow: hidden;
   color: var(--White, #f5f5f5);
   text-overflow: ellipsis;
-  font-family: Inter;
   font-size: 12px;
   font-style: normal;
   font-weight: 600;

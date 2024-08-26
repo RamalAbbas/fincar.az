@@ -41,7 +41,6 @@
   color: var(--Neutral-Text-Dark, #505673);
 
   /* Body/B1/Semibold */
-  font-family: "SF Pro";
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -122,6 +121,36 @@
   z-index: 11;
 }
 
+.crudBodyMobile{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important;
+  gap: 13px;
+}
+
+.overlay{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.40);
+}
+
+.bg{
+  padding: 24px 16px;
+  width: 430px !important;
+  position: fixed;
+  left: 50%;
+  right: 50%;
+  top: 72px;
+  transform: translate(-50%, 150%);
+  z-index: 33;
+  background: #fff;
+  border-radius: 10px;
+}
+
 .editButton {
   padding: 8px 40px;
   border-radius: 16px;
@@ -129,11 +158,23 @@
   color: var(--White, #fff);
 
   /* Body/C1/Medium */
-  font-family: "SF Pro";
   font-size: 12px;
   font-style: normal;
   font-weight: 510;
   line-height: 16px; /* 133.333% */
+}
+
+.editButtonMobile {
+  width: 100% !important;
+  padding: 9px 16px;
+  border-radius: 10px;
+  background: #F5F6FA;
+  color: var(--Neutral-Text-Soft, #8990B9);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+  justify-content: flex-start !important;
 }
 
 .deleteButton {
@@ -143,11 +184,22 @@
   color: var(--Neutral-Text-Dark, #505673);
 
   /* Body/C1/Medium */
-  font-family: "SF Pro";
   font-size: 12px;
   font-style: normal;
   font-weight: 510;
   line-height: 16px; /* 133.333% */
+}
+
+.deleteButtonMobile {
+  padding: 9px 16px;
+  border-radius: 10px;
+  background: #F5F6FA;
+  color: var(--Neutral-Text-Soft, #F50100);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; 
+  justify-content: flex-start !important;
 }
 
 .deletemodal {
@@ -170,7 +222,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 40px 16px;
+  padding: 40px 26px;
   border-radius: 10px;
   background: var(--Neutral-Lightest, #f5f6fa);
 }
@@ -179,7 +231,6 @@
   color: var(--Neutral-Text-Dark, #505673);
 
   /* Heading/H4 */
-  font-family: "SF Pro";
   font-size: 20px;
   font-style: normal;
   font-weight: 590;
@@ -194,7 +245,6 @@
   text-align: center;
 
   /* Body/B3/Regular */
-  font-family: "SF Pro";
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -212,7 +262,6 @@
   color: var(--Neutral-Lightest, #f5f6fa);
 
   /* Body/B2/Medium */
-  font-family: "SF Pro";
   font-size: 16px;
   font-style: normal;
   font-weight: 510;
@@ -233,4 +282,52 @@
   font-style: normal;
   font-weight: 510;
   line-height: 24px; /* 150% */
+}
+
+.mobileCrudButton{
+  display: none !important;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.75);
+  display: flex;
+  width: 28px !important;
+  height: 28px !important;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1260px) {
+    .mobileCrudButton{
+      display: flex !important;
+    }
+
+    .crudBody{
+      display: none !important;
+    }
+}
+
+@media screen and (max-width: 850px) {
+  .card{
+    padding: 0px;
+    &:hover{
+      background: none !important;
+    }
+  }
+
+  .card img{
+    height: 160px;
+  }
+
+  .mobileCrudButton{
+    top: 8px;
+    right: 8px;
+  }
+
+  .bg{
+    width: 350px !important;
+  }
+
+  
 }

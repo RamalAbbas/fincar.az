@@ -394,7 +394,6 @@
 
 .mobileInput input::placeholder {
   color: var(--Neutral-Text-Soft, #8990b9);
-  font-family: "SF Pro";
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
