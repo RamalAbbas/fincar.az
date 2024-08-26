@@ -12,8 +12,10 @@ import {
   getDealerInfo,
 } from "../../../services";
 import { useRef, useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
 import { toast } from "react-toastify";
 const CompanyInf = () => {
+  const {push} = useRouter()
   const inputRef = useRef(null);
   const [cities, setCities] = useState([]);
 
@@ -182,7 +184,6 @@ const CompanyInf = () => {
           </div>
         </div>
       </div>
-      <div className={styles.responsive}></div>
     </>
   );
 };
