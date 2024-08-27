@@ -8,16 +8,16 @@ import linkedIn from "../../../assets/icons//contact/linkedIn.svg";
 import Link from "next/link";
 import languageIcon from "../../../assets/icons/languageIcon.svg";
 import  rec from "../../../assets/icons/rec/Rectangle 141.svg";
-import { usePathname } from "next/navigation";
 import leftBlue from "../../../assets/icons/arrow/leftBlue.svg";
 import saved from "../../../assets/icons/saved/saved.svg";
 import notification from "../../../assets/icons/notification/notification.svg";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { usePathname } from "next/navigation";
 
 const Header = ({ isSaved, isNotification }) => {
-  const { push , back } = useRouter();
   const pathname = usePathname();
+  const { push , back } = useRouter();
   const [isNotificationHover, setIsNotificationHover] = useState(false);
   const [data, setData] = useState([]);
   const [isMenu, setIsMenu] = useState(false);
@@ -27,6 +27,14 @@ const Header = ({ isSaved, isNotification }) => {
       : setData(JSON.parse(Cookies.get("data")));
   }, []);
 
+  useEffect(() => {
+    Cookies.get("admin_data") == undefined
+      ? console.log("undefined")
+      : setData(JSON.parse(Cookies.get("admin_data")));
+  }, []);
+
+  
+
   const handleSend = () => {
     if (!data?.username) {
       push("/signin");
@@ -34,11 +42,24 @@ const Header = ({ isSaved, isNotification }) => {
   };
 
   const exitFunction = () => {
-    Cookies.remove("data");
+    Cookies.get("admin_data") == undefined
+      ? console.log("undefined")
+      : Cookies.remove("admin_data");
+
+    Cookies.get("data") == undefined
+      ? console.log("undefined")
+      : Cookies.remove("data");
     push("/signin");
   };
 
-
+  const handleBack = () => {
+    console.log(pathname);
+    if(pathname == "/admin/company_information"){
+      window.location.reload();
+    }else{
+      back()
+    }
+  }
 
   return (
     <div>
@@ -153,11 +174,10 @@ const Header = ({ isSaved, isNotification }) => {
           >
             <div className={styles.wrapperMobile}>
               <div className="h-[44px] flex items-center">
-                <div onClick={() => back()} className="ml-[16px]">
+                <div onClick={handleBack} className="ml-[16px]">
                   <Image src={leftBlue} width={10} height={15} alt="arrow" />
                 </div>
               </div>
-              
             </div>
           </div>
         </div>

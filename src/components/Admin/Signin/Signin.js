@@ -28,6 +28,7 @@ const Signin = () => {
       toast.error("İnputlari doldrun !");
     } else {
       const res = await dealerLogin(data);
+console.log(res);
 
       if (res?.status == 200) {
         toast.success("Daxil Olundu");

@@ -19,7 +19,7 @@ const MobileCarProfile = ({ detail }) => {
         </div>
       </div>
       <div className={styles.desc}>
-        <span>Simply Cleaver</span>
+        <span>Haqqımızda</span>
         <p>{detail?.about}</p>
       </div>
     </div>

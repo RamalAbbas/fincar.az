@@ -38,7 +38,7 @@ const Profile = ({ detail }) => {
           </div>
         </div>
         <div className="w-full h-[1px] bg-[#C0C3D7] rounded my-[16px]"></div>
-        <span>Simply Cleaver</span>
+        <span>Haqqımızda</span>
         <p>{detail?.dealer?.about}</p>
         <div className="w-full h-[1px] bg-[#C0C3D7] rounded my-[16px]"></div>
         <div className={styles.divarrrrrrr}>

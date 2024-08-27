@@ -139,7 +139,6 @@ const Title = ({ filterData }) => {
 
   const getCarFeatureData = async () => {
     const response = await getCarFeature();
-    console.log(response);
     setCarFeature(response);
   };
 

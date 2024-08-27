@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import styles from './CarImgSlider.module.css'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
@@ -9,11 +9,14 @@ import ProductDetail1 from '../../../assets/images/carDetailExample/productCard1
 import ProductDetail2 from '../../../assets/images/carDetailExample/productCard2.png'
 import ProductDetail3 from '../../../assets/images/carDetailExample/productCard3.png'
 
-const CarImgSlider = ({ data , images }) => {
+const CarImgSlider = ({ data, images }) => {
   const settings = {
     customPaging: function (i) {
+      // Calculate the number of additional images
+      const additionalImagesCount = images.length - (i + 1);
+
       return (
-        <div>
+        <div className={styles.customPaging}>
           <img
             src={images[i].image}
             loading="lazy"
@@ -22,6 +25,12 @@ const CarImgSlider = ({ data , images }) => {
             alt="productDetail"
             className="w-full h-[126px] object-cover rounded-[10px]"
           />
+
+          {i == 2 && (
+            <div className={styles.overlay}>
+              <p className={styles.overlayText}>+ {additionalImagesCount} more images</p>
+            </div>
+          )}
         </div>
       )
     },
@@ -33,11 +42,12 @@ const CarImgSlider = ({ data , images }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   }
+
   return (
     <div className={`${styles.productDetailContainer}`}>
       <div className="slider-container">
         <Slider {...settings}>
-          {images?.map((item) => (
+          {images?.map((item, index) => (
             <div className={styles.sliderPhoto} key={item.id}>
               <img
                 src={item.image}
@@ -51,11 +61,7 @@ const CarImgSlider = ({ data , images }) => {
           ))}
         </Slider>
       </div>
-      <p>
-        {
-          data?.description
-        }
-      </p>
+      <p>{data?.description}</p>
     </div>
   )
 }
