@@ -631,16 +631,19 @@ const AddProduct = () => {
             </div>
             <div className={styles.vin_code_item} onMouseEnter={() => setIsMenu(true)}
                 onMouseLeave={() => setIsMenu(false)}>
-              <p className={styles.vin_code_title}>VIN-kod nədir?</p>
-              <div className={styles.vincontainer}>
+              <div className={styles.vin_code_title}>VIN-kod nədir?
+
+                <div className={styles.vincontainer}>
               <p className={styles.paragraph}>Nəqliyyat vasitəsinin identifikasiya nömrəsi</p>
               <p className={styles.paragraphh}>Nəqliyyat vasitəsinin <span>qeydiyyat şəhadətnaməsinin</span> ön tərəfində tapa bilərsiniz</p>
               <div className={styles.img}>
-              <Image src={vin} className={styles.vinimg}></Image>
-              <p className={styles.paragraphh}>Yeni nəsil <span>qeydiyyat şəhadətnaməsinin</span> arxa tərəfində tapa bilərsiniz</p>
-              <Image src={vin} className={styles.vinimg}></Image>
+                <Image src={vin} className={styles.vinimg}></Image>
+                <p className={styles.paragraphh}>Yeni nəsil <span>qeydiyyat şəhadətnaməsinin</span> arxa tərəfində tapa bilərsiniz</p>
+                <Image src={vin} className={styles.vinimg}></Image>
               </div>
               </div>
+              </div>
+              
             </div>
           </div>
 
