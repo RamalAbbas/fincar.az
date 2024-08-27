@@ -18,8 +18,10 @@ import {
 } from "../../../services";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const AddProduct = ({ slug }) => {
+  const { push } = useRouter()
   const handleCheckboxChange = (e) => {
     const { id, checked } = e.target;
   
@@ -157,9 +159,32 @@ const AddProduct = ({ slug }) => {
 
     try {
       console.log(state);
+      setState({
+        car: slug,
+        new_make: 0,
+        new_model: 0,
+        new_color: 0,
+        fuel: 0,
+        new_distance: 0,
+        new_distance_unit: 0,
+        new_price: 0,
+        new_currency: 0,
+        new_body: 0,
+        new_drive: 0,
+        new_owner: 0,
+        new_gearbox: 0,
+        new_market: 0,
+        new_year: 0,
+        new_engine_power: 0,
+        new_engine_volume: 0,
+        new_vin: "",
+        new_description: "",
+        new_optionals: "",
+      })
       const res = await editCar(state, token);
       if (!!res) {
         toast.success("Maşin Update Olundu .");
+        push("/admin/products")
       } else {
         toast.error("Düzgün Melumat Daxil Edin");
       }

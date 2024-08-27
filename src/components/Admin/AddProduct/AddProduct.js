@@ -14,8 +14,11 @@ import {
 } from "../../../services";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import { useNavigation } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 const AddProduct = () => {
+  const { push } = useRouter()
   const [state, setState] = useState({
     make: 0,
     model: 0,
@@ -141,7 +144,6 @@ const AddProduct = () => {
       setModels(data);
     }
   };
-  console.log(models);
   
 
   const addProduct = async () => {
@@ -150,9 +152,40 @@ const AddProduct = () => {
       : "";
 
     try {
-      const res = await createCar(state, token);
+      const res = await createCar(state, token); 
       if (!!res) {
         toast.success("Maşin Əlavə Olundu .");
+        setState({
+          make: 0,
+          model: 0,
+          color: 0,
+          fuel: 0,
+          distance: 0,
+          distance_unit: 0,
+          price: 0,
+          currency: 0,
+          body: 0,
+          drive: 0,
+          owner: 0,
+          gearbox: 0,
+          market: 0,
+          year: 0,
+          engine_power: 0,
+          engine_volume: 0,
+          vin: "",
+          description: "",
+          uploaded_images: "",
+          optionals: ""
+        })
+        setImagePreview([])
+        setIsImageUploaded(false)
+        carFeature?.optional?.forEach((item) => {
+          const checkboxes = document.getElementsByClassName(item.name);
+          Array.from(checkboxes).forEach((checkbox) => {
+            checkbox.checked = false;
+          });
+        });
+        push("/admin/products")
       } else {
         toast.error("Düzgün Melumat Daxil Edin");
       }
@@ -624,6 +657,7 @@ const AddProduct = () => {
                     type="checkbox"
                     id={item.id}
                     onChange={handleCheckboxChange}
+                    className={item.name}
                   />
                   <label htmlFor={item.id}></label>
                   <label className={styles.custom_label} htmlFor={item.id}>
