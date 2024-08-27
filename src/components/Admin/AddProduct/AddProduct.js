@@ -4,6 +4,7 @@ import BreadCrumb from "../../Common/BreadCrumb/BreadCrumb";
 import styles from "./AddProduct.module.css";
 import steps from "../../../assets/images/steps/steps.png";
 import Image from "next/image";
+import vin from "../../../assets/images/admin/vin.png"
 import upload from "../../../assets/icons/upload/upload.svg";
 import upload2 from "../../../assets/icons/upload/upload2.svg";
 import {
@@ -41,6 +42,7 @@ const AddProduct = () => {
   
   const [carFeature, setCarFeature] = useState([]);
   const [models, setModels] = useState([]);
+  const [isMenu, setIsMenu] = useState(false);
   const [drives, setDrives] = useState([]);
   const minYear = 2000;
   const currentYear = new Date().getFullYear();
@@ -71,8 +73,6 @@ const AddProduct = () => {
       };
     });
   };
-  
-
   const handleImageUpload = (event) => {
     const files = event.target.files;
     if (files.length < 3) {
@@ -596,8 +596,18 @@ const AddProduct = () => {
                 onChange={handleChange}
               />
             </div>
-            <div className={styles.vin_code_item}>
+            <div className={styles.vin_code_item} onMouseEnter={() => setIsMenu(true)}
+                onMouseLeave={() => setIsMenu(false)}>
               <p className={styles.vin_code_title}>VIN-kod nədir?</p>
+              <div className={styles.vincontainer}>
+              <p className={styles.paragraph}>Nəqliyyat vasitəsinin identifikasiya nömrəsi</p>
+              <p className={styles.paragraphh}>Nəqliyyat vasitəsinin <span>qeydiyyat şəhadətnaməsinin</span> ön tərəfində tapa bilərsiniz</p>
+              <div className={styles.img}>
+              <Image src={vin} className={styles.vinimg}></Image>
+              <p className={styles.paragraphh}>Yeni nəsil <span>qeydiyyat şəhadətnaməsinin</span> arxa tərəfində tapa bilərsiniz</p>
+              <Image src={vin} className={styles.vinimg}></Image>
+              </div>
+              </div>
             </div>
           </div>
 
