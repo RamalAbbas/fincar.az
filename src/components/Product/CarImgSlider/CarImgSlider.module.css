@@ -317,8 +317,7 @@
 }
 
 .customPagingImage{
-  /* "w-full h-[126px] object-cover rounded-[10px]" */
-  width: fit-content;
+  width: 100%;
   height: 126px;
   object-fit: cover;
   border-radius: 10px;
