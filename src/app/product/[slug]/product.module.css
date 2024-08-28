@@ -28,5 +28,26 @@
   }
 }
 
-@media (max-width: 468px) {
+@media (max-width: 1250px) {
+    .productContainer{
+      justify-content: space-between;
+    }
+
+    .ProductDetailM{
+      width: 450px;
+    }
+}
+
+@media (max-width: 1213px) {
+  .productContainer{
+    justify-content: space-between;
+  }
+
+  .ProductDetailM{
+    width: 450px;
+  }
+
+  .widhtLimitContainer {
+    max-width: 992px;
+  }
 }
