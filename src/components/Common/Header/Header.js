@@ -64,13 +64,12 @@ const Header = ({ isSaved, isNotification }) => {
   return (
     <div>
     {pathname !== "/main" &&
-    pathname !== "/contact" &&
+      pathname !== "/contact" &&
       pathname !== "/signin" &&
       pathname !== "/signin/user" &&
       pathname !== "/admin/signin" &&
       pathname !== "/signin/request" && (
-      <div className={pathname !== "/about"? styles.noAbout: styles.aboutActive}>
-        <div className={pathname !== "/contact"? styles.noAbout: styles.aboutActive}>
+      <div className={pathname !== "/about"?  styles.noAbout: styles.aboutActive}>
           <div className="h-[56px] lg:hidden">
             <div className={styles.widhtLimitContainerLarge}>
               <div
@@ -169,7 +168,7 @@ const Header = ({ isSaved, isNotification }) => {
           </div>
           <div
             className={`min-lg:hidden ${
-              pathname === "/dealership" ? "h-[44px]" : "h-[44px]"
+              pathname === "/dealership"? "h-[44px]" : "h-[44px]"
             }`}
           >
             <div className={styles.wrapperMobile}>
@@ -180,7 +179,6 @@ const Header = ({ isSaved, isNotification }) => {
               </div>
             </div>
           </div>
-        </div>
         </div>
       )}
   </div>

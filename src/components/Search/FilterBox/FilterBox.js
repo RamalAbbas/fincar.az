@@ -262,6 +262,26 @@ const FilterBox = ({ carfeature, filterData }) => {
               <option value="3800">3800</option>
               <option value="3900">3900</option>
               <option value="4000">4000</option>
+              <option value="4100">4100</option>
+              <option value="4200">4200</option>
+              <option value="4300">4300</option>
+              <option value="4400">4400</option>
+              <option value="4500">4500</option>
+              <option value="4600">4600</option>
+              <option value="4700">4700</option>
+              <option value="4800">4800</option>
+              <option value="4900">4900</option>
+              <option value="5000">5000</option>
+              <option value="5100">5100</option>
+              <option value="5200">5200</option>
+              <option value="5300">5300</option>
+              <option value="5400">5400</option>
+              <option value="5500">5500</option>
+              <option value="5600">5600</option>
+              <option value="5700">5700</option>
+              <option value="5800">5800</option>
+              <option value="5900">5900</option>
+              <option value="6000">6000</option>
             </select>
           </div>
           <div className={styles.select_wrapper}>
@@ -273,7 +293,67 @@ const FilterBox = ({ carfeature, filterData }) => {
               <option value="" disabled>
                 Maksimum
               </option>
+              <option value="0">0</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+              <option value="300">300</option>
+              <option value="400">400</option>
+              <option value="500">500</option>
+              <option value="600">600</option>
+              <option value="700">700</option>
+              <option value="800">800</option>
+              <option value="900">900</option>
+              <option value="1000">1000</option>
+              <option value="1100">1100</option>
+              <option value="1200">1200</option>
+              <option value="1300">1300</option>
+              <option value="1400">1400</option>
+              <option value="1500">1500</option>
+              <option value="1600">1600</option>
+              <option value="1700">1700</option>
+              <option value="1800">1800</option>
+              <option value="1900">1900</option>
+              <option value="2000">2000</option>
+              <option value="2100">2100</option>
+              <option value="2200">2200</option>
+              <option value="2300">2300</option>
+              <option value="2400">2400</option>
+              <option value="2500">2500</option>
+              <option value="2600">2600</option>
+              <option value="2700">2700</option>
+              <option value="2800">2800</option>
+              <option value="2900">2900</option>
+              <option value="3000">3000</option>
+              <option value="3100">3100</option>
+              <option value="3200">3200</option>
+              <option value="3300">3300</option>
+              <option value="3400">3400</option>
+              <option value="3500">3500</option>
+              <option value="3600">3600</option>
+              <option value="3700">3700</option>
+              <option value="3800">3800</option>
+              <option value="3900">3900</option>
+              <option value="4000">4000</option>
+              <option value="4100">4100</option>
+              <option value="4200">4200</option>
+              <option value="4300">4300</option>
+              <option value="4400">4400</option>
+              <option value="4500">4500</option>
+              <option value="4600">4600</option>
+              <option value="4700">4700</option>
+              <option value="4800">4800</option>
+              <option value="4900">4900</option>
               <option value="5000">5000</option>
+              <option value="5100">5100</option>
+              <option value="5200">5200</option>
+              <option value="5300">5300</option>
+              <option value="5400">5400</option>
+              <option value="5500">5500</option>
+              <option value="5600">5600</option>
+              <option value="5700">5700</option>
+              <option value="5800">5800</option>
+              <option value="5900">5900</option>
+              <option value="6000">6000</option>
             </select>
           </div>
         </div>
