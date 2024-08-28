@@ -12,6 +12,7 @@
   position: relative;
 }
 
+
 .sliderDotsImg {
   min-width: 167px;
   height: 126px;
@@ -19,12 +20,13 @@
 
 .productDetailContainer :global(.slick-thumb) {
   display: flex !important;
-  overflow-x: scroll;
   justify-content: space-between;
   gap: 24px;
   position: static !important;
   height: auto;
   margin-top: 10px;
+  overflow: hidden; 
+  max-width: 100%;
 }
 
 .productDetailContainer p {
@@ -78,8 +80,6 @@
 }
 
 .productDetailContainer :global(.slick-active) {
-  cursor: default !important;
-  pointer-events: none;
   opacity: 1 !important;
 }
 
@@ -257,4 +257,87 @@
     height: 269px;
     position: relative;
   } */
+}
+
+.nextArrow{
+  position: absolute;
+  top: 37%;
+  right: -30px;
+  cursor: pointer;
+}
+
+.prevArrow{
+  position: absolute;
+  top: 37%;
+  left: -30px;
+  cursor: pointer;
+}
+
+.menuContainer{
+  padding: 40px 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 1000;
+}
+
+.menuImage{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  height: 547px;
+}
+
+.sliderMenuContainer .slick-list{
+  width: 820px !important;
+  height: 547px !important;
+}
+
+
+.sliderPhotoMenu {
+  width: 804px !important;
+  height: 547px !important;
+  position: relative !important;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%,0);
+}
+
+.menuContainer .slick-slide .slick-active .slick-current{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.productDetailContainer div {
+}
+
+.customPagingImage{
+  /* "w-full h-[126px] object-cover rounded-[10px]" */
+  width: fit-content;
+  height: 126px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.backTitle{
+  color: #fff;
+  margin-bottom: 50px;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  padding: 6px 24px;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.customPagingMenu{
+  overflow-x: scroll !important;
+}
+
+.productDetailContainer .menuContainer :global(.slick-thumb) {
+    overflow-x: scroll !important; 
 }

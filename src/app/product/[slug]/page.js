@@ -48,7 +48,7 @@ const ProductPage = ({ params }) => {
             <CarImgSlider data={data} images={data?.images} />
             <Stocks optionals={data?.optionals} />
           </div>
-          <div>
+          <div className={styles.ProductDetailM}>
             <ProductDetail detail={data} />
             <Profile detail={data} />
           </div>
