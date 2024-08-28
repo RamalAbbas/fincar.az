@@ -340,3 +340,12 @@
 .productDetailContainer .menuContainer :global(.slick-thumb) {
     overflow-x: scroll !important; 
 }
+
+.slideTitleMenu{
+  color: #fff !important;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  margin-top: -35px !important;
+  margin-bottom: 35px !important;
+}
