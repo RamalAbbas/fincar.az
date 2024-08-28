@@ -47,8 +47,8 @@ const page = () => {
             <div className={styles.rightNav}>
               <a onClick={() => push("/search")}>Bütün Elanlar</a>
               <a onClick={() => push("/dealerships")}>Salonlar</a>
-              <a onClick={() => push("/about")}>Haqqımızda</a>
-              <a onClick={() => push("/contactus")}>Bizimlə əlaqə</a>
+          
+              <a onClick={() => push("/contact")}>Bizimlə əlaqə</a>
               <a onClick={() => push("/faqs")}>FAQ</a>
               {data && (
                     <div
