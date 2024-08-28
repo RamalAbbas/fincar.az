@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
 const CarImgSlider = ({ data, images }) => {
+  const [currentSlide, setCurrentSlide] = useState(1);
   const [bigMenu,setBigMenu] = useState(false)
 
   const handleMenu = () => {
@@ -101,6 +102,7 @@ const CarImgSlider = ({ data, images }) => {
         </div>
       )
     },
+    afterChange: (index) => setCurrentSlide(index + 1), 
     dots: true,
     dotsClass: 'slick-dots slick-thumb',
     infinite: true,
@@ -150,11 +152,14 @@ const CarImgSlider = ({ data, images }) => {
                         height={418}
                         alt="productDetail"
                         className={styles.menuImage}
-
                       />
+                      <p className={styles.slideTitleMenu}>
+                        {currentSlide}/{images?.length}
+                      </p>
                     </div>
                   ))}
                 </Slider>
+                
               </div>
             </div>
         )
