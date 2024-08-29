@@ -67,6 +67,7 @@ const CarImgSlider = ({ data, images }) => {
             height={126}
             alt="productDetail"
             className="w-full h-[126px] object-cover rounded-[10px]"
+            onClick={handleMenu}
           />
           {additionalImagesCount !== 0 && i === 2 && (
             <div onClick={handleMenu} className={styles.overlay}>
@@ -121,7 +122,7 @@ const CarImgSlider = ({ data, images }) => {
       <div className="slider-container">
         <Slider {...settings}>
           {images?.map((item) => (
-            <div className={styles.sliderPhoto} key={item.id}>
+            <div onClick={handleMenu} className={styles.sliderPhoto} key={item.id}>
               <img
                 src={item.image}
                 loading="lazy"

@@ -7,8 +7,12 @@ import Image from "next/image";
 import xmark from "../../../assets/icons/mark.svg";
 import { carLoanCalculation, carLoanRequest } from "../../../services";
 import { toast } from "react-toastify";
+import { usePathname } from "next/navigation";
 
 const PaymentModal = ({ data }) => {
+  const pathname = usePathname();
+  console.log();
+
   const [payments, setPayments] = useState([]);
   const [error, setError] = useState("");
   const [initialPrice, setInitialPrice] = useState(0);
@@ -30,17 +34,17 @@ const PaymentModal = ({ data }) => {
     dispatch(handlePaymentModal());
   };
 
-  const handleSelectChange = async (e) => {
-    setSelectedOption(e.target.value);
+  const handleSelectChange = async (value) => {
+    setSelectedOption(value);
     let info = {
-      car_slug: data?.slug,
+      car_slug: pathname.slice(9,pathname.length),
       initial_payment: initialPrice,
     };
     const response = await carLoanCalculation(info);
 
-    let item = response?.details?.filter((item) => item.term == e.target.value);
+    let item = response?.details?.filter((item) => item.term == value);
 
-    setFirstPayment(item[0].initial_payment_azn);
+    setFirstPayment(item[0]?.initial_payment_azn);
     setPayments(item[0]);
   };
 
@@ -89,6 +93,16 @@ const PaymentModal = ({ data }) => {
     }
   };
 
+  const renderMonth = async () => {
+    console.log("asd");
+    
+    handleSelectChange(12)
+  }
+
+  useEffect(() => {
+    renderMonth()
+  },[])
+
   return (
     <div
       className={`${!isActivePaymentModal && "!translate-y-[-40px]"} ${
@@ -128,10 +142,9 @@ const PaymentModal = ({ data }) => {
             name="cars"
             id="cars"
             value={selectedOption}
-            onChange={handleSelectChange}
+            onChange={(e) => handleSelectChange(e.target.value)}
           >
-            <option selected>Seçin</option>
-            <option value="12">12 ay</option>
+            <option value="12" selected>12 ay</option>
             <option value="24">24 ay</option>
             <option value="36">36 ay</option>
           </select>
