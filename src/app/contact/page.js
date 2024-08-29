@@ -65,6 +65,7 @@ const page = () => {
               <a onClick={() => push("/search")}>Bütün Elanlar</a>
               <a onClick={() => push("/dealerships")}>Salonlar</a>
               <a onClick={() => push("/about")}>Haqqımızda</a>
+              <a onClick={() => push("/contact")}>Bizimlə Əlaqə</a>
               <a onClick={() => push("/faqs")}>FAQ</a>
               {data && (
                     <div
