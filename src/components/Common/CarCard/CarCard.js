@@ -36,7 +36,7 @@ const CarCard = ({ data, callBackSlug , renderProducts }) => {
             className="h-full object-cover rounded-t-[10px] w-full"
           />
           <div className={styles.price}>
-            {data?.payment?.details[2].initial_payment_azn?.toFixed(0)} ₼ / ilkin
+            {data?.payment?.details[0].initial_payment_azn?.toFixed(0)} ₼ / ilkin
           </div>
           {             
           data?.is_saved ? (

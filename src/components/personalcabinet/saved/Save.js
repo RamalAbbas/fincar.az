@@ -59,7 +59,7 @@ const Saved = () => {
                 onClick={() => callBackSlug(item.slug)}
               />
               <div className={styles.price}>
-                {item?.payment?.details[2].initial_payment_azn?.toFixed(0)} ₼ /
+                {item?.payment?.details[0].initial_payment_azn?.toFixed(0)} ₼ /
                 ilkin
               </div>
 
