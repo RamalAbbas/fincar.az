@@ -9,7 +9,8 @@ const ProductDetail = ({ detail }) => {
   const [isMenu,setIsMenu] = useState(false)
   const [mounthlyPayment, setMounthlyPayment] = useState();
   const [initialPayment, setInitialPayment] = useState();
-  const [activeColor, setActiveColor] = useState(24);
+  const [total, setTotal] = useState();
+  const [activeColor, setActiveColor] = useState(12);
   const [isActiveMonth, setIsActiveMonth] = useState("")
   const insideRef = useRef(null);
   const isActivePaymentModal = useSelector(
@@ -38,21 +39,32 @@ const ProductDetail = ({ detail }) => {
       handleClickPaymentModal();
     }
   };
+  console.log(detail);
+  
   useEffect(() => {
-    setMounthlyPayment(detail?.payment?.details[1]?.monthly_payment_azn);
+    setMounthlyPayment(detail?.payment?.details[0]?.monthly_payment_azn);
   }, [detail?.payment?.details[1]?.monthly_payment_azn]);
 
   const handlePayment = (item) => {
     setIsMenu(false)
     setMounthlyPayment(item?.monthly_payment_azn);
     setInitialPayment(item?.initial_payment_azn);
+    setTotal(item?.total);
     setActiveColor(item.term);
   };
 
   useEffect(() => {
-    if (detail?.payment?.details[1]) {
+    if (detail?.payment?.details[0]) {
       setInitialPayment(
-        detail?.payment?.details[1]?.initial_payment_azn?.toFixed(0)
+        detail?.payment?.details[0]?.initial_payment_azn?.toFixed(0)
+      );
+    }
+  }, [detail]);
+
+  useEffect(() => {
+    if (detail?.payment?.details[0]) {
+      setTotal(
+        detail?.payment?.details[0]?.total.toFixed(0)
       );
     }
   }, [detail]);
@@ -68,7 +80,7 @@ const ProductDetail = ({ detail }) => {
           {detail?.year} il, {detail?.distance} {detail?.distance_unit}
         </span>
         <p className={styles.price_azn}>İlkin ödəniş <span className={styles.initial_payment_title}>{initialPayment} ₼</span> </p>
-        <p className={styles.price_azn}>Ümumi məbləği <span className={styles.price_valditation}>{detail?.price_azn} ₼</span></p>
+        <p className={styles.price_azn}>Ümumi məbləği <span className={styles.price_valditation}>{total} ₼</span></p>
 
         <div className={styles.months_box}>
           <div className={styles.months_center}>

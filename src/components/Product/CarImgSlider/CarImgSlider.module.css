@@ -10,6 +10,7 @@
   width: 552px;
   height: 418px;
   position: relative;
+  cursor: pointer;
 }
 
 
@@ -348,4 +349,72 @@
   text-align: center;
   margin-top: -35px !important;
   margin-bottom: 35px !important;
+}
+
+@media screen and (max-height:870px) { 
+  .menuImage{
+    height: 447px;
+  }
+
+  .sliderMenuContainer .slick-list{
+    height:447px !important;
+  }
+
+  .sliderPhotoMenu {
+    height: 447px !important;
+  }
+}
+
+@media screen and (max-height:760px) { 
+  .menuImage{
+    width: 75%;
+    height: 387px;
+  }
+
+  .sliderMenuContainer .slick-list{
+    height: 387px !important;
+  }
+
+  .sliderPhotoMenu {
+    height: 387px !important;
+    display: flex !important;
+    justify-content: center;
+  }
+
+
+  .productDetailContainer .menuContainer :global(.slick-thumb) {
+    margin-top: 20px;
+  }
+}
+
+
+@media screen and (max-height:660px) { 
+  .menuImage{
+    height: 300px;
+  }
+
+  .sliderMenuContainer .slick-list{
+    height: 300px !important;
+  }
+
+  .sliderPhotoMenu {
+    height: 300px !important;
+  }
+
+  .backTitle{
+    margin-bottom: 20px;
+  }
+
+
+  .sliderDotsImg {
+    height: 106px;
+  }
+
+  .productDetailContainer :global(.slick-thumb > li) {
+    height: 106px;
+  }
+
+  .customPagingImage{
+    height: 106px;
+  }
 }
