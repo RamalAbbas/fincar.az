@@ -18,6 +18,7 @@ const CompanyInf = () => {
   const {push} = useRouter()
   const inputRef = useRef(null);
   const [cities, setCities] = useState([]);
+  const [activeName, setActiveName] = useState("")
 
   const [inputFields, setInputFields] = useState([{ value: "" }]);
   const [dealerInfo, setDealerInfo] = useState([]);
@@ -72,6 +73,12 @@ const CompanyInf = () => {
     renderDetailInfo();
   }, []);
 
+  console.log(dealerInfo,cities);
+  useEffect(() => {
+      let item = cities?.filter((item) => item?.id == dealerInfo?.city)
+      setActiveName(item[0]?.name,"item");
+  },[cities])
+
   return (
     <>
       <div className={styles.wraperr}>
@@ -90,7 +97,7 @@ const CompanyInf = () => {
                 <label className={styles.username}>Company name</label>
                 <input
                   type="text"
-                  placeholder="AutoStar Kaukasus GmbH"
+                  placeholder={dealerInfo?.name}
                   className={styles.wraper}
                   name="name"
                   value={data.name}
@@ -105,7 +112,7 @@ const CompanyInf = () => {
                   value={data.city}
                   onChange={handleInputChange}
                 >
-                  <option value={0}>Select City</option>
+                  <option value={0}>{activeName}</option>
                   {cities?.map((item) => (
                     <option key={item.id} value={item.id}>
                       {item.name}
@@ -118,7 +125,7 @@ const CompanyInf = () => {
                 <label className={styles.username}>Working hour</label>
                 <input
                   type="text"
-                  placeholder="09:00  19:00"
+                  placeholder={dealerInfo?.opening_time}
                   className={styles.wraper}
                   name="opening_time"
                   value={data.opening_time}
@@ -129,7 +136,7 @@ const CompanyInf = () => {
                 <label className={styles.username}>Street</label>
                 <input
                   type="text"
-                  placeholder="Zaur Nudirəliyev 89a"
+                  placeholder={dealerInfo?.street}
                   className={styles.wraper}
                   name="street"
                   value={data.street}
