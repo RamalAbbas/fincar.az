@@ -76,6 +76,7 @@ const AddProduct = () => {
       };
     });
   };
+
   const handleImageUpload = (event) => {
     const files = event.target.files;
     if (files.length < 3) {
@@ -89,7 +90,7 @@ const AddProduct = () => {
         reader.onloadend = () => {
           previews.push(reader.result);
           if (previews.length === files.length) {
-            setImagePreview(previews);
+            setImagePreview((prev) => [...prev,...previews]);
             setIsImageUploaded(true);
           }
         };
@@ -116,7 +117,8 @@ const AddProduct = () => {
       reader.onloadend = () => {
         previews.push(reader.result);
         if (previews.length === files.length) {
-          setImagePreview(previews);
+          setImagePreview((prev) => [...prev,...previews]);
+
           setIsImageUploaded(true);
         }
       };

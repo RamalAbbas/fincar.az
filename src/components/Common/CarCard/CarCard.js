@@ -39,7 +39,7 @@ const CarCard = ({ data, callBackSlug , renderProducts }) => {
             {data?.payment?.details[0].initial_payment_azn?.toFixed(0)} ₼ / ilkin
           </div>
           {             
-          data?.is_saved ? (
+            data?.is_saved ? (
               <div onClick={deleteCarFunction} className={styles.fav_disabled}>
                 <Image
                   src={favouriteblack}
@@ -52,14 +52,14 @@ const CarCard = ({ data, callBackSlug , renderProducts }) => {
               </div>
             ) : (
               <div onClick={saveCarFunction} className={styles.fav}>
-                <Image
-                  src={favorite}
-                  loading="lazy"
-                  width={20}
-                  height={20}
-                  alt="car"
-                  className="h-full w-full object-cover rounded-t-[10px]"
-                />
+                  <Image
+                    src={favorite}
+                    loading="lazy"
+                    width={20}
+                    height={20}
+                    alt="car"
+                    className="h-full w-full object-cover rounded-t-[10px]"
+                  />
               </div>
             )
           }
