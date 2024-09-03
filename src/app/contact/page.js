@@ -30,30 +30,10 @@ const page = () => {
         Cookies.remove("data");
         push("/signin");
       };
-      const handleBack = () => {
-        console.log(pathname);
-        if(pathname == "/contact"){
-          window.location.reload();
-        }else{
-          back()
-        }
-      }
   return (
 
    <>
-    <div
-            className={`min-lg:hidden ${
-              pathname === "/contact" ? "h-[44px]" : "h-[44px]"
-            }`}
-          >
-            <div className={styles.wrapperMobile}>
-              <div className="h-[44px] flex items-center">
-                <div onClick={handleBack} className="ml-[16px]">
-                  <Image src={leftBlue} width={10} height={15} alt="arrow" />
-                </div>
-              </div>
-            </div>
-    </div>
+
        <div className={`${styles.headerContainer} ${styles.widhtLimitContainer}`}>
     <Image src={headerBg} width={1440} height={580} alt="header-bg" />
     <div className={`${styles.content} ${styles.widhtLimit}`}>
