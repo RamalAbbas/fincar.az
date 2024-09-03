@@ -32,6 +32,12 @@ const Signin = () => {
         toast.success("Login Olundu");
         Cookies.set("data", JSON.stringify(res?.data));
 
+
+        if(Cookies.get("admin_data")){
+          Cookies.remove("admin_data")
+        }
+
+
         setTimeout(() => {
           push("/main");
         }, 1000);

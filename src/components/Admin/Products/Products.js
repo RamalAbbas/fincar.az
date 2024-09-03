@@ -14,6 +14,7 @@ const Products = () => {
   const [deleteModal, setDeleteModal] = useState(false);
   const [data, setData] = useState([]);
   const [slug, setSlug] = useState("");
+  const [topDropdownMenu, setTopDropdownMenu] = useState(false)
   const token = Cookies.get("admin_data")
     ? JSON.parse(Cookies.get("admin_data")).access_token
     : "";
@@ -49,15 +50,42 @@ const Products = () => {
     push(`/admin/edit_product/${slug}`)
   }
 
+  const handleDropdownMenu = () => {
+    setTopDropdownMenu(!topDropdownMenu)
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <div className={styles.top}>
-          <div className={styles.filterBody}>
-            <span className={styles.filter_title}>All products</span>
-          </div>
-          <div></div>
+            <div onClick={handleDropdownMenu} className={styles.filterBody}>
+              <span className={styles.filter_title}>All products</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 10L12 14L16 10" stroke="#878CA8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            
+            {
+              topDropdownMenu && (
+                  <div className={styles.dropdownBottom}>
+                      <p className={styles.dropdownTitle}>
+                        Bütün elanlar
+                      </p>
+                      <p className={styles.dropdownTitle}>
+                        Saytda
+                      </p>
+                      <p className={styles.dropdownTitle}>
+                        Gözləmədə
+                      </p>
+                      <p className={styles.dropdownTitle}>
+                        İmtina olunmuş
+                      </p>
+                  </div>
+              )
+            }
         </div>
+
+        
 
         <button
           onClick={() => push("/admin/add_product")}

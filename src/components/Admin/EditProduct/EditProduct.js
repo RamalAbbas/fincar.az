@@ -85,13 +85,21 @@ const AddProduct = ({ slug }) => {
 
   const handleImageUpload = (event) => {
     const files = event.target.files;
+
     if (files.length < 3) {
       setErrorText("Minimum 3 şəkil olmalıdır");
-
+      
       const previews = [];
+      console.log(files);
+      
       for (let i = 0; i < files.length; i++) {
+        console.log(files[0]);
+        
         const file = files[i];
         const reader = new FileReader();
+        console.log(reader.result);
+        console.log(file);
+        
 
         reader.onloadend = () => {
           previews.push(reader.result);
@@ -279,12 +287,13 @@ const AddProduct = ({ slug }) => {
 
   const deleteImage = (img) => {
     let imageItem = carDetail?.images?.filter((item) => item.image === img);
-    let a = imagePreview.filter((item) => item !== imageItem[0].image);
+    let a = imagePreview.filter((item) => item !== imageItem[0]?.image);
+    console.log(a,carDetail?.images,"cart");
     
     setImagePreview(a);
   
     setImageIds((prev) => {
-      const updatedImageIds = [...prev, imageItem[0].id];
+      const updatedImageIds = [...prev, imageItem[0]?.id];
       
       setState((prevState) => ({
         ...prevState,

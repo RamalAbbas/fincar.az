@@ -30,6 +30,10 @@
   max-width: 100%;
 }
 
+.menuContainer  :global(.slick-thumb){
+  justify-content: space-evenly !important;
+}
+
 .productDetailContainer p {
   overflow: hidden;
   color: var(--Neutral-Text-Dark, #505673);
@@ -54,7 +58,7 @@
 
 .overlayText {
   color: white !important;
-  font-size: 14px !important;
+  font-size: 12px !important;
   font-weight: bold !important;
   margin-top: 0px !important;
 }
@@ -69,15 +73,13 @@
 
 .productDetailContainer :global(.slick-thumb > li) {
   margin: 0;
-  width: 100%;
-  height: 100%;
-  height: 126px;
+  min-width: 90px;
+  height: 70px;
   cursor: pointer;
   transition: 0.2s;
   transition-timing-function: linear;
   border: 1px solid rgba(130, 130, 130, 0);
   overflow: hidden;
-  min-width: 167px;
 }
 
 .productDetailContainer :global(.slick-active) {
@@ -286,22 +288,24 @@
 }
 
 .menuImage{
+  max-width: 862px;
+  max-height: 647px;
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
-  height: 547px;
+  height: 100%;
 }
 
 .sliderMenuContainer .slick-list{
-  width: 820px !important;
-  height: 547px !important;
+  width: 862px !important;
+  height: 647px !important;
 }
 
 
 .sliderPhotoMenu {
-  width: 804px !important;
-  height: 547px !important;
+  width: 862px !important;
+  height: 647px !important;
   position: relative !important;
   left: 50%;
   right: 50%;
@@ -315,18 +319,19 @@
 }
 
 .productDetailContainer div {
+    
 }
 
 .customPagingImage{
-  width: 100%;
-  height: 126px;
+  min-width: 90px;
+  height: 70px;
   object-fit: cover;
   border-radius: 10px;
 }
 
 .backTitle{
   color: #fff;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   border: 1px solid #fff;
   border-radius: 10px;
   padding: 6px 24px;
@@ -334,12 +339,12 @@
   cursor: pointer;
 }
 
-.customPagingMenu{
-  overflow-x: scroll !important;
-}
-
 .productDetailContainer .menuContainer :global(.slick-thumb) {
     overflow-x: scroll !important; 
+
+    &&::-webkit-scrollbar {
+      display: none;
+    }
 }
 
 .slideTitleMenu{
@@ -351,70 +356,100 @@
   margin-bottom: 35px !important;
 }
 
-@media screen and (max-height:870px) { 
+@media screen and (max-height: 865px) {
   .menuImage{
-    height: 447px;
+    max-width: 862px;
+    max-height: 547px;
   }
-
+  
   .sliderMenuContainer .slick-list{
-    height:447px !important;
+    width: 862px !important;
+    height: 547px !important;
   }
-
+  
+  
   .sliderPhotoMenu {
-    height: 447px !important;
-  }
-}
-
-@media screen and (max-height:760px) { 
-  .menuImage{
-    width: 75%;
-    height: 387px;
-  }
-
-  .sliderMenuContainer .slick-list{
-    height: 387px !important;
-  }
-
-  .sliderPhotoMenu {
-    height: 387px !important;
-    display: flex !important;
-    justify-content: center;
-  }
-
-
-  .productDetailContainer .menuContainer :global(.slick-thumb) {
-    margin-top: 20px;
+    width: 862px !important;
+    height: 547px !important;
   }
 }
 
 
-@media screen and (max-height:660px) { 
+@media screen and (max-height: 759px) {
   .menuImage{
-    height: 300px;
+    max-width: 762px;
+    max-height: 480px;
   }
-
+  
   .sliderMenuContainer .slick-list{
-    height: 300px !important;
+    width: 762px !important;
+    height: 480px !important;
   }
-
+  
+  
   .sliderPhotoMenu {
-    height: 300px !important;
+    width: 762px !important;
+    height: 480px !important;
+  }
+}
+
+@media screen and (max-height: 697px) {
+  .menuImage{
+    max-width: 700px;
+    max-height: 450px;
+  }
+  
+  .sliderMenuContainer .slick-list{
+    width: 700px !important;
+    height: 450px !important;
+  }
+  
+  
+  .sliderPhotoMenu {
+    width: 700px !important;
+    height: 450px !important;
+  }
+}
+
+@media screen and (max-height: 659px) {
+  .menuImage{
+    max-width: 600px;
+    max-height: 400px;
+  }
+  
+  .sliderMenuContainer .slick-list{
+    width: 600px !important;
+    height: 400px !important;
+  }
+  
+  
+  .sliderPhotoMenu {
+    width: 600px !important;
+    height: 400px !important;
   }
 
-  .backTitle{
-    margin-bottom: 20px;
+  .menuContainer{
+    padding: 20px 100px;
+  }
+}
+
+@media screen and (max-height: 589px) {
+  .menuImage{
+    max-width: 550px;
+    max-height: 350px;
+  }
+  
+  .sliderMenuContainer .slick-list{
+    width: 550px !important;
+    height: 350px !important;
+  }
+  
+  .sliderPhotoMenu {
+    width: 550px !important;
+    height: 350px !important;
   }
 
-
-  .sliderDotsImg {
-    height: 106px;
-  }
-
-  .productDetailContainer :global(.slick-thumb > li) {
-    height: 106px;
-  }
-
-  .customPagingImage{
-    height: 106px;
+  .menuContainer{
+    padding: 20px 100px;
   }
 }
