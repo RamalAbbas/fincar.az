@@ -413,18 +413,18 @@
 
 @media screen and (max-height: 659px) {
   .menuImage{
-    max-width: 600px;
+    max-width: 450px;
     max-height: 400px;
   }
   
   .sliderMenuContainer .slick-list{
-    width: 600px !important;
+    width: 450px !important;
     height: 400px !important;
   }
   
   
   .sliderPhotoMenu {
-    width: 600px !important;
+    width: 450px !important;
     height: 400px !important;
   }
 
@@ -435,18 +435,60 @@
 
 @media screen and (max-height: 589px) {
   .menuImage{
-    max-width: 550px;
+    max-width: 400px;
     max-height: 350px;
   }
   
   .sliderMenuContainer .slick-list{
-    width: 550px !important;
+    width: 400px !important;
     height: 350px !important;
   }
   
   .sliderPhotoMenu {
-    width: 550px !important;
+    width: 400px !important;
     height: 350px !important;
+  }
+
+  .menuContainer{
+    padding: 20px 100px;
+  }
+}
+
+@media screen and (max-height: 540px) {
+  .menuImage{
+    max-width: 380px;
+    max-height: 300px;
+  }
+  
+  .sliderMenuContainer .slick-list{
+    width: 380px !important;
+    height: 300px !important;
+  }
+  
+  .sliderPhotoMenu {
+    width: 380px !important;
+    height: 300px !important;
+  }
+
+  .menuContainer{
+    padding: 20px 100px;
+  }
+}
+
+@media screen and (max-height: 480px) {
+  .menuImage{
+    max-width: 300px;
+    max-height: 250px;
+  }
+  
+  .sliderMenuContainer .slick-list{
+    width: 300px !important;
+    height: 250px !important;
+  }
+  
+  .sliderPhotoMenu {
+    width: 300px !important;
+    height: 250px !important;
   }
 
   .menuContainer{
