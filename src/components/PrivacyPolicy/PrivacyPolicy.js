@@ -1,6 +1,5 @@
 'use client'
 import styles from './PrivacyPolicy.module.css'
-import { useEffect, useState } from 'react';
 
 const privacy_policy_data = [
     {

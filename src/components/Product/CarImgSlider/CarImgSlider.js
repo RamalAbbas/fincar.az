@@ -66,10 +66,10 @@ const CarImgSlider = ({ data, images }) => {
             width={167}
             height={126}
             alt="productDetail"
-            className="w-full h-[126px] object-cover rounded-[10px]"
             onClick={handleMenu}
+            className={styles.customPagingImage}
           />
-          {additionalImagesCount !== 0 && i === 2 && (
+          {additionalImagesCount !== 0 && i === 4 && (
             <div onClick={handleMenu} className={styles.overlay}>
               <p className={styles.overlayText}>+ {additionalImagesCount} more images</p>
             </div>
@@ -114,8 +114,6 @@ const CarImgSlider = ({ data, images }) => {
     nextArrow: <NextArrowMenu />, 
     prevArrow: <PrevArrowMenu />,
   }
-
-
 
   return (
     <div className={`${styles.productDetailContainer}`}>

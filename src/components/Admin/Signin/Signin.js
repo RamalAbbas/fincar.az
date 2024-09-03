@@ -34,8 +34,12 @@ console.log(res);
         toast.success("Daxil Olundu");
         Cookies.set("admin_data", JSON.stringify(res?.data));
 
+        if(Cookies.get("data")){
+          Cookies.remove("data")
+        }
+
         setTimeout(() => {
-          push("/admin/company_information");
+          push("/admin/products");
         }, 1000);
       } else {
         toast.error("Yanliş ad vəya şifrə !");

@@ -49,6 +49,9 @@
 .top {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
 }
 
 .filterBody {
@@ -270,4 +273,25 @@
   .wrapper{
     padding: 16px;
   }
+}
+
+.dropdownBottom{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+    width: 182px;
+    background-color: #F5F6FA;
+    border-radius: 10px;
+    padding: 12px;
+    position: absolute;
+    top: 32px;
+    z-index: 231;
+}
+
+.dropdownTitle{
+  color: var(--Neutral-Medium, #878CA8);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
 }

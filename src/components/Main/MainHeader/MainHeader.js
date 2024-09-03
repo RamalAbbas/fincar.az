@@ -11,7 +11,7 @@ import downArrow from "../../../assets/icons/arrow/down.svg";
 import leftBlue from "../../../assets/icons/arrow/leftBlue.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { handleMenuFilter } from "../../../redux/features/mobileMenuFilterSlice";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import saved from "../../../assets/icons/saved/saved.svg";
 
@@ -20,10 +20,13 @@ import {
   getCarFeature,
   getCarFilter,
 } from "../../../services";
+
 import Dropdown2 from "../../Dropdown2/Dropdown";
 import DropdownMobile from "../../DropdownMobile/Dropdown";
 
 const Title = ({ filterData }) => {
+  const pathname = usePathname();
+
   const { push } = useRouter();
   const [yearOptions, setYearOptions] = useState([]);
   const [isMenu, setIsMenu] = useState(false);
@@ -31,6 +34,8 @@ const Title = ({ filterData }) => {
   const [carFeature, setCarFeature] = useState([]);
   const [models, setModels] = useState([]);
   const [data, setData] = useState([]);
+  const [isAdminPage, setIsAdminPage] = useState(false);
+  const [adminData, setAdminData] = useState([]);
 
 
   const [options, setOptions] = useState([]);
@@ -85,11 +90,7 @@ const Title = ({ filterData }) => {
       setYearOptions(years);
     }
   }, [state.min_year]);
-  useEffect(() => {
-    Cookies.get("data") == undefined
-      ? console.log("undefined")
-      : setData(JSON.parse(Cookies.get("data")));
-  }, []);
+  
 
   const isMobileFilterActive = useSelector(
     (state) => state.mobileMenuFilter.isMobileFilterActive
@@ -214,6 +215,28 @@ const Title = ({ filterData }) => {
     }
   };
 
+  useEffect(() => {
+    if (
+      pathname !== "/admin/products" &&
+      pathname !== "/admin/add_product" &&
+      pathname !== "/admin/company_information" &&
+      pathname !== "/admin/edit_product"
+    ) {
+      Cookies.remove("admin_data");
+      const userData = Cookies.get("data");
+      if (userData) {
+        setData(JSON.parse(userData));
+      }
+      setIsAdminPage(false);
+    } else {
+      const adminUserData = Cookies.get("admin_data");
+      if (adminUserData) {
+        setAdminData(JSON.parse(adminUserData));
+      }
+      setIsAdminPage(true);
+    }
+  }, [pathname]);
+
   return (
     <section>
       <div
@@ -249,17 +272,39 @@ const Title = ({ filterData }) => {
                 onMouseLeave={() => setIsMenu(false)}
                 className={styles.user_body}
               >
-                <button onClick={handleSend}>
-                  {data?.username ? data.username : "Daxil ol"}
-                </button>
-                {isMenu && data.username ? (
-                  <div className={styles.user_menu}>
-                    <p className={styles.userAccontTitle} onClick={() => push("/personalcabinet")}>User account</p>
-                    <p className={styles.logout_button} onClick={exitFunction}>Çıxış</p>
-                  </div>
-                ) : (
-                  <></>
-                )}
+                  {isAdminPage && adminData?.username ? (
+                        <button onClick={handleSend}>{adminData?.username}</button>
+                      ) : data?.username ? (
+                        <button onClick={handleSend}>{data?.username}</button>
+                      ) : (
+                        <button onClick={handleSend}>Daxil ol</button>
+                      )}
+
+                      {isMenu && (data?.username || adminData?.username) && (
+                        <div className={styles.user_menu}>
+                          {
+                            isAdminPage ? (
+                              <p
+                                className={styles.userAccontTitle}
+                                onClick={handleBusinesAccount}
+                              >
+                                Business account
+                              </p>
+                            ) : (
+                              <p
+                                className={styles.userAccontTitle}
+                                onClick={() => push("/personalcabinet")}
+                              >
+                                User account
+                              </p>
+                            )
+                          }
+
+                          <p className={styles.logout_button} onClick={exitFunction}>
+                            Çıxış
+                          </p>
+                        </div>
+                      )} 
               </div>
             </div>
           </nav>
