@@ -115,6 +115,10 @@ const Saved = () => {
             </div>
           </div>
         ))}
+
+        {
+          carSaved?.length == 0 && (<p>Save olunan Masin yoxdur</p>)
+        }
       </div>
     </div>
   );

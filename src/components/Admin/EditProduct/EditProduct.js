@@ -85,65 +85,58 @@ const AddProduct = ({ slug }) => {
 
   const handleImageUpload = (event) => {
     const files = event.target.files;
-
+  
     if (files.length < 3) {
       setErrorText("Minimum 3 şəkil olmalıdır");
-      
+  
       const previews = [];
-      console.log(files);
-      
+  
       for (let i = 0; i < files.length; i++) {
-        console.log(files[0]);
-        
         const file = files[i];
         const reader = new FileReader();
-        console.log(reader.result);
-        console.log(file);
-        
-
+  
         reader.onloadend = () => {
-          previews.push(reader.result);
-          if (previews.length === files.length) {
-            setImagePreview((prev) => [...prev,...previews]);
-            setIsImageUploaded(true);
-          }
+          setImagePreview((prev) => [...prev, reader.result]);
+          setIsImageUploaded(true);
         };
-
+  
         reader.readAsDataURL(file);
       }
-
+  
+      // Update state with the files
       setState((prevData) => ({
         ...prevData,
-        new_images: { ...files },
+        new_images: Array.from(files), // Convert to array
       }));
+      
       return;
     }
-
+  
     if (files.length > 24) {
       setErrorText("Maksimum 24 şəkil ola bilər");
+      return;
     }
-
+  
     const previews = [];
+  
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const reader = new FileReader();
 
       reader.onloadend = () => {
-        previews.push(reader.result);
-        if (previews.length === files.length) {
-          setImagePreview((prev) => [...prev,...previews]);
-          setIsImageUploaded(true);
-        }
+        setImagePreview((prev) => [...prev, reader.result]);
+        setIsImageUploaded(true);
       };
 
       reader.readAsDataURL(file);
     }
 
+    // Update state with the files
     setState((prevData) => ({
       ...prevData,
-      new_images: { ...files },
+      new_images: Array.from(files), // Convert to array
     }));
-
+  
     setErrorText("");
   };
 
@@ -166,7 +159,6 @@ const AddProduct = ({ slug }) => {
       : "";
 
     try {
-      console.log(state);
       setState({
         car: slug,
         new_make: 0,
@@ -203,7 +195,6 @@ const AddProduct = ({ slug }) => {
 
   const getCarDetailData = async () => {
     const response = await getCarDetailAdmin(slug);
-    console.log(response);
     
     setCarDetail(response);
     setIsImageUploaded(true);
@@ -286,9 +277,11 @@ const AddProduct = ({ slug }) => {
   const [imageIds, setImageIds] = useState([]);
 
   const deleteImage = (img) => {
+    let item = imagePreview.filter((item) => item !== img)
+    console.log(item,img);
+    setImagePreview(item)    
     let imageItem = carDetail?.images?.filter((item) => item.image === img);
     let a = imagePreview.filter((item) => item !== imageItem[0]?.image);
-    console.log(a,carDetail?.images,"cart");
     
     setImagePreview(a);
   
@@ -416,7 +409,7 @@ const AddProduct = ({ slug }) => {
           <p className={styles.head_title}>Əsas göstəriciləri</p>
 
           <div className={styles.grid}>
-            <div>
+            {/* <div>
               <label htmlFor="new_make">Marka</label>
               <select
                 name="new_make"
@@ -431,7 +424,7 @@ const AddProduct = ({ slug }) => {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
             <div>
               <label htmlFor="new_fuel">Yanacaq növü</label>
               <select
@@ -449,7 +442,7 @@ const AddProduct = ({ slug }) => {
                 ))}
               </select>
             </div>
-            <div>
+            {/* <div>
               <label htmlFor="new_model">Model</label>
               <select
                 name="new_model"
@@ -467,7 +460,7 @@ const AddProduct = ({ slug }) => {
                   ))
                 ))}
               </select>
-            </div>
+            </div> */}
             <div>
               <label htmlFor="new_distance">Yürüş</label>
               <div className={styles.custom_item}>
@@ -494,7 +487,7 @@ const AddProduct = ({ slug }) => {
                 </select>
               </div>
             </div>
-            <div>
+            {/* <div>
               <label htmlFor="new_color">Rəng</label>
               <select
                 name="new_color"
@@ -510,7 +503,7 @@ const AddProduct = ({ slug }) => {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
             <div>
               <label htmlFor="new_price">Qiyməti</label>
               <div className={styles.custom_item}>
@@ -544,7 +537,7 @@ const AddProduct = ({ slug }) => {
           <p className={styles.head_title}>Digər xüsusiyyətləri</p>
 
           <div className={styles.grid}>
-            <div>
+            {/* <div>
               <label htmlFor="new_body">Ban növü</label>
               <select
                 name="new_body"
@@ -560,7 +553,7 @@ const AddProduct = ({ slug }) => {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
             <div>
               <label htmlFor="new_drive">Ötürücü</label>
               <select
@@ -626,7 +619,7 @@ const AddProduct = ({ slug }) => {
                 ))}
               </select>
             </div>
-            <div>
+            {/* <div>
               <label htmlFor="new_year">İl</label>
               <select
                 name="new_year"
@@ -653,8 +646,8 @@ const AddProduct = ({ slug }) => {
                 onChange={handleChange}
                 id="new_engine_power"
               />
-            </div>
-            <div>
+            </div> */}
+            {/* <div>
               <label htmlFor="new_engine_volume">Mühərrikin həcmi, sm3</label>
               <select
                 name="new_engine_volume"
@@ -680,10 +673,10 @@ const AddProduct = ({ slug }) => {
                 value={state.new_vin}
                 onChange={handleChange}
               />
-            </div>
-            <div className={styles.vin_code_item}>
+            </div> */}
+            {/* <div className={styles.vin_code_item}>
               <p className={styles.vin_code_title}>VIN-kod nədir?</p>
-            </div>
+            </div> */}
           </div>
 
           <div className={styles.note}>
