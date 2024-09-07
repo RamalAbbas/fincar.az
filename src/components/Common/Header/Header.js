@@ -24,17 +24,23 @@ const Header = ({ isSaved, isNotification }) => {
   const [adminData, setAdminData] = useState([]);
   const [isMenu, setIsMenu] = useState(false);
   const [isAdminPage, setIsAdminPage] = useState(false);
-console.log();
+  const [clientData, setClientData] = useState();
 
   useEffect(() => {
+    const adminPages = [
+      "/admin/products",
+      "/admin/add_product",
+      "/admin/company_information",
+      "/admin/change_password",
+    ];
+
     if (
-      pathname !== "/admin/products" &&
-      pathname !== "/admin/add_product" &&
-      pathname !== "/admin/company_information" &&
-      pathname !== "/admin/change_password" &&
-      pathname.slice(0,19) !== "/admin/edit_product"
+      !adminPages.includes(pathname) &&
+      pathname.slice(0, 19) !== "/admin/edit_product"
     ) {
-      Cookies.remove("admin_data");
+      if (!adminPages.some((page) => page === Cookies.get("lastAdminPage"))) {
+        Cookies.remove("admin_data");
+      }
       const userData = Cookies.get("data");
       if (userData) {
         setData(JSON.parse(userData));
@@ -46,6 +52,14 @@ console.log();
         setAdminData(JSON.parse(adminUserData));
       }
       setIsAdminPage(true);
+      Cookies.set("lastAdminPage", pathname);
+    }
+  }, [pathname]);
+
+  useEffect(() => {
+    const userData = Cookies.get("data");
+    if (userData) {
+      setClientData(JSON.parse(userData));
     }
   }, [pathname]);
 
@@ -70,8 +84,9 @@ console.log();
   };
 
   const handleBusinesAccount = () => {
-      push(`/dealership/${adminData?.slug}`);
-  }
+    // Navigate to the admin company information page
+    push("/admin/company_information");
+  };
 
   return (
     <div>
@@ -81,33 +96,49 @@ console.log();
         pathname !== "/signin/user" &&
         pathname !== "/admin/signin" &&
         pathname !== "/signin/request" && (
-          <div className={pathname !== "/about" ? styles.noAbout : styles.aboutActive}>
+          <div
+            className={
+              pathname !== "/about" ? styles.noAbout : styles.aboutActive
+            }
+          >
             <div className="h-[56px] lg:hidden">
               <div className={styles.widhtLimitContainerLarge}>
-                <div className={`${styles.headerContainer} ${styles.widhtLimitContainer}`}>
+                <div
+                  className={`${styles.headerContainer} ${styles.widhtLimitContainer}`}
+                >
                   <a onClick={() => push("/main")}>Fincar.az</a>
                   <div className={styles.rightNav}>
                     <a onClick={() => push("/search")}>Bütün Elanlar</a>
                     <a onClick={() => push("/dealerships")}>Salonlar</a>
                     <a onClick={() => push("/about")}>Haqqımızda</a>
                     <a onClick={() => push("/contact")}>Bizimlə əlaqə</a>
-                    <a onClick={() => push("/faqs")}>FAQ</a>
-                    <a onClick={() => push("/privacypolicy")}>Məxfilik siyasəti</a>
                     <div className={styles.cont}>
-                      <Image src={rec} height={24} width={24} alt="languageIcon" className={styles.frame} />
+                      <Image
+                        src={rec}
+                        height={24}
+                        width={24}
+                        alt="languageIcon"
+                        className={styles.frame}
+                      />
                     </div>
-                    {data?.username && (
-                      <div className="cursor-pointer" onClick={() => push("/saved")}>
+                    {clientData?.access_token && (
+                      <div
+                        className="cursor-pointer"
+                        onClick={() => push("/saved")}
+                      >
                         <Image src={saved} alt="" />
                       </div>
                     )}
+
                     <div
                       onMouseEnter={() => setIsMenu(true)}
                       onMouseLeave={() => setIsMenu(false)}
                       className={styles.user_body}
                     >
-                      {isAdminPage && adminData?.username ? (
-                        <button onClick={handleSend}>{adminData?.username}</button>
+                      {adminData?.username ? (
+                        <button onClick={handleSend}>
+                          {adminData?.username}
+                        </button>
                       ) : data?.username ? (
                         <button onClick={handleSend}>{data?.username}</button>
                       ) : (
@@ -116,35 +147,40 @@ console.log();
 
                       {isMenu && (data?.username || adminData?.username) && (
                         <div className={styles.user_menu}>
-                          {
-                            isAdminPage ? (
-                              <p
-                                className={styles.userAccontTitle}
-                                onClick={handleBusinesAccount}
-                              >
-                                Business account
-                              </p>
-                            ) : (
-                              <p
-                                className={styles.userAccontTitle}
-                                onClick={() => push("/personalcabinet")}
-                              >
-                                User account
-                              </p>
-                            )
-                          }
+                          {adminData?.username ? (
+                            <p
+                              className={styles.userAccontTitle}
+                              onClick={handleBusinesAccount}
+                            >
+                              Business account
+                            </p>
+                          ) : (
+                            <p
+                              className={styles.userAccontTitle}
+                              onClick={() => push("/personalcabinet")}
+                            >
+                              User account
+                            </p>
+                          )}
 
-                          <p className={styles.logout_button} onClick={exitFunction}>
+                          <p
+                            className={styles.logout_button}
+                            onClick={exitFunction}
+                          >
                             Çıxış
                           </p>
                         </div>
-                      )} 
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className={`min-lg:hidden ${pathname === "/dealership" ? "h-[44px]" : "h-[44px]"}`}>
+            <div
+              className={`min-lg:hidden ${
+                pathname === "/dealership" ? "h-[44px]" : "h-[44px]"
+              }`}
+            >
               <div className={styles.wrapperMobile}>
                 <div className="h-[44px] flex items-center">
                   <div onClick={handleBack} className="ml-[16px]">

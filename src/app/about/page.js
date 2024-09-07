@@ -7,7 +7,7 @@ import about from "../../assets/icons/about/OheU7K.tif.svg"
 import Frame from "../../assets/images/about/Frame 247.png"
 import good from "../../assets/icons/about/good.svg"
 import call from "../../assets/icons/about/call.svg"
-import { useRouter } from 'next/navigation';
+import { useRouter , usePathname } from 'next/navigation';
 import saved from "../../assets/icons/saved/saved.svg";
 import Cookies from "js-cookie";
 
@@ -32,6 +32,17 @@ const page = () => {
     Cookies.remove("data");
     push("/signin");
   };
+  const pathname = usePathname();
+
+  const [clientData,setClientData] = useState()
+
+
+  useEffect(() => {
+    const userData = Cookies.get("data");
+    if (userData) {
+      setClientData(JSON.parse(userData));
+    }
+  },[pathname])
   
   return (
     <>
@@ -50,7 +61,7 @@ const page = () => {
               <a onClick={() => push("/about")}>Haqqımızda</a>
               <a onClick={() => push("/contact")}>Bizimlə əlaqə</a>
               <a onClick={() => push("/faqs")}>FAQ</a>
-              {data && (
+              {clientData?.access_token && (
                     <div
                       className="cursor-pointer"
                       onClick={() => push("/saved")}

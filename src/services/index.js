@@ -254,6 +254,22 @@ export const dealerDetailSlug = async (slug) => {
   }
 };
 
+
+export const dealerFilterCars = async (slug,token) => {
+  try {
+    const response = await instanceAxios.get(`car/dealer-admin/list?status=${slug}`,{
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log({ error });
+  }
+};
+
+
 export const getDealerInfo = async (token) => {
   try {
     const response = await instanceAxios.get(`dealer/detail`, {

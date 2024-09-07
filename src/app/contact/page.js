@@ -30,6 +30,17 @@ const page = () => {
         Cookies.remove("data");
         push("/signin");
       };
+
+
+  const [clientData,setClientData] = useState()
+
+
+  useEffect(() => {
+    const userData = Cookies.get("data");
+    if (userData) {
+      setClientData(JSON.parse(userData));
+    }
+  },[pathname])
   return (
 
    <>
@@ -47,7 +58,7 @@ const page = () => {
               <a onClick={() => push("/about")}>Haqqımızda</a>
               <a onClick={() => push("/contact")}>Bizimlə Əlaqə</a>
               <a onClick={() => push("/faqs")}>FAQ</a>
-              {data && (
+              {clientData?.access_token && (
                     <div
                       className="cursor-pointer"
                       onClick={() => push("/saved")}

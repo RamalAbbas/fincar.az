@@ -26,6 +26,7 @@ import DropdownMobile from "../../DropdownMobile/Dropdown";
 
 const Title = ({ filterData }) => {
   const pathname = usePathname();
+  const [clientData,setClientData] = useState()
 
   const { push } = useRouter();
   const [yearOptions, setYearOptions] = useState([]);
@@ -237,6 +238,13 @@ const Title = ({ filterData }) => {
     }
   }, [pathname]);
 
+    useEffect(() => {
+      const userData = Cookies.get("data");
+      if (userData) {
+        setClientData(JSON.parse(userData));
+      }
+    },[pathname])
+
   return (
     <section>
       <div
@@ -253,9 +261,7 @@ const Title = ({ filterData }) => {
               <a onClick={() => push("/dealerships")}>Salonlar</a>
               <a onClick={() => push("/about")}>Haqqımızda</a>
               <a onClick={() => push("/contact")}>Bizimlə əlaqə</a>
-              <a onClick={() => push("/faqs")}>FAQ</a>
-              <a onClick={() => push("/privacypolicy")}>Məxfilik siyasəti</a>
-              {data && (
+              {clientData?.access_token && (
                     <div
                       className="cursor-pointer"
                       onClick={() => push("/saved")}

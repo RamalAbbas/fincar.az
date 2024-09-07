@@ -5,7 +5,7 @@ import card_img from "../../../assets/images/admin/card/card.png";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { dealerDetailSlug, deleteCar } from "../../../services";
+import { dealerDetailSlug, dealerFilterCars, deleteCar } from "../../../services";
 import { toast } from "react-toastify";
 import Card from '../Card/Card'
 const Products = () => {
@@ -15,6 +15,7 @@ const Products = () => {
   const [data, setData] = useState([]);
   const [slug, setSlug] = useState("");
   const [topDropdownMenu, setTopDropdownMenu] = useState(false)
+  const [activeTitle,setActiveTitle] = useState("")
   const token = Cookies.get("admin_data")
     ? JSON.parse(Cookies.get("admin_data")).access_token
     : "";
@@ -23,11 +24,13 @@ const Products = () => {
       ? JSON.parse(Cookies.get("admin_data")).slug
       : "";
     const res = await dealerDetailSlug(slug);
+    console.log(res);
+    
     setData(res);
   };
 
   useEffect(() => {
-    renderProducts();
+    filterCars("all-cars","Bütün elanlar")
   }, []);
 
   const handleDelete = (slug) => {
@@ -54,12 +57,20 @@ const Products = () => {
     setTopDropdownMenu(!topDropdownMenu)
   }
 
+  const filterCars = async (slug,activeT) => {
+    const res = await dealerFilterCars(slug,token);
+    console.log(res);
+    setData(res);
+    setTopDropdownMenu(false)
+    setActiveTitle(activeT)
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <div className={styles.top}>
             <div onClick={handleDropdownMenu} className={styles.filterBody}>
-              <span className={styles.filter_title}>All products</span>
+              <span className={styles.filter_title}>{activeTitle}</span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M8 10L12 14L16 10" stroke="#878CA8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -68,16 +79,16 @@ const Products = () => {
             {
               topDropdownMenu && (
                   <div className={styles.dropdownBottom}>
-                      <p className={styles.dropdownTitle}>
+                      <p onClick={() => filterCars("","Bütün elanlar")} className={styles.dropdownTitle}>
                         Bütün elanlar
                       </p>
-                      <p className={styles.dropdownTitle}>
+                      <p onClick={() => filterCars("approved","Saytda")} className={styles.dropdownTitle}>
                         Saytda
                       </p>
-                      <p className={styles.dropdownTitle}>
+                      <p onClick={() => filterCars("pending","Gözləmədə")} className={styles.dropdownTitle}>
                         Gözləmədə
                       </p>
-                      <p className={styles.dropdownTitle}>
+                      <p onClick={() => filterCars("rejected","İmtina olunmuş")} className={styles.dropdownTitle}>
                         İmtina olunmuş
                       </p>
                   </div>
@@ -118,9 +129,13 @@ const Products = () => {
       </div>
 
       <div className={styles.cards}>
-        {data?.cars?.map((item) => (
+        {data?.map((item) => (
           <Card item={item} renderDelete={renderProducts} />
         ))}
+
+        {
+          data?.length == 0 && (<p>Axtarisa uygun masin yoxdur</p>)
+        }
       </div>
 
       {deleteModal ? (
