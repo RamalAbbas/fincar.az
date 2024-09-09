@@ -16,7 +16,11 @@ const Footer = () => {
 
   return (
     <>
-      {pathname !== '/signin' && pathname !== '/signin/request' && pathname !== '/signin/user' && pathname !== '/admin/signin' && (
+      {pathname !== '/signin' && pathname !== '/signin/request' && pathname !== '/signin/user' && pathname !== '/admin/signin' && pathname != "/admin/products" &&
+                      pathname != "/admin/change_password" &&
+                      pathname != "/admin/add_product" &&
+                      pathname.slice(0, 19) != "/admin/edit_product" &&
+                      pathname != "/admin/company_information" && (
          <div className={styles.divarrrrrrrrr}>
           <div className={styles.widhtLimitContainerLarge}>
             <div

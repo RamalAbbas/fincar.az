@@ -50,7 +50,7 @@ const Signin = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <Image src={logo} alt="logo" />
+        <Image onClick={() => push("/main")} className="cursor-pointer" src={logo} alt="logo" />
 
         <div className={styles.box}>
           <p className={styles.headTitle}>Sign in</p>
