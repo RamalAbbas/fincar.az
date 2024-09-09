@@ -33,11 +33,17 @@ const Header = ({ isSaved, isNotification }) => {
       "/admin/company_information",
       "/admin/change_password",
     ];
-
+  
     if (
       !adminPages.includes(pathname) &&
       pathname.slice(0, 19) !== "/admin/edit_product"
     ) {
+      // Ana səhifəyə keçid zamanı admin məlumatlarını silirik
+      if (pathname === "/main") {
+        Cookies.remove("admin_data");
+        setAdminData([]);
+      }
+  
       if (!adminPages.some((page) => page === Cookies.get("lastAdminPage"))) {
         Cookies.remove("admin_data");
       }
@@ -55,39 +61,34 @@ const Header = ({ isSaved, isNotification }) => {
       Cookies.set("lastAdminPage", pathname);
     }
   }, [pathname]);
-
-  useEffect(() => {
-    const userData = Cookies.get("data");
-    if (userData) {
-      setClientData(JSON.parse(userData));
-    }
-  }, [pathname]);
-
+  
   const handleSend = () => {
     if (!data?.username && !adminData?.username) {
       push("/signin");
     }
   };
-
+  
   const exitFunction = () => {
     Cookies.remove("admin_data");
     Cookies.remove("data");
     push("/signin");
   };
-
+  
   const handleBack = () => {
     if (pathname === "/admin/company_information") {
       window.location.reload();
+    } else if (pathname === "/main") {
+      Cookies.remove("admin_data");
+      setAdminData([]);
+      push("/main");
     } else {
       back();
     }
   };
-
+  
   const handleBusinesAccount = () => {
-    // Navigate to the admin company information page
     push("/admin/company_information");
   };
-
   return (
     <div>
       {pathname !== "/main" &&
@@ -106,12 +107,40 @@ const Header = ({ isSaved, isNotification }) => {
                 <div
                   className={`${styles.headerContainer} ${styles.widhtLimitContainer}`}
                 >
-                  <a onClick={() => push("/main")}>Fincar.az</a>
+                  {
+                     (pathname === "/admin/products" || pathname === "/admin/company_information" || pathname === "/admin/add_product" || pathname === "/admin/change_password" || pathname.slice(0, 19) == "/admin/edit_product") && (
+                      <a>Fincar.az</a>
+                    )
+                  }
+
+                    {
+                      pathname != "/admin/products" &&
+                      pathname != "/admin/change_password" &&
+                      pathname != "/admin/add_product" &&
+                      pathname.slice(0, 19) != "/admin/edit_product" &&
+                      pathname != "/admin/company_information" && (
+                          <>
+                            <a onClick={() => push("/main")}>Fincar.az</a>
+                          </>
+                      )
+                    }
+
                   <div className={styles.rightNav}>
-                    <a onClick={() => push("/search")}>Bütün Elanlar</a>
-                    <a onClick={() => push("/dealerships")}>Salonlar</a>
-                    <a onClick={() => push("/about")}>Haqqımızda</a>
-                    <a onClick={() => push("/contact")}>Bizimlə əlaqə</a>
+                    {
+                      pathname != "/admin/products" &&
+                      pathname != "/admin/change_password" &&
+                      pathname != "/admin/add_product" &&
+                      pathname.slice(0, 19) != "/admin/edit_product" &&
+                      pathname != "/admin/company_information" && (
+                          <>
+                            <a onClick={() => push("/search")}>Bütün Elanlar</a>
+                            <a onClick={() => push("/dealerships")}>Salonlar</a>
+                            <a onClick={() => push("/about")}>Haqqımızda</a>
+                            <a onClick={() => push("/contact")}>Bizimlə əlaqə</a>
+                          </>
+                      )
+                    }
+                    
                     <div className={styles.cont}>
                       <Image
                         src={rec}
