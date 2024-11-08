@@ -1,22 +1,22 @@
  "use client";
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from "./About.module.css";
 import Image from "next/image";
 import headerBg from "../../assets/images/headerBg.png";
 import about from "../../assets/icons/about/OheU7K.tif.svg"
-import Frame from "../../assets/images/about/Frame 247.png"
+import Frame from "../../assets/images/about/Frame247.png"
 import good from "../../assets/icons/about/good.svg"
 import call from "../../assets/icons/about/call.svg"
 import { useRouter , usePathname } from 'next/navigation';
 import saved from "../../assets/icons/saved/saved.svg";
 import Cookies from "js-cookie";
 
-const page = () => {
+const Page = () => {
  const {push} = useRouter()
- const [data, setData] = useState([]);
- const [isMenu, setIsMenu] = useState(false);
+ const [data, setData] = React.useState([]);
+ const [isMenu, setIsMenu] = React.useState(false);
 
- useEffect(() => {
+ React.useEffect(() => {
     Cookies.get("data") == undefined
       ? console.log("undefined")
       : setData(JSON.parse(Cookies.get("data")));
@@ -32,12 +32,12 @@ const page = () => {
     Cookies.remove("data");
     push("/signin");
   };
-  const pathname = usePathname();
+ 
+  const pathname = React.usePathname();
 
-  const [clientData,setClientData] = useState()
+  const [clientData,setClientData] = React.useState()
 
-
-  useEffect(() => {
+  React.useEffect(() => {
     const userData = Cookies.get("data");
     if (userData) {
       setClientData(JSON.parse(userData));
@@ -69,10 +69,8 @@ const page = () => {
                       <Image src={saved} alt="" />
                     </div>
                   )}
-              {/* <div className={styles.languageDivar}>
-                AZ
-                <Image src={azFlag} width={20} height={15} alt="header-bg" />
-              </div> */}
+
+
               <div
                 onMouseEnter={() => setIsMenu(true)}
                 onMouseLeave={() => setIsMenu(false)}
@@ -141,4 +139,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
