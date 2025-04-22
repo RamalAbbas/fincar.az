@@ -1,2 +1,2 @@
-const baseUrl = "https://fincarapi.pythonanywhere.com/";
+const baseUrl = "https://fincarapi.innomatch.xyz/";
 export default baseUrl;
